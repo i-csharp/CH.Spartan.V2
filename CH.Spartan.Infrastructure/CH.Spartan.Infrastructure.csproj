@@ -100,7 +100,9 @@
     <Compile Include="Extensions\EnumExtend.cs" />
     <Compile Include="Extensions\LinqExtend.cs" />
     <Compile Include="Abp\Application\Services\Dto\QueryResultRequestInput.cs" />
+    <Compile Include="Extensions\ObjectExtend.cs" />
     <Compile Include="Helpers\ComboboxHelper.cs" />
+    <Compile Include="Helpers\HttpHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpartanAuthorizationProvider.cs" />
     <Compile Include="SpartanConsts.cs" />

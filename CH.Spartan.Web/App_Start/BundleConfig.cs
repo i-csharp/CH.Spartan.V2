@@ -29,6 +29,7 @@ namespace CH.Spartan.Web
                         "~/Content/js/jquery.min.js",
                         "~/Content/js/bootstrap.min.js",
                         "~/Content/js/json2.min.js",
+                        "~/Content/js/plugins/linq/jquery.linq.js",
                         "~/Content/js/plugins/layer/layer.min.js",
                         "~/Content/js/plugins/knockout/knockout.min.js",
                         "~/Content/js/plugins/knockout/knockout.mapping.js",

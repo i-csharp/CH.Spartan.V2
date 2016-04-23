@@ -20,16 +20,13 @@ namespace CH.Spartan.Areas.Dto
         [MaxLength(500)]
         public string Points { get; set; }
 
-        /// <summary>
-        /// 所属用户Id
-        /// </summary>
-        public long UserId { get; set; }
-
     }
 
     public class CreateAreaInput : IInputDto
     {
         public CreateAreaDto Area { get; set; }
+
+        public EnumCoordinates Coordinates { get; set; }
     }
 
     public class CreateAreaOutput : IOutputDto

@@ -8,6 +8,27 @@ namespace CH.Spartan.Areas.Dto
     [AutoMapFrom(typeof(Area))]
     public class GetAreaListDto : AuditedEntityDto
     {
+        public GetAreaListDto()
+        {
+            var code = Guid.NewGuid().GetHashCode();
+            if (code % 4 == 0)
+            {
+                Cls = "warning-element";
+            }
+            else if(code % 3 == 0)
+            {
+                Cls = "success-element";
+            }
+            else if (code % 2 == 0)
+            {
+                Cls = "danger-element";
+            }
+            else if (code % 1 == 0)
+            {
+                Cls = "info-element";
+            }
+
+        }
         /// <summary>
         /// 区域名字
         /// </summary>
@@ -21,15 +42,15 @@ namespace CH.Spartan.Areas.Dto
         public string Points { get; set; }
 
         /// <summary>
-        /// 所属用户Id
+        /// 样式
         /// </summary>
-        public long UserId { get; set; }
+        public string Cls { get; set; }
 
     }
 
     public class GetAreaListInput : QueryListResultRequestInput
     {
-
+        public EnumCoordinates Coordinates { get; set; }
     }
 
     public class GetAreaListPagedInput : QueryListPagedResultRequestInput

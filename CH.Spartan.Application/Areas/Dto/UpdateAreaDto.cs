@@ -31,6 +31,8 @@ namespace CH.Spartan.Areas.Dto
     public class UpdateAreaInput : IInputDto
     {
         public UpdateAreaDto Area { get; set; }
+
+        public EnumCoordinates Coordinates { get; set; }
     }
 
     public class UpdateAreaOutput : IOutputDto

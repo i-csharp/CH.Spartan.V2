@@ -42,27 +42,14 @@ namespace CH.Spartan.Areas
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task CreateAreaAsync(CreateAreaInput input);
+        Task<GetAreaOutput> CreateAreaAsync(CreateAreaInput input);
 
         /// <summary>
         /// 更新 区域
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task UpdateAreaAsync(UpdateAreaInput input);
-
-        /// <summary>
-        /// 获取 新区域
-        /// </summary>
-        /// <returns></returns>
-        CreateAreaOutput GetNewArea();
-
-        /// <summary>
-        /// 获取 更新区域
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<UpdateAreaOutput> GetUpdateAreaAsync(IdInput input);
+        Task<GetAreaOutput> UpdateAreaAsync(UpdateAreaInput input);
 
         /// <summary>
         /// 删除 区域

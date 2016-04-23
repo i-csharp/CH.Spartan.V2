@@ -18,6 +18,14 @@ namespace CH.Spartan.Infrastructure
 
     #region 枚举
 
+    public enum EnumCoordinates
+    {
+        //地球坐标系
+        Wgs84 = 0,
+        //火星坐标系
+        Gcj02 = 1
+    }
+
     public enum EnumDealRecordType
     {
         [EnumDisplayName("充值")]

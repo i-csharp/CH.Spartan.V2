@@ -374,7 +374,7 @@ var abp = abp || {};
         abp.log.warn('abp.message.confirm is not implemented!');
     };
 
-    abp.message.prompt = function (message, callback) {
+    abp.message.prompt = function (message, yes, no) {
         abp.log.warn('abp.message.prompt is not implemented!');
     };
 

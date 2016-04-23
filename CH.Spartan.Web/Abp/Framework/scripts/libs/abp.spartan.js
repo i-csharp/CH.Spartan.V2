@@ -74,21 +74,27 @@
         });
     };
 
-    abp.message.prompt = function (message, callback) {
+    abp.message.prompt = function (message, yes,no) {
         dialog.prompt({
             title: message,
-            formType: 1
-        }, function (pass) {
-            if (callback) {
-                callback(pass);
+            formType: 0,
+            cancel: function(index) {
+                if (no) {
+                    no(index);
+                }
             }
+        }, function (value, index, elem) {
+            if (yes) {
+                yes(value,index,elem);
+            }
+            dialog.close(index);
         });
     };
 
     /* BLOCK **************************************************/
     var block = 0;
     abp.ui.block = function (elm) {
-        loablockding = dialog.load();
+        block = dialog.load();
     };
 
     abp.ui.unblock = function (elm) {

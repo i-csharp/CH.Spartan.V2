@@ -459,6 +459,9 @@
     <Content Include="Content\js\plugins\layer\skin\layer.ext.css" />
     <Content Include="Content\js\plugins\layer\skin\moon\default.png" />
     <Content Include="Content\js\plugins\layer\skin\moon\style.css" />
+    <None Include="Content\js\plugins\linq\jquery.linq-vsdoc.js" />
+    <Content Include="Content\js\plugins\linq\jquery.linq.js" />
+    <Content Include="Content\js\plugins\linq\jquery.linq.min.js" />
     <Content Include="Content\js\plugins\metisMenu\jquery.metisMenu.js" />
     <Content Include="Content\js\plugins\my97\calendar.js" />
     <Content Include="Content\js\plugins\my97\lang\en.js" />

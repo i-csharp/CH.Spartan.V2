@@ -42,7 +42,7 @@ namespace CH.Spartan.Web.Controllers
 
         #region 查询
 
-        [HttpGet]
+        [HttpPost]
         [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Area)]
         public async Task<JsonResult> GetAreaListPaged(GetAreaListPagedInput input)
         {
@@ -50,7 +50,7 @@ namespace CH.Spartan.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
+        [HttpPost]
         [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Area)]
         public async Task<JsonResult> GetAreaList(GetAreaListInput input)
         {
@@ -60,39 +60,26 @@ namespace CH.Spartan.Web.Controllers
         #endregion
 
         #region 添加
-        [HttpGet]
-        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Area_Create)]
-        public ActionResult CreateArea()
-        {
-            var result = _areaAppService.GetNewArea();
-            return View(result);
-        }
-
+       
         [HttpPost]
         [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Area_Create)]
         public async Task<JsonResult> CreateArea(CreateAreaInput input)
         {
-            await _areaAppService.CreateAreaAsync(input);
-            return Json(true, JsonRequestBehavior.AllowGet);
+            var result= await _areaAppService.CreateAreaAsync(input);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
         #region 更新
-        [HttpGet]
-        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Area_Update)]
-        public async Task<ActionResult> UpdateArea(IdInput input)
-        {
-            var result = await _areaAppService.GetUpdateAreaAsync(input);
-            return View(result);
-        }
 
         [HttpPost]
         [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Area_Update)]
         public async Task<JsonResult> UpdateArea(UpdateAreaInput input)
         {
-            await _areaAppService.UpdateAreaAsync(input);
-            return Json(true, JsonRequestBehavior.AllowGet);
+            var result = await _areaAppService.UpdateAreaAsync(input);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
+
         #endregion
 
         #region 删除

@@ -22,72 +22,24 @@
     </div>
     <div class="ibox-content ">
         <div class="input-group">
-            <button type="button" class="btn btn-sm btn-primary"> <i class="fa fa-plus"></i> @L("添加")</button>
+            <button type="button" class="btn btn-sm btn-primary" data-bind="click:newArea"> <i class="fa fa-plus"></i> @L("添加")</button>
             <button type="button" class="btn btn-sm btn-primary ml5"> <i class="fa fa-remove"></i> @L("隐藏所有区域")</button>
         </div>
-        <div class="input-group none">
-            <input type="text" placeholder="@L("区域名"))" class="input input-sm form-control">
+        @*<div class="input-group none" id="edit-area">
+            <input type="hidden" id="AreaId" value="" />
+            <input type="text" id="AreaName" placeholder="@L("区域名")" class="input input-sm form-control">
             <span class="input-group-btn">
-                <button type="button" class="btn btn-sm btn-primary"> <i class="fa fa-check"></i> @L("保存")</button>
-                <button type="button" class="btn btn-sm btn-primary"> <i class="fa fa-arrows"></i> @L("调整区域")</button>
+                <button type="button" class="btn btn-sm btn-primary" data-bind="click:saveArea"> <i class="fa fa-check"></i> @L("保存")</button>
+                <button type="button" class="btn btn-sm btn-primary" data-bind="click:enableEditingArea"> <i class="fa fa-arrows"></i> @L("调整区域")</button>
             </span>
-        </div>
-        <ul class="sortable-list connectList agile-list h500 ova">
-            <li class="warning-element">
-                加强过程管理，及时统计教育经费使用情况，做到底码清楚，
+        </div>*@
+        <ul class="sortable-list connectList agile-list h500 ova" data-bind="foreach: areas">
+            <li data-bind="css:cls">
+                <span data-bind="text:name,click:$parent.showArea"></span>
                 <div class="agile-detail">
-                    <a href="#" class="pull-right btn btn-xs btn-danger">删除</a>
-                    <i class="fa fa-clock-o"></i> 2015.09.01
-                </div>
-            </li>
-            <li class="success-element">
-                支持财会人员的继续培训工作。
-                <div class="agile-detail">
-                    <a href="#" class="pull-right btn btn-xs btn-danger">删除</a>
-                    <a href="#" class="pull-right btn btn-xs btn-primary mr5">隐藏</a>
-                    <i class="fa fa-clock-o"></i> 2015.05.12
-                </div>
-            </li>
-            <li class="info-element">
-                协同教导处搞好助学金、减免教科书费的工作。
-                <div class="agile-detail">
-                    <a href="#" class="pull-right btn btn-xs btn-danger">删除</a>
-                    <i class="fa fa-clock-o"></i> 2015.09.10
-                </div>
-            </li>
-            <li class="danger-element">
-                要求会计、出纳人员严格执行财务制度，遵守岗位职责，按时上报各种资料。
-                <div class="agile-detail">
-                    <a href="#" class="pull-right btn btn-xs btn-danger">删除</a>
-                    <i class="fa fa-clock-o"></i> 2015.06.10
-                </div>
-            </li>
-            <li class="warning-element">
-                做好职工公费医疗工作，按时发放门诊费。
-                <div class="agile-detail">
-                    <a href="#" class="pull-right btn btn-xs btn-danger">删除</a>
-                    <i class="fa fa-clock-o"></i> 2015.09.09
-                </div>
-            </li>
-            <li class="warning-element">
-                有计划地把课本复习三至五遍。
-                <div class="agile-detail">
-                    <a href="#" class="pull-right btn btn-xs btn-danger">删除</a>
-                    <i class="fa fa-clock-o"></i> 2015.08.04
-                </div>
-            </li>
-            <li class="success-element">
-                看一本高质量的高中语法书
-                <div class="agile-detail">
-                    <a href="#" class="pull-right btn btn-xs btn-danger">删除</a>
-                    <i class="fa fa-clock-o"></i> 2015.05.12
-                </div>
-            </li>
-            <li class="info-element">
-                选择一份较好的英语报纸，通过阅读提高英语学习效果。
-                <div class="agile-detail">
-                    <a href="#" class="pull-right btn btn-xs btn-danger">标记</a>
-                    <i class="fa fa-clock-o"></i> 2015.09.10
+                    <a href="#" class="pull-right btn btn-xs btn-danger" data-bind="click:$parent.delArea">删除</a>
+                    <a href="#" class="pull-right btn btn-xs btn-primary mr5" data-bind="click:$parent.hideArea">隐藏</a>
+                    <i class="fa fa-clock-o"></i> <!--ko text: lastModificationTime--><!--/ko-->
                 </div>
             </li>
         </ul>
@@ -98,11 +50,235 @@
         if (!$) {
             return;
         }
+
+        function areaVM() {
+            var self = this;
+            //坐标系
+            self.coordinates = "@(EnumCoordinates.Gcj02)";
+            //区域
+            self.areas = ko.observableArray();
+
+            ////显示区域
+            //self.showArea = function (area, event) {
+            //    if (area.polygon) {
+            //        area.polygon.show();
+            //        self.showEditAreaBox(area.id());
+            //        abp.global.map.current.setFitView(area.polygon);
+            //    } else {
+            //        var points = JSON.parse(area.points);
+            //        var pts = [];
+            //        $.each(points, function (index, item) {
+            //            pts.push(new AMap.LngLat(item.Lng, item.Lat));
+            //        });
+            //        area.polygon = new AMap.Polygon({
+            //            path: pts,
+            //            fillOpacity: 0.2,
+            //            strokeColor: "#F00",
+            //            strokeOpacity: 0.8,
+            //            strokeWeight: 1,
+            //            strokeStyle: "dashed",
+            //            strokeDasharray: [10, 5]
+            //        });
+            //        area.polygon.areaId = area.id();
+            //        area.polygon.edit = new AMap.PolyEditor(abp.global.map.current, area.polygon);
+            //        AMap.event.addListener(area.polygon, "click", function (e) {
+            //            self.showEditAreaBox(e.target.areaId);
+            //        });
+
+            //        area.polygon.setMap(abp.global.map.current);
+            //        abp.global.map.current.setFitView(area.polygon);
+            //        self.showEditAreaBox(area.Id);
+            //    }
+            //};
+
+            ////隐藏区域
+            //self.hideArea = function (area, event) {
+            //    if (area.polygon) {
+            //        area.polygon.hide();
+            //    }
+            //};
+
+            @*//开启编辑区域路径
+            self.enableEditingArea = function () {
+                var areaId = $("#AreaId").val();
+                var area = self.getArea(areaId);
+                if (area == null) {
+                    $.message.error(@L("找不到区域信息!"));
+                    return;
+                }
+                area.polygon.edit.open();
+            };*@
+
+            @*//关闭编辑区域路径
+            self.disableEditingArea = function () {
+                var areaId = $("#AreaId").val();
+                var area = self.getArea(areaId);
+                if (area == null) {
+                    $.message.error(@L("找不到区域信息!"));
+                    return;
+                }
+                area.polygon.edit.close();
+            };*@
+
+
+            //关闭编辑区域面板
+            self.hideEditAreaBox = function () {
+                $("#edit-area").hide();
+            };
+
+            ////打开编辑区域面板
+            //self.showEditAreaBox = function (areaId) {
+            //    var area = self.getArea(areaId);
+            //    $("#AreaId").val(area.id());
+            //    $("#AreaName").val(area.name());
+            //    $("#edit-area").show();
+            //};
+
+            //加载区域
+            self.loadArea = function () {
+                var data =
+                {
+                    coordinates: self.coordinates
+                }
+
+                abp.ajax(
+                {
+                    url: "/CustomerManage/GetAreaList",
+                    data: JSON.stringify(data)
+                }).done(function (result) {
+                    $.each(result.items, function (index, item) {
+                        self.areas.push(ko.mapping.fromJS(item));
+                    });
+                });
+            };
+
+            ////获取区域
+            //self.getArea = function(id) {
+            //    return $.Enumerable.From(self.areas()).SingleOrDefault(null, function(p) { return p.id() == id; });
+            //};
+
+            @*//保存区域
+            self.saveArea = function() {
+                //debugger;
+                var areaId = $("#AreaId").val();
+                var areaName = $("#AreaName").val();
+                if (areaName == "") {
+                    abp.message.error(@L("请输入区域名字!"));
+                    return;
+                }
+
+                var area = self.getArea(areaId);
+                if (area == null) {
+                    abp.message.error(@L("找不到区域信息!"));
+                    return;
+                }
+                area.polygon.edit.close();
+
+                abp.ajax(
+                {
+                    url: "/CustomerManage/UpdateArea",
+                    data: JSON.stringify({ id: areaId, name: text, points: JSON.stringify(self.drawPolygon.getPath()), coordinates: self.coordinates })
+                }).done(function(result) {
+                    debugger;
+                    area = self.getArea(result.Data.Id);
+                    area.AreaName(result.Data.Name);
+                });
+            };
+
+
+            //删除区域
+            self.delArea = function (area, event) {
+                abp.message.confirm("确定删除?", function (result) {
+                    if (result) {
+                        abp.ajax({
+                            url: "/CustomerManage/DeleteArea",
+                            data:JSON.stringify([{id:area.id()}])
+                        }).done(function (result) {
+                            if (area.polygon) {
+                                area.polygon.setMap(null);
+                            }
+                            self.areas.remove(area);
+                        });
+                    }
+                });
+            };*@
+
+            //新建区域
+            self.newArea = function () {
+                self.hideEditAreaBox();
+                abp.global.map.mouseTool.polygon({
+                    fillOpacity: 0.2,
+                    strokeColor: "#F00",
+                    strokeOpacity: 0.8,
+                    strokeWeight: 1,
+                    strokeStyle: "dashed",
+                    strokeDasharray: [10, 5]
+                });
+                abp.global.map.current.setDefaultCursor("crosshair");
+            };
+
+
+            //完成新建多边形
+            self.finishDrawPolygon = function (e) {
+                abp.global.map.current.setDefaultCursor("pointer");
+                self.drawPolygon = e.obj;
+                abp.message.prompt("@L("请输入区域名字")", function(value, index, elem) {
+                    if (value == "") {
+                        $.message.error("@L("请输入区域名字!")");
+                        return false;
+                    }
+                    var data =
+                    {
+                        area:
+                        {
+                            name: value,
+                            points: JSON.stringify(self.drawPolygon.getPath())
+                        },
+                        coordinates: self.coordinates
+                    }
+
+                    abp.ajax(
+                    {
+                        url: "/CustomerManage/CreateArea",
+                        data: JSON.stringify(data)
+                    }).done(function(result) {
+                        var area = ko.mapping.fromJS(result.area);
+                        area.polygon = self.drawPolygon;
+                        area.polygon.areaId = area.id();
+                        area.polygon.edit = new AMap.PolyEditor(abp.global.map.current, area.polygon);
+                        AMap.event.addListener(area.polygon, "click", function(e) {
+                            self.showEditAreaBox(e.target.areaId);
+                        });
+                        self.areas.push(area);
+                        self.drawPolygon.setMap(null);
+                        self.drawPolygon = null;
+                    });
+                }, function(index) {
+                    self.drawPolygon.setMap(null);
+                    self.drawPolygon = null;
+                });
+                
+                abp.global.map.mouseTool.close();
+            };
+
+            //加载数据
+            self.load = function () {
+                self.loadArea();
+                abp.global.map.current.plugin(["AMap.MouseTool"], function () {
+                    debugger;
+                    abp.global.map.mouseTool = new AMap.MouseTool(abp.global.map.current);
+                    AMap.event.addListener(abp.global.map.mouseTool, "draw", function (e) {
+                        self.finishDrawPolygon(e);
+                    });
+                });
+            }
+
+        }
+
         $(function() {
-           
-
-
-
+            abp.global.area = new areaVM();
+            ko.applyBindings(abp.global.area);
+            abp.global.area.load();
         });
     })(jQuery);
 </script>
