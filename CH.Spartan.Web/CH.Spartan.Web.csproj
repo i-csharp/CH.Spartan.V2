@@ -304,6 +304,11 @@
     <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\jquery.signalR-2.2.0.min.js" />
     <Content Include="Content\js\json2.min.js" />
+    <Content Include="Content\js\plugins\drag\jquery.event.default.js" />
+    <Content Include="Content\js\plugins\drag\jquery.event.drag.js" />
+    <Content Include="Content\js\plugins\drag\jquery.event.drag.live.js" />
+    <Content Include="Content\js\plugins\drag\jquery.event.drop.js" />
+    <Content Include="Content\js\plugins\drag\jquery.event.drop.live.js" />
     <Content Include="Content\js\plugins\icheck\demo\css\banner.jpg" />
     <Content Include="Content\js\plugins\icheck\demo\css\custom.css" />
     <Content Include="Content\js\plugins\icheck\demo\css\icheck.png" />
@@ -438,6 +443,8 @@
     <Content Include="Content\js\plugins\icheck\skins\square\yellow.css" />
     <Content Include="Content\js\plugins\icheck\skins\square\yellow.png" />
     <Content Include="Content\js\plugins\icheck\skins\square\_all.css" />
+    <Content Include="Content\js\plugins\knockout\knockout.mapping.js" />
+    <Content Include="Content\js\plugins\knockout\knockout.min.js" />
     <Content Include="Content\js\plugins\layer\extend\layer.ext.js" />
     <Content Include="Content\js\plugins\layer\layer.min.js" />
     <Content Include="Content\js\plugins\layer\layim\layim.css" />
@@ -859,6 +866,8 @@
     <Content Include="Views\AgentManage\CreateDeviceStock.cshtml" />
     <Content Include="Views\AgentManage\DeviceStock.cshtml" />
     <Content Include="Views\AgentManage\UpdateDeviceStock.cshtml" />
+    <Content Include="Views\Shared\_Map.cshtml" />
+    <Content Include="Views\Shared\_AreaBox.cshtml" />
     <None Include="Views\SystemManage\CreateTenant.cshtml" />
     <Content Include="Views\SystemManage\UpdateTenant.cshtml" />
     <Content Include="Views\SystemManage\DeviceType.cshtml" />

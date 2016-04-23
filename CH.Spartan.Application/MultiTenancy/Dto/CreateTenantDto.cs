@@ -24,8 +24,6 @@ namespace CH.Spartan.MultiTenancy.Dto
         [Required]
         [StringLength(Tenant.MaxPhoneLength)]
         public string Phone { get; set; }
-
-        public int? EditionId { get; set; }
     }
 
     public class CreateTenantInput : IInputDto

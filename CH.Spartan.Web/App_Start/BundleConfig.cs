@@ -22,28 +22,33 @@ namespace CH.Spartan.Web
                     .Include("~/Content/css/main.css", new CssRewriteUrlTransform())
                 );
 
+            //基础
             bundles.Add(
-              new ScriptBundle("~/scripts/top")
-                  .Include(
-                      "~/Content/js/jquery.min.js",
-                      "~/Content/js/bootstrap.min.js",
-                      "~/Content/js/json2.min.js"
-                  )
-              );
+                new ScriptBundle("~/scripts/top")
+                    .Include(
+                        "~/Content/js/jquery.min.js",
+                        "~/Content/js/bootstrap.min.js",
+                        "~/Content/js/json2.min.js",
+                        "~/Content/js/plugins/layer/layer.min.js",
+                        "~/Content/js/plugins/knockout/knockout.min.js",
+                        "~/Content/js/plugins/knockout/knockout.mapping.js",
+                        "~/Abp/Framework/scripts/abp.js",
+                        "~/Abp/Framework/scripts/libs/abp.jquery.js",
+                        "~/Abp/Framework/scripts/libs/abp.spartan.js"
+                    )
+                );
 
+            //插件
             bundles.Add(
                 new ScriptBundle("~/scripts/bottom")
                     .Include(
-                       "~/Content/js/contabs.min.js",
+                        "~/Content/js/contabs.min.js",
                         "~/Content/js/plugins/pace/pace.min.js",
-                        "~/Content/js/plugins/layer/layer.min.js",
                         "~/Content/js/plugins/metisMenu/jquery.metisMenu.js",
                         "~/Content/js/plugins/slimscroll/jquery.slimscroll.min.js",
-                        "~/Abp/Framework/scripts/abp.js",
-                        "~/Abp/Framework/scripts/libs/abp.jquery.js",
-                        "~/Abp/Framework/scripts/libs/abp.spartan.js",
                         "~/Content/js/hplus.min.js",
-                        "~/Content/js/content.min.js"
+                        "~/Content/js/content.min.js",
+                        "~/Content/js/main.js"
                     )
                 );
 
@@ -96,6 +101,17 @@ namespace CH.Spartan.Web
                        "~/Content/js/plugins/icheck/icheck.default.js"
                    )
                );
+
+            bundles.Add(
+             new ScriptBundle("~/scripts/plugins/drag")
+                 .Include(
+                     "~/Content/js/plugins/drag/jquery.event.drag.js"
+                 ).Include(
+                     "~/Content/js/plugins/drag/jquery.event.drop.js"
+                 ).Include(
+                     "~/Content/js/plugins/drag/jquery.event.default.js"
+                 )
+             );
         }
     }
 }

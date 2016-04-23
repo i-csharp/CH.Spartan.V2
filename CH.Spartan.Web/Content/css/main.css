@@ -1,11 +1,13 @@
-﻿/*list*/
+﻿/*common*/
+.ibox .ibox-title{ cursor:move}
+/*list*/
 .wrapper-content.list { padding: 0px; }
 .wrapper-content.list .ibox-content { border: 0px; }
 .wrapper-content.list .ibox-content.list-toolbar { padding-bottom: 0px;padding-top: 20px; }
 .wrapper-content.list .ibox-content.list-toolbar .form-group{ height: 39px !important; }
 .wrapper-content.list .ibox-content.list-content { padding-top: 0px; }
 .wrapper-content.list .ibox-content.list-content .btn-op{ cursor: pointer;padding: 0px;margin: 0px; margin-right: 10px;font-size: 10px;}
-
+/*edit*/
 .ibox.edit{margin-bottom: 0px;}
 .ibox.edit .form-group{ height: 65px;margin-bottom: 0px;}
 .ibox.edit-col-1 .form-group.has-error .select2-selection--single{ border-color: #ed5565 !important;}

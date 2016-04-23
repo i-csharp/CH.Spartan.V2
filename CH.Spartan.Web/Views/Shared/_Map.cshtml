@@ -1,0 +1,87 @@
+﻿@using Abp.Configuration
+<div class="map-container w h" id="map-container">
+
+
+</div>
+<script src="http://webapi.amap.com/maps?v=1.3&key=@SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_Map_AMapAk)" type="text/javascript"></script>
+<script type="text/javascript">
+    (function () {
+        abp.global.map = {};
+        $(function() {
+            abp.global.map.container = $("#map-container");
+            abp.global.map.container.height(abp.global.win.h);
+            abp.global.map.current = new AMap.Map("map-container", {
+                resizeEnable: true,
+                rotateEnable: true,
+                dragEnable: true,
+                zoomEnable: true,
+                zooms: [3, 18]
+            });
+
+            AMap.event.addListener(abp.global.map.current, "zoomchange", function (e) {
+                abp.global.map.zoom = this.getZoom();
+            });
+            abp.global.map.current.plugin(["AMap.PolyEditor"]);
+            abp.global.map.current.plugin(["AMap.Scale"], function () {
+                var scale = new AMap.Scale();
+                abp.global.map.current.addControl(scale);
+            });
+
+            abp.global.map.current.plugin(["AMap.OverView"], function () {
+                var view = new AMap.OverView();
+                abp.global.map.current.addControl(view);
+            });
+
+            abp.global.map.current.plugin(["AMap.ToolBar"], function () {
+                var tool = new AMap.ToolBar();
+                abp.global.map.current.addControl(tool);
+            });
+
+            abp.global.map.current.plugin(["AMap.CitySearch"], function () {
+                var citySearch = new AMap.CitySearch();
+                citySearch.getLocalCity(function (status, result) {
+                    if (status === 'complete' && result.info === 'OK') {
+                        if (result && result.city && result.bounds) {
+                            abp.global.map.current.setBounds(result.bounds);
+                        }
+                    }
+                });
+            });
+
+            abp.global.map.current.plugin(["AMap.PlaceSearch"], function () {
+                var placeSearch = new AMap.PlaceSearch();
+                abp.global.map.placeSearch = placeSearch;
+            });
+
+            abp.global.map.current.plugin(["AMap.RangingTool"], function () {
+                var startMarker = {
+                    icon: new AMap.Icon({
+                        size: new AMap.Size(19, 33),
+                        image: "/Areas/Gps/Content/Images/Marker/start.png",
+                        imageOffset: new AMap.Pixel(0, 0)
+                    })
+                };
+                var endMarker = {
+                    icon: new AMap.Icon({
+                        size: new AMap.Size(19, 33),
+                        image: "/Areas/Gps/Content/Images/Marker/end.png",
+                        imageOffset: new AMap.Pixel(0, 0)
+                    }),
+                    offset: new AMap.Pixel(-10, -32)
+                };
+                var lineOptions = {
+                    strokeStyle: "solid",
+                    strokeColor: "#FF33FF",
+                    strokeOpacity: 1,
+                    strokeWeight: 2
+                };
+                var rulerOptions = { startMarkerOptions: startMarker, endMarkerOptions: endMarker, lineOptions: lineOptions };
+                abp.global.map.ruler = new AMap.RangingTool(abp.global.map.current, rulerOptions);
+                AMap.event.addListener(self.ruler, "end", function (e) {
+                    abp.global.map.ruler.turnOff();
+                });
+            });
+
+        });
+    })(jQuery);
+</script>

@@ -18,10 +18,15 @@
     @RenderSection("styles", required: false)
     @Scripts.Render("~/scripts/top")
     <script type="text/javascript">
-        var abp = abp || {}; abp.appPath = '@ApplicationPath';
+        var abp = abp || {};
+        abp.global = {};
+        abp.global.win = {};
+        abp.global.win.h = $(window).height();
+        abp.global.win.w = $(window).width();
+        abp.appPath = '@ApplicationPath';
     </script>
 </head>
-<body class="fixed-sidebar full-height-layout ">
+<body class="fixed-sidebar full-height-layout @ViewBag.BodyClass">
     @RenderBody()
     @Scripts.Render("~/scripts/bottom")
     <script src="/api/AbpServiceProxies/GetAll?v=@(Clock.Now.Ticks)"></script>
