@@ -23,23 +23,23 @@
     <div class="ibox-content ">
         <div class="input-group">
             <button type="button" class="btn btn-sm btn-primary" data-bind="click:newArea"> <i class="fa fa-plus"></i> @L("添加")</button>
-            <button type="button" class="btn btn-sm btn-primary ml5"> <i class="fa fa-remove"></i> @L("隐藏所有区域")</button>
+            <button type="button" class="btn btn-sm btn-primary ml5" data-bind="click:hideAllArea"> <i class="fa fa-remove"></i> @L("隐藏所有区域")</button>
         </div>
-        @*<div class="input-group none" id="edit-area">
+        <div class="input-group" id="edit-area" style="display: none">
             <input type="hidden" id="AreaId" value="" />
             <input type="text" id="AreaName" placeholder="@L("区域名")" class="input input-sm form-control">
             <span class="input-group-btn">
                 <button type="button" class="btn btn-sm btn-primary" data-bind="click:saveArea"> <i class="fa fa-check"></i> @L("保存")</button>
                 <button type="button" class="btn btn-sm btn-primary" data-bind="click:enableEditingArea"> <i class="fa fa-arrows"></i> @L("调整区域")</button>
             </span>
-        </div>*@
-        <ul class="sortable-list connectList agile-list h500 ova" data-bind="foreach: areas">
+        </div>
+        <ul class="sortable-list connectList agile-list h500 ova pt0" data-bind="foreach: areas">
             <li data-bind="css:cls">
                 <span data-bind="text:name,click:$parent.showArea"></span>
                 <div class="agile-detail">
                     <a href="#" class="pull-right btn btn-xs btn-danger" data-bind="click:$parent.delArea">删除</a>
                     <a href="#" class="pull-right btn btn-xs btn-primary mr5" data-bind="click:$parent.hideArea">隐藏</a>
-                    <i class="fa fa-clock-o"></i> <!--ko text: lastModificationTime--><!--/ko-->
+                    <i class="fa fa-clock-o"></i> <!--ko text: creationTime--><!--/ko-->
                 </div>
             </li>
         </ul>
@@ -53,86 +53,99 @@
 
         function areaVM() {
             var self = this;
+
             //坐标系
             self.coordinates = "@(EnumCoordinates.Gcj02)";
+
             //区域
             self.areas = ko.observableArray();
 
-            ////显示区域
-            //self.showArea = function (area, event) {
-            //    if (area.polygon) {
-            //        area.polygon.show();
-            //        self.showEditAreaBox(area.id());
-            //        abp.global.map.current.setFitView(area.polygon);
-            //    } else {
-            //        var points = JSON.parse(area.points);
-            //        var pts = [];
-            //        $.each(points, function (index, item) {
-            //            pts.push(new AMap.LngLat(item.Lng, item.Lat));
-            //        });
-            //        area.polygon = new AMap.Polygon({
-            //            path: pts,
-            //            fillOpacity: 0.2,
-            //            strokeColor: "#F00",
-            //            strokeOpacity: 0.8,
-            //            strokeWeight: 1,
-            //            strokeStyle: "dashed",
-            //            strokeDasharray: [10, 5]
-            //        });
-            //        area.polygon.areaId = area.id();
-            //        area.polygon.edit = new AMap.PolyEditor(abp.global.map.current, area.polygon);
-            //        AMap.event.addListener(area.polygon, "click", function (e) {
-            //            self.showEditAreaBox(e.target.areaId);
-            //        });
+            //显示区域
+            self.showArea = function (area, event) {
+                if (area.polygon) {
+                    area.polygon.show();
+                    self.showEditAreaBox(area.id());
+                    abp.global.map.current.setFitView(area.polygon);
+                } else {
+                    var points = JSON.parse(area.points());
+                    var pts = [];
+                    $.each(points, function (index, item) {
+                        pts.push(new AMap.LngLat(item.Lng, item.Lat));
+                    });
+                    area.polygon = new AMap.Polygon({
+                        path: pts,
+                        fillOpacity: 0.2,
+                        strokeColor: "#F00",
+                        strokeOpacity: 0.8,
+                        strokeWeight: 1,
+                        strokeStyle: "dashed",
+                        strokeDasharray: [10, 5]
+                    });
+                    area.polygon.areaId = area.id();
+                    area.polygon.edit = new AMap.PolyEditor(abp.global.map.current, area.polygon);
+                    AMap.event.addListener(area.polygon, "click", function (e) {
+                        self.showEditAreaBox(e.target.areaId);
+                    });
 
-            //        area.polygon.setMap(abp.global.map.current);
-            //        abp.global.map.current.setFitView(area.polygon);
-            //        self.showEditAreaBox(area.Id);
-            //    }
-            //};
+                    area.polygon.setMap(abp.global.map.current);
+                    abp.global.map.current.setFitView(area.polygon);
+                    self.showEditAreaBox(area.id());
+                }
+            };
 
-            ////隐藏区域
-            //self.hideArea = function (area, event) {
-            //    if (area.polygon) {
-            //        area.polygon.hide();
-            //    }
-            //};
+            //隐藏区域
+            self.hideArea = function (area, event) {
+                if (area.polygon) {
+                    area.polygon.hide();
+                    area.polygon.edit.close();
+                }
+            };
 
-            @*//开启编辑区域路径
+            //隐藏区域 全部
+            self.hideAllArea = function () {
+                $.each(self.areas(), function(index, area) {
+                    if (area.polygon) {
+                        area.polygon.hide();
+                        area.polygon.edit.close();
+                    }
+                });
+                
+            };
+
+            //开启编辑区域路径
             self.enableEditingArea = function () {
                 var areaId = $("#AreaId").val();
                 var area = self.getArea(areaId);
                 if (area == null) {
-                    $.message.error(@L("找不到区域信息!"));
+                    $.message.error("@L("找不到区域信息!")");
                     return;
                 }
                 area.polygon.edit.open();
-            };*@
+            };
 
-            @*//关闭编辑区域路径
+            //关闭编辑区域路径
             self.disableEditingArea = function () {
                 var areaId = $("#AreaId").val();
                 var area = self.getArea(areaId);
                 if (area == null) {
-                    $.message.error(@L("找不到区域信息!"));
+                    $.message.error("@L("找不到区域信息!")");
                     return;
                 }
                 area.polygon.edit.close();
-            };*@
-
+            };
 
             //关闭编辑区域面板
             self.hideEditAreaBox = function () {
-                $("#edit-area").hide();
+                $("#edit-area").fadeOut();
             };
 
-            ////打开编辑区域面板
-            //self.showEditAreaBox = function (areaId) {
-            //    var area = self.getArea(areaId);
-            //    $("#AreaId").val(area.id());
-            //    $("#AreaName").val(area.name());
-            //    $("#edit-area").show();
-            //};
+            //打开编辑区域面板
+            self.showEditAreaBox = function (areaId) {
+                var area = self.getArea(areaId);
+                $("#AreaId").val(area.id());
+                $("#AreaName").val(area.name());
+                $("#edit-area").fadeIn();
+            };
 
             //加载区域
             self.loadArea = function () {
@@ -152,48 +165,53 @@
                 });
             };
 
-            ////获取区域
-            //self.getArea = function(id) {
-            //    return $.Enumerable.From(self.areas()).SingleOrDefault(null, function(p) { return p.id() == id; });
-            //};
+            //获取区域
+            self.getArea = function(id) {
+                return $.Enumerable.From(self.areas()).SingleOrDefault(null, function(p) { return p.id() == id; });
+            };
 
-            @*//保存区域
+            //保存区域
             self.saveArea = function() {
-                //debugger;
                 var areaId = $("#AreaId").val();
                 var areaName = $("#AreaName").val();
                 if (areaName == "") {
-                    abp.message.error(@L("请输入区域名字!"));
+                    abp.message.error("@L("请输入区域名字!")");
                     return;
                 }
 
                 var area = self.getArea(areaId);
                 if (area == null) {
-                    abp.message.error(@L("找不到区域信息!"));
+                    abp.message.error("@L("找不到区域信息!")");
                     return;
                 }
                 area.polygon.edit.close();
 
+                var data =
+                {
+                    area: { id: areaId, name: areaName, points: JSON.stringify(area.polygon.getPath()) },
+                    coordinates: self.coordinates
+                }
+
                 abp.ajax(
                 {
                     url: "/CustomerManage/UpdateArea",
-                    data: JSON.stringify({ id: areaId, name: text, points: JSON.stringify(self.drawPolygon.getPath()), coordinates: self.coordinates })
+                    data: JSON.stringify(data)
                 }).done(function(result) {
-                    debugger;
-                    area = self.getArea(result.Data.Id);
-                    area.AreaName(result.Data.Name);
+                    area = self.getArea(result.area.id);
+                    area.name(result.area.name);
                 });
             };
 
 
             //删除区域
             self.delArea = function (area, event) {
-                abp.message.confirm("确定删除?", function (result) {
+                abp.message.confirm("@L("确定删除?")", function (result) {
                     if (result) {
                         abp.ajax({
                             url: "/CustomerManage/DeleteArea",
                             data:JSON.stringify([{id:area.id()}])
                         }).done(function (result) {
+                            
                             if (area.polygon) {
                                 area.polygon.setMap(null);
                             }
@@ -201,7 +219,7 @@
                         });
                     }
                 });
-            };*@
+            };
 
             //新建区域
             self.newArea = function () {
@@ -249,9 +267,7 @@
                         AMap.event.addListener(area.polygon, "click", function(e) {
                             self.showEditAreaBox(e.target.areaId);
                         });
-                        self.areas.push(area);
-                        self.drawPolygon.setMap(null);
-                        self.drawPolygon = null;
+                        self.areas.splice(0, 0, area);
                     });
                 }, function(index) {
                     self.drawPolygon.setMap(null);
@@ -265,20 +281,18 @@
             self.load = function () {
                 self.loadArea();
                 abp.global.map.current.plugin(["AMap.MouseTool"], function () {
-                    debugger;
                     abp.global.map.mouseTool = new AMap.MouseTool(abp.global.map.current);
                     AMap.event.addListener(abp.global.map.mouseTool, "draw", function (e) {
                         self.finishDrawPolygon(e);
                     });
                 });
             }
-
+            self.load();
         }
 
         $(function() {
             abp.global.area = new areaVM();
             ko.applyBindings(abp.global.area);
-            abp.global.area.load();
         });
     })(jQuery);
 </script>

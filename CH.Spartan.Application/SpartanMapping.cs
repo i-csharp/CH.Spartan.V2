@@ -37,6 +37,9 @@ namespace CH.Spartan
             Mapper.CreateMap<Device, UpdateDeviceByAgentDto>()
             .ForMember(d => d.AreaSettings, opt => opt.MapFrom(o => o.GetOutAreaSettings().MapTo<List<AreaSettingDto>>()));
 
+            Mapper.CreateMap<Device, UpdateDeviceByCustomerDto>()
+           .ForMember(d => d.AreaSettings, opt => opt.MapFrom(o => o.GetOutAreaSettings().MapTo<List<AreaSettingDto>>()));
+
             Mapper.CreateMap<DealRecord, GetDealRecordListDto>()
               .ForMember(d => d.IsSucceedText, opt => opt.MapFrom(o => o.IsSucceed ? L("是") : L("否")))
               .ForMember(d => d.TenantText, opt => opt.MapFrom(o => o.Tenant != null ? o.Tenant.Name : "-"))

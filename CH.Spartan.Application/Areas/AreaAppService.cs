@@ -82,8 +82,6 @@ namespace CH.Spartan.Areas
 
         public async Task<GetAreaOutput> CreateAreaAsync(CreateAreaInput input)
         {
-            var area = input.Area.MapTo<Area>();
-            area.UserId = AbpSession.GetUserId();
             switch (input.Coordinates)
             {
                 case EnumCoordinates.Wgs84:
@@ -94,16 +92,15 @@ namespace CH.Spartan.Areas
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
+            var area = input.Area.MapTo<Area>();
+            area.UserId = AbpSession.GetUserId();
             await _areaRepository.InsertAsync(area);
+            UnitOfWorkManager.Current.SaveChanges();
             return new GetAreaOutput(area.MapTo<GetAreaDto>());
         }
 
         public async Task<GetAreaOutput> UpdateAreaAsync(UpdateAreaInput input)
         {
-            var area = await _areaRepository.GetAsync(input.Area.Id);
-            input.Area.MapTo(area);
-            area.UserId = AbpSession.GetUserId();
             switch (input.Coordinates)
             {
                 case EnumCoordinates.Wgs84:
@@ -115,6 +112,8 @@ namespace CH.Spartan.Areas
                     throw new ArgumentOutOfRangeException();
             }
 
+            var area = await _areaRepository.GetAsync(input.Area.Id);
+            input.Area.MapTo(area);
             await _areaRepository.UpdateAsync(area);
             return new GetAreaOutput(area.MapTo<GetAreaDto>());
         }

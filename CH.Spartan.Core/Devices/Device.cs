@@ -335,7 +335,7 @@ namespace CH.Spartan.Devices
         {
             if (!SInOutArea.IsNullOrEmpty())
             {
-               return SInOutArea.ToObject<List<AreaSetting>>();
+                return SInOutArea.ToObject<List<AreaSetting>>();
             }
             return new EditableList<AreaSetting>();
         }
