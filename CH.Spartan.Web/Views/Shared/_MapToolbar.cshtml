@@ -1,0 +1,200 @@
+﻿@using Abp.Extensions
+@model string
+@{
+    var cls = Model;
+    if (cls.IsNullOrEmpty())
+    {
+        cls = "z-index: 999; top: 5px; right: 405px;";
+    }
+}
+<div id="map-toolbar-box" class="ibox float-e-margins w300" style="position: absolute; @cls">
+    <div class="ibox-title">
+        <h5>@L("地图工具箱")</h5>
+        <div class="ibox-tools">
+            <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="close-link">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+    </div>
+    <div class="ibox-content p5 text-center">
+        <button class="btn btn-primary btn-circle btn-outline btn-lg" type="button" data-toggle="tooltip" data-placement="bottom" title="@L("路况 切换显示城市路况")" data-bind="click:toggleTrafficLayer">
+            <i class="fa fa-road"></i>
+        </button>
+        <button class="btn btn-success btn-circle btn-outline btn-lg" type="button" data-toggle="tooltip" data-placement="bottom" title="@L("卫星 切换显示地图 普通/卫星地图")" data-bind="click:toggleSatellLayer">
+            <i class="fa fa-map"></i>
+        </button>
+        <button class="btn btn-info btn-circle btn-outline btn-lg" type="button" data-toggle="tooltip" data-placement="bottom" title="@L("视图 切换显示视图 2D/3D 当地图缩放级别达到17、18级时可以显示")" data-bind="click:toggleBuildingLayer">
+            <i class="fa fa-cubes"></i>
+        </button>
+        <button class="btn btn-warning btn-circle btn-outline btn-lg" type="button" data-toggle="tooltip" data-placement="bottom" title="@L("测距 鼠标在地图上点击获取量测点，双击左键结束当前量距操作")" data-bind="click:startRuler">
+            <i class="fa fa-expand"></i>
+        </button>
+        <button class="btn btn-danger btn-circle btn-outline btn-lg" type="button" data-toggle="tooltip" data-placement="bottom" title="@L("检索 在地图上搜索地方")" data-bind="click:showPlaceSearchBox">
+            <i class="fa fa-search"></i>
+        </button>
+    </div>
+</div>
+<script type="text/javascript">
+    (function ($) {
+        if (!$) {
+            return;
+        }
+
+        function mapToolbarVM() {
+            var self = this;
+            //路况
+            self.trafficLayer = null;
+            self.trafficLayerIsShow = false;
+
+            //卫星
+            self.satellLayer = null;
+            self.satellLayerIsShow = false;
+
+            //视图
+            self.buildingLayer = null;
+            self.buildingLayerIsShow = false;
+
+
+            //显示
+            self.show = function(cls) {
+                debugger;
+                if (cls) {
+                    $("#map-toolbar-box").css(cls).fadeIn();
+                } else {
+                    $("#map-toolbar-box").fadeIn();
+                }
+            }
+            //隐藏
+            self.hide = function (cls) {
+                if (cls) {
+                    $("#map-toolbar-box").css(cls).fadeOut();
+                } else {
+                    $("#map-toolbar-box").fadeOut();
+                }
+            }
+
+            //切换路况
+            self.toggleTrafficLayer = function (a, b) {
+                //debugger;
+                if (!self.trafficLayer) {
+                    self.trafficLayer = new AMap.TileLayer.Traffic(
+                    {
+                        zIndex: 15
+                    });
+                    self.trafficLayer.setMap(abp.global.map.current);
+                }
+
+                if (self.trafficLayerIsShow) {
+                    $(b.target).removeClass("active");
+                    self.trafficLayerIsShow = false;
+                    self.trafficLayer.hide();
+                } else {
+                    $(b.target).addClass("active");
+                    self.trafficLayerIsShow = true;
+                    self.trafficLayer.show();
+                }
+            };
+
+            //切换图层
+            self.toggleSatellLayer = function (a, b) {
+                if (!self.satellLayer) {
+                    self.satellLayer = new AMap.TileLayer.Satellite(
+                    {
+                        zIndex: abp.global.map.zoom
+                    });
+                    self.satellLayer.setMap(abp.global.map.current);
+                }
+
+                if (self.satellLayerIsShow) {
+                    $(b.target).removeClass("active");
+                    self.satellLayerIsShow = false;
+                    self.satellLayer.hide();
+                } else {
+                    $(b.target).addClass("active");
+                    self.satellLayerIsShow = true;
+                    self.satellLayer.show();
+                }
+
+            };
+
+            //切换视图
+            self.toggleBuildingLayer = function (a, b) {
+                if (!self.buildingLayer) {
+                    self.buildingLayer = new AMap.Buildings(
+                    {
+                        zIndex: 5
+                    });
+
+                }
+
+                if (self.buildingLayerIsShow) {
+                    $(b.target).removeClass("active");
+                    self.buildingLayerIsShow = false;
+                    self.buildingLayer.setMap(null);
+                } else {
+                    $(b.target).addClass("active");
+                    self.buildingLayerIsShow = true;
+                    self.buildingLayer.setMap(abp.global.map.current);
+                }
+            };
+
+            //显示检索
+            self.showPlaceSearchBox = function () {
+                debugger;
+                if (abp.global.mapPlaceSearchBox) {
+                    var cls = { left: (abp.global.win.w / 2 - 150) + "px" };
+                    abp.global.mapPlaceSearchBox.show(cls);
+                }
+            }
+
+
+            //开始测距
+            self.startRuler = function (a, b) {
+                self.ruler.turnOn();
+            };
+
+
+            self.load = function () {
+                debugger;
+                abp.global.map.current.plugin(["AMap.RangingTool"], function () {
+                    var startMarker = {
+                        icon: new AMap.Icon({
+                            size: new AMap.Size(19, 33),
+                            image: "/Content/img/marker/start.png",
+                            imageOffset: new AMap.Pixel(0, 0)
+                        })
+                    };
+                    var endMarker = {
+                        icon: new AMap.Icon({
+                            size: new AMap.Size(19, 33),
+                            image: "/Content/img/marker/end.png",
+                            imageOffset: new AMap.Pixel(0, 0)
+                        }),
+                        offset: new AMap.Pixel(-10, -32)
+                    };
+                    var lineOptions = {
+                        strokeStyle: "solid",
+                        strokeColor: "#FF33FF",
+                        strokeOpacity: 1,
+                        strokeWeight: 2
+                    };
+                    var rulerOptions = { startMarkerOptions: startMarker, endMarkerOptions: endMarker, lineOptions: lineOptions };
+                    self.ruler = new AMap.RangingTool(abp.global.map.current, rulerOptions);
+                    AMap.event.addListener(self.ruler, "end", function (e) {
+                        self.ruler.turnOff();
+                    });
+                });
+            }
+            self.load();
+        }
+
+        $(function () {
+            abp.global.mapToolbarBox = new mapToolbarVM();
+            ko.applyBindings(abp.global.mapToolbarBox, $("#map-toolbar-box")[0]);
+        });
+    })(jQuery);
+
+</script>

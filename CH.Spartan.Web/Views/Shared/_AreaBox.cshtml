@@ -8,19 +8,27 @@
     }
 }
 
-<div id="area-box" class="ibox float-e-margins w400" style="position: absolute; @cls">
+<div id="area-box" class="ibox float-e-margins w300" style="position: absolute; @cls">
     <div class="ibox-title">
         <h5>@L("全部区域")</h5>
         <div class="ibox-tools">
             <a class="collapse-link">
                 <i class="fa fa-chevron-up"></i>
             </a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li>
+                    <a href="#" data-bind="click:showMapToolbarBox">@L("工具箱")</a>
+                </li>
+            </ul>
             <a class="close-link">
                 <i class="fa fa-times"></i>
             </a>
         </div>
     </div>
-    <div class="ibox-content ">
+    <div class="ibox-content p5">
         <div class="input-group">
             <button type="button" class="btn btn-sm btn-primary" data-bind="click:newArea"> <i class="fa fa-plus"></i> @L("添加")</button>
             <button type="button" class="btn btn-sm btn-primary ml5" data-bind="click:hideAllArea"> <i class="fa fa-remove"></i> @L("隐藏所有区域")</button>
@@ -53,12 +61,35 @@
 
         function areaVM() {
             var self = this;
+            //显示
+            self.show = function(cls) {
+                if (cls) {
+                    $("#area-box").css(cls).fadeIn();
+                } else {
+                    $("#area-box").fadeIn();
+                }
+            }
+            //隐藏
+            self.hide = function (cls) {
+                if (cls) {
+                    $("#area-box").css(cls).fadeOut();
+                } else {
+                    $("#area-box").fadeOut();
+                }
+            }
 
             //坐标系
             self.coordinates = "@(EnumCoordinates.Gcj02)";
 
             //区域
             self.areas = ko.observableArray();
+
+            //显示工具箱
+            self.showMapToolbarBox = function() {
+                if (abp.global.mapToolbarBox) {
+                    abp.global.mapToolbarBox.show();
+                }
+            }
 
             //显示区域
             self.showArea = function (area, event) {
@@ -291,8 +322,8 @@
         }
 
         $(function() {
-            abp.global.area = new areaVM();
-            ko.applyBindings(abp.global.area);
+            abp.global.areaBox = new areaVM();
+            ko.applyBindings(abp.global.areaBox, $("#area-box")[0]);
         });
     })(jQuery);
 </script>

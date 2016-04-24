@@ -10,48 +10,11 @@
 @section scripts
 {
     @Scripts.Render("~/scripts/plugins/drag")
-    <script type="text/javascript">
-        //添加
-        function create() {
-         
-        }
-
-        //更新
-        function update(id) {
-           
-        }
-
-        //删除
-        function del(ids) {
-            if (typeof ids == "string") {
-                ids = [{ id: ids }];
-            }
-            abp.message.confirm("@L("确定删除")?", function (yes) {
-                if (!yes) return;
-                abp.ajax({
-                    url: "/CustomerManage/DeleteArea",
-                    data: JSON.stringify(ids)
-                }).done(function (result) {
-                    abp.notify.success("@L("删除成功")");
-                    $("#table").bootstrapTable("refresh");
-                });
-            });
-        }
-
-
-        (function ($) {
-            if (!$) {
-                return;
-            }
-            $(function () {
-            
-
-            });
-        })(jQuery);
-    </script>
 }
 
 <div class="wrapper wrapper-content @(SpartanConsts.DefaultAnimate) p0">
     @Html.Partial("_Map")
-    @Html.Partial("_AreaBox")
+    @Html.Partial("_AreaBox", "z-index: 999; top: 5px; right: 5px;")
+    @Html.Partial("_MapToolbar", "z-index: 999; top: 5px; right: 310px;")
+    @Html.Partial("_MapPlaceSearchBox", "z-index: 999; top: 5px; right: 610px;display:none")
 </div>
