@@ -1,5 +1,8 @@
 ﻿namespace CH.Spartan.Infrastructure
 {
+    /// <summary>
+    /// 权限 菜单 控制器 均是按照角色来划分
+    /// </summary>
     public static class SpartanPermissionNames
     {
 
@@ -19,7 +22,10 @@
         public const string CustomerManages_Area_Create = "CustomerManages.Area.Create";
         public const string CustomerManages_Area_Update = "CustomerManages.Area.Update";
         public const string CustomerManages_Area_Delete = "CustomerManages.Area.Delete";
-        
+
+        public const string CustomerManages_UserInfo = "CustomerManages.UserInfo";
+        public const string CustomerManages_ChangePassword = "CustomerManages.ChangePassword";
+
         //代理
         public const string AgentManages = "AgentManages";
         public const string AgentManages_Monitor = "AgentManages.Monitor";
@@ -51,14 +57,10 @@
         public const string AgentManages_DealRecord_Delete = "AgentManages.DealRecord.Delete";
 
 
-
-
         //平台
         public const string PlatformManages = "PlatformManages";
         public const string PlatformManages_DealRecord = "PlatformManages.DealRecord";
         public const string PlatformManages_DealRecord_Delete = "PlatformManages.DealRecord.Delete";
-
-
 
 
         //系统

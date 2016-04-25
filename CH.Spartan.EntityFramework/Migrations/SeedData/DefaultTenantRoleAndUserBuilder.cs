@@ -32,6 +32,7 @@ namespace CH.Spartan.Migrations.SeedData
             CreateHost();
             CreateTenant("羽衡科技", "yugps", "yugps@qq.com", "18566267191", 100000);
             CreateTenant("哈尔滨卓拓科技", "hebztkj", "hebztkj@qq.com", "18533696989", 2000);
+            UpdateTenantUserRolePermission();
             UpdateTenantAdminRolePermission();
         }
 
@@ -232,6 +233,43 @@ namespace CH.Spartan.Migrations.SeedData
                 _context.SaveChanges();
                 //给租主 赋予租户管理员角色
                 _context.UserRoles.Add(new UserRole(adminUserFoTenant.Id, adminRoleForTenant.Id));
+                _context.SaveChanges();
+            }
+        }
+
+        private void UpdateTenantUserRolePermission()
+        {
+            //给所有租户管理员角色 添加权限 更新权限的时候用
+            var tenantUserRoles =
+                _context.Roles.Where(p => p.Name == StaticRoleNames.Tenants.User && p.TenantId != null).ToList();
+
+            var tenantUserRolePermissions = PermissionFinder
+                .GetAllPermissions(new SpartanAuthorizationProvider())
+                .Where(p => p.MultiTenancySides.HasFlag(MultiTenancySides.Tenant) && !p.Name.StartsWith(SpartanPermissionNames.AgentManages))
+                .ToList();
+
+            foreach (var tenantUserRole in tenantUserRoles)
+            {
+                foreach (var permission in tenantUserRolePermissions)
+                {
+                    if (!permission.IsGrantedByDefault)
+                    {
+                        var permissionSetting =
+                            _context.RolePermissions.FirstOrDefault(
+                                p => p.Name == permission.Name && p.IsGranted && p.RoleId == tenantUserRole.Id);
+
+                        if (permissionSetting == null)
+                        {
+                            _context.Permissions.Add(
+                                new RolePermissionSetting
+                                {
+                                    Name = permission.Name,
+                                    IsGranted = true,
+                                    RoleId = tenantUserRole.Id
+                                });
+                        }
+                    }
+                }
                 _context.SaveChanges();
             }
         }

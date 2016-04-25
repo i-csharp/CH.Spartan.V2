@@ -3,12 +3,6 @@ using Abp.Localization;
 
 namespace CH.Spartan.Infrastructure
 {
-    /// <summary>
-    /// This class defines menus for the application.
-    /// It uses ABP's menu system.
-    /// When you add menu items here, they are automatically appear in angular application.
-    /// See Views/Layout/_TopMenu.cshtml file to know how to render menu.
-    /// </summary>
     public class SpartanNavigationProvider : NavigationProvider
     {
         public override void SetNavigation(INavigationProviderContext context)
@@ -16,7 +10,7 @@ namespace CH.Spartan.Infrastructure
             context.Manager.MainMenu
                 .AddItem(
                     new MenuItemDefinition(
-                        "Customers",
+                        "Customer",
                         L("我的主页"),//客户主页
                         url: "#",
                         icon: "fa fa-home",
@@ -36,12 +30,14 @@ namespace CH.Spartan.Infrastructure
                         requiresAuthentication: true,
                         requiredPermissionName: SpartanPermissionNames.CustomerManages
                         )
+                        .AddItem(new MenuItemDefinition("UserInfo", L("个人资料"), "fa fa-flag-o", "/CustomerManage/UserInfo", true, SpartanPermissionNames.CustomerManages_UserInfo))
+                        .AddItem(new MenuItemDefinition("ChangePassword", L("修改密码"), "fa fa-flag-o", "/CustomerManage/ChangePassword", true, SpartanPermissionNames.CustomerManages_ChangePassword))
                         .AddItem(new MenuItemDefinition("Device", L("车辆管理"), "fa fa-truck", "/CustomerManage/Device", true, SpartanPermissionNames.CustomerManages_Device))
                         .AddItem(new MenuItemDefinition("Area", L("区域管理"), "fa fa-flag-o", "/CustomerManage/Area", true, SpartanPermissionNames.CustomerManages_Area))
                 )
                 .AddItem(
                     new MenuItemDefinition(
-                        "Agents",
+                        "Agent",
                         L("客户主页"),//代理客户的主页
                         url: "#",
                         icon: "fa fa-circle-o-notch",

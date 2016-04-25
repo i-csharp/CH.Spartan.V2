@@ -26,6 +26,9 @@ namespace CH.Spartan.Infrastructure
             customerManageArea.CreateChildPermission(SpartanPermissionNames.CustomerManages_Area_Update, L("更新"), multiTenancySides: MultiTenancySides.Tenant);
             customerManageArea.CreateChildPermission(SpartanPermissionNames.CustomerManages_Area_Delete, L("删除"), multiTenancySides: MultiTenancySides.Tenant);
 
+            customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_UserInfo, L("个人资料"), multiTenancySides: MultiTenancySides.Tenant);
+            customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_ChangePassword, L("修改密码"), multiTenancySides: MultiTenancySides.Tenant);
+
             //代理--------------------------------------------------------------------
             var agentManages = context.GetPermissionOrNull(SpartanPermissionNames.AgentManages) ??
                                context.CreatePermission(SpartanPermissionNames.AgentManages, L("代理管理"), multiTenancySides: MultiTenancySides.Tenant);
