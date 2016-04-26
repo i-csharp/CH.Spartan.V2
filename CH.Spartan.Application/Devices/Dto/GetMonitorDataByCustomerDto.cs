@@ -9,7 +9,7 @@ namespace CH.Spartan.Devices.Dto
     #region Common
     public class GetMonitorDataByCutomerInput : GetMonitorDataInput
     {
-
+       
     }
 
     public class GetMonitorDataByCutomerOutput<T> : GetMonitorDataOutput<T>

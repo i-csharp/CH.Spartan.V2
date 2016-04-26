@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abp.Runtime.Session;
 using CH.Spartan.Devices;
 using CH.Spartan.Devices.Dto;
+using Shouldly;
 using Xunit;
 
 namespace CH.Spartan.Tests.Devices
@@ -19,10 +21,11 @@ namespace CH.Spartan.Tests.Devices
         }
 
         [Fact]
-        public async Task Should_Get_Current_User_When_Logged_In_As_Host()
+        public async Task GetMonitorDataByCutomerForWeb()
         {
             LoginAsTenant("yugps", "yugps");
-            var result = await _deviceAppService.GetMonitorDataByCutomerForWeb(new GetMonitorDataByCutomerForWebInput());
+            var result = await _deviceAppService.GetMonitorDataByCutomerForWeb(new GetMonitorDataByCutomerForWebInput() {UserId = AbpSession.GetUserId() });
+            result.ShouldNotBeNull();
         }
     }
 }

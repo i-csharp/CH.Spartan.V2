@@ -59,6 +59,7 @@ namespace CH.Spartan
 
            //监控数据
            Mapper.CreateMap<Device, GetMonitorDataByCutomerForWebDto>()
+               .ForMember(d => d.DeviceTypeName, opt => opt.MapFrom(o => o.DeviceType != null ? o.DeviceType.Name : ""))
                .ForMember(p => p.WinGpsStatusText, opt => opt.MapFrom(o => DeviceHelper.WinGpsStatusText(o)))
                .ForMember(p => p.WinDeviceStatusText, opt => opt.MapFrom(o => DeviceHelper.WinDeviceStatusText(o)))
                .ForMember(p => p.WinAlarmText, opt => opt.MapFrom(o => DeviceHelper.WinAlarmText(o)))

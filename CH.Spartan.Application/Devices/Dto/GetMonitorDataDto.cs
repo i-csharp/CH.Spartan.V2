@@ -30,11 +30,11 @@ namespace CH.Spartan.Devices.Dto
 
     public class GetMonitorDataInput : QueryListResultRequestInput
     {
-        ///// <summary>
-        ///// 所属用户
-        ///// </summary>
-        //[Range(1, long.MaxValue)]
-        //public long? UserId { get; set; }
+        /// <summary>
+        /// 所属用户
+        /// </summary>
+        [Range(1, long.MaxValue)]
+        public long? UserId { get; set; }
     }
 
     public class GetMonitorDataOutput<T> : ListResultOutput<T>

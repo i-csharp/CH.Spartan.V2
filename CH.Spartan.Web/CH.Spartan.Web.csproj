@@ -1073,6 +1073,8 @@
     <Content Include="Views\Shared\_AreaBox.cshtml" />
     <Content Include="Views\Shared\_MapPlaceSearchBox.cshtml" />
     <Content Include="Views\Shared\_MapToolbar.cshtml" />
+    <Content Include="Views\CustomerManage\Monitor.cshtml" />
+    <Content Include="Views\Shared\_DeviceBoxByCustomer.cshtml" />
     <None Include="Views\SystemManage\CreateTenant.cshtml" />
     <Content Include="Views\SystemManage\UpdateTenant.cshtml" />
     <Content Include="Views\SystemManage\DeviceType.cshtml" />

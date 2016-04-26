@@ -239,10 +239,11 @@ namespace CH.Spartan.Devices
 
         public async Task<GetMonitorDataByCutomerForWebOutput> GetMonitorDataByCutomerForWeb(GetMonitorDataByCutomerForWebInput input)
         {
+            
             var output = new GetMonitorDataByCutomerForWebOutput();
             var list = await _deviceRepository.GetAll()
-                .Include(p=>p.DeviceType)
-                .Where(p => p.UserId == AbpSession.GetUserId())
+                .Include(p => p.DeviceType)
+                .WhereIf(input.UserId.HasValue, p => p.UserId == input.UserId)
                 .OrderByDescending(p => p.GReceiveTime)
                 .Take(input).ToListAsync();
 

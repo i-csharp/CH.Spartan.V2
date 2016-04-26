@@ -1,0 +1,89 @@
+﻿@using Abp.Extensions
+@model string
+@{
+    var cls = Model;
+    if (cls.IsNullOrEmpty())
+    {
+        cls = "z-index: 999; top: 5px; right: 5px;";
+    }
+}
+
+<div id="device-box" class="ibox float-e-margins w300" style="position: absolute; @cls">
+    <div class="ibox-title">
+        <h5>@L("全部车辆")</h5>
+        <div class="ibox-tools">
+            <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li>
+                    <a href="#" data-bind="click:showMapToolbarBox">@L("工具面板")</a>
+                    <a href="#" data-bind="click:showAreaBox">@L("区域面板")</a>
+                </li>
+            </ul>
+            <a class="close-link">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+    </div>
+    <div class="ibox-content p5">
+    </div>
+</div>
+<script type="text/javascript">
+    (function($) {
+        if (!$) {
+            return;
+        }
+
+        function deviceVM() {
+            var self = this;
+            //显示
+            self.show = function(cls) {
+                if (cls) {
+                    $("#device-box").css(cls).fadeIn();
+                } else {
+                    $("#device-box").fadeIn();
+                }
+            }
+            //隐藏
+            self.hide = function (cls) {
+                if (cls) {
+                    $("#device-box").css(cls).fadeOut();
+                } else {
+                    $("#device-box").fadeOut();
+                }
+            }
+
+            //坐标系
+            self.coordinates = "@(EnumCoordinates.Gcj02)";
+
+            //显示工具面板
+            self.showMapToolbarBox = function() {
+                if (abp.global.mapToolbarBox) {
+                    abp.global.mapToolbarBox.show();
+                }
+            }
+
+            //显示区域面板
+            self.showAreaBox = function () {
+                if (abp.global.areaBox) {
+                    abp.global.areaBox.show();
+                }
+            }
+
+            //加载数据
+            self.load = function () {
+               
+            }
+            self.load();
+        }
+
+        $(function() {
+            abp.global.deviceBox = new deviceVM();
+            ko.applyBindings(abp.global.deviceBox, $("#device-box")[0]);
+        });
+    })(jQuery);
+</script>

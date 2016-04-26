@@ -140,7 +140,6 @@
   <ItemGroup>
     <Compile Include="Devices\DeviceAppService_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sessions\SessionAppService_Tests.cs" />
     <Compile Include="SpartanTestBase.cs" />
   </ItemGroup>
   <ItemGroup>

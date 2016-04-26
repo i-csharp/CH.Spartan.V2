@@ -31,11 +31,11 @@ namespace CH.Spartan.Tests
             base.PreInitialize();
 
             //Fake DbConnection using Effort!
-            LocalIocManager.IocContainer.Register(
-                Component.For<DbConnection>()
-                    .UsingFactoryMethod(Effort.DbConnectionFactory.CreateTransient)
-                    .LifestyleSingleton()
-                );
+            //LocalIocManager.IocContainer.Register(
+            //    Component.For<DbConnection>()
+            //        .UsingFactoryMethod(Effort.DbConnectionFactory.CreateTransient)
+            //        .LifestyleSingleton()
+            //    );
         }
 
         protected override void AddModules(ITypeList<AbpModule> modules)

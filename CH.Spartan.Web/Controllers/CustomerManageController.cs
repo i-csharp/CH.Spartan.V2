@@ -165,5 +165,22 @@ namespace CH.Spartan.Web.Controllers
 
 
         #endregion
+
+        #region 监控
+
+        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Monitor)]
+        public ActionResult Monitor()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Monitor)]
+        public async Task<JsonResult> GetMonitorData(GetMonitorDataByCutomerForWebInput input)
+        {
+            var result = await _deviceAppService.GetMonitorDataByCutomerForWeb(input);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }
