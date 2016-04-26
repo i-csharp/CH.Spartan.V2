@@ -126,6 +126,9 @@ namespace CH.Spartan.Devices
             CheckErrors(await _tenantManager.DeductMoneyByInstallDeviceAsync(tenant, device, deviceType));
             //添加交易记录
             await _dealRecordRepository.InsertAsync(dealRecord);
+
+            //添加库存 如果不存在
+            await _deviceStockManager.CreateIfNotExistAsync(device.BNo);
             await CurrentUnitOfWork.SaveChangesAsync();
         }
 
@@ -138,6 +141,8 @@ namespace CH.Spartan.Devices
             //生成设备Code
             device.BCode = await _deviceTypeManager.CreateCodeAsync(device, deviceType);
             await _deviceManager.UpdateAsync(device);
+            //添加库存 如果不存在
+            await _deviceStockManager.CreateIfNotExistAsync(device.BNo);
         }
 
         public CreateDeviceByAgentOutput GetNewDeviceByAgent()

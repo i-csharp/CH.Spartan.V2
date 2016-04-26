@@ -43,5 +43,14 @@ namespace CH.Spartan.DeviceStocks
                 ? AbpIdentityResult.Failed(L("所属租户库存没有当前设备号"))
                 : IdentityResult.Success;
         }
+
+        public async Task CreateIfNotExistAsync(string no)
+        {
+            var result = await _deviceStockRepository.FirstOrDefaultAsync(p => p.No == no);
+            if (result == null)
+            {
+                await _deviceStockRepository.InsertAsync(new DeviceStock() {No = no});
+            }
+        }
     }
 }
