@@ -44,16 +44,9 @@ namespace CH.Spartan.Web.Controllers
 
         [HttpPost]
         [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Area)]
-        public async Task<JsonResult> GetAreaListPaged(GetAreaListPagedInput input)
-        {
-            var result = await _areaAppService.GetAreaListPagedAsync(input);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Area)]
         public async Task<JsonResult> GetAreaList(GetAreaListInput input)
         {
+            input.UserId = AbpSession.GetUserId();
             var result = await _areaAppService.GetAreaListAsync(input);
             return Json(result, JsonRequestBehavior.AllowGet);
         }

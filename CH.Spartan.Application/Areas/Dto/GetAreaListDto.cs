@@ -51,6 +51,8 @@ namespace CH.Spartan.Areas.Dto
     public class GetAreaListInput : QueryListResultRequestInput
     {
         public EnumCoordinates Coordinates { get; set; }
+
+        public long? UserId { get; set; }
     }
 
     public class GetAreaListPagedInput : QueryListPagedResultRequestInput

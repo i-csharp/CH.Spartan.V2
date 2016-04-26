@@ -23,13 +23,6 @@ namespace CH.Spartan.Areas
         /// <returns></returns>
         Task<ListResultOutput<GetAreaListDto>> GetAreaListAsync(GetAreaListInput input);
 
-        /// <summary>
-        /// 获取 区域 分页
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<PagedResultOutput<GetAreaListDto>> GetAreaListPagedAsync(GetAreaListPagedInput input);
-
 		/// <summary>
         /// 获取 集合 自动补全
         /// </summary>

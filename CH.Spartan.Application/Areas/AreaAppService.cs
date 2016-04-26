@@ -40,6 +40,7 @@ namespace CH.Spartan.Areas
         {
             var list = await _areaRepository.GetAll()
                 .WhereIf(!input.SearchText.IsNullOrEmpty(), p => p.Name.Contains(input.SearchText))
+                .WhereIf(input.UserId.HasValue,p=>p.UserId==input.UserId)
                 .OrderBy(input)
                 .Take(input)
                 .ToListAsync();
@@ -59,18 +60,6 @@ namespace CH.Spartan.Areas
 
 
             return new ListResultOutput<GetAreaListDto>(list.MapTo<List<GetAreaListDto>>());
-        }
-
-        public async Task<PagedResultOutput<GetAreaListDto>> GetAreaListPagedAsync(GetAreaListPagedInput input)
-        {
-            var query = _areaRepository.GetAll();
-            //.WhereIf(!input.SearchText.IsNullOrEmpty(), p => p.Name.Contains(input.SearchText));
-
-            var count = await query.CountAsync();
-
-            var list = await query.OrderBy(input).PageBy(input).ToListAsync();
-
-            return new PagedResultOutput<GetAreaListDto>(count, list.MapTo<List<GetAreaListDto>>());
         }
 
         public async Task<ListResultOutput<ComboboxItemDto>> GetAreaListAutoCompleteAsync(GetAreaListInput input)
