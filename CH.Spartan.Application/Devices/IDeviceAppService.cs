@@ -88,7 +88,16 @@ namespace CH.Spartan.Devices
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<UpdateDeviceByCustomerOutput> GetUpdateDeviceByCustomerAsync(IdInput input); 
+        Task<UpdateDeviceByCustomerOutput> GetUpdateDeviceByCustomerAsync(IdInput input);
+
+        /// <summary>
+        /// 获取定位监控数据 Web
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<GetMonitorDataByCutomerForWebOutput> GetMonitorDataByCutomerForWeb(GetMonitorDataByCutomerForWebInput input);
         #endregion
+
+
     }
 }

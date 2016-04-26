@@ -22,6 +22,7 @@ namespace CH.Spartan.Infrastructure
     }
 
     public class QueryResultRequestInput :
+        IInputDto,
         IDateTimeResultRequest,
         IFilterResultRequest,
         ISortedResultRequest

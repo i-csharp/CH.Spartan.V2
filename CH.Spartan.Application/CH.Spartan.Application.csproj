@@ -119,7 +119,9 @@
     <Compile Include="Devices\DeviceAppService.cs" />
     <Compile Include="Devices\Dto\CreateDeviceByCustomerDto.cs" />
     <Compile Include="Devices\Dto\CreateDeviceByAgentDto.cs" />
+    <Compile Include="Devices\Dto\GetMonitorDataByCustomerDto.cs" />
     <Compile Include="Devices\Dto\GetDeviceListDto.cs" />
+    <Compile Include="Devices\Dto\GetMonitorDataDto.cs" />
     <Compile Include="Devices\Dto\UpdateDeviceByCustomerDto.cs" />
     <Compile Include="Devices\Dto\UpdateDeviceByAgentDto.cs" />
     <Compile Include="Devices\IDeviceAppService.cs" />

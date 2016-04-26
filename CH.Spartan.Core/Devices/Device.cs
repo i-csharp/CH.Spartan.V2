@@ -328,18 +328,5 @@ namespace CH.Spartan.Devices
         public virtual Node Node { get; set; }
 
         #endregion
-
-        #region 实体方法
-
-        public List<AreaSetting> GetOutAreaSettings()
-        {
-            if (!SInOutArea.IsNullOrEmpty())
-            {
-                return SInOutArea.ToObject<List<AreaSetting>>();
-            }
-            return new EditableList<AreaSetting>();
-        }
-
-        #endregion
     }
 }

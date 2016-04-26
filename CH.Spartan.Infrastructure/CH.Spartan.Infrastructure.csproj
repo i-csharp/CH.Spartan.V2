@@ -97,6 +97,7 @@
     <Compile Include="Abp\Domain\Entities\FullUserEntity.cs" />
     <Compile Include="Abp\Domain\Entities\IMustHaveUser.cs" />
     <Compile Include="Abp\Domain\Entities\IMustHaveUserAndTenant.cs" />
+    <Compile Include="Extensions\DateTimeExtend.cs" />
     <Compile Include="Extensions\EnumExtend.cs" />
     <Compile Include="Extensions\LinqExtend.cs" />
     <Compile Include="Abp\Application\Services\Dto\QueryResultRequestInput.cs" />

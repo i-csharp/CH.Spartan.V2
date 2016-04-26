@@ -235,7 +235,24 @@ namespace CH.Spartan.Devices
                 BExpireTime = result.BExpireTime
             };
             return output;
-        } 
+        }
+
+        public async Task<GetMonitorDataByCutomerForWebOutput> GetMonitorDataByCutomerForWeb(GetMonitorDataByCutomerForWebInput input)
+        {
+            var output = new GetMonitorDataByCutomerForWebOutput();
+            var list = await _deviceRepository.GetAll()
+                .Include(p=>p.DeviceType)
+                .Where(p => p.UserId == AbpSession.GetUserId())
+                .OrderByDescending(p => p.GReceiveTime)
+                .Take(input).ToListAsync();
+
+            output.Items = list.MapTo<List<GetMonitorDataByCutomerForWebDto>>();
+            output.Total = list.Count;
+            output.TotalOnline = list.Count(DeviceHelper.IsOnline);
+            output.TotalExpire = list.Count(DeviceHelper.IsExpire);
+            return output;
+        }
+
         #endregion
     }
 }
