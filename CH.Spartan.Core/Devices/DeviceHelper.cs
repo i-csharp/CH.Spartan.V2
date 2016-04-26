@@ -335,7 +335,7 @@ namespace CH.Spartan.Devices
             return GetOfflineText(device);
         }
 
-        public static string PanelStatusText(Device device)
+        public static string PanelGpsStatusText(Device device)
         {
             return GetGpsStatusText(device);
         }

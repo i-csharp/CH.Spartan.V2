@@ -57,7 +57,7 @@ namespace CH.Spartan
                    .ForMember(d => d.IsExpireText, opt => opt.MapFrom(o => DeviceHelper.IsExpire(o) ? L("是") : L("否")))
                    .ForMember(d => d.IsLocatedText, opt => opt.MapFrom(o => o.GIsLocated ? L("是") : L("否")));
 
-            //监控数据
+           //监控数据
            Mapper.CreateMap<Device, GetMonitorDataByCutomerForWebDto>()
                .ForMember(p => p.WinGpsStatusText, opt => opt.MapFrom(o => DeviceHelper.WinGpsStatusText(o)))
                .ForMember(p => p.WinDeviceStatusText, opt => opt.MapFrom(o => DeviceHelper.WinDeviceStatusText(o)))
@@ -66,8 +66,8 @@ namespace CH.Spartan
                .ForMember(p => p.WinReportTimeText, opt => opt.MapFrom(o => DeviceHelper.WinReportTimeText(o)))
                .ForMember(p => p.WinSpeedText, opt => opt.MapFrom(o => DeviceHelper.WinSpeedText(o)))
                .ForMember(p => p.WinOfflineText, opt => opt.MapFrom(o => DeviceHelper.WinOfflineText(o)))
-               .ForMember(p => p.PanelStatusText, opt => opt.MapFrom(o => DeviceHelper.PanelStatusText(o)))
-               .ForMember(p => p.WinOfflineText, opt => opt.MapFrom(o => DeviceHelper.PanelSpeedText(o)))
+               .ForMember(p => p.PanelGpsStatusText, opt => opt.MapFrom(o => DeviceHelper.PanelGpsStatusText(o)))
+               .ForMember(p => p.PanelSpeedText, opt => opt.MapFrom(o => DeviceHelper.PanelSpeedText(o)))
                .ForMember(p => p.ExpireText, opt => opt.MapFrom(o => DeviceHelper.ExpireText(o)));
        }
 

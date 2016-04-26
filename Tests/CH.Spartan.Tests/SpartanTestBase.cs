@@ -22,9 +22,8 @@ namespace CH.Spartan.Tests
         protected SpartanTestBase()
         {
             //Seed initial data
-            UsingDbContext(context => new InitialDataBuilder(context).Build());
-
-            LoginAsDefaultTenantAdmin();
+            //UsingDbContext(context => new InitialDataBuilder(context).Build());
+            //LoginAsDefaultTenantAdmin();
         }
 
         protected override void PreInitialize()

@@ -155,7 +155,6 @@ namespace CH.Spartan.Devices
         /// </summary>
         public DateTime? CRelay1BreakTime { get; set; }
 
-
         /// <summary>
         /// 是否继电器2启用
         /// </summary>
@@ -166,7 +165,6 @@ namespace CH.Spartan.Devices
         /// </summary>
         public DateTime? CRelay2BreakTime { get; set; }
 
-
         /// <summary>
         /// 是否继电器3启用
         /// </summary>
@@ -176,7 +174,6 @@ namespace CH.Spartan.Devices
         /// 继电器3启用时间
         /// </summary>
         public DateTime? CRelay3BreakTime { get; set; }
-
 
         /// <summary>
         /// 是否外接电源断开

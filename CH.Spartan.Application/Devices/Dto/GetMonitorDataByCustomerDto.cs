@@ -60,9 +60,9 @@ namespace CH.Spartan.Devices.Dto
         public string WinOfflineText { get; set; }
 
         /// <summary>
-        /// 面板状态
+        /// 面板Gps状态
         /// </summary>
-        public string PanelStatusText { get; set; }
+        public string PanelGpsStatusText { get; set; }
 
         /// <summary>
         /// 面板速度
