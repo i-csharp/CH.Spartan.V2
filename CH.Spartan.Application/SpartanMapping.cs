@@ -69,8 +69,12 @@ namespace CH.Spartan
                .ForMember(p => p.WinOfflineText, opt => opt.MapFrom(o => DeviceHelper.WinOfflineText(o)))
                .ForMember(p => p.PanelGpsStatusText, opt => opt.MapFrom(o => DeviceHelper.PanelGpsStatusText(o)))
                .ForMember(p => p.PanelSpeedText, opt => opt.MapFrom(o => DeviceHelper.PanelSpeedText(o)))
-               .ForMember(p => p.ExpireText, opt => opt.MapFrom(o => DeviceHelper.ExpireText(o)));
-       }
+               .ForMember(p => p.ExpireText, opt => opt.MapFrom(o => DeviceHelper.ExpireText(o)))
+               .ForMember(p => p.IconUrl, opt => opt.MapFrom(o => DeviceHelper.IconUrl(o)))
+               .ForMember(p => p.IsOnline, opt => opt.MapFrom(o => DeviceHelper.IsOnline(o)))
+               .ForMember(p => p.IsExpire, opt => opt.MapFrom(o => DeviceHelper.IsExpire(o)))
+               .ForMember(p => p.ClsText, opt => opt.MapFrom(o => DeviceHelper.ClsText(o)));
+        }
 
        private static string L(string name)
        {

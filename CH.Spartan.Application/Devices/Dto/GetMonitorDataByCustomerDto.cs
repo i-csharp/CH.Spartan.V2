@@ -74,6 +74,11 @@ namespace CH.Spartan.Devices.Dto
         /// </summary>
         public string ExpireText { get; set; }
 
+        /// <summary>
+        /// 设备样式
+        /// </summary>
+        public string ClsText { get; set; }
+
     }
 
     public class GetMonitorDataByCutomerForWebInput : GetMonitorDataByCutomerInput

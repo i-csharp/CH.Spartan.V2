@@ -25,6 +25,7 @@ namespace CH.Spartan.Infrastructure
                 new SettingDefinition(SpartanSettingKeys.General_Mail_Smtp,GetDefaultSetting(SpartanSettingKeys.General_Mail_Smtp,"smtp.mxhichina.com"),L("发送邮件服务器(Smtp)")),
                 new SettingDefinition(SpartanSettingKeys.General_Mail_UserName,GetDefaultSetting(SpartanSettingKeys.General_Mail_UserName,"postmaster@fealance.com"),L("发送人邮箱名字")),
                 new SettingDefinition(SpartanSettingKeys.General_Map_AMapAk,GetDefaultSetting(SpartanSettingKeys.General_Map_AMapAk,"250fed3f464be8847f9222509d2c6fab"),L("高德地图密钥")),
+                new SettingDefinition(SpartanSettingKeys.General_Map_AMapAk_Api,GetDefaultSetting(SpartanSettingKeys.General_Map_AMapAk_Api,"6066cc23797c91b773c3db8c624d8811"),L("高德地图地理解析密钥")),
                 new SettingDefinition(SpartanSettingKeys.General_Map_BaiduAk,GetDefaultSetting(SpartanSettingKeys.General_Map_BaiduAk,"slLbcEcljWxsOqywcSE7ejFd"),L("百度地图密钥")),
                 new SettingDefinition(SpartanSettingKeys.General_Push_AppKey,GetDefaultSetting(SpartanSettingKeys.General_Push_AppKey,"fd6eca4a3d13df41cb248fc2"),L("推送AppKey")),
                 new SettingDefinition(SpartanSettingKeys.General_Push_IsEnable,GetDefaultSetting(SpartanSettingKeys.General_Push_IsEnable,"true"),L("允许推送")),

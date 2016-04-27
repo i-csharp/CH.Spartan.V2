@@ -18,6 +18,24 @@
                 zooms: [3, 18]
             });
 
+            abp.global.map.getLocation = function (target, lat, lng, coordinates, callback) {
+                var data =
+                {
+                    lat:lat,
+                    lng:lng,
+                    coordinates:coordinates
+                };
+                abp.ajax(
+                {
+                    url: "/Map/GetLocation",
+                    data: JSON.stringify(data)
+                }).done(function(result) {
+                    if (callback) {
+                        callback(target, result.regeocode.formatted_address, result);
+                    }
+                });
+            }
+
             AMap.event.addListener(abp.global.map.current, "zoomchange", function (e) {
                 abp.global.map.zoom = this.getZoom();
             });

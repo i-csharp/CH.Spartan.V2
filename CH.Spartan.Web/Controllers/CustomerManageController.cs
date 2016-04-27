@@ -171,6 +171,7 @@ namespace CH.Spartan.Web.Controllers
         [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Monitor)]
         public async Task<JsonResult> GetMonitorData(GetMonitorDataByCutomerForWebInput input)
         {
+            input.UserId = AbpSession.GetUserId();
             var result = await _deviceAppService.GetMonitorDataByCutomerForWeb(input);
             return Json(result, JsonRequestBehavior.AllowGet);
         }

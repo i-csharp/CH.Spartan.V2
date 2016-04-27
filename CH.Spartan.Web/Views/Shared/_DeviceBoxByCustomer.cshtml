@@ -1,4 +1,6 @@
 ﻿@using Abp.Extensions
+@using Abp.Json
+@using CH.Spartan.Devices.Dto
 @model string
 @{
     var cls = Model;
@@ -7,7 +9,17 @@
         cls = "z-index: 999; top: 5px; right: 5px;";
     }
 }
-
+<style type="text/css">
+    #device-box .nav-tabs li a {
+        border-radius: 0;
+    }
+     #device-box .nav-tabs li.active a {
+         border-bottom-color: #fff;
+    }
+    #device-box .search-keyword {
+        border-top: 0;
+    }
+</style>
 <div id="device-box" class="ibox float-e-margins w300" style="position: absolute; @cls">
     <div class="ibox-title">
         <h5>@L("全部车辆")</h5>
@@ -24,12 +36,27 @@
                     <a href="#" data-bind="click:showAreaBox">@L("区域面板")</a>
                 </li>
             </ul>
-            <a class="close-link">
-                <i class="fa fa-times"></i>
-            </a>
         </div>
     </div>
     <div class="ibox-content p5">
+        <ul class="nav nav-tabs">
+            <li class="active"><a class="p5" data-toggle="tab" href="#" data-showtype="all">@L("全部") (<span data-bind="html:data.total"></span>)</a></li>
+            <li><a class="p5"data-toggle="tab" href="#" data-showtype="online">@L("在线") (<span data-bind="html:data.totalOnline"></span>)</a></li>
+            <li><a class="p5"data-toggle="tab" href="#" data-showtype="offline">@L("离线") (<span data-bind="html:data.totalOffline"></span>)</a></li>
+            <li><a class="p5"data-toggle="tab" href="#" data-showtype="offline">@L("过期") (<span data-bind="html:data.totalExpire"></span>)</a></li>
+        </ul>
+        <div class="input-group col-xs-12">
+            <input type="text" class="form-control search-keyword" placeholder="@L("搜索车辆"))" data-bind="event:{keyup:localSearch}">
+        </div>
+        <ul class="sortable-list connectList agile-list h500 ova pt0 mt5" data-bind="foreach: data.items">
+            <li data-bind="css:clsText">
+                <span data-bind="text:bName,click:$parent.showDevice"></span>
+                <div class="agile-detail">
+                    <a href="#" class="pull-right btn btn-xs btn-primary" data-bind="click:$parent.showDeviceUpdate">@L("修改")</a>
+                    <!--ko text: panelGpsStatusText--><!--/ko-->
+                </div>
+            </li>
+        </ul>
     </div>
 </div>
 <script type="text/javascript">
@@ -40,6 +67,119 @@
 
         function deviceVM() {
             var self = this;
+            
+            //计时
+            self.timing = ko.observable();
+            self.timing.time = ko.observable(0);
+            self.timing.refresh = ko.observable(15);
+
+            //查询参数
+            self.args=ko.observable();
+            //显示 all online offline expire
+            self.args.showType=ko.observable("all");
+            //数据源
+            self.data = ko.mapping.fromJS(@Html.Raw(new GetMonitorDataByCutomerOutput<GetMonitorDataByCutomerForWebDto>() { Items= new List<GetMonitorDataByCutomerForWebDto>() }.ToJsonString(true)), {
+                "items": {
+                    key: function (data) {
+                        return ko.utils.unwrapObservable(data.id);
+                    },
+                    create:function(data) {
+                        debugger;
+                        var item= ko.mapping.fromJS(data.data);
+                        item.isSearchResult=ko.observable(true);
+                        item.isShow= ko.dependentObservable(function () {
+                            var isShow=false;
+                            if(self.args.showType()=="all")
+                            {
+                                isShow= true;
+                            }else if(self.args.showType()=="online")
+                            {
+                                if(this.isOnLine())
+                                {
+                                    isShow= true;
+                                }
+
+                            }else if(self.args.showType()=="offline")
+                            {
+                                if(!this.isOnLine())
+                                {
+                                    isShow= true;
+                                }
+                            }else if(self.args.showType()=="expire")
+                            {
+                                if(this.isExpire())
+                                {
+                                    isShow= true;
+                                }
+                            }
+
+                            if(isShow)
+                            {
+                                if(!item.isSearchResult())
+                                {
+                                    isShow=false;
+                                }
+                            }
+                            return isShow;
+                        }, item);
+
+                        item.marker = new AMap.Marker({
+                            map: abp.global.map.current,
+                            offset: new AMap.Pixel(-15, -12),
+                            position: new AMap.LngLat(item.gLongitude(), item.gLatitude()),
+                            content: "<div class=\"marker-container\"><img src=\"" + item.iconUrl() + "\" /><span>" + item.bName() + "</span></div>"
+                        });
+                        item.marker.setMap(abp.global.map.current);
+                        item.marker.deviceId = item.id();
+                        AMap.event.addListener(item.marker, "click", function (e) {
+                            //self.openInfoWindow(e.target.deviceId);
+                        });
+                        return item;
+                    },
+                    update:function(data)
+                    {
+                        var item= ko.mapping.fromJS(data.data,data.target);
+                        item.marker.setContent("<div class=\"marker-container\"><img src=\"" + item.iconUrl() + "\" /><span>" + item.bName() + "</span></div>");
+                        item.marker.setPosition(new AMap.LngLat(item.gLongitude(), item.gLatitude()));
+                        return item;
+                    }
+                }
+            });
+           
+            //当前监控数据
+            self.current=ko.mapping.fromJS(@Html.Raw(new GetMonitorDataByCutomerForWebDto().ToJsonString(true)));
+            self.current.address=ko.observable("");
+
+            //当前监控数据信息窗口
+            self.infoWindow = new AMap.InfoWindow(
+            {
+                content: $("#info-window")[0],
+                autoMove: true
+            });
+
+            //本地搜索
+            self.localSearch=function(a,b,c)
+            {
+                var val=b.target.value;
+                if(val!="")
+                {
+                    $.each(self.data.items(),function(index,item){
+                        if(item&&item.bName().indexOf(val)<0)
+                        {
+                            item.isSearchResult(false);
+                        }else
+                        {
+                            item.isSearchResult(true);
+                        }
+                    });
+                }else
+                {
+                    $.each(self.data.items(),function(index,item){
+                        item.isSearchResult(true);
+                    });
+                }
+            }
+
             //显示
             self.show = function(cls) {
                 if (cls) {
@@ -48,6 +188,7 @@
                     $("#device-box").fadeIn();
                 }
             }
+
             //隐藏
             self.hide = function (cls) {
                 if (cls) {
@@ -74,9 +215,130 @@
                 }
             }
 
+            //更新窗口信息
+            self.updateInfoWindow = function(item) {
+                var data = ko.mapping.toJS(item);
+                ko.mapping.fromJS(data, self.current);
+                self.current.address("@L("解析地址中...")");
+                abp.global.map.getLocation(self.current, self.current.gLatitude(), self.current.gLongitude(), self.coordinates, function(target, address, all) {
+                    self.current.address(address);
+                    if (all.regeocode.pois.length > 0) {
+                        var arounds = [];
+                        $.each(all.regeocode.pois, function(index, item) {
+                            arounds.push("@L("距离")" + item.name + "" + item.distance + "@L("米")");
+                        });
+                        arounds.unshift(address);
+                        self.current.address(arounds.join("，"));
+                    }
+                });
+            };
+
+
+            //打开窗口
+            self.openInfoWindow = function (id) {
+                var item= self.data.items.mappedGet({id:id});
+                if(item)
+                {
+                    self.updateInfoWindow(item);
+                    var pt = item.marker.getPosition();
+                    if (!self.infoWindow.getIsOpen()) {
+                        self.infoWindow.open(abp.global.map.current, pt);
+                    }
+                    $(".amap-info").show();
+                    self.infoWindow.setPosition(pt);
+                    abp.global.map.current.setCenter(pt);
+                    abp.global.map.current.setZoom(abp.global.map.zoom);
+                }
+            };
+
+            //窗口是否打开
+            self.isInfoWindowOpen = function () {
+                return $(".amap-info").is(":visible");
+            };
+
+            //关闭窗口
+            self.closeInfoWindow = function () {
+                $(".amap-info").hide();
+            };
+
+            //加载定位数据
+            self.loadVDeviceCurrentDataDetail = function() {
+                //关闭窗口
+                self.closeInfoWindow();
+
+                //清空标注点
+                $.each(self.data.items(), function(index, item) {
+                    if (item && item.marker) {
+                        item.marker.setMap(null);
+                    }
+                });
+
+                //获取数据
+                self.getVDeviceCurrentDataDetail(function(data) {
+                    debugger;
+                    ko.mapping.fromJS(data, self.data);
+                    //设置首次视图
+                    var markers = [];
+                    $.each(self.data.items(), function(index, item) {
+                        if (item && item.marker) {
+                            markers.push(item.marker);
+                        }
+                    });
+                    if (markers.length > 0) {
+                        abp.global.map.current.setFitView(markers);
+                    }
+                });
+            };
+
+            //刷新定位数据
+            self.refreshVDeviceCurrentDataDetail=function()
+            {
+                self.getVDeviceCurrentDataDetail(function(data){
+                    ko.mapping.fromJS(data, self.data);
+                    if(self.isInfoWindowOpen())
+                    {
+                        var item= self.data.items.mappedGet({id:self.current.id()});
+                        if(item)
+                        {
+                            self.updateInfoWindow(item);
+                            var pt = item.marker.getPosition();
+                            self.infoWindow.setPosition(pt);
+                            abp.global.map.current.setCenter(pt);
+                        }
+                    }
+                });
+            }
+
+            //获取定位数据
+            self.getVDeviceCurrentDataDetail = function (callback) {
+                debugger;
+                var data =
+                {
+                    coordinates:self.coordinates
+                };
+                abp.ajax(
+                {
+                    url:"/CustomerManage/GetMonitorData",
+                    data:JSON.stringify(data)
+                }).done(function(result) {
+                    debugger;
+                    callback(result);
+                });
+            }
+
             //加载数据
             self.load = function () {
-               
+                //加载数据
+                debugger;
+                self.loadVDeviceCurrentDataDetail();
+                //刷新计时
+                //setInterval(function () {
+                //    if (self.timing.time() == 0) {
+                //        self.timing.time(self.timing.refresh());
+                //        self.refreshVDeviceCurrentDataDetail();
+                //    }
+                //    self.timing.time(self.timing.time() - 1);
+                //}, 1000);
             }
             self.load();
         }

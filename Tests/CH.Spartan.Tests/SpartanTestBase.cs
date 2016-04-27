@@ -45,6 +45,7 @@ namespace CH.Spartan.Tests
             //Adding testing modules. Depended modules of these modules are automatically added.
             modules.Add<SpartanApplicationModule>();
             modules.Add<SpartanDataModule>();
+            modules.Add<SpartanInfrastructureModule>();
         }
 
         public void UsingDbContext(Action<SpartanDbContext> action)

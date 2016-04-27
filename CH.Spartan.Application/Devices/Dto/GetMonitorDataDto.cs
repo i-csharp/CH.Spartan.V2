@@ -26,6 +26,32 @@ namespace CH.Spartan.Devices.Dto
         /// </summary>
         public string BDscription { get; set; }
 
+        /// <summary>
+        /// 纬度
+        /// </summary>
+        public double GLatitude { get; set; }
+
+        /// <summary>
+        /// 经度
+        /// </summary>
+        public double GLongitude { get; set; }
+
+        /// <summary>
+        /// 设备图标
+        /// </summary>
+        public string IconUrl { get; set; }
+
+        /// <summary>
+        /// 是否在线
+        /// </summary>
+        public bool IsOnline { get; set; }
+
+
+        /// <summary>
+        /// 是否过期
+        /// </summary>
+        public bool IsExpire { get; set; }
+
     }
 
     public class GetMonitorDataInput : QueryListResultRequestInput
@@ -35,6 +61,11 @@ namespace CH.Spartan.Devices.Dto
         /// </summary>
         [Range(1, long.MaxValue)]
         public long? UserId { get; set; }
+
+        /// <summary>
+        /// 地图坐标系
+        /// </summary>
+        public EnumCoordinates Coordinates { get; set; }
     }
 
     public class GetMonitorDataOutput<T> : ListResultOutput<T>

@@ -7,6 +7,7 @@ using System.Xml;
 using Abp.Configuration;
 using Abp.Dependency;
 using Abp.Domain.Uow;
+using Abp.Json;
 using Abp.Runtime.Caching;
 using CH.Spartan.Domain;
 using CH.Spartan.Infrastructure;
@@ -26,11 +27,11 @@ namespace CH.Spartan.Maps
 
         private readonly double _r = 6378245.0;
         private double _e = 0.00669342162296594323;
-        private readonly string _baduKey;
+        private readonly string _aMapAk_Api;
         public MapManager(ISettingManager settingManager, ICacheManager cacheManager, IIocResolver iocResolver, IUnitOfWorkManager unitOfWorkManager) :
             base(settingManager, cacheManager, iocResolver, unitOfWorkManager)
         {
-            _baduKey= settingManager.GetSettingValue(SpartanSettingKeys.General_Map_BaiduAk);
+            _aMapAk_Api = settingManager.GetSettingValueForApplication(SpartanSettingKeys.General_Map_AMapAk_Api);
         }
 
         #region 坐标转换
@@ -45,7 +46,7 @@ namespace CH.Spartan.Maps
 
         public MapPoint Wgs84ToGcj02(MapPoint mapPoint)
         {
-            if (IsOutOfChina(mapPoint))
+            if (mapPoint.Lng == 0 || mapPoint.Lng == 0||IsOutOfChina(mapPoint))
             {
                 return mapPoint;
             }
@@ -82,7 +83,7 @@ namespace CH.Spartan.Maps
 
         private MapPoint TransForm(MapPoint mapPoint)
         {
-            if (IsOutOfChina(mapPoint))
+            if (mapPoint.Lng == 0 || mapPoint.Lng == 0 || IsOutOfChina(mapPoint))
             {
                 return mapPoint;
             }
@@ -184,24 +185,20 @@ namespace CH.Spartan.Maps
         /// <returns></returns>
         public MapLocation GetLocation(MapPoint mapPoint)
         {
+            if (mapPoint.Coordinates == EnumCoordinates.Wgs84)
+            {
+                mapPoint = Wgs84ToGcj02(mapPoint);
+            }
+
             MapLocation location = new MapLocation();
             try
             {
-                var url = string.Format("http://api.map.baidu.com/geocoder/v2/?output=xml&coordtype={0}ll&location={1},{2}&ak={3}", mapPoint.Coordinates.ToString().ToLower(), mapPoint.Lat, mapPoint.Lng, _baduKey);
-                var xml = HttpLibSyncRequest.Get(url);
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(xml);
-                XmlElement root = doc.DocumentElement;
-                XmlNode res = root.SelectSingleNode("result");
-                location.Address = res.SelectSingleNode("formatted_address").InnerText;
-                location.Province = res.SelectSingleNode("addressComponent/province").InnerText;
-                location.City = res.SelectSingleNode("addressComponent/city").InnerText;
-                location.District = res.SelectSingleNode("addressComponent/district").InnerText;
-                location.Street = res.SelectSingleNode("addressComponent/street").InnerText;
+                var url = $"http://restapi.amap.com/v3/geocode/regeo?key={_aMapAk_Api}&location={mapPoint.Lng},{mapPoint.Lat}&homeorcorp=1&radius=1000&extensions=all&batch=false&roadlevel=1";
+                location = HttpLibSyncRequest.Get(url).ToObject<MapLocation>();
             }
             catch
             {
-                location.Address = "无法解析地址";
+                // ignored
             }
             return location;
         }

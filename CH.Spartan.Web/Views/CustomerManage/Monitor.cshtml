@@ -5,11 +5,12 @@
 
 @section styles
 {
-  
+    @Styles.Render("~/styles/plugins/select")
 }
 @section scripts
 {
     @Scripts.Render("~/scripts/plugins/drag")
+    @Scripts.Render("~/scripts/plugins/select")
 }
 
 <div class="wrapper wrapper-content @(SpartanConsts.DefaultAnimate) p0">
@@ -17,5 +18,5 @@
     @Html.Partial("_DeviceBoxByCustomer", "z-index: 999; top: 5px; right: 5px")
     @Html.Partial("_MapToolbar", "z-index: 998; top: 5px; right: 310px;display:none")
     @Html.Partial("_MapPlaceSearchBox", "z-index: 997; top: 5px; right: 610px;display:none")
-    @Html.Partial("_AreaBox", "z-index: 996; top: 205px; right: 310px;display:none")
+    @Html.Partial("_AreaBox", "z-index: 996; top: 100px; right: 310px;display:none")
 </div>

@@ -57,33 +57,33 @@ namespace CH.Spartan.Devices
         {
             if (device.GDirection > 27 && device.GDirection <= 72)
             {
-                return "东北";
+                return L("东北");
             }
             if (device.GDirection > 72 && device.GDirection <= 117)
             {
-                return "正东";
+                return L("正东");
             }
             if (device.GDirection > 117 && device.GDirection <= 162)
             {
-                return "东南";
+                return L("东南");
             }
             if (device.GDirection > 162 && device.GDirection <= 207)
             {
-                return "正南";
+                return L("正南");
             }
             if (device.GDirection > 207 && device.GDirection <= 252)
             {
-                return "西南";
+                return L("西南");
             }
             if (device.GDirection > 252 && device.GDirection <= 297)
             {
-                return "正西";
+                return L("正西");
             }
             if (device.GDirection > 297 && device.GDirection <= 342)
             {
-                return "西北";
+                return L("西北");
             }
-            return "正北";
+            return L("正北");
         }
 
         /// <summary>
@@ -127,6 +127,8 @@ namespace CH.Spartan.Devices
             return $"/Content/img/cars/{type}/{status}/{icon}";
         }
 
+
+
         /// <summary>
         /// 获取速度
         /// </summary>
@@ -157,6 +159,7 @@ namespace CH.Spartan.Devices
         public static string GetGpsStatusText(Device device)
         {
             var result = new StringBuilder();
+            result.Append((IsOnline(device) ? L("在线") : L("离线")) + " ");
             result.Append(GetDirectionText(device) + " ");
             result.Append((device.GIsLocated ? L("已定位") : L("未定位")) + " ");
             return result.ToString();
@@ -249,6 +252,28 @@ namespace CH.Spartan.Devices
                 return DateTime.Now.GetDateDiff(device.GReceiveTime.Value);
             }
             return string.Empty;
+        }
+
+
+        /// <summary>
+        /// 获取离线时间
+        /// </summary>
+        /// <param name="device"></param>
+        /// <returns></returns>
+        public static string GetClsText(Device device)
+        {
+            var cls = "success-element";
+            if (!IsOnline(device))
+            {
+                cls= "danger-element";
+            }
+
+            if (IsExpire(device))
+            {
+                cls= "warning-element";
+            }
+
+            return cls;
         }
         /// <summary>
         /// 获取通讯时间
@@ -350,6 +375,15 @@ namespace CH.Spartan.Devices
             return GetExpireText(device);
         }
 
+        public static string IconUrl(Device device)
+        {
+            return GetIconUrl(device);
+        }
+
+        public static string ClsText(Device device)
+        {
+            return GetClsText(device);
+        }
         #endregion
 
         #region App

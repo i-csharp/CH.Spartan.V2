@@ -46,6 +46,11 @@ namespace CH.Spartan.Infrastructure
         public const string General_Map_AMapAk = "General.Map.AMapAk";
 
         /// <summary>
+        /// 高德地图密钥(ak) 地理解析
+        /// </summary>
+        public const string General_Map_AMapAk_Api = "General.Map.AMapAk.Api";
+
+        /// <summary>
         /// 百度地图密钥(ak)
         /// </summary>
         public const string General_Map_BaiduAk = "General.Map.BaiduAk";

@@ -39,7 +39,7 @@ namespace CH.Spartan.Web
                     )
                 );
 
-            //插件
+            //模块
             bundles.Add(
                 new ScriptBundle("~/scripts/bottom")
                     .Include(
@@ -52,8 +52,6 @@ namespace CH.Spartan.Web
                         "~/Content/js/main.js"
                     )
                 );
-
-
 
             bundles.Add(
                 new StyleBundle("~/styles/plugins/list")
@@ -103,6 +101,8 @@ namespace CH.Spartan.Web
                    )
                );
 
+
+            //插件
             bundles.Add(
              new ScriptBundle("~/scripts/plugins/drag")
                  .Include(
@@ -113,6 +113,26 @@ namespace CH.Spartan.Web
                      "~/Content/js/plugins/drag/jquery.event.default.js"
                  )
              );
+
+            bundles.Add(
+              new StyleBundle("~/styles/plugins/select")
+              .Include("~/Content/js/plugins/select2/css/select2.css", new CssRewriteUrlTransform())
+              );
+
+            bundles.Add(
+                new ScriptBundle("~/scripts/plugins/select")
+                    .Include(
+                        "~/Content/js/plugins/select2/js/select2.full.js"
+                    )
+                );
+
+            bundles.Add(
+                new ScriptBundle("~/scripts/plugins/date")
+                    .Include(
+                       "~/Content/js/plugins/my97/wdatepicker.js"
+                   )
+                );
+
         }
     }
 }

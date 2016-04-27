@@ -125,7 +125,16 @@
     <Compile Include="Devices\DeviceHelper.cs" />
     <Compile Include="Devices\DeviceManager.cs" />
     <Compile Include="Domain\ManagerBase.cs" />
-    <Compile Include="Maps\MapLocation.cs" />
+    <Compile Include="Maps\MapLocations\AddressComponent.cs" />
+    <Compile Include="Maps\MapLocations\Building.cs" />
+    <Compile Include="Maps\MapLocations\BusinessArea.cs" />
+    <Compile Include="Maps\MapLocations\MapLocation.cs" />
+    <Compile Include="Maps\MapLocations\Neighborhood.cs" />
+    <Compile Include="Maps\MapLocations\Pois.cs" />
+    <Compile Include="Maps\MapLocations\Regeocode.cs" />
+    <Compile Include="Maps\MapLocations\Road.cs" />
+    <Compile Include="Maps\MapLocations\Roadinter.cs" />
+    <Compile Include="Maps\MapLocations\StreetNumber.cs" />
     <Compile Include="Maps\MapManager.cs" />
     <Compile Include="Maps\MapPoint.cs" />
     <Compile Include="Nodes\NodeManager.cs" />

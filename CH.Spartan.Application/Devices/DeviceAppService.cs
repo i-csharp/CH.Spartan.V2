@@ -17,6 +17,7 @@ using CH.Spartan.Devices.Dto;
 using CH.Spartan.DeviceStocks;
 using CH.Spartan.DeviceTypes;
 using CH.Spartan.Infrastructure;
+using CH.Spartan.Maps;
 using CH.Spartan.MultiTenancy;
 using CH.Spartan.Nodes;
 
@@ -31,6 +32,7 @@ namespace CH.Spartan.Devices
         private readonly NodeManager _nodeManager;
         private readonly TenantManager _tenantManager;
         private readonly DeviceStockManager _deviceStockManager;
+        private readonly MapManager _mapManager;
         private readonly IRepository<Device> _deviceRepository;
         private readonly IRepository<Tenant> _tenantRepository;
         private readonly IRepository<DeviceType> _deviceTypeRepository;
@@ -45,7 +47,7 @@ namespace CH.Spartan.Devices
             IRepository<Tenant> tenantRepository,
             IRepository<DeviceType> deviceTypeRepository,
             IRepository<DealRecord> dealRecordRepository,
-            IRepository<Area> areaRepository, DeviceStockManager deviceStockManager)
+            IRepository<Area> areaRepository, DeviceStockManager deviceStockManager, MapManager mapManager)
         {
             _deviceRepository = deviceRepository;
             _deviceManager = deviceManager;
@@ -57,6 +59,7 @@ namespace CH.Spartan.Devices
             _dealRecordRepository = dealRecordRepository;
             _areaRepository = areaRepository;
             _deviceStockManager = deviceStockManager;
+            _mapManager = mapManager;
         } 
         #endregion
 
@@ -251,6 +254,23 @@ namespace CH.Spartan.Devices
             output.Total = list.Count;
             output.TotalOnline = list.Count(DeviceHelper.IsOnline);
             output.TotalExpire = list.Count(DeviceHelper.IsExpire);
+
+            switch (input.Coordinates)
+            {
+                case EnumCoordinates.Wgs84:
+                    break;
+                case EnumCoordinates.Gcj02:
+                    Parallel.ForEach(output.Items, p =>
+                    {
+                        var point = _mapManager.Wgs84ToGcj02(new MapPoint(p.GLatitude, p.GLongitude));
+                        p.GLatitude = point.Lat;
+                        p.GLongitude = point.Lng;
+                    }); 
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
             return output;
         }
 
