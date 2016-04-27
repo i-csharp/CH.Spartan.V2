@@ -25,15 +25,13 @@
                     lng:lng,
                     coordinates:coordinates
                 };
-                abp.ajax(
-                {
-                    url: "/Map/GetLocation",
-                    data: JSON.stringify(data)
-                }).done(function(result) {
+
+                $.post("/Map/GetLocation", data, function(data) {
+                    debugger;
                     if (callback) {
-                        callback(target, result.regeocode.formatted_address, result);
+                        callback(target, data.result.regeocode.formatted_address, data.result);
                     }
-                });
+                },"json");
             }
 
             AMap.event.addListener(abp.global.map.current, "zoomchange", function (e) {

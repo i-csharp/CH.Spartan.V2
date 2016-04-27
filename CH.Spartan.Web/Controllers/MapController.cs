@@ -8,7 +8,7 @@ using CH.Spartan.Maps;
 
 namespace CH.Spartan.Web.Controllers
 {
-    public class MapController : Controller
+    public class MapController : SpartanControllerBase
     {
         private readonly MapManager _mapManager;
         public MapController(MapManager mapManager)
@@ -16,8 +16,8 @@ namespace CH.Spartan.Web.Controllers
             _mapManager = mapManager;
         }
 
-        public JsonResult GetLocation(MapPoint point)
-        {
+        public async Task<JsonResult> GetLocation(MapPoint point)
+        { 
             var result = _mapManager.GetLocation(point);
             return Json(result, JsonRequestBehavior.AllowGet);
         }

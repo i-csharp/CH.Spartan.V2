@@ -136,6 +136,11 @@ namespace CH.Spartan.Devices
         /// <returns></returns>
         public static string GetSpeedText(Device device)
         {
+            if (!device.GReceiveTime.HasValue)
+            {
+                return "-";
+            }
+
             string text;
             if (!IsOnline(device) || device.GSpeed < 2)
             {
@@ -158,6 +163,10 @@ namespace CH.Spartan.Devices
         /// <returns></returns>
         public static string GetGpsStatusText(Device device)
         {
+            if (!device.GReceiveTime.HasValue)
+            {
+                return "-";
+            }
             var result = new StringBuilder();
             result.Append((IsOnline(device) ? L("在线") : L("离线")) + " ");
             result.Append(GetDirectionText(device) + " ");
@@ -203,7 +212,8 @@ namespace CH.Spartan.Devices
                 result.Append((device.CIsRelay3Enable ? L("R3开启") : L("R3关闭")) + " ");
             }
 
-            return result.ToString();
+            var text = result.ToString();
+            return text.IsNullOrEmpty() ? "-" : text;
         }
 
         /// <summary>
@@ -211,7 +221,7 @@ namespace CH.Spartan.Devices
         /// </summary>
         /// <param name="device"></param>
         /// <returns></returns>
-        public static string GetAlarmText(Device device)
+        public static string GetAlarmStatusText(Device device)
         {
             var result = new StringBuilder();
             if (device.DeviceType.IsHaveDropOff)
@@ -237,7 +247,8 @@ namespace CH.Spartan.Devices
             {
                 result.Append(device.CIsMainPowerBreak ? L("断电") + " " : "");
             }
-            return result.ToString();
+            var text = result.ToString();
+            return text.IsNullOrEmpty() ? "-" : text;
         }
 
         /// <summary>
@@ -251,7 +262,7 @@ namespace CH.Spartan.Devices
             {
                 return DateTime.Now.GetDateDiff(device.GReceiveTime.Value);
             }
-            return string.Empty;
+            return "-";
         }
 
 
@@ -335,9 +346,9 @@ namespace CH.Spartan.Devices
             return GetDeviceStatusText(device);
         }
 
-        public static string WinAlarmText(Device device)
+        public static string WinAlarmStatusText(Device device)
         {
-            return GetAlarmText(device);
+            return GetAlarmStatusText(device);
         }
 
         public static string WinReceiveTimeText(Device device)

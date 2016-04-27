@@ -82,6 +82,7 @@
       <HintPath>..\packages\System.Linq.Dynamic.1.0.6\lib\net40\System.Linq.Dynamic.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -102,6 +103,7 @@
     <Compile Include="Extensions\LinqExtend.cs" />
     <Compile Include="Abp\Application\Services\Dto\QueryResultRequestInput.cs" />
     <Compile Include="Extensions\ObjectExtend.cs" />
+    <Compile Include="Extensions\StringExtend.cs" />
     <Compile Include="Helpers\ComboboxHelper.cs" />
     <Compile Include="Helpers\HttpHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

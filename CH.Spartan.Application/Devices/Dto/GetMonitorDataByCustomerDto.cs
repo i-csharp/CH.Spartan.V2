@@ -37,7 +37,7 @@ namespace CH.Spartan.Devices.Dto
         /// <summary>
         /// 窗口报警信息
         /// </summary>
-        public string WinAlarmText { get; set; }
+        public string WinAlarmStatusText { get; set; }
 
         /// <summary>
         /// 窗口接收

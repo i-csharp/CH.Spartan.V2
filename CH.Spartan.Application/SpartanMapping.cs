@@ -62,7 +62,7 @@ namespace CH.Spartan
                .ForMember(d => d.DeviceTypeName, opt => opt.MapFrom(o => o.DeviceType != null ? o.DeviceType.Name : ""))
                .ForMember(p => p.WinGpsStatusText, opt => opt.MapFrom(o => DeviceHelper.WinGpsStatusText(o)))
                .ForMember(p => p.WinDeviceStatusText, opt => opt.MapFrom(o => DeviceHelper.WinDeviceStatusText(o)))
-               .ForMember(p => p.WinAlarmText, opt => opt.MapFrom(o => DeviceHelper.WinAlarmText(o)))
+               .ForMember(p => p.WinAlarmStatusText, opt => opt.MapFrom(o => DeviceHelper.WinAlarmStatusText(o)))
                .ForMember(p => p.WinReceiveTimeText, opt => opt.MapFrom(o => DeviceHelper.WinReceiveTimeText(o)))
                .ForMember(p => p.WinReportTimeText, opt => opt.MapFrom(o => DeviceHelper.WinReportTimeText(o)))
                .ForMember(p => p.WinSpeedText, opt => opt.MapFrom(o => DeviceHelper.WinSpeedText(o)))

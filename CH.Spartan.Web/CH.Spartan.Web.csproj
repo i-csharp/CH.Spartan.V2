@@ -1162,9 +1162,7 @@
       <Name>CH.Spartan.WebApi</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Map\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Content\js\content.min.js" />
   </ItemGroup>
