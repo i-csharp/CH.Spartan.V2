@@ -33,9 +33,9 @@ namespace CH.Spartan.Devices.Dto
         /// 窗口设备状态
         /// </summary>
         public string WinDeviceStatusText { get; set; }
-        
+
         /// <summary>
-        /// 窗口报警信息
+        /// 窗口报警状态
         /// </summary>
         public string WinAlarmStatusText { get; set; }
 
@@ -72,12 +72,12 @@ namespace CH.Spartan.Devices.Dto
         /// <summary>
         /// 过期时间
         /// </summary>
-        public string ExpireText { get; set; }
+        public string PanelExpireText { get; set; }
 
         /// <summary>
         /// 设备样式
         /// </summary>
-        public string ClsText { get; set; }
+        public string PanelClsText { get; set; }
 
     }
 

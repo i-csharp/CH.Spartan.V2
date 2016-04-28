@@ -102,17 +102,17 @@
             <input type="text" class="form-control search-keyword" placeholder="@L("搜索车辆"))" data-bind="event:{keyup:localSearch}">
         </div>
         <ul class="sortable-list connectList agile-list h500 ova pt0 mt5" data-bind="foreach: data.items">
-            <li data-bind="css:clsText,visible:isShow">
+            <li data-bind="css:panelClsText,visible:isShow">
                 <span data-bind="text:bName,click:$root.showDevice"></span>
                 <div class="agile-detail">
-                    <a href="#" class="pull-right btn btn-xs btn-primary" data-bind="click:$root.showDeviceUpdate">@L("修改")</a>
+                    <a href="#" class="pull-right btn btn-xs btn-primary" data-bind="click:$root.showUpdateDevice">@L("修改")</a>
                     <!--ko text: panelGpsStatusText--><!--/ko-->
                 </div>
             </li>
         </ul>
     </div>
     <div class="info-window" id="info-window">
-        <div class="panel-heading p0" style="border:0px;">
+        <div class="panel-heading p0" style="border:0;">
             <span data-bind="click:closeInfoWindow">X</span>
         </div>
         <div class="panel-body p0 f12">
@@ -136,14 +136,13 @@
 
         function deviceVM() {
             var self = this;
+            //坐标系
+            self.coordinates = "@(EnumCoordinates.Gcj02)";
 
             //计时
             self.timing = ko.observable();
             self.timing.time = ko.observable(0);
             self.timing.refresh = ko.observable(15);
-
-            //坐标系
-            self.coordinates = "@(EnumCoordinates.Gcj02)";
 
             //查询参数
             self.args=ko.observable();
@@ -230,24 +229,6 @@
                 autoMove: true
             });
 
-            //本地搜索
-            self.localSearch = function(a, b, c) {
-                var val = b.target.value;
-                if (val != "") {
-                    $.each(self.data.items(), function(index, item) {
-                        if (item && item.bName().indexOf(val) < 0) {
-                            item.isSearchResult(false);
-                        } else {
-                            item.isSearchResult(true);
-                        }
-                    });
-                } else {
-                    $.each(self.data.items(), function(index, item) {
-                        item.isSearchResult(true);
-                    });
-                }
-            }
-
             //显示
             self.show = function(cls) {
                 if (cls) {
@@ -266,7 +247,6 @@
                 }
             }
 
-
             //显示工具面板
             self.showMapToolbarBox = function() {
                 if (abp.global.mapToolbarBox) {
@@ -281,11 +261,65 @@
                 }
             }
 
+            //本地搜索
+            self.localSearch = function(a, b, c) {
+                var val = b.target.value;
+                if (val != "") {
+                    $.each(self.data.items(), function(index, item) {
+                        if (item && item.bName().indexOf(val) < 0) {
+                            item.isSearchResult(false);
+                        } else {
+                            item.isSearchResult(true);
+                        }
+                    });
+                } else {
+                    $.each(self.data.items(), function(index, item) {
+                        item.isSearchResult(true);
+                    });
+                }
+            }
+
             //打开设备详细信息
             self.showDevice = function(device) {
-                debugger;
                 self.openInfoWindow(device.id());
+            }; 
+            
+            //打开修改设备窗口
+            self.showUpdateDevice = function(device) {
+                abp.dialog.open("/CustomerManage/UpdateDevice?id=" + device.id(), "@L("修改车辆")", {
+                area: ["575px", "750px"],
+                btn: ["@L("保存")", '@L("取消")'],
+                yes: function (index, layero) {
+                    var iframeWin = layero.find("iframe")[0].contentWindow;
+                    iframeWin.submitForm(self.refreshMonitorData);
+                }
+            });
             };
+
+            //打开窗口
+            self.openInfoWindow = function (id) {
+                var item= self.data.items.mappedGet({id:id});
+                if(item) {
+                    self.current.address("");
+                    self.updateInfoWindow(item);
+                    var pt = item.marker.getPosition();
+                    if (!self.infoWindow.getIsOpen()) {
+                        self.infoWindow.open(abp.global.map.current, pt);
+                    }
+                    $(".amap-info").show();
+                    $(".info-window").show();
+                    self.infoWindow.setPosition(pt);
+                    abp.global.map.current.setCenter(pt);
+                    abp.global.map.current.setZoom(abp.global.map.zoom);
+                }
+            };
+
+            //关闭窗口
+            self.closeInfoWindow = function () {
+                $(".amap-info").hide();
+                $(".info-window").hide();
+            };
+
             //更新窗口信息
             self.updateInfoWindow = function(item) {
                 var data = ko.mapping.toJS(item);
@@ -307,41 +341,46 @@
                 }
             };
 
-
-            //打开窗口
-            self.openInfoWindow = function (id) {
-                var item= self.data.items.mappedGet({id:id});
-                if(item) {
-                    self.current.address("");
-                    self.updateInfoWindow(item);
-                    var pt = item.marker.getPosition();
-                    if (!self.infoWindow.getIsOpen()) {
-                        self.infoWindow.open(abp.global.map.current, pt);
-                    }
-                    $(".amap-info").show();
-                    $(".info-window").show();
-                    self.infoWindow.setPosition(pt);
-                    abp.global.map.current.setCenter(pt);
-                    abp.global.map.current.setZoom(abp.global.map.zoom);
-                }
-            };
-
             //窗口是否打开
             self.isInfoWindowOpen = function () {
                 return $(".amap-info").is(":visible");
             };
 
-            //关闭窗口
-            self.closeInfoWindow = function () {
-                $(".amap-info").hide();
-                $(".info-window").hide();
-            };
+            //获取监控数据
+            self.getMonitorData = function (callback) {
+                var data =
+                {
+                    coordinates:self.coordinates
+                };
+                abp.ajax(
+                {
+                    url:"/CustomerManage/GetMonitorData",
+                    data:JSON.stringify(data)
+                }).done(function(result) {
+                    callback(result);
+                });
+            }
 
-            //加载定位数据
-            self.loadVDeviceCurrentDataDetail = function() {
+            //刷新监控数据
+            self.refreshMonitorData=function() {
+                self.getMonitorData(function(data) {
+                    ko.mapping.fromJS(data, self.data);
+                    if (self.isInfoWindowOpen()) {
+                        var item = self.data.items.mappedGet({ id: self.current.id() });
+                        if (item) {
+                            self.updateInfoWindow(item);
+                            var pt = item.marker.getPosition();
+                            self.infoWindow.setPosition(pt);
+                            abp.global.map.current.setCenter(pt);
+                        }
+                    }
+                });
+            }
+
+            //加载监控数据
+            self.loadMonitorData = function() {
                 //关闭窗口
                 self.closeInfoWindow();
-
                 //清空标注点
                 $.each(self.data.items(), function(index, item) {
                     if (item && item.marker) {
@@ -350,8 +389,7 @@
                 });
 
                 //获取数据
-                self.getVDeviceCurrentDataDetail(function(data) {
-                    //
+                self.getMonitorData(function(data) {
                     ko.mapping.fromJS(data, self.data);
                     //设置首次视图
                     var markers = [];
@@ -366,49 +404,15 @@
                 });
             };
 
-            //刷新定位数据
-            self.refreshVDeviceCurrentDataDetail=function()
-            {
-                self.getVDeviceCurrentDataDetail(function(data){
-                    ko.mapping.fromJS(data, self.data);
-                    if(self.isInfoWindowOpen())
-                    {
-                        var item= self.data.items.mappedGet({id:self.current.id()});
-                        if(item)
-                        {
-                            self.updateInfoWindow(item);
-                            var pt = item.marker.getPosition();
-                            self.infoWindow.setPosition(pt);
-                            abp.global.map.current.setCenter(pt);
-                        }
-                    }
-                });
-            }
-
-            //获取定位数据
-            self.getVDeviceCurrentDataDetail = function (callback) {
-                var data =
-                {
-                    coordinates:self.coordinates
-                };
-                abp.ajax(
-                {
-                    url:"/CustomerManage/GetMonitorData",
-                    data:JSON.stringify(data)
-                }).done(function(result) {
-                    callback(result);
-                });
-            }
-
             //加载数据
             self.load = function () {
-                //加载数据
-                self.loadVDeviceCurrentDataDetail();
-                //刷新计时
+                //加载监控数据
+                self.loadMonitorData();
+                //开始计时刷新
                 setInterval(function () {
                     if (self.timing.time() == 0) {
                         self.timing.time(self.timing.refresh());
-                        self.refreshVDeviceCurrentDataDetail();
+                        self.refreshMonitorData();
                     }
                     self.timing.time(self.timing.time() - 1);
                 }, 1000);
@@ -419,7 +423,6 @@
         $(function() {
             abp.global.deviceBox = new deviceVM();
             ko.applyBindings(abp.global.deviceBox, $("#device-box")[0]);
-
             $("#device-box .nav-tabs a").on("shown.bs.tab", function (e) {
                 abp.global.deviceBox.args.showType($(e.target).data("showtype"));
             });

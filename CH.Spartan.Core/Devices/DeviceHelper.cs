@@ -347,64 +347,64 @@ namespace CH.Spartan.Devices
         #endregion
        
         #region Web
-        public static string WinGpsStatusText(Device device)
+        public static string WebWinGpsStatusText(Device device)
         {
             return GetGpsStatusText(device);
         }
-        public static string WinDeviceStatusText(Device device)
+        public static string WebWinDeviceStatusText(Device device)
         {
             return GetDeviceStatusText(device);
         }
 
-        public static string WinAlarmStatusText(Device device)
+        public static string WebWinAlarmStatusText(Device device)
         {
             return GetAlarmStatusText(device);
         }
 
-        public static string WinReceiveTimeText(Device device)
+        public static string WebWinReceiveTimeText(Device device)
         {
             return GetReceiveTimeText(device);
         }
 
-        public static string WinReportTimeText(Device device)
+        public static string WebWinReportTimeText(Device device)
         {
             return GetReportTimeText(device);
         }
 
-        public static string WinSpeedText(Device device)
+        public static string WebWinSpeedText(Device device)
         {
             return GetSpeedText(device);
         }
 
-        public static string WinOfflineText(Device device)
+        public static string WebWinOfflineText(Device device)
         {
             return GetOfflineText(device);
         }
 
-        public static string PanelGpsStatusText(Device device)
+        public static string WebPanelGpsStatusText(Device device)
         {
             return GetGpsStatusText(device);
         }
 
-        public static string PanelSpeedText(Device device)
+        public static string WebPanelSpeedText(Device device)
         {
             return GetSpeedText(device);
         }
 
-        public static string ExpireText(Device device)
+        public static string WebPanelExpireText(Device device)
         {
             return GetExpireText(device);
         }
-
-        public static string IconUrl(Device device)
-        {
-            return GetIconUrl(device);
-        }
-
-        public static string ClsText(Device device)
+        public static string WebPanelClsText(Device device)
         {
             return GetClsText(device);
         }
+
+        public static string WebWebIconUrl(Device device)
+        {
+            return GetIconUrl(device);
+        }
+        
         #endregion
 
         #region App
