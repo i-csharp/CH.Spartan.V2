@@ -32,6 +32,16 @@ namespace CH.Spartan.Devices
         public static bool IsExpire(Device device)
         {
             return device.BExpireTime < DateTime.Now;
+        } 
+        
+        /// <summary>
+        /// 是否静态
+        /// </summary>
+        /// <param name="device"></param>
+        /// <returns></returns>
+        public static bool IsStatic(Device device)
+        {
+            return !IsOnline(device) || device.GSpeed < 2;
         }
 
         /// <summary>
@@ -142,7 +152,7 @@ namespace CH.Spartan.Devices
             }
 
             string text;
-            if (!IsOnline(device) || device.GSpeed < 2)
+            if (IsStatic(device))
             {
                 text = L("静止");
                 if (device.CLastHaveSpeedTime.HasValue)

@@ -290,7 +290,7 @@
             self.updateInfoWindow = function(item) {
                 var data = ko.mapping.toJS(item);
                 ko.mapping.fromJS(data, self.current);
-                if (self.current.address() == "" || self.current.isOnline()) {
+                if (self.current.address() == "" || !self.current.isStatic()) {
                     abp.global.map.getLocation(self.current, self.current.gLatitude(), self.current.gLongitude(), self.coordinates, function(target, address, all) {
                         self.current.address(address);
                         if (all.regeocode.pois.length > 0) {

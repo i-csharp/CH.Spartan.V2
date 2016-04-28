@@ -73,6 +73,7 @@ namespace CH.Spartan
                .ForMember(p => p.IconUrl, opt => opt.MapFrom(o => DeviceHelper.IconUrl(o)))
                .ForMember(p => p.IsOnline, opt => opt.MapFrom(o => DeviceHelper.IsOnline(o)))
                .ForMember(p => p.IsExpire, opt => opt.MapFrom(o => DeviceHelper.IsExpire(o)))
+               .ForMember(p => p.IsStatic, opt => opt.MapFrom(o => DeviceHelper.IsStatic(o)))
                .ForMember(p => p.ClsText, opt => opt.MapFrom(o => DeviceHelper.ClsText(o)));
         }
 

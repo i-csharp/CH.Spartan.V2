@@ -37,7 +37,7 @@ namespace CH.Spartan.Devices.Dto
         public double GLongitude { get; set; }
 
         /// <summary>
-        /// 设备图标
+        /// 图标地址
         /// </summary>
         public string IconUrl { get; set; }
 
@@ -46,11 +46,15 @@ namespace CH.Spartan.Devices.Dto
         /// </summary>
         public bool IsOnline { get; set; }
 
-
         /// <summary>
         /// 是否过期
         /// </summary>
         public bool IsExpire { get; set; }
+
+        /// <summary>
+        /// 是否静态 无速度
+        /// </summary>
+        public bool IsStatic { get; set; }
 
     }
 
