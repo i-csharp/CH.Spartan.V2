@@ -274,6 +274,39 @@ namespace CH.Spartan.Devices
             return output;
         }
 
+        public async Task<GetMonitorDataByAgentForWebOutput> GetMonitorDataByAgentForWeb(GetMonitorDataByAgentForWebInput input)
+        {
+
+            var output = new GetMonitorDataByAgentForWebOutput();
+            var list = await _deviceRepository.GetAll()
+                .Include(p => p.DeviceType)
+                .WhereIf(input.UserId.HasValue, p => p.UserId == input.UserId)
+                .OrderByDescending(p => p.GReceiveTime)
+                .Take(input).ToListAsync();
+
+            output.Items = list.MapTo<List<GetMonitorDataByAgentForWebDto>>();
+            output.Total = list.Count;
+            output.TotalOnline = list.Count(DeviceHelper.IsOnline);
+            output.TotalExpire = list.Count(DeviceHelper.IsExpire);
+
+            switch (input.Coordinates)
+            {
+                case EnumCoordinates.Wgs84:
+                    break;
+                case EnumCoordinates.Gcj02:
+                    Parallel.ForEach(output.Items, p =>
+                    {
+                        var point = _mapManager.Wgs84ToGcj02(new MapPoint(p.GLatitude, p.GLongitude));
+                        p.GLatitude = point.Lat;
+                        p.GLongitude = point.Lng;
+                    });
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return output;
+        }
         #endregion
     }
 }

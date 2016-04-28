@@ -1,0 +1,53 @@
+﻿@using Abp.Extensions
+@using CH.Spartan.Web.Models.Device
+@model string
+@Html.Partial("_DeviceBox", new DeviceBoxViewModel()
+{
+    IsShowSelectUser = true,
+    IsShowAreaBoxMenu = false,
+    IsShowMapToolbarBoxMenu = true,
+    Cls = Model
+})
+<script type="text/javascript">
+
+    (function ($) {
+        if (!$) {
+            return;
+        }
+        $(function() {
+            
+            //获取监控数据
+            abp.global.deviceBox.getMonitorData = function (callback) {
+                var data =
+                {
+                    userId: $("#device-box #UserId").val(),
+                    coordinates: self.coordinates
+                };
+                abp.ajax(
+                {
+                    url: "/AgentManage/GetMonitorData",
+                    data: JSON.stringify(data)
+                }).done(function(result) {
+                    callback(result);
+                });
+            };
+
+            //打开修改设备窗口
+            abp.global.deviceBox.showUpdateDevice = function (device) {
+                abp.dialog.open("/AgentManage/UpdateDevice?id=" + device.id(), "@L("修改车辆")", {
+                    area: ["575px", "750px"],
+                    btn: ["@L("保存")", '@L("取消")'],
+                    yes: function(index, layero) {
+                        var iframeWin = layero.find("iframe")[0].contentWindow;
+                        iframeWin.submitForm(self.refreshMonitorData);
+                    }
+                });
+            };
+
+            $("#device-box #UserId").on("select2:select", function(e) {
+                abp.global.deviceBox.load();
+            });
+
+        });
+    })(jQuery);
+</script>

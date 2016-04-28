@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Abp.Application.Services.Dto;
+using Abp.Runtime.Session;
 using Abp.Web.Mvc.Authorization;
 using CH.Spartan.DealRecords;
 using CH.Spartan.DealRecords.Dto;
@@ -104,6 +105,23 @@ namespace CH.Spartan.Web.Controllers
         #endregion
 
 
+        #endregion
+
+        #region 监控
+
+        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Monitor)]
+        public ActionResult Monitor()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Monitor)]
+        public async Task<JsonResult> GetMonitorData(GetMonitorDataByAgentForWebInput input)
+        {
+            var result = await _deviceAppService.GetMonitorDataByAgentForWeb(input);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region 库存管理

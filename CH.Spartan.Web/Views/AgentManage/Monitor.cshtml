@@ -1,0 +1,22 @@
+﻿@using System.Web.Services.Protocols
+@{
+    ViewBag.BodyClass = "gray-bg";
+}
+
+@section styles
+{
+    @Styles.Render("~/styles/plugins/select")
+
+}
+@section scripts
+{
+    @Scripts.Render("~/scripts/plugins/drag")
+    @Scripts.Render("~/scripts/plugins/select")
+}
+
+<div class="wrapper wrapper-content @(SpartanConsts.DefaultAnimate) p0">
+    @Html.Partial("_Map")
+    @Html.Partial("_MapToolbar", "z-index: 998; top: 5px; right: 310px;display:none")
+    @Html.Partial("_MapPlaceSearchBox", "z-index: 997; top: 5px; right: 610px;display:none")
+    @Html.Partial("_DeviceBoxByAgent", "z-index: 999; top: 5px; right: 5px")
+</div>

@@ -74,6 +74,24 @@ namespace CH.Spartan
                .ForMember(p => p.PanelSpeedText, opt => opt.MapFrom(o => DeviceHelper.WebPanelSpeedText(o)))
                .ForMember(p => p.PanelExpireText, opt => opt.MapFrom(o => DeviceHelper.WebPanelExpireText(o)))
                .ForMember(p => p.PanelClsText, opt => opt.MapFrom(o => DeviceHelper.WebPanelClsText(o)));
+
+            //监控数据
+            Mapper.CreateMap<Device, GetMonitorDataByAgentForWebDto>()
+                .ForMember(p => p.IsOnline, opt => opt.MapFrom(o => DeviceHelper.IsOnline(o)))
+                .ForMember(p => p.IsExpire, opt => opt.MapFrom(o => DeviceHelper.IsExpire(o)))
+                .ForMember(p => p.IsStatic, opt => opt.MapFrom(o => DeviceHelper.IsStatic(o)))
+                .ForMember(p => p.IconUrl, opt => opt.MapFrom(o => DeviceHelper.WebWebIconUrl(o)))
+                .ForMember(p => p.WinGpsStatusText, opt => opt.MapFrom(o => DeviceHelper.WebWinGpsStatusText(o)))
+                .ForMember(p => p.WinDeviceStatusText, opt => opt.MapFrom(o => DeviceHelper.WebWinDeviceStatusText(o)))
+                .ForMember(p => p.WinAlarmStatusText, opt => opt.MapFrom(o => DeviceHelper.WebWinAlarmStatusText(o)))
+                .ForMember(p => p.WinReceiveTimeText, opt => opt.MapFrom(o => DeviceHelper.WebWinReceiveTimeText(o)))
+                .ForMember(p => p.WinReportTimeText, opt => opt.MapFrom(o => DeviceHelper.WebWinReportTimeText(o)))
+                .ForMember(p => p.WinSpeedText, opt => opt.MapFrom(o => DeviceHelper.WebWinSpeedText(o)))
+                .ForMember(p => p.WinOfflineText, opt => opt.MapFrom(o => DeviceHelper.WebWinOfflineText(o)))
+                .ForMember(p => p.PanelGpsStatusText, opt => opt.MapFrom(o => DeviceHelper.WebPanelGpsStatusText(o)))
+                .ForMember(p => p.PanelSpeedText, opt => opt.MapFrom(o => DeviceHelper.WebPanelSpeedText(o)))
+                .ForMember(p => p.PanelExpireText, opt => opt.MapFrom(o => DeviceHelper.WebPanelExpireText(o)))
+                .ForMember(p => p.PanelClsText, opt => opt.MapFrom(o => DeviceHelper.WebPanelClsText(o)));
         }
 
        private static string L(string name)
