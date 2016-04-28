@@ -17,7 +17,6 @@ namespace CH.Spartan.Areas.Dto
         /// <summary>
         /// 区域点集合
         /// </summary>
-        [MaxLength(500)]
         public string Points { get; set; }
 
     }

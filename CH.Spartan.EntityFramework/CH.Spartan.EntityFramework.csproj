@@ -153,6 +153,22 @@
     <Compile Include="Migrations\201604210641282_EditDeviceStock.Designer.cs">
       <DependentUpon>201604210641282_EditDeviceStock.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604281332547_Edit_History.cs" />
+    <Compile Include="Migrations\201604281332547_Edit_History.Designer.cs">
+      <DependentUpon>201604281332547_Edit_History.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604281347149_Edit_Node.cs" />
+    <Compile Include="Migrations\201604281347149_Edit_Node.Designer.cs">
+      <DependentUpon>201604281347149_Edit_Node.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604281359500_Edit_Area1.cs" />
+    <Compile Include="Migrations\201604281359500_Edit_Area1.Designer.cs">
+      <DependentUpon>201604281359500_Edit_Area1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604281528324_Edit_User1.cs" />
+    <Compile Include="Migrations\201604281528324_Edit_User1.Designer.cs">
+      <DependentUpon>201604281528324_Edit_User1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\DefaultDataBuilder.cs" />
     <Compile Include="SpartanDataModule.cs" />
@@ -215,6 +231,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604210641282_EditDeviceStock.resx">
       <DependentUpon>201604210641282_EditDeviceStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604281332547_Edit_History.resx">
+      <DependentUpon>201604281332547_Edit_History.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604281347149_Edit_Node.resx">
+      <DependentUpon>201604281347149_Edit_Node.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604281359500_Edit_Area1.resx">
+      <DependentUpon>201604281359500_Edit_Area1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604281528324_Edit_User1.resx">
+      <DependentUpon>201604281528324_Edit_User1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

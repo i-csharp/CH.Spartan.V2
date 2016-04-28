@@ -30,8 +30,8 @@ namespace CH.Spartan.Infrastructure
                         requiresAuthentication: true,
                         requiredPermissionName: SpartanPermissionNames.CustomerManages
                         )
-                        .AddItem(new MenuItemDefinition("UserInfo", L("个人资料"), "fa fa-flag-o", "/CustomerManage/UserInfo", true, SpartanPermissionNames.CustomerManages_UserInfo))
-                        .AddItem(new MenuItemDefinition("ChangePassword", L("修改密码"), "fa fa-flag-o", "/CustomerManage/ChangePassword", true, SpartanPermissionNames.CustomerManages_ChangePassword))
+                        .AddItem(new MenuItemDefinition("UserInfo", L("个人资料"), "fa fa-briefcase", "/CustomerManage/UserInfo", true, SpartanPermissionNames.CustomerManages_UserInfo))
+                        .AddItem(new MenuItemDefinition("ChangePassword", L("修改密码"), "fa fa-key", "/CustomerManage/ChangePassword", true, SpartanPermissionNames.CustomerManages_ChangePassword))
                         .AddItem(new MenuItemDefinition("Device", L("车辆管理"), "fa fa-truck", "/CustomerManage/Device", true, SpartanPermissionNames.CustomerManages_Device))
                         .AddItem(new MenuItemDefinition("Area", L("区域管理"), "fa fa-flag-o", "/CustomerManage/Area", true, SpartanPermissionNames.CustomerManages_Area))
                 )

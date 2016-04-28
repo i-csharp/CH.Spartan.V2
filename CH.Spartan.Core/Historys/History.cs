@@ -17,12 +17,6 @@ namespace CH.Spartan.Historys
         public int DeviceId { get; set; }
 
         /// <summary>
-        /// 设备时间键 设备Id-日期  例如  1-20150821
-        /// </summary>
-        [MaxLength(50)]
-        public string DeviceDayKey { get; set; }
-
-        /// <summary>
         /// 方向 0-359,正北为0,顺时针 
         /// </summary>
         public int Direction { get; set; }

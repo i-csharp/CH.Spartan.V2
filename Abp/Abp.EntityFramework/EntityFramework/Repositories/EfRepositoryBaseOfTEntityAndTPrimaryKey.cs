@@ -9,18 +9,13 @@ using Abp.Domain.Repositories;
 
 namespace Abp.EntityFramework.Repositories
 {
-    public interface ISqlCommand
-    {
-        Database Database { get; }
-    }
-
     /// <summary>
     /// Implements IRepository for Entity Framework.
     /// </summary>
     /// <typeparam name="TDbContext">DbContext which contains <see cref="TEntity"/>.</typeparam>
     /// <typeparam name="TEntity">Type of the Entity for this repository</typeparam>
     /// <typeparam name="TPrimaryKey">Primary key of the entity</typeparam>
-    public class EfRepositoryBase<TDbContext, TEntity, TPrimaryKey> : AbpRepositoryBase<TEntity, TPrimaryKey>, ISqlCommand
+    public class EfRepositoryBase<TDbContext, TEntity, TPrimaryKey> : AbpRepositoryBase<TEntity, TPrimaryKey>
         where TEntity : class, IEntity<TPrimaryKey>
         where TDbContext : DbContext
     {
@@ -32,12 +27,7 @@ namespace Abp.EntityFramework.Repositories
         /// <summary>
         /// Gets DbSet for given entity.
         /// </summary>
-        public virtual DbSet<TEntity> Table { get { return Context.Set<TEntity>(); } }
-
-        /// <summary>
-        /// Gets Database
-        /// </summary>
-        public virtual Database Database { get { return Context.Database; } }
+        protected virtual DbSet<TEntity> Table { get { return Context.Set<TEntity>(); } }
 
 
         private readonly IDbContextProvider<TDbContext> _dbContextProvider;

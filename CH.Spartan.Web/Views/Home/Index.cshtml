@@ -9,17 +9,22 @@
     <script src="/signalr/hubs"></script>
     <script src="/Abp/Framework/scripts/libs/abp.signalr.js"></script>
     <script type="text/javascript">
-        (function ($) {
+        function updateUser(user) {
+            debugger;
+            $("#img-user-avatar").attr("src", user.avatar);
+            $("#lbl-user-name").html(user.name);
+        }
+        (function($) {
             if (!$) {
                 return;
             }
-            $(function () {
-                abp.event.on('abp.notifications.received', function (userNotification) {
+            $(function() {
+                abp.event.on('abp.notifications.received', function(userNotification) {
                     console.log(userNotification);
                 });
 
             });
-           
+
         })(jQuery);
     </script>
 }
@@ -33,7 +38,7 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element">
-                        <span><img alt="image" class="img-circle" src="/Content/img/profile_small.jpg" /></span>
+                        <span><img alt="image" class="img-circle" width="64" height="64" id="img-user-avatar" src="@Model.LoginInformations.User.Avatar" /></span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear">
                                 <span class="block m-t-xs">
@@ -50,7 +55,7 @@
                                         }
                                     </strong>
                                 </span>
-                                <span class="text-muted text-xs block">@Model.LoginInformations.User.UserName<b class="caret"></b></span>
+                                <span class="text-muted text-xs block"><span id="lbl-user-name">@Model.LoginInformations.User.UserName</span><b class="caret"></b></span>
                             </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">

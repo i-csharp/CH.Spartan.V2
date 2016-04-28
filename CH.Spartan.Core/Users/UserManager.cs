@@ -84,6 +84,11 @@ namespace CH.Spartan.Users
 
         public override async Task<IdentityResult> ChangePasswordAsync(User user, string newPassword)
         {
+            var result = await PasswordValidator.ValidateAsync(newPassword);
+            if (!result.Succeeded)
+            {
+                return result;
+            }
             await AbpStore.SetPasswordHashAsync(user, new Md532PasswordHasher().HashPassword(newPassword));
             return IdentityResult.Success;
         }
@@ -112,8 +117,6 @@ namespace CH.Spartan.Users
         {
             user.Surname = user.UserName;
             user.Password = new Md532PasswordHasher().HashPassword(SpartanConsts.DefaultPassword);
-            user.IsInitPassword = true;
-            user.IsInitUserName = true;
             user.IsActive = true;
             user.IsEmailConfirmed = true;
             user.IsStatic = false;

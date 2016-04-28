@@ -133,6 +133,19 @@ namespace CH.Spartan.Web
                    )
                 );
 
+
+            bundles.Add(
+                new StyleBundle("~/styles/plugins/cropper")
+                    .Include("~/Content/js/plugins/cropper/cropper.css", new CssRewriteUrlTransform())
+            );
+
+            bundles.Add(
+               new ScriptBundle("~/scripts/plugins/cropper")
+                   .Include(
+                      "~/Content/js/plugins/cropper/cropper.js"
+                  )
+               );
+
         }
     }
 }

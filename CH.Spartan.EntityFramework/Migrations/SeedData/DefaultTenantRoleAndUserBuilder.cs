@@ -94,8 +94,6 @@ namespace CH.Spartan.Migrations.SeedData
                         EmailAddress = "359875450@qq.com",
                         IsEmailConfirmed = true,
                         IsStatic = true,
-                        IsInitPassword = true,
-                        IsInitUserName = true,
                         Password = new Md532PasswordHasher().HashPassword(SpartanConsts.DefaultPassword)
                     });
 
@@ -225,8 +223,6 @@ namespace CH.Spartan.Migrations.SeedData
                         EmailAddress = emailAddress,
                         IsEmailConfirmed = true,
                         IsStatic = true,
-                        IsInitPassword = true,
-                        IsInitUserName = true,
                         Password = new Md532PasswordHasher().HashPassword(SpartanConsts.DefaultPassword)
                     });
 

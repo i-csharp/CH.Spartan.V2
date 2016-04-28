@@ -12,6 +12,8 @@ using CH.Spartan.Areas.Dto;
 using CH.Spartan.Devices;
 using CH.Spartan.Devices.Dto;
 using CH.Spartan.Infrastructure;
+using CH.Spartan.Users;
+using CH.Spartan.Users.Dto;
 
 namespace CH.Spartan.Web.Controllers
 {
@@ -23,11 +25,12 @@ namespace CH.Spartan.Web.Controllers
     {
         private readonly IAreaAppService _areaAppService;
         private readonly IDeviceAppService _deviceAppService;
-
-        public CustomerManageController(IAreaAppService areaAppService, IDeviceAppService deviceAppService)
+        private readonly IUserAppService _userAppService;
+        public CustomerManageController(IAreaAppService areaAppService, IDeviceAppService deviceAppService, IUserAppService userAppService)
         {
             _areaAppService = areaAppService;
             _deviceAppService = deviceAppService;
+            _userAppService = userAppService;
         }
 
         #region 区域
@@ -174,6 +177,29 @@ namespace CH.Spartan.Web.Controllers
             input.UserId = AbpSession.GetUserId();
             var result = await _deviceAppService.GetMonitorDataByCutomerForWeb(input);
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region 个人
+        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_UserInfo)]
+        public async Task<ActionResult> UserInfo()
+        {
+            var result = await _userAppService.GetUpdateUserInfoAsync(new IdInput<long>(AbpSession.GetUserId()));
+            return View(result);
+        }
+
+        [HttpPost]
+        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_UserInfo)]
+        public async Task<JsonResult> UpdateUserInfo(UpdateUserInfoInput input)
+        {
+            var result = await _userAppService.UpdateUserInfoAsync(input);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_UserInfo)]
+        public ActionResult ChangePassword()
+        {
+            return View();
         }
         #endregion
     }

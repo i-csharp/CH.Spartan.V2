@@ -123,5 +123,19 @@ namespace CH.Spartan.Users
         {
             await _userManager.DeleteByIdsAsync(input.Select(p => p.Id));
         }
+        public async Task<UpdateUserInfoOutput> UpdateUserInfoAsync(UpdateUserInfoInput input)
+        {
+            input.User.Avatar = ImageHelper.SaveBase64ToImage(input.User.Avatar);
+            var user = await _userRepository.GetAsync(input.User.Id);
+            input.User.MapTo(user);
+            CheckErrors(await _userManager.UpdateAsync(user));
+            return new UpdateUserInfoOutput(user.MapTo<UpdateUserInfoDto>());
+        }
+
+        public async Task<UpdateUserInfoOutput> GetUpdateUserInfoAsync(IdInput<long> input)
+        {
+            var result = await _userRepository.GetAsync(input.Id);
+            return new UpdateUserInfoOutput(result.MapTo<UpdateUserInfoDto>());
+        }
     }
 }

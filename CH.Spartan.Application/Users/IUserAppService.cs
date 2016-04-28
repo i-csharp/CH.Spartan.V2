@@ -69,5 +69,19 @@ namespace CH.Spartan.Users
         /// <returns></returns>
         Task DeleteUserAsync(List<IdInput<long>> input);
 
+        /// <summary>
+        /// 更新 用户
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<UpdateUserInfoOutput> UpdateUserInfoAsync(UpdateUserInfoInput input);
+
+        /// <summary>
+        /// 获取 更新用户
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<UpdateUserInfoOutput> GetUpdateUserInfoAsync(IdInput<long> input);
+
     }
 }

@@ -30,7 +30,7 @@ namespace CH.Spartan.Migrations.SeedData
 
        private void CreateNode()
        {
-           for (var i = 1; i <= 5; i++)
+           for (var i = 1; i <= 10; i++)
            {
                var nodeName = "T" + i;
                var node = _context.Nodes.FirstOrDefault(p => p.Name == nodeName);
@@ -39,7 +39,9 @@ namespace CH.Spartan.Migrations.SeedData
                    node = new Node
                    {
                        Name = nodeName,
-                       HistoryTableName = "historys" + i
+                       HistoryTableName = "histories_" + i,
+                       HistoryConnectionStringRead = "Server=localhost;Database=Spartan;Uid=root;Pwd=123456",
+                       HistoryConnectionStringWrite = "Server=localhost;Database=Spartan;Uid=root;Pwd=123456"
                    };
                    _context.Nodes.Add(node);
                }

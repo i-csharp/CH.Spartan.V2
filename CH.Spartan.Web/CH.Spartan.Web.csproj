@@ -280,6 +280,7 @@
     <Content Include="Content\css\style.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\img\avatar.jpg" />
     <Content Include="Content\img\a1.jpg" />
     <Content Include="Content\img\a2.jpg" />
     <Content Include="Content\img\a3.jpg" />
@@ -504,6 +505,10 @@
     <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\jquery.signalR-2.2.0.min.js" />
     <Content Include="Content\js\json2.min.js" />
+    <Content Include="Content\js\plugins\cropper\cropper.css" />
+    <Content Include="Content\js\plugins\cropper\cropper.js" />
+    <Content Include="Content\js\plugins\cropper\cropper.min.css" />
+    <Content Include="Content\js\plugins\cropper\cropper.min.js" />
     <Content Include="Content\js\plugins\drag\jquery.event.default.js" />
     <Content Include="Content\js\plugins\drag\jquery.event.drag.js" />
     <Content Include="Content\js\plugins\drag\jquery.event.drag.live.js" />
@@ -1080,6 +1085,8 @@
     <Content Include="Views\Shared\_DeviceBox.cshtml" />
     <Content Include="Views\Shared\_DeviceBoxByAgent.cshtml" />
     <Content Include="Views\AgentManage\Monitor.cshtml" />
+    <Content Include="Views\CustomerManage\UserInfo.cshtml" />
+    <Content Include="Views\CustomerManage\ChangePassword.cshtml" />
     <None Include="Views\SystemManage\CreateTenant.cshtml" />
     <Content Include="Views\SystemManage\UpdateTenant.cshtml" />
     <Content Include="Views\SystemManage\DeviceType.cshtml" />

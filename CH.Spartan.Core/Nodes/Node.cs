@@ -11,19 +11,6 @@ namespace CH.Spartan.Nodes
     public class Node : FullAuditedEntity
     {
 
-        #region 常量
-        public const string T1 = "T1";
-
-        public const string T2 = "T2";
-
-        public const string T3 = "T3";
-
-        public const string T4 = "T4";
-
-        public const string T5 = "T5";
-
-        #endregion
-
         /// <summary>
         /// 节点名字
         /// </summary>
@@ -33,8 +20,20 @@ namespace CH.Spartan.Nodes
         /// <summary>
         /// 历史数据表
         /// </summary>
-        [MaxLength(250)]
+        [MaxLength(100)]
         public string HistoryTableName { get; set; }
+
+        /// <summary>
+        /// 历史数据表 读字符串
+        /// </summary>
+        [MaxLength(250)]
+        public string HistoryConnectionStringRead { get; set; }
+
+        /// <summary>
+        /// 历史数据表 写字符串
+        /// </summary>
+        [MaxLength(250)]
+        public string HistoryConnectionStringWrite { get; set; }
 
         /// <summary>
         /// 使用量

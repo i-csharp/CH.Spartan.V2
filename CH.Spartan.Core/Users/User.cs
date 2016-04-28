@@ -11,15 +11,11 @@ namespace CH.Spartan.Users
     public class User : AbpUser<Tenant, User>
     {
         #region 基本
-        /// <summary>
-        /// 是否初始用户名
-        /// </summary>
-        public bool IsInitUserName { get; set; }
 
         /// <summary>
-        /// 是否初始密码
+        /// 头像
         /// </summary>
-        public bool IsInitPassword { get; set; }
+        public string Avatar { get; set; }
 
         /// <summary>
         /// 静态用户
@@ -105,9 +101,8 @@ namespace CH.Spartan.Users
                 IsEmailConfirmed = true,
                 EmailAddress = emailAddress,
                 IsActive = true,
-                IsInitPassword = true,
-                IsInitUserName = true,
                 IsStatic = true,
+                Avatar= "/Content/img/avatar.jpg",
                 Password = new Md532PasswordHasher().HashPassword(password)
             };
         }
@@ -122,9 +117,8 @@ namespace CH.Spartan.Users
                 IsEmailConfirmed = true,
                 EmailAddress = emailAddress,
                 IsActive = true,
-                IsInitPassword = true,
-                IsInitUserName = true,
                 IsStatic = false,
+                Avatar = "/Content/img/avatar.jpg",
                 Password = new Md532PasswordHasher().HashPassword(password)
             };
         }
