@@ -39,7 +39,7 @@ namespace CH.Spartan.Migrations.SeedData
                    node = new Node
                    {
                        Name = nodeName,
-                       HistoryTableName = "histories_" + i,
+                       HistoryTableName = "historydatas_" + i,
                        HistoryConnectionStringRead = "Server=localhost;Database=Spartan;Uid=root;Pwd=123456",
                        HistoryConnectionStringWrite = "Server=localhost;Database=Spartan;Uid=root;Pwd=123456"
                    };

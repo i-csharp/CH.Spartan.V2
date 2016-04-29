@@ -15,9 +15,7 @@ namespace CH.Spartan.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(maxLength: 250, storeType: "nvarchar"),
-                        Type = c.Int(nullable: false),
-                        Points = c.String(maxLength: 500, storeType: "nvarchar"),
-                        Radius = c.Int(),
+                        Points = c.String(unicode: false),
                         TenantId = c.Int(nullable: false),
                         UserId = c.Long(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
@@ -77,8 +75,8 @@ namespace CH.Spartan.Migrations
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
-                        IsInitUserName = c.Boolean(nullable: false),
-                        IsInitPassword = c.Boolean(nullable: false),
+                        Avatar = c.String(unicode: false),
+                        IsStatic = c.Boolean(nullable: false),
                         QQOpenId = c.String(maxLength: 200, storeType: "nvarchar"),
                         QQAccessToken = c.String(maxLength: 200, storeType: "nvarchar"),
                         QQExpiresIn = c.Int(),
@@ -259,10 +257,13 @@ namespace CH.Spartan.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        No = c.String(maxLength: 250, storeType: "nvarchar"),
+                        OutNo = c.String(maxLength: 250, storeType: "nvarchar"),
                         Name = c.String(maxLength: 250, storeType: "nvarchar"),
                         Remark = c.String(maxLength: 250, storeType: "nvarchar"),
                         Type = c.Int(nullable: false),
                         Amount = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        IsSucceed = c.Boolean(nullable: false),
                         TenantId = c.Int(nullable: false),
                         UserId = c.Long(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
@@ -290,23 +291,23 @@ namespace CH.Spartan.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         BName = c.String(nullable: false, maxLength: 100, storeType: "nvarchar"),
-                        BLicensePlate = c.String(nullable: false, maxLength: 100, storeType: "nvarchar"),
+                        BNo = c.String(nullable: false, maxLength: 50, storeType: "nvarchar"),
+                        BSimNo = c.String(nullable: false, maxLength: 50, storeType: "nvarchar"),
+                        BDscription = c.String(maxLength: 50, storeType: "nvarchar"),
                         BIconType = c.String(nullable: false, maxLength: 50, storeType: "nvarchar"),
                         BDeviceTypeId = c.Int(nullable: false),
-                        BNo = c.String(nullable: false, maxLength: 50, storeType: "nvarchar"),
                         BCode = c.String(nullable: false, maxLength: 50, storeType: "nvarchar"),
-                        BSimNo = c.String(nullable: false, maxLength: 50, storeType: "nvarchar"),
                         BExpireTime = c.DateTime(precision: 0),
                         BNodeId = c.Int(nullable: false),
                         SLimitSpeed = c.Int(nullable: false),
-                        SInOutArea = c.Boolean(nullable: false),
+                        SInOutArea = c.String(unicode: false),
                         GDirection = c.Int(nullable: false),
                         GHeight = c.Double(nullable: false),
                         GLatitude = c.Double(nullable: false),
                         GLongitude = c.Double(nullable: false),
                         GSpeed = c.Double(nullable: false),
-                        GReportTime = c.DateTime(nullable: false, precision: 0),
-                        GReceiveTime = c.DateTime(nullable: false, precision: 0),
+                        GReportTime = c.DateTime(precision: 0),
+                        GReceiveTime = c.DateTime(precision: 0),
                         GIsLocated = c.Boolean(nullable: false),
                         CIsAccOn = c.Boolean(nullable: false),
                         CPower = c.Int(nullable: false),
@@ -415,7 +416,10 @@ namespace CH.Spartan.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(maxLength: 50, storeType: "nvarchar"),
-                        HistoryTableName = c.String(maxLength: 250, storeType: "nvarchar"),
+                        HistoryTableName = c.String(maxLength: 100, storeType: "nvarchar"),
+                        HistoryConnectionStringRead = c.String(maxLength: 250, storeType: "nvarchar"),
+                        HistoryConnectionStringWrite = c.String(maxLength: 250, storeType: "nvarchar"),
+                        UsageCount = c.Int(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
                         DeleterUserId = c.Long(),
                         DeletionTime = c.DateTime(precision: 0),
@@ -429,6 +433,30 @@ namespace CH.Spartan.Migrations
                     { "DynamicFilter_Node_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
                 })
                 .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.DeviceStocks",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        No = c.String(nullable: false, maxLength: 50, storeType: "nvarchar"),
+                        TenantId = c.Int(nullable: false),
+                        IsDeleted = c.Boolean(nullable: false),
+                        DeleterUserId = c.Long(),
+                        DeletionTime = c.DateTime(precision: 0),
+                        LastModificationTime = c.DateTime(precision: 0),
+                        LastModifierUserId = c.Long(),
+                        CreationTime = c.DateTime(nullable: false, precision: 0),
+                        CreatorUserId = c.Long(),
+                    },
+                annotations: new Dictionary<string, object>
+                {
+                    { "DynamicFilter_DeviceStock_MustHaveTenant", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
+                    { "DynamicFilter_DeviceStock_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
+                })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AbpTenants", t => t.TenantId, cascadeDelete: true)
+                .Index(t => t.TenantId);
             
             CreateTable(
                 "dbo.AbpFeatures",
@@ -448,12 +476,11 @@ namespace CH.Spartan.Migrations
                 .Index(t => t.EditionId);
             
             CreateTable(
-                "dbo.Histories",
+                "dbo.HistoryDatas",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         DeviceId = c.Int(nullable: false),
-                        DeviceDayKey = c.String(maxLength: 50, storeType: "nvarchar"),
                         Direction = c.Int(nullable: false),
                         Height = c.Double(nullable: false),
                         Latitude = c.Double(nullable: false),
@@ -689,6 +716,7 @@ namespace CH.Spartan.Migrations
             DropForeignKey("dbo.AbpRoles", "CreatorUserId", "dbo.AbpUsers");
             DropForeignKey("dbo.AbpOrganizationUnits", "ParentId", "dbo.AbpOrganizationUnits");
             DropForeignKey("dbo.AbpFeatures", "EditionId", "dbo.AbpEditions");
+            DropForeignKey("dbo.DeviceStocks", "TenantId", "dbo.AbpTenants");
             DropForeignKey("dbo.Devices", "UserId", "dbo.AbpUsers");
             DropForeignKey("dbo.Devices", "TenantId", "dbo.AbpTenants");
             DropForeignKey("dbo.Devices", "BNodeId", "dbo.Nodes");
@@ -719,6 +747,7 @@ namespace CH.Spartan.Migrations
             DropIndex("dbo.AbpOrganizationUnits", new[] { "ParentId" });
             DropIndex("dbo.AbpNotificationSubscriptions", new[] { "NotificationName", "EntityTypeName", "EntityId", "UserId" });
             DropIndex("dbo.AbpFeatures", new[] { "EditionId" });
+            DropIndex("dbo.DeviceStocks", new[] { "TenantId" });
             DropIndex("dbo.Devices", new[] { "UserId" });
             DropIndex("dbo.Devices", new[] { "TenantId" });
             DropIndex("dbo.Devices", new[] { "BNodeId" });
@@ -779,8 +808,14 @@ namespace CH.Spartan.Migrations
                     { "DynamicFilter_ApplicationLanguage_MayHaveTenant", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
                     { "DynamicFilter_ApplicationLanguage_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
                 });
-            DropTable("dbo.Histories");
+            DropTable("dbo.HistoryDatas");
             DropTable("dbo.AbpFeatures");
+            DropTable("dbo.DeviceStocks",
+                removedAnnotations: new Dictionary<string, object>
+                {
+                    { "DynamicFilter_DeviceStock_MustHaveTenant", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
+                    { "DynamicFilter_DeviceStock_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
+                });
             DropTable("dbo.Nodes",
                 removedAnnotations: new Dictionary<string, object>
                 {

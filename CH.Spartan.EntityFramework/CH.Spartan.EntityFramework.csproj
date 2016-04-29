@@ -125,49 +125,9 @@
   <ItemGroup>
     <Compile Include="EntityFramework\SpartanDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\SpartanRepositoryBase.cs" />
-    <Compile Include="Migrations\201604110343221_Init.cs" />
-    <Compile Include="Migrations\201604110343221_Init.Designer.cs">
-      <DependentUpon>201604110343221_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604160542521_Edit_User.cs" />
-    <Compile Include="Migrations\201604160542521_Edit_User.Designer.cs">
-      <DependentUpon>201604160542521_Edit_User.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604170944239_Edit_Device.cs" />
-    <Compile Include="Migrations\201604170944239_Edit_Device.Designer.cs">
-      <DependentUpon>201604170944239_Edit_Device.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604171030222_Edit_Device1.cs" />
-    <Compile Include="Migrations\201604171030222_Edit_Device1.Designer.cs">
-      <DependentUpon>201604171030222_Edit_Device1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604181208070_Edit_Area.cs" />
-    <Compile Include="Migrations\201604181208070_Edit_Area.Designer.cs">
-      <DependentUpon>201604181208070_Edit_Area.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604191305319_EditDealRecord.cs" />
-    <Compile Include="Migrations\201604191305319_EditDealRecord.Designer.cs">
-      <DependentUpon>201604191305319_EditDealRecord.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604210641282_EditDeviceStock.cs" />
-    <Compile Include="Migrations\201604210641282_EditDeviceStock.Designer.cs">
-      <DependentUpon>201604210641282_EditDeviceStock.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604281332547_Edit_History.cs" />
-    <Compile Include="Migrations\201604281332547_Edit_History.Designer.cs">
-      <DependentUpon>201604281332547_Edit_History.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604281347149_Edit_Node.cs" />
-    <Compile Include="Migrations\201604281347149_Edit_Node.Designer.cs">
-      <DependentUpon>201604281347149_Edit_Node.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604281359500_Edit_Area1.cs" />
-    <Compile Include="Migrations\201604281359500_Edit_Area1.Designer.cs">
-      <DependentUpon>201604281359500_Edit_Area1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604281528324_Edit_User1.cs" />
-    <Compile Include="Migrations\201604281528324_Edit_User1.Designer.cs">
-      <DependentUpon>201604281528324_Edit_User1.cs</DependentUpon>
+    <Compile Include="Migrations\201604290242161_Init.cs" />
+    <Compile Include="Migrations\201604290242161_Init.Designer.cs">
+      <DependentUpon>201604290242161_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\DefaultDataBuilder.cs" />
@@ -211,38 +171,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604110343221_Init.resx">
-      <DependentUpon>201604110343221_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604160542521_Edit_User.resx">
-      <DependentUpon>201604160542521_Edit_User.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604170944239_Edit_Device.resx">
-      <DependentUpon>201604170944239_Edit_Device.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604171030222_Edit_Device1.resx">
-      <DependentUpon>201604171030222_Edit_Device1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604181208070_Edit_Area.resx">
-      <DependentUpon>201604181208070_Edit_Area.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604191305319_EditDealRecord.resx">
-      <DependentUpon>201604191305319_EditDealRecord.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604210641282_EditDeviceStock.resx">
-      <DependentUpon>201604210641282_EditDeviceStock.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604281332547_Edit_History.resx">
-      <DependentUpon>201604281332547_Edit_History.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604281347149_Edit_Node.resx">
-      <DependentUpon>201604281347149_Edit_Node.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604281359500_Edit_Area1.resx">
-      <DependentUpon>201604281359500_Edit_Area1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604281528324_Edit_User1.resx">
-      <DependentUpon>201604281528324_Edit_User1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604290242161_Init.resx">
+      <DependentUpon>201604290242161_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

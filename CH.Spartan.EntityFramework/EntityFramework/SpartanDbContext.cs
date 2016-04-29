@@ -11,7 +11,7 @@ using MySql.Data.Entity;
 using CH.Spartan.Areas;
 using CH.Spartan.DealRecords;
 using CH.Spartan.DeviceStocks;
-using CH.Spartan.Historys;
+using CH.Spartan.HistoryDatas;
 using CH.Spartan.Nodes;
 using CH.Spartan.Reports;
 
@@ -48,7 +48,7 @@ namespace CH.Spartan.EntityFramework
         /// <summary>
         /// 历史
         /// </summary>
-        public IDbSet<History> Historys { get; set; }
+        public IDbSet<HistoryData> HistoryDatas { get; set; }
 
         /// <summary>
         /// 节点

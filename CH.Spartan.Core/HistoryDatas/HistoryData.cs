@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 
-namespace CH.Spartan.Historys
+namespace CH.Spartan.HistoryDatas
 {
-    public class History : Entity
+    public class HistoryData : Entity
     {
         /// <summary>
         /// 设备Id

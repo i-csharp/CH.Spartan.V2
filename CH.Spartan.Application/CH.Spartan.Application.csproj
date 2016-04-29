@@ -130,6 +130,9 @@
     <Compile Include="DeviceTypes\Dto\GetDeviceTypeListDto.cs" />
     <Compile Include="DeviceTypes\Dto\UpdateDeviceTypeDto.cs" />
     <Compile Include="DeviceTypes\IDeviceTypeAppService.cs" />
+    <Compile Include="HistoryDatas\Dto\GetHistoryDataDto.cs" />
+    <Compile Include="HistoryDatas\HistoryDataService.cs" />
+    <Compile Include="HistoryDatas\IHistoryDataService.cs" />
     <Compile Include="MultiTenancy\Dto\GetTenantDto.cs" />
     <Compile Include="MultiTenancy\Dto\CreateTenantDto.cs" />
     <Compile Include="MultiTenancy\Dto\GetTenantListDto.cs" />
@@ -191,6 +194,7 @@
       <Name>CH.Spartan.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
