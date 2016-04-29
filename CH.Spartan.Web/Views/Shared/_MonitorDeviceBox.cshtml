@@ -6,7 +6,7 @@
             return;
         }
 
-        function deviceVM() {
+        function monitorDeviceVM() {
             var self = this;
             //坐标系
             self.coordinates = "@(EnumCoordinates.Gcj02)";
@@ -292,10 +292,10 @@
         }
 
         $(function() {
-            abp.global.deviceBox = new deviceVM();
-            ko.applyBindings(abp.global.deviceBox, $("#device-box")[0]);
-            $("#device-box .nav-tabs a").on("shown.bs.tab", function (e) {
-                abp.global.deviceBox.args.showType($(e.target).data("showtype"));
+            abp.global.monitorDeviceBox = new monitorDeviceVM();
+            ko.applyBindings(abp.global.monitorDeviceBox, $("#monitor-device-box")[0]);
+            $("#monitor-device-box .nav-tabs a").on("shown.bs.tab", function (e) {
+                abp.global.monitorDeviceBox.args.showType($(e.target).data("showtype"));
             });
         });
     })(jQuery);

@@ -973,7 +973,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Device\DeviceBoxViewModel.cs" />
     <Compile Include="Models\HtmlHelperExtend.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1081,12 +1080,16 @@
     <Content Include="Views\Shared\_MapPlaceSearchBox.cshtml" />
     <Content Include="Views\Shared\_MapToolbar.cshtml" />
     <Content Include="Views\CustomerManage\Monitor.cshtml" />
-    <Content Include="Views\Shared\_DeviceBoxByCustomer.cshtml" />
-    <Content Include="Views\Shared\_DeviceBox.cshtml" />
-    <Content Include="Views\Shared\_DeviceBoxByAgent.cshtml" />
+    <Content Include="Views\Shared\_MonitorDeviceBoxByCustomer.cshtml" />
+    <Content Include="Views\Shared\_MonitorDeviceBox.cshtml" />
+    <Content Include="Views\Shared\_MonitorDeviceBoxByAgent.cshtml" />
     <Content Include="Views\AgentManage\Monitor.cshtml" />
     <Content Include="Views\CustomerManage\UserInfo.cshtml" />
     <Content Include="Views\CustomerManage\ChangePassword.cshtml" />
+    <Content Include="Views\CustomerManage\HistoryData.cshtml" />
+    <Content Include="Views\Shared\_HistoryDataDeviceBox.cshtml" />
+    <Content Include="Views\Shared\_HistoryDataDeviceBoxByCustomer.cshtml" />
+    <Content Include="Views\Shared\_HistoryDataDeviceBoxByAgent.cshtml" />
     <None Include="Views\SystemManage\CreateTenant.cshtml" />
     <Content Include="Views\SystemManage\UpdateTenant.cshtml" />
     <Content Include="Views\SystemManage\DeviceType.cshtml" />

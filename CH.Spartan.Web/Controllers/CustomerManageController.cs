@@ -11,6 +11,8 @@ using CH.Spartan.Areas;
 using CH.Spartan.Areas.Dto;
 using CH.Spartan.Devices;
 using CH.Spartan.Devices.Dto;
+using CH.Spartan.HistoryDatas;
+using CH.Spartan.HistoryDatas.Dto;
 using CH.Spartan.Infrastructure;
 using CH.Spartan.Users;
 using CH.Spartan.Users.Dto;
@@ -26,11 +28,17 @@ namespace CH.Spartan.Web.Controllers
         private readonly IAreaAppService _areaAppService;
         private readonly IDeviceAppService _deviceAppService;
         private readonly IUserAppService _userAppService;
-        public CustomerManageController(IAreaAppService areaAppService, IDeviceAppService deviceAppService, IUserAppService userAppService)
+        private readonly IHistoryDataAppService _historyDataAppService;
+        public CustomerManageController(
+            IAreaAppService areaAppService,
+            IDeviceAppService deviceAppService,
+            IUserAppService userAppService,
+            IHistoryDataAppService historyDataAppService)
         {
             _areaAppService = areaAppService;
             _deviceAppService = deviceAppService;
             _userAppService = userAppService;
+            _historyDataAppService = historyDataAppService;
         }
 
         #region 区域
@@ -176,6 +184,23 @@ namespace CH.Spartan.Web.Controllers
         {
             input.UserId = AbpSession.GetUserId();
             var result = await _deviceAppService.GetMonitorDataByCutomerForWeb(input);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region 历史
+
+        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_HistoryData)]
+        public ActionResult HistoryData()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_HistoryData)]
+        public async Task<JsonResult> GetHistoryData(GetHistoryDataForWebInput input)
+        {
+            var result = await _historyDataAppService.GetHistoryDataForWebAsync(input);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         #endregion

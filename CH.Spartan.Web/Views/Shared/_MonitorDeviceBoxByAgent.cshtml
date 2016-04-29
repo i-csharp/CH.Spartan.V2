@@ -8,15 +8,15 @@
     }
 }
 <style type="text/css">
-    #device-box .nav-tabs li a {
+    #monitor-device-box .nav-tabs li a {
         border-radius: 0;
     }
 
-    #device-box .nav-tabs li.active a {
+    #monitor-device-box .nav-tabs li.active a {
         border-bottom-color: #fff;
     }
 
-    #device-box .search-keyword {
+    #monitor-device-box .search-keyword {
         border-top: 0;
     }
 
@@ -67,7 +67,7 @@
             opacity: 0.7;
         }
 </style>
-<div id="device-box" class="ibox float-e-margins w300" style="position: absolute; @cls">
+<div id="monitor-device-box" class="ibox float-e-margins w300" style="position: absolute; @cls">
     <div class="ibox-title">
         <h5>@L("全部车辆")</h5>
         <div class="ibox-tools">
@@ -125,7 +125,7 @@
         </div>
     </div>
 </div>
-@Html.Partial("_DeviceBox")
+@Html.Partial("_MonitorDeviceBox")
 <script type="text/javascript">
 
     (function ($) {
@@ -135,10 +135,10 @@
 
         $(function() {
             //获取监控数据
-            abp.global.deviceBox.getMonitorData = function (callback) {
+            abp.global.monitorDeviceBox.getMonitorData = function (callback) {
                 var data =
                 {
-                    userId: $("#device-box #UserId").val(),
+                    userId: $("#monitor-device-box #UserId").val(),
                     coordinates: self.coordinates
                 };
                 abp.ajax(
@@ -151,7 +151,7 @@
             };
 
             //打开修改设备窗口
-            abp.global.deviceBox.showUpdateDevice = function (device) {
+            abp.global.monitorDeviceBox.showUpdateDevice = function (device) {
                 abp.dialog.open("/AgentManage/UpdateDevice?id=" + device.id(), "@L("修改车辆")", {
                     area: ["575px", "750px"],
                     btn: ["@L("保存")", '@L("取消")'],
@@ -162,8 +162,8 @@
                 });
             };
 
-            $("#device-box #UserId").on("select2:select", function(e) {
-                abp.global.deviceBox.load();
+            $("#monitor-device-box #UserId").on("select2:select", function (e) {
+                abp.global.monitorDeviceBox.load();
             });
 
         });

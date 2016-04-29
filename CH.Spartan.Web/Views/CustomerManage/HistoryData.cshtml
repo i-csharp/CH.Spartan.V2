@@ -12,11 +12,13 @@
 {
     @Scripts.Render("~/scripts/plugins/drag")
     @Scripts.Render("~/scripts/plugins/select")
+    @Scripts.Render("~/scripts/plugins/date")
 }
 
 <div class="wrapper wrapper-content @(SpartanConsts.DefaultAnimate) p0">
     @Html.Partial("_Map")
     @Html.Partial("_MapToolbar", "z-index: 998; top: 5px; right: 310px")
     @Html.Partial("_MapPlaceSearchBox", "z-index: 997; top: 5px; right: 610px;display:none")
-    @Html.Partial("_MonitorDeviceBoxByAgent", "z-index: 999; top: 5px; right: 5px")
+    @Html.Partial("_AreaBox", "z-index: 996; top: 125px; right: 310px;display:none")
+    @Html.Partial("_HistoryDataDeviceBoxByCustomer", "z-index: 999; top: 5px; right: 5px")
 </div>

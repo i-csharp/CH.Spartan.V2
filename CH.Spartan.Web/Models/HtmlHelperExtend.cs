@@ -15,7 +15,7 @@ using CH.Spartan.DeviceTypes;
 using CH.Spartan.Infrastructure;
 using CH.Spartan.MultiTenancy;
 using CH.Spartan.Users;
-
+using CH.Spartan.Devices;
 namespace CH.Spartan.Web.Models
 {
     public static class HtmlHelperExtend
@@ -73,6 +73,42 @@ namespace CH.Spartan.Web.Models
             var valueField = "value";
             var textField = "displayText";
             var url = "/AutoComplete/GetUserList";
+            return helper.Action("AutoComplete", "Layout",
+                new { name, url, placeholder, value, text, cls, valueField, textField });
+        }
+
+        public static MvcHtmlString AutoCompleteDeviceByCustomer(this HtmlHelper helper, string name, string placeholder, int? value = null, string cls = "w180")
+        {
+            var text = "";
+            if (value.HasValue)
+            {
+                var def = IocManager.Instance.Resolve<IRepository<Device>>().Get(value.Value);
+                if (def != null)
+                {
+                    text = $"[{def.BNo}]{def.BName}";
+                }
+            }
+            var valueField = "value";
+            var textField = "displayText";
+            var url = "/AutoComplete/GetDeviceListByCustomer";
+            return helper.Action("AutoComplete", "Layout",
+                new { name, url, placeholder, value, text, cls, valueField, textField });
+        }
+
+        public static MvcHtmlString AutoCompleteDeviceByAgent(this HtmlHelper helper, string name, string placeholder, int? value = null, string cls = "w180")
+        {
+            var text = "";
+            if (value.HasValue)
+            {
+                var def = IocManager.Instance.Resolve<IRepository<Device>>().Get(value.Value);
+                if (def != null)
+                {
+                    text = $"[{def.BNo}]{def.BName}";
+                }
+            }
+            var valueField = "value";
+            var textField = "displayText";
+            var url = "/AutoComplete/GetDeviceListByAgent";
             return helper.Action("AutoComplete", "Layout",
                 new { name, url, placeholder, value, text, cls, valueField, textField });
         }
