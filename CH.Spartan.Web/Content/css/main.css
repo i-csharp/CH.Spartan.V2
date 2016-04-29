@@ -1,5 +1,7 @@
 ﻿/*common*/
 .ibox .ibox-title{ cursor:move}
+.wrapper-content.pages { padding: 0px; }
+.wrapper-content.pages .ibox-content { border: 0px; }
 /*list*/
 .wrapper-content.list { padding: 0px; }
 .wrapper-content.list .ibox-content { border: 0px; }

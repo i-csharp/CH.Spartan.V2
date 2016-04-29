@@ -201,6 +201,15 @@ namespace CH.Spartan.Web.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_UserInfo)]
+        public async Task<JsonResult> ChangePassword(ChangePasswordInput input)
+        {
+            await _userAppService.ChangePasswordAsync(input);
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
     }
 }

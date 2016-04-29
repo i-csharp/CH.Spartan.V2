@@ -82,14 +82,20 @@ namespace CH.Spartan.Users
             }
         }
 
-        public override async Task<IdentityResult> ChangePasswordAsync(User user, string newPassword)
+        public async Task<IdentityResult> ChangePasswordAsync(User user, string oldPassword, string newPassword1,
+            string newPassword2)
         {
-            var result = await PasswordValidator.ValidateAsync(newPassword);
-            if (!result.Succeeded)
+            var passwordHasher = new Md532PasswordHasher();
+            if (!newPassword1.Equals(newPassword2))
             {
-                return result;
+                return AbpIdentityResult.Failed(L("两次输入的新密不一致"));
             }
-            await AbpStore.SetPasswordHashAsync(user, new Md532PasswordHasher().HashPassword(newPassword));
+
+            if (passwordHasher.VerifyHashedPassword(user.Password, oldPassword) == PasswordVerificationResult.Failed)
+            {
+                return AbpIdentityResult.Failed(L("密码不正确"));
+            }
+            await AbpStore.SetPasswordHashAsync(user, passwordHasher.HashPassword(newPassword1));
             return IdentityResult.Success;
         }
 

@@ -1,4 +1,5 @@
-﻿using Abp.Application.Services.Dto;
+﻿using System.ComponentModel.DataAnnotations;
+using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 
 namespace CH.Spartan.Users.Dto
@@ -9,16 +10,19 @@ namespace CH.Spartan.Users.Dto
         /// <summary>
         /// 用户名 hhahh2011
         /// </summary>
+        [Required]
         public string UserName { get; set; }
 
         /// <summary>
         /// 名称 陈欢
         /// </summary>
+        [Required]
         public string Name { get; set; }
 
         /// <summary>
         /// 邮件
         /// </summary>
+        [Required]
         public string EmailAddress { get; set; }
 
         /// <summary>

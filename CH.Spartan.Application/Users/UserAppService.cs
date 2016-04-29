@@ -10,6 +10,7 @@ using Abp.Domain.Uow;
 using Abp.Linq.Extensions;
 using CH.Spartan.Users.Dto;
 using Abp.Extensions;
+using Abp.Runtime.Session;
 using CH.Spartan.MultiTenancy;
 using CH.Spartan.Infrastructure;
 
@@ -136,6 +137,13 @@ namespace CH.Spartan.Users
         {
             var result = await _userRepository.GetAsync(input.Id);
             return new UpdateUserInfoOutput(result.MapTo<UpdateUserInfoDto>());
+        }
+
+        public async Task ChangePasswordAsync(ChangePasswordInput input)
+        {
+            var user = await _userRepository.GetAsync(AbpSession.GetUserId());
+            CheckErrors(
+                await _userManager.ChangePasswordAsync(user, input.OldPassword, input.NewPassword1, input.NewPassword2));
         }
     }
 }

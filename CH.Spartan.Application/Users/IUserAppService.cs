@@ -83,5 +83,11 @@ namespace CH.Spartan.Users
         /// <returns></returns>
         Task<UpdateUserInfoOutput> GetUpdateUserInfoAsync(IdInput<long> input);
 
+        /// <summary>
+        /// ĞŞ¸ÄÃÜÂë
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task ChangePasswordAsync(ChangePasswordInput input);
     }
 }

@@ -150,6 +150,7 @@
     <Compile Include="Roles\IRoleAppService.cs" />
     <Compile Include="Roles\Dto\UpdateRolePermissionsInput.cs" />
     <Compile Include="SpartanMapping.cs" />
+    <Compile Include="Users\Dto\ChangePasswordInput.cs" />
     <Compile Include="Users\Dto\CreateUserDto.cs" />
     <Compile Include="Users\Dto\GetUserListDto.cs" />
     <Compile Include="Users\Dto\UpdateUserInfoDto.cs" />
