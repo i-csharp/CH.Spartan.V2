@@ -8,13 +8,13 @@ using CH.Spartan.HistoryDatas.Dto;
 
 namespace CH.Spartan.HistoryDatas
 {
-    public interface IHistoryDataService : IApplicationService
+    public interface IHistoryDataAppService : IApplicationService
     {
         /// <summary>
         /// 获取历史数据
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<GetHistoryDataForWebOutput> GetHistoryDataForWeb(GetHistoryDataForWebInput input);
+        Task<GetHistoryDataForWebOutput> GetHistoryDataForWebAsync(GetHistoryDataForWebInput input);
     }
 }

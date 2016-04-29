@@ -476,22 +476,6 @@ namespace CH.Spartan.Migrations
                 .Index(t => t.EditionId);
             
             CreateTable(
-                "dbo.HistoryDatas",
-                c => new
-                    {
-                        Id = c.Long(nullable: false, identity: true),
-                        DeviceId = c.Int(nullable: false),
-                        Direction = c.Int(nullable: false),
-                        Height = c.Double(nullable: false),
-                        Latitude = c.Double(nullable: false),
-                        Longitude = c.Double(nullable: false),
-                        Speed = c.Double(nullable: false),
-                        ReceiveTime = c.DateTime(nullable: false, precision: 0),
-                        ReportTime = c.DateTime(nullable: false, precision: 0),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
                 "dbo.AbpLanguages",
                 c => new
                     {
@@ -808,7 +792,6 @@ namespace CH.Spartan.Migrations
                     { "DynamicFilter_ApplicationLanguage_MayHaveTenant", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
                     { "DynamicFilter_ApplicationLanguage_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
                 });
-            DropTable("dbo.HistoryDatas");
             DropTable("dbo.AbpFeatures");
             DropTable("dbo.DeviceStocks",
                 removedAnnotations: new Dictionary<string, object>

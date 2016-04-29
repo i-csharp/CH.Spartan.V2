@@ -14,16 +14,21 @@ namespace CH.Spartan.Infrastructure
         string SearchText { get; set; }
     }
 
+    public interface ISearchTimeResultRequest
+    {
+        string SearchTime { get; set; }
+    }
+
     public interface IDateTimeResultRequest
     {
         DateTime? StartTime { get; set; }
         DateTime? EndTime { get; set; }
-        string SearchTime { get; set; }
     }
 
     public class QueryResultRequestInput :
         IInputDto,
         IDateTimeResultRequest,
+        ISearchTimeResultRequest,
         IFilterResultRequest,
         ISortedResultRequest
         

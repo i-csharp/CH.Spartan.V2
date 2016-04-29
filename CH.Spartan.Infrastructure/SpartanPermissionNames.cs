@@ -9,7 +9,7 @@
         //客户
         public const string CustomerManages = "CustomerManages";
         public const string CustomerManages_Monitor = "CustomerManages.Monitor";
-        public const string CustomerManages_HistoryTrack = "CustomerManages.HistoryTrack";
+        public const string CustomerManages_HistoryData = "CustomerManages.HistoryData";
         public const string CustomerManages_Notification = "CustomerManages.Notification";
         public const string CustomerManages_MileageReport = "CustomerManages.MileageReport";
       
@@ -29,7 +29,7 @@
         //代理
         public const string AgentManages = "AgentManages";
         public const string AgentManages_Monitor = "AgentManages.Monitor";
-        public const string AgentManages_HistoryTrack = "AgentManages.HistoryTrack";
+        public const string AgentManages_HistoryData = "AgentManages.HistoryData";
         public const string AgentManages_Notification = "AgentManages.Notification";
         public const string AgentManages_MileageReport = "AgentManages.MileageReport";
 

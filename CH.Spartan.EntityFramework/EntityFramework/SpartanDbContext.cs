@@ -46,11 +46,6 @@ namespace CH.Spartan.EntityFramework
         public IDbSet<DealRecord> DealRecords { get; set; }
 
         /// <summary>
-        /// 历史
-        /// </summary>
-        public IDbSet<HistoryData> HistoryDatas { get; set; }
-
-        /// <summary>
         /// 节点
         /// </summary>
         public IDbSet<Node> Nodes { get; set; } 

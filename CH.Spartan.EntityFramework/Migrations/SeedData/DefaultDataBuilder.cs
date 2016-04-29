@@ -40,8 +40,8 @@ namespace CH.Spartan.Migrations.SeedData
                    {
                        Name = nodeName,
                        HistoryTableName = "historydatas_" + i,
-                       HistoryConnectionStringRead = "Server=localhost;Database=Spartan;Uid=root;Pwd=123456",
-                       HistoryConnectionStringWrite = "Server=localhost;Database=Spartan;Uid=root;Pwd=123456"
+                       HistoryConnectionStringRead = "Server=localhost;Database=spartan_historydata;Uid=root;Pwd=123456",
+                       HistoryConnectionStringWrite = "Server=localhost;Database=spartan_historydata;Uid=root;Pwd=123456"
                    };
                    _context.Nodes.Add(node);
                }

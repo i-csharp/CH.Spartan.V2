@@ -12,7 +12,7 @@ namespace CH.Spartan.Infrastructure
             var customerManages = context.GetPermissionOrNull(SpartanPermissionNames.CustomerManages) ??
                             context.CreatePermission(SpartanPermissionNames.CustomerManages, L("客户管理"), multiTenancySides: MultiTenancySides.Tenant);
             customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_Monitor, L("定位监控"), multiTenancySides: MultiTenancySides.Tenant);
-            customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_HistoryTrack, L("历史轨迹"), multiTenancySides: MultiTenancySides.Tenant);
+            customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_HistoryData, L("历史轨迹"), multiTenancySides: MultiTenancySides.Tenant);
             customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_Notification, L("报警信息"), multiTenancySides: MultiTenancySides.Tenant);
             customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_MileageReport, L("里程统计"), multiTenancySides: MultiTenancySides.Tenant);
 
@@ -34,7 +34,7 @@ namespace CH.Spartan.Infrastructure
                                context.CreatePermission(SpartanPermissionNames.AgentManages, L("代理管理"), multiTenancySides: MultiTenancySides.Tenant);
 
             agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_Monitor, L("定位监控"), multiTenancySides: MultiTenancySides.Tenant);
-            agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_HistoryTrack, L("历史轨迹"), multiTenancySides: MultiTenancySides.Tenant);
+            agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_HistoryData, L("历史轨迹"), multiTenancySides: MultiTenancySides.Tenant);
             agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_Notification, L("报警信息"), multiTenancySides: MultiTenancySides.Tenant);
             agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_MileageReport, L("里程统计"), multiTenancySides: MultiTenancySides.Tenant);
 

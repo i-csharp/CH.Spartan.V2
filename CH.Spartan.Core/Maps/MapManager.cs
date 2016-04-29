@@ -179,6 +179,7 @@ namespace CH.Spartan.Maps
         #endregion 坐标格式转换
 
         #region 地理计算
+
         /// <summary>
         /// 获取地理位置
         /// </summary>
