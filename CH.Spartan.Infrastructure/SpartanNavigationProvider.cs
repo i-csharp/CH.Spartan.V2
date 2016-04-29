@@ -20,7 +20,6 @@ namespace CH.Spartan.Infrastructure
                         .AddItem(new MenuItemDefinition("Monitor", L("定位监控"), "fa fa-map-signs", "/CustomerManage/Monitor", true, SpartanPermissionNames.CustomerManages_Monitor))
                         .AddItem(new MenuItemDefinition("HistoryData", L("历史轨迹"), "fa fa-reply", "/CustomerManage/HistoryData", true, SpartanPermissionNames.CustomerManages_HistoryData))
                         .AddItem(new MenuItemDefinition("Notification", L("报警信息"), "fa fa-bell", "/CustomerManage/Notification", true, SpartanPermissionNames.CustomerManages_Notification))
-                        .AddItem(new MenuItemDefinition("MileageReport", L("里程统计"), "fa fa-bar-chart", "/CustomerManage/MileageReport", true, SpartanPermissionNames.CustomerManages_MileageReport))
                 ).AddItem(
                     new MenuItemDefinition(
                         "CustomersManage",
@@ -47,7 +46,6 @@ namespace CH.Spartan.Infrastructure
                         .AddItem(new MenuItemDefinition("Monitor", L("定位监控"), "fa fa-map-signs", "/AgentManage/Monitor", true, SpartanPermissionNames.AgentManages_Monitor))
                         .AddItem(new MenuItemDefinition("HistoryData", L("历史轨迹"), "fa fa-reply", "/AgentManage/HistoryData", true, SpartanPermissionNames.AgentManages_HistoryData))
                         .AddItem(new MenuItemDefinition("Notification", L("报警信息"), "fa fa-bell", "/AgentManage/Notification", true, SpartanPermissionNames.AgentManages_Notification))
-                        .AddItem(new MenuItemDefinition("MileageReport", L("里程统计"), "fa fa-bar-chart", "/AgentManage/MileageReport", true, SpartanPermissionNames.AgentManages_MileageReport))
                 )
                 .AddItem(
                     new MenuItemDefinition(

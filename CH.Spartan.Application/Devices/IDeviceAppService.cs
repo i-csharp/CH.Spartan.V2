@@ -30,6 +30,13 @@ namespace CH.Spartan.Devices
         /// <param name="input"></param>
         /// <returns></returns>
         Task DeleteDeviceAsync(List<IdInput> input);
+
+        /// <summary>
+        /// 获取 设备 自动补全
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<ListResultOutput<ComboboxItemDto>> GetDeviceListAutoCompleteAsync(GetDeviceListInput input);
         #endregion
 
         #region 代理
@@ -104,7 +111,5 @@ namespace CH.Spartan.Devices
         /// <returns></returns>
         Task<GetMonitorDataByAgentForWebOutput> GetMonitorDataByAgentForWeb(GetMonitorDataByAgentForWebInput input);
         #endregion
-
-
     }
 }

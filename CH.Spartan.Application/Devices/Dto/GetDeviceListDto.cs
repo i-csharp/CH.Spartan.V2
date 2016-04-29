@@ -76,7 +76,10 @@ namespace CH.Spartan.Devices.Dto
 
     public class GetDeviceListInput : QueryListResultRequestInput
     {
-
+        /// <summary>
+        /// 用户Id
+        /// </summary>
+        public long? UserId { get; set; }
     }
 
     public class GetDeviceListPagedInput : QueryListPagedResultRequestInput

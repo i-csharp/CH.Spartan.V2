@@ -99,7 +99,23 @@ namespace CH.Spartan.Devices
         public async Task DeleteDeviceAsync(List<IdInput> input)
         {
             await _deviceManager.DeleteByIdsAsync(input.Select(p => p.Id));
-        } 
+        }
+       
+
+        public async Task<ListResultOutput<ComboboxItemDto>> GetDeviceListAutoCompleteAsync(GetDeviceListInput input)
+        {
+            var list = await _deviceRepository.GetAll()
+                .WhereIf(!input.SearchText.IsNullOrEmpty(),
+                    p => p.BName.Contains(input.SearchText)|| p.BNo.Contains(input.SearchText))
+                .OrderBy(input)
+                .Take(input)
+                .ToListAsync();
+
+            return
+                new ListResultOutput<ComboboxItemDto>(
+                    list.Select(p => new ComboboxItemDto {Value = p.Id.ToString(), DisplayText = $"[{p.BNo}]{p.BName}"})
+                        .ToList());
+        }
         #endregion
 
         #region 代理

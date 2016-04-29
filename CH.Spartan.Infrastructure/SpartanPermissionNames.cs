@@ -11,7 +11,6 @@
         public const string CustomerManages_Monitor = "CustomerManages.Monitor";
         public const string CustomerManages_HistoryData = "CustomerManages.HistoryData";
         public const string CustomerManages_Notification = "CustomerManages.Notification";
-        public const string CustomerManages_MileageReport = "CustomerManages.MileageReport";
       
         public const string CustomerManages_Device = "CustomerManages.Device";
         public const string CustomerManages_Device_Create = "CustomerManages.Device.Create";
@@ -31,7 +30,6 @@
         public const string AgentManages_Monitor = "AgentManages.Monitor";
         public const string AgentManages_HistoryData = "AgentManages.HistoryData";
         public const string AgentManages_Notification = "AgentManages.Notification";
-        public const string AgentManages_MileageReport = "AgentManages.MileageReport";
 
         public const string AgentManages_User = "AgentManages.User";
         public const string AgentManages_User_Create = "AgentManages.User.Create";

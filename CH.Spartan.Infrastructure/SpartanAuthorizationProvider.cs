@@ -14,7 +14,6 @@ namespace CH.Spartan.Infrastructure
             customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_Monitor, L("定位监控"), multiTenancySides: MultiTenancySides.Tenant);
             customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_HistoryData, L("历史轨迹"), multiTenancySides: MultiTenancySides.Tenant);
             customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_Notification, L("报警信息"), multiTenancySides: MultiTenancySides.Tenant);
-            customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_MileageReport, L("里程统计"), multiTenancySides: MultiTenancySides.Tenant);
 
             var customerManageDevice = customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_Device, L("车辆管理"), multiTenancySides: MultiTenancySides.Tenant);
             customerManageDevice.CreateChildPermission(SpartanPermissionNames.CustomerManages_Device_Create, L("添加"), multiTenancySides: MultiTenancySides.Tenant);
@@ -36,7 +35,6 @@ namespace CH.Spartan.Infrastructure
             agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_Monitor, L("定位监控"), multiTenancySides: MultiTenancySides.Tenant);
             agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_HistoryData, L("历史轨迹"), multiTenancySides: MultiTenancySides.Tenant);
             agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_Notification, L("报警信息"), multiTenancySides: MultiTenancySides.Tenant);
-            agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_MileageReport, L("里程统计"), multiTenancySides: MultiTenancySides.Tenant);
 
 
             var agentManageUser = agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_User, L("客户管理"), multiTenancySides: MultiTenancySides.Tenant);
