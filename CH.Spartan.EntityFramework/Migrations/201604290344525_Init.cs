@@ -479,7 +479,7 @@ namespace CH.Spartan.Migrations
                 "dbo.HistoryDatas",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Long(nullable: false, identity: true),
                         DeviceId = c.Int(nullable: false),
                         Direction = c.Int(nullable: false),
                         Height = c.Double(nullable: false),

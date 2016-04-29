@@ -125,9 +125,9 @@
   <ItemGroup>
     <Compile Include="EntityFramework\SpartanDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\SpartanRepositoryBase.cs" />
-    <Compile Include="Migrations\201604290242161_Init.cs" />
-    <Compile Include="Migrations\201604290242161_Init.Designer.cs">
-      <DependentUpon>201604290242161_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201604290344525_Init.cs" />
+    <Compile Include="Migrations\201604290344525_Init.Designer.cs">
+      <DependentUpon>201604290344525_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\DefaultDataBuilder.cs" />
@@ -171,8 +171,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604290242161_Init.resx">
-      <DependentUpon>201604290242161_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604290344525_Init.resx">
+      <DependentUpon>201604290344525_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

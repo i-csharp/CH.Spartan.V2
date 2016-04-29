@@ -9,7 +9,7 @@ using Abp.Domain.Entities.Auditing;
 
 namespace CH.Spartan.HistoryDatas
 {
-    public class HistoryData : Entity
+    public class HistoryData : Entity<long>
     {
         /// <summary>
         /// 设备Id
