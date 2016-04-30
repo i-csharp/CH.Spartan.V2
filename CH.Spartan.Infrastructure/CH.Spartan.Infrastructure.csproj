@@ -105,6 +105,7 @@
     <Compile Include="Extensions\ObjectExtend.cs" />
     <Compile Include="Extensions\StringExtend.cs" />
     <Compile Include="Helpers\ComboboxHelper.cs" />
+    <Compile Include="Helpers\CronHelper.cs" />
     <Compile Include="Helpers\HttpHelper.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

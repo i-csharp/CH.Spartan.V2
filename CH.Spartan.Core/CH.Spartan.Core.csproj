@@ -135,6 +135,7 @@
     <Compile Include="Domain\ManagerBase.cs" />
     <Compile Include="HistoryDatas\HistoryDataHelper.cs" />
     <Compile Include="HistoryDatas\HistoryDataManager.cs" />
+    <Compile Include="Jobs\JobManager.cs" />
     <Compile Include="Maps\MapLocations\AddressComponent.cs" />
     <Compile Include="Maps\MapLocations\Building.cs" />
     <Compile Include="Maps\MapLocations\BusinessArea.cs" />

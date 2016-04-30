@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
+using Abp.BackgroundJobs;
 using Abp.Localization.Dictionaries;
 using Abp.Localization.Dictionaries.Xml;
 using Abp.Modules;
@@ -7,6 +9,10 @@ using Abp.Zero.Configuration;
 using CH.Spartan.Authorization;
 using CH.Spartan.Authorization.Roles;
 using CH.Spartan.Infrastructure;
+using CH.Spartan.Jobs;
+using Hangfire;
+using Hangfire.Server;
+using NCrontab;
 
 namespace CH.Spartan
 {
@@ -22,6 +28,7 @@ namespace CH.Spartan
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
+            //RecurringJob.AddOrUpdate<JobManager>(p=>p.GetGetwayNotification(), CrontabField.Seconds(5));
         }
     }
 }
