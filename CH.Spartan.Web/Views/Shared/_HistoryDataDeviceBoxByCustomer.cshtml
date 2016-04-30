@@ -1,0 +1,85 @@
+﻿@using Abp.Extensions
+@using Abp.Timing
+@model string
+@{
+    var cls = Model;
+    if (cls.IsNullOrEmpty())
+    {
+        cls = "z-index: 999; top: 5px; right: 5px;";
+    }
+}
+<style type="text/css">
+
+</style>
+<div id="history-data-device-box" class="ibox float-e-margins w300" style="position: absolute; @cls">
+    <div class="ibox-title">
+        <h5>@L("选择车辆")</h5>
+        <div class="ibox-tools">
+            <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li>
+                    <a href="#" data-bind="click:showMapToolbarBox">@L("工具面板")</a>
+                </li>
+                <li>
+                    <a href="#" data-bind="click:showAreaBox">@L("区域面板")</a>
+                </li>
+                <li>
+                    <a href="#" data-bind="click:showTimelineBox">@L("时间轴面板")</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="ibox-content p5">
+        @Html.AutoCompleteDeviceByCustomer("DeviceId", L("请选择车辆"), cls: "w")
+        <div class="input-group col-xs-12 mt5">
+            <label for="StartTime">@L("开始时间")：</label>
+        </div>
+        <div class="input-group col-xs-12">
+            <input type="text" class="form-control"
+                   id="StartTime" name="StartTime" placeholder="@L("开始时间")" onfocus="WdatePicker({ maxDate: '#F{$dp.$D(\'EndTime\')}' })" value="@DateTimeRange.Today.StartTime.ToString("yyyy/MM/dd HH:mm:ss")"/>
+        </div>
+        <div class="input-group col-xs-12 mt5">
+            <label for="EndTime">@L("结束时间")：</label>
+        </div>
+        <div class="input-group col-xs-12">
+            <input type="text" class="form-control"
+                   id="EndTime" name="EndTime" placeholder="@L("结束时间")" onfocus="WdatePicker({ minDate: '#F{$dp.$D(\'StartTime\')}' })" value="@DateTimeRange.Today.EndTime.ToString("yyyy/MM/dd HH:mm:ss")" />
+        </div>
+        <div class="input-group col-xs-12 mt5">
+            <label for="ParkingTime">@L("静止多久记一次停车")：</label>
+        </div>
+        <div class="input-group col-xs-12">
+            <select class="input-sm form-control" name="ParkingTime" id="ParkingTime">
+                <option value="5">@L("5分钟")</option>
+                <option value="10">@L("10分钟")</option>
+                <option value="15">@L("15分钟")</option>
+                <option value="30">@L("30分钟")</option>
+            </select>
+        </div>
+        <div class="input-group col-xs-12 mt5">
+            <button class="btn btn-sm btn-block btn-primary" data-bind="click:start" type="button">@L("开始")</button>
+        </div>
+    </div>
+</div>
+@Html.Partial("_HistoryDataDeviceBox")
+<script type="text/javascript">
+
+    (function ($) {
+        if (!$) {
+            return;
+        }
+
+
+
+
+
+        $(function () {
+
+        });
+    })(jQuery);
+</script>

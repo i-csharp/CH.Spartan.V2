@@ -400,7 +400,7 @@ namespace CH.Spartan.Devices
             return GetClsText(device);
         }
 
-        public static string WebWebIconUrl(Device device)
+        public static string WebIconUrl(Device device)
         {
             return GetIconUrl(device);
         }

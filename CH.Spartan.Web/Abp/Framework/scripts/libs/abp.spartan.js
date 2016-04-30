@@ -94,21 +94,21 @@
     /* BLOCK **************************************************/
     var block = 0;
     abp.ui.block = function (elm) {
-        block = dialog.load();
+        block = layer.load();
     };
 
     abp.ui.unblock = function (elm) {
-        dialog.close(block);
+        layer.close(block);
     };
 
     /* BUSY **************************************************/
     var busy = 1;
     abp.ui.setBusy = function (elm, optionsOrPromise) {
-        busy = dialog.load();
+        busy = layer.load();
     };
 
     abp.ui.clearBusy = function (elm) {
-        dialog.close(busy);
+        layer.close(busy);
     };
 
     /* DIALOG **************************************************/

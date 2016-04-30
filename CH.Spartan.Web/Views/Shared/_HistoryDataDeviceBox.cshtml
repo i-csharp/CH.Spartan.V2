@@ -1,0 +1,228 @@
+﻿@using Abp.Json
+@using CH.Spartan.Devices.Dto
+<script type="text/javascript">
+    (function($) {
+        if (!$) {
+            return;
+        }
+
+        function historyDataDeviceBoxVM() {
+            var self = this;
+            //坐标系
+            self.coordinates = "@(EnumCoordinates.Gcj02)";
+
+            //轨迹数据
+            self.data = null;
+
+            //标注点
+            self.deviceMarker = null;
+            self.startMarker = null;
+            self.endMarker = null;
+            self.polyline = null;
+
+            //信息窗口
+            self.infoWindow = new AMap.InfoWindow({
+                content: ""
+            });
+
+            //显示
+            self.show = function (cls) {
+                if (cls) {
+                    $("#history-data-device-box").css(cls).fadeIn();
+                } else {
+                    $("#history-data-device-box").fadeIn();
+                }
+            }
+
+            //隐藏
+            self.hide = function (cls) {
+                if (cls) {
+                    $("#history-data-device-box").css(cls).fadeOut();
+                } else {
+                    $("#history-data-device-box").fadeOut();
+                }
+            }
+
+            //显示工具面板
+            self.showMapToolbarBox = function () {
+                if (abp.global.mapToolbarBox) {
+                    abp.global.mapToolbarBox.show();
+                }
+            }
+
+            //显示区域面板
+            self.showAreaBox = function () {
+                if (abp.global.areaBox) {
+                    abp.global.areaBox.show();
+                }
+            }
+
+            //显示历史时间轴面板
+            self.showTimelineBox = function () {
+                if (abp.global.historyDataTimelineBox) {
+                    abp.global.historyDataTimelineBox.show();
+                }
+            }
+            //打开窗口
+            self.openInfoWindow = function (content, point) {
+                self.infoWindow.setContent(content);
+                self.infoWindow.setPosition(point);
+                self.infoWindow.open(abp.global.map.current);
+            };
+
+            //清空地图
+            self.clearHistoryData = function () {
+                if (self.data) {
+                    delete self.data;
+                }
+               
+                if (self.startMarker) {
+                    self.startMarker.setMap(null);
+                    delete self.startMarker;
+                }
+
+                if (self.endMarker) {
+                    self.endMarker.setMap(null);
+                    delete self.endMarker;
+                }
+                if (self.deviceMarker) {
+                    self.deviceMarker.setMap(null);
+                    delete self.deviceMarker;
+                }
+
+                if (self.polyline) {
+                    self.polyline.setMap(null);
+                    delete self.polyline;
+                }
+            };
+
+            //开始
+            self.start = function () {
+                self.clearHistoryData();
+                self.getHistoryData(function (data) {
+                    if (data.items == undefined || data.items.length == 0) {
+                        abp.message.warn("@L("无历史数据")");
+                        return;
+                    }
+                    self.data = data;
+                    //添加开始点
+                    var firstItem = self.data.items[0];
+                    var spt = new AMap.LngLat(firstItem.longitude, firstItem.latitude);
+                    abp.global.map.current.setCenter(spt);
+                    self.startMarker = new AMap.Marker({
+                        title: "@L("开始时间"):" + firstItem.reportTime,
+                        map: abp.global.map.current,
+                        position: spt,
+                        icon: "/Content/img/marker/start.png",
+                        offset: new AMap.Pixel(-10, -32)
+                    });
+
+                    AMap.event.addListener(self.startMarker, "click", function (e) {
+                        self.openInfoWindow(e.target.getTitle(), e.lnglat);
+                    });
+
+                    //添加车辆
+                    self.deviceMarker = new AMap.Marker({
+                        map: abp.global.map.current,
+                        position: spt,
+                        icon: firstItem.iconUrl,
+                        offset: new AMap.Pixel(-12, -12)
+                    });
+
+                    //开始画线
+                    var paths = new Array();
+                    $.each(self.data.items, function (index, item) {
+                        paths.push(new AMap.LngLat(item.longitude, item.latitude));
+                    });
+                    self.polyline = new AMap.Polyline({
+                        path: paths,
+                        strokeColor: "#0008ff",
+                        strokeOpacity: 0.8,
+                        strokeWeight: 3,
+                        strokeStyle: "solid"
+                    });
+                    self.polyline.setMap(abp.global.map.current);
+
+                    //更新区间信息 停车或者无数据
+                    var sts = $.Enumerable.From(self.data.items).Where(function (p) { return p.isSection; }).ToArray();
+                    if (sts && sts.length > 0) {
+                        $.each(sts, function (index, item) {
+                            var stopMarker = new AMap.Marker({
+                                title: item.sectionInfo,
+                                map: abp.global.map.current,
+                                position: new AMap.LngLat(item.longitude, item.latitude),
+                                icon: item.sectionIconUrl,
+                                offset: new AMap.Pixel(-10, -32)
+                            });
+
+                            AMap.event.addListener(stopMarker, "click", function (e) {
+                                self.openInfoWindow(e.target.getTitle(), e.lnglat);
+                            });
+                        });
+                    }
+
+                    //添加终点
+                    var lastItem = self.data.items[self.data.items.length - 1];
+                    var lpt = new AMap.LngLat(lastItem.longitude, lastItem.latitude);
+
+                    self.endMarkerMarker = new AMap.Marker({
+                        title: "@L("结束时间"):" + lastItem.reportTime + " - @L("总里程"):" + self.data.totalMileage + " km",
+                        map: abp.global.map.current,
+                        position: lpt,
+                        icon: "/Content/img/marker/end.png",
+                        offset: new AMap.Pixel(-10, -32)
+                    });
+
+                    AMap.event.addListener(self.endMarkerMarker, "click", function (e) {
+                        self.openInfoWindow(e.target.getTitle(), e.lnglat);
+                    });
+
+                    abp.global.map.current.setFitView(self.polyline);
+                    self.showTimelineBox();
+                });
+            }
+
+            //获取数据
+            self.getHistoryData = function(callback) {
+                var data =
+                {
+                    deviceId: $("#history-data-device-box #DeviceId").val(),
+                    coordinates: self.coordinates,
+                    startTime: $("#history-data-device-box #StartTime").val(),
+                    endTime: $("#history-data-device-box #EndTime").val(),
+                    parkingTime: $("#history-data-device-box #ParkingTime").val()
+                };
+
+                if (!data.deviceId) {
+                    abp.message.error("@L("请选择车辆")");
+                    return;
+                }
+
+                if (!data.startTime) {
+                    abp.message.error("@L("请选择开始时间")");
+                    return;
+                }
+                if (!data.endTime) {
+                    abp.message.error("@L("请选择结束时间")");
+                    return;
+                }
+
+                abp.ajax(
+                {
+                    url: "/CustomerManage/GetHistoryData",
+                    data:JSON.stringify(data)
+                }).done(function(result) {
+                    if (callback) {
+                        callback(result);
+                    }
+                });
+
+            }
+        }
+
+        $(function() {
+            abp.global.historyDataDeviceBox = new historyDataDeviceBoxVM();
+            ko.applyBindings(abp.global.historyDataDeviceBox, $("#history-data-device-box")[0]);
+        });
+    })(jQuery);
+</script>

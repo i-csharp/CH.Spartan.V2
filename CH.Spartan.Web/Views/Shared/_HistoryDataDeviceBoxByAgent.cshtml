@@ -1,0 +1,46 @@
+﻿@using Abp.Extensions
+@model string
+@{
+    var cls = Model;
+    if (cls.IsNullOrEmpty())
+    {
+        cls = "z-index: 999; top: 5px; right: 5px;";
+    }
+}
+<style type="text/css">
+  
+</style>
+<div id="device-box" class="ibox float-e-margins w300" style="position: absolute; @cls">
+    <div class="ibox-title">
+        <h5>@L("全部车辆")</h5>
+        <div class="ibox-tools">
+            <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li>
+                    <a href="#" data-bind="click:showMapToolbarBox">@L("工具面板")</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="ibox-content p5">
+        @Html.AutoCompleteDeviceByAgent("DeviceId", L("请选择车辆"), cls: "w")
+    </div>
+</div>
+@Html.Partial("_HistoryDataDeviceBox")
+<script type="text/javascript">
+
+    (function ($) {
+        if (!$) {
+            return;
+        }
+
+        $(function() {
+
+        });
+    })(jQuery);
+</script>

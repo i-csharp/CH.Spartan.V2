@@ -21,18 +21,25 @@
             abp.global.map.getLocation = function (target, lat, lng, coordinates, callback) {
                 var data =
                 {
-                    lat:lat,
-                    lng:lng,
-                    coordinates:coordinates
+                    lat: lat,
+                    lng: lng,
+                    coordinates: coordinates
                 };
 
-                $.post("/Map/GetLocation", data, function(data) {
+                $.post("/Map/GetLocation", data, function (data) {
                     debugger;
                     if (callback) {
                         callback(target, data.result.regeocode.formatted_address, data.result);
                     }
-                },"json");
-            }
+                }, "json");
+            };
+
+            abp.global.map.setCenterToBound = function (pt) {
+                var bounds = abp.global.map.current.getBounds();
+                if (!bounds.contains(pt)) {
+                    abp.global.map.current.setCenter(pt);
+                }
+            };
 
             AMap.event.addListener(abp.global.map.current, "zoomchange", function (e) {
                 abp.global.map.zoom = this.getZoom();

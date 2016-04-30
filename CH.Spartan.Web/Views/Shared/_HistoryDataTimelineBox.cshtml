@@ -1,0 +1,238 @@
+﻿@using Abp.Extensions
+@model string
+@{
+    var cls = Model;
+    if (cls.IsNullOrEmpty())
+    {
+        cls = "z-index: 999; bottom: 305px;";
+    }
+}
+<style type="text/css">
+    #history-data-time-line-box .ibox-content {
+        border-top: 0;
+    }
+
+    #history-data-time-line-box .nav-tabs .active a {
+        border-bottom-color: #fff;
+    }
+</style>
+<div id="history-data-time-line-box" class="ibox float-e-margins w mb0" style="position: absolute; @cls">
+    <div class="ibox-title pt5 pl5">
+        <div class="ibox-tools">
+            <a class="close-link">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="#tab-time-line"><i class="fa fa-map-signs"></i> @L("时间轴")</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="#tab-speed-line"><i class="fa fa-bar-chart"></i> @L("速度曲线")</a>
+            </li>
+        </ul>
+    </div>
+    <div class="ibox-content p5">
+        <div class="tab-content">
+            <div id="tab-time-line" class="tab-pane active h100">
+                <div class="col-md-12 text-center">
+                    <button class="btn btn-primary btn-xs btn-circle" type="button" data-toggle="tooltip" data-placement="left" title="@L("减慢播放速度")" data-bind="click:playBackward">
+                        <i class="fa fa-fast-backward"></i>
+                    </button>
+                    <button class="btn btn-primary btn-circle" type="button" data-bind="click:play">
+                        <i class="fa" data-bind="css:{'fa-play':!isPlaying(),'fa-pause':isPlaying()}"></i>
+                    </button>
+                    <button class="btn btn-primary btn-xs btn-circle" type="button" data-toggle="tooltip" data-placement="right" title="@L("加快播放速度")" data-bind="click:playForward">
+                        <i class="fa fa-fast-forward"></i>
+                    </button>
+                </div>
+                <div class="col-md-12 pl50 pr50">
+                    <input class="time-line" id="time-line" type="text" name="time-line">
+                </div>
+            </div>
+            <div id="tab-speed-line" class="tab-pane">
+                <span class="speed-line w h350" id="speed-line"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    (function ($) {
+        if (!$) {
+            return;
+        }
+
+        function historyDataTimelineBoxVM() {
+            var self = this;
+
+            self.playIndex = ko.observable(0);
+            self.isPlaying = ko.observable(false);
+            self.playSpeed = ko.observable(200);
+            self.playHandler = null;
+            //时间轴
+            self.timeline = $("#history-data-time-line-box #time-line").ionRangeSlider({
+                min: 0,
+                max: 0,
+                type: "single",
+                prefix: "",
+                grid: true,
+                grid_num: 10,
+                prettify: function (step) {
+                    if (!abp.global.historyDataDeviceBox.data ||
+                        abp.global.historyDataDeviceBox.data.items.length < 1 ||
+                        step >= abp.global.historyDataDeviceBox.data.items.length) {
+                        return "";
+                    }
+                    var text = "";
+                    var data = abp.global.historyDataDeviceBox.data.items[step];
+                    text = data.reportTime + " " + data.mileage.toFixed(2) + " km";
+                    return text;
+                },
+                onChange: function (obj) {
+                    self.setDeviceMarkerPosition(obj.from);
+                }
+            });
+
+            //设置车辆位置
+            self.setDeviceMarkerPosition = function (index) {
+                if (!abp.global.historyDataDeviceBox.data || abp.global.historyDataDeviceBox.data.items.length < 1 || index > abp.global.historyDataDeviceBox.data.items.length) {
+                    return;
+                }
+                self.playIndex(index);
+                var data = abp.global.historyDataDeviceBox.data.items[index];
+                var lpt = new AMap.LngLat(data.longitude, data.latitude);
+                abp.global.historyDataDeviceBox.deviceMarker.setIcon(data.iconUrl);
+                abp.global.historyDataDeviceBox.deviceMarker.setPosition(lpt);
+                abp.global.map.setCenterToBound(lpt);
+            }
+
+            //显示
+            self.show = function (cls) {
+                if (cls) {
+                    $("#history-data-time-line-box").css(cls).fadeIn();
+                } else {
+                    $("#history-data-time-line-box").fadeIn();
+                }
+                self.load();
+            }
+
+            //隐藏
+            self.hide = function (cls) {
+                if (cls) {
+                    $("#history-data-time-line-box").css(cls).fadeOut();
+                } else {
+                    $("#history-data-time-line-box").fadeOut();
+                }
+            }
+
+            //播放速度 减
+            self.playBackward = function() {
+                if (self.playSpeed() <1000) {
+                    self.playSpeed(self.playSpeed() + 100);
+                    self.loadPlay();
+                    abp.notify.info("@L("当前播放速度")：" + self.playSpeed());
+                } else {
+                    abp.notify.info("@L("已经是慢速度")");
+                }
+            }
+
+            //开始播放
+            self.play = function () {
+                if (self.isPlaying()) {
+                    self.isPlaying(false);
+                } else {
+                    self.isPlaying(true);
+                }
+            };
+
+            //播放速度 加
+            self.playForward = function () {
+                if (self.playSpeed() > 100) {
+                    self.playSpeed(self.playSpeed() - 100);
+                    abp.notify.info("@L("当前播放速度")：" + self.playSpeed());
+                    self.loadPlay();
+                } else {
+                    abp.notify.info("@L("已经是最快速度")");
+                }
+            }
+
+            //加载时间轴
+            self.loadTimeline = function () {
+                var timeline = self.timeline.data("ionRangeSlider");
+                timeline.reset();
+                timeline.update({
+                    max: abp.global.historyDataDeviceBox.data.items.length - 1,
+                    from: 0
+                });
+            }
+
+            //加载速度曲线
+            self.loadSpeedline = function() {
+                if (abp.global.historyDataDeviceBox.data && abp.global.historyDataDeviceBox.data.items.length > 0) {
+                    var speeds = new Array();
+                    $.each(abp.global.historyDataDeviceBox.data.items, function(index, item) {
+                        var date = new Date(item.reportTime.replace(/-/g, "/"));
+                        speeds.push([Date.UTC(date.getYear(), date.getMonth(), date.getDay(), date.getHours(), date.getMinutes(), date.getSeconds()), item.speed]);
+                    });
+
+                    $("#history-data-time-line-box #speed-line").highcharts("StockChart", {
+                        rangeSelector: {
+                            enabled: false
+                        },
+                        tooltip: {
+                            formatter: function() {
+                                var pt = this.points[0].point;
+                                self.setDeviceMarkerPosition(pt.index);
+                                var item = abp.global.historyDataDeviceBox.data.items[pt.index];
+                                var html = "@L("时间")：" + item.reportTime + "</br>";
+                                html += "@L("里程")：" + item.mileage.toFixed(2) + "km </br>";
+                                html += "@L("速度")：" + item.speed + "km/h";
+                                return html;
+                            },
+                            useHTML: true
+                        },
+                        series: [
+                            {
+                                name: "@L("速度")",
+                                data: speeds,
+                                tooltip: {
+                                    valueDecimals: 2
+                                }
+                            }
+                        ]
+                    });
+
+                }
+            };
+
+            //加载播放
+            self.loadPlay = function () {
+                if (self.playHandler) {
+                    clearInterval(self.playHandler);
+                }
+                self.playHandler = setInterval(function () {
+                    if (self.isPlaying()) {
+                        self.playIndex(self.playIndex() + 10);
+                        if (abp.global.historyDataDeviceBox.data &&
+                            abp.global.historyDataDeviceBox.data.items.length > 0 &&
+                            self.playIndex() < abp.global.historyDataDeviceBox.data.items.length) {
+                            self.setDeviceMarkerPosition(self.playIndex());
+                        }
+                    }
+                }, self.playSpeed());
+            }
+            //加载数据
+            self.load = function() {
+                self.loadTimeline();
+                self.loadSpeedline();
+                self.loadPlay();
+            };
+        }
+
+        $(function () {
+            abp.global.historyDataTimelineBox = new historyDataTimelineBoxVM();
+            ko.applyBindings(abp.global.historyDataTimelineBox, $("#history-data-time-line-box")[0]);
+        });
+    })(jQuery);
+</script>

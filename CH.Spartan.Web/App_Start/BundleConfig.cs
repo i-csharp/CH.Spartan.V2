@@ -11,6 +11,9 @@ namespace CH.Spartan.Web
         {
             var currentLanguage = Thread.CurrentThread.CurrentUICulture.Name;
             bundles.IgnoreList.Clear();
+
+            #region 基础
+
             bundles.Add(
                 new StyleBundle("~/styles")
                     .Include("~/Content/css/bootstrap.min.css", new CssRewriteUrlTransform())
@@ -22,7 +25,7 @@ namespace CH.Spartan.Web
                     .Include("~/Content/css/main.css", new CssRewriteUrlTransform())
                 );
 
-            //基础
+
             bundles.Add(
                 new ScriptBundle("~/scripts/top")
                     .Include(
@@ -39,7 +42,6 @@ namespace CH.Spartan.Web
                     )
                 );
 
-            //模块
             bundles.Add(
                 new ScriptBundle("~/scripts/bottom")
                     .Include(
@@ -52,7 +54,10 @@ namespace CH.Spartan.Web
                         "~/Content/js/main.js"
                     )
                 );
+            #endregion
 
+            #region 模块
+            //list
             bundles.Add(
                 new StyleBundle("~/styles/plugins/list")
                 .Include("~/Content/js/plugins/table/bootstrap-table.css", new CssRewriteUrlTransform())
@@ -76,6 +81,7 @@ namespace CH.Spartan.Web
                    )
                 );
 
+            //edit
             bundles.Add(
                 new StyleBundle("~/styles/plugins/edit")
                      .Include("~/Content/js/plugins/select2/css/select2.css", new CssRewriteUrlTransform())
@@ -101,8 +107,10 @@ namespace CH.Spartan.Web
                    )
                );
 
+            #endregion
 
-            //插件
+            #region 插件
+            //drag
             bundles.Add(
              new ScriptBundle("~/scripts/plugins/drag")
                  .Include(
@@ -114,6 +122,7 @@ namespace CH.Spartan.Web
                  )
              );
 
+            //select
             bundles.Add(
               new StyleBundle("~/styles/plugins/select")
               .Include("~/Content/js/plugins/select2/css/select2.css", new CssRewriteUrlTransform())
@@ -126,6 +135,7 @@ namespace CH.Spartan.Web
                     )
                 );
 
+            //date
             bundles.Add(
                 new ScriptBundle("~/scripts/plugins/date")
                     .Include(
@@ -133,11 +143,12 @@ namespace CH.Spartan.Web
                    )
                 );
 
-
+            //cropper
             bundles.Add(
                 new StyleBundle("~/styles/plugins/cropper")
                     .Include("~/Content/js/plugins/cropper/cropper.css", new CssRewriteUrlTransform())
             );
+
 
             bundles.Add(
                new ScriptBundle("~/scripts/plugins/cropper")
@@ -145,6 +156,39 @@ namespace CH.Spartan.Web
                       "~/Content/js/plugins/cropper/cropper.js"
                   )
                );
+
+            //highcharts
+            bundles.Add(
+               new ScriptBundle("~/scripts/plugins/highcharts")
+                   .Include(
+                      "~/Content/js/plugins/highcharts/highcharts.js"
+                  )
+               );
+
+            //highstock
+            bundles.Add(
+               new ScriptBundle("~/scripts/plugins/highstock")
+                   .Include(
+                      "~/Content/js/plugins/highstock/js/highstock.js"
+                  )
+               );
+
+
+            //ionslider
+            bundles.Add(
+                new StyleBundle("~/styles/plugins/ionslider")
+                    .Include("~/Content/js/plugins/ionslider/css/ion.rangeSlider.css", new CssRewriteUrlTransform())
+                    .Include("~/Content/js/plugins/ionslider/css/ion.rangeSlider.skinNice.css", new CssRewriteUrlTransform())
+            );
+
+            bundles.Add(
+               new ScriptBundle("~/scripts/plugins/ionslider")
+                   .Include(
+                      "~/Content/js/plugins/ionslider/js/ion.rangeSlider.js"
+                  )
+               ); 
+            #endregion
+
 
         }
     }

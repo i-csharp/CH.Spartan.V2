@@ -9,6 +9,8 @@ using CH.Spartan.DealRecords;
 using CH.Spartan.DealRecords.Dto;
 using CH.Spartan.Devices;
 using CH.Spartan.Devices.Dto;
+using CH.Spartan.HistoryDatas;
+using CH.Spartan.HistoryDatas.Dto;
 using CH.Spartan.Infrastructure;
 using CH.Spartan.MultiTenancy;
 using CH.Spartan.MultiTenancy.Dto;
@@ -62,7 +64,7 @@ namespace CH.Spartan
                .ForMember(p => p.IsOnline, opt => opt.MapFrom(o => DeviceHelper.IsOnline(o)))
                .ForMember(p => p.IsExpire, opt => opt.MapFrom(o => DeviceHelper.IsExpire(o)))
                .ForMember(p => p.IsStatic, opt => opt.MapFrom(o => DeviceHelper.IsStatic(o)))
-               .ForMember(p => p.IconUrl, opt => opt.MapFrom(o => DeviceHelper.WebWebIconUrl(o)))
+               .ForMember(p => p.IconUrl, opt => opt.MapFrom(o => DeviceHelper.WebIconUrl(o)))
                .ForMember(p => p.WinGpsStatusText, opt => opt.MapFrom(o => DeviceHelper.WebWinGpsStatusText(o)))
                .ForMember(p => p.WinDeviceStatusText, opt => opt.MapFrom(o => DeviceHelper.WebWinDeviceStatusText(o)))
                .ForMember(p => p.WinAlarmStatusText, opt => opt.MapFrom(o => DeviceHelper.WebWinAlarmStatusText(o)))
@@ -80,7 +82,7 @@ namespace CH.Spartan
                 .ForMember(p => p.IsOnline, opt => opt.MapFrom(o => DeviceHelper.IsOnline(o)))
                 .ForMember(p => p.IsExpire, opt => opt.MapFrom(o => DeviceHelper.IsExpire(o)))
                 .ForMember(p => p.IsStatic, opt => opt.MapFrom(o => DeviceHelper.IsStatic(o)))
-                .ForMember(p => p.IconUrl, opt => opt.MapFrom(o => DeviceHelper.WebWebIconUrl(o)))
+                .ForMember(p => p.IconUrl, opt => opt.MapFrom(o => DeviceHelper.WebIconUrl(o)))
                 .ForMember(p => p.WinGpsStatusText, opt => opt.MapFrom(o => DeviceHelper.WebWinGpsStatusText(o)))
                 .ForMember(p => p.WinDeviceStatusText, opt => opt.MapFrom(o => DeviceHelper.WebWinDeviceStatusText(o)))
                 .ForMember(p => p.WinAlarmStatusText, opt => opt.MapFrom(o => DeviceHelper.WebWinAlarmStatusText(o)))
@@ -92,9 +94,14 @@ namespace CH.Spartan
                 .ForMember(p => p.PanelSpeedText, opt => opt.MapFrom(o => DeviceHelper.WebPanelSpeedText(o)))
                 .ForMember(p => p.PanelExpireText, opt => opt.MapFrom(o => DeviceHelper.WebPanelExpireText(o)))
                 .ForMember(p => p.PanelClsText, opt => opt.MapFrom(o => DeviceHelper.WebPanelClsText(o)));
-        }
 
-       private static string L(string name)
+            //历史数据
+           Mapper.CreateMap<HistoryData, GetHistoryDataForWebDto>()
+               .ForMember(p => p.IconUrl, opt => opt.MapFrom(o => HistoryDataHelper.WebIconUrl(o)));
+
+       }
+
+        private static string L(string name)
        {
            return LocalizationHelper.GetString(SpartanConsts.LocalizationSourceName, name);
        }

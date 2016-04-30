@@ -133,6 +133,7 @@
     <Compile Include="Devices\DeviceHelper.cs" />
     <Compile Include="Devices\DeviceManager.cs" />
     <Compile Include="Domain\ManagerBase.cs" />
+    <Compile Include="HistoryDatas\HistoryDataHelper.cs" />
     <Compile Include="HistoryDatas\HistoryDataManager.cs" />
     <Compile Include="Maps\MapLocations\AddressComponent.cs" />
     <Compile Include="Maps\MapLocations\Building.cs" />

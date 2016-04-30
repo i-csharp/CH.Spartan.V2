@@ -56,6 +56,11 @@ namespace CH.Spartan.HistoryDatas.Dto
         public DateTime ReportTime { get; set; }
 
         /// <summary>
+        /// 历史图标
+        /// </summary>
+        public string IconUrl { get; set; }
+
+        /// <summary>
         /// 累计里程
         /// </summary>
         public double Mileage { get; set; }
@@ -95,7 +100,7 @@ namespace CH.Spartan.HistoryDatas.Dto
         public DateTime? EndTime { get; set; }
 
         /// <summary>
-        /// 多长时间 记一个停车点
+        /// 静止多长时间记一个停车点
         /// </summary>
         [Range(4, int.MaxValue)]
         public int ParkingTime { get; set; }
