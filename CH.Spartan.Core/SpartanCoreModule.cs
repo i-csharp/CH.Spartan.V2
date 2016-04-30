@@ -28,7 +28,7 @@ namespace CH.Spartan
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
-            //RecurringJob.AddOrUpdate<JobManager>(p=>p.GetGetwayNotification(), CrontabField.Seconds(5));
+            RecurringJob.AddOrUpdate<JobManager>(p=>p.GetGetwayNotification(), Cron.Minutely);
         }
     }
 }

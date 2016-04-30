@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Abp.Application.Services.Dto;
+using Abp.Runtime.Session;
 using Abp.Web.Models;
 using Abp.Web.Mvc.Authorization;
 using Abp.Web.Mvc.Models;
@@ -20,6 +21,8 @@ using CH.Spartan.MultiTenancy;
 using CH.Spartan.MultiTenancy.Dto;
 using CH.Spartan.Nodes;
 using CH.Spartan.Nodes.Dto;
+using CH.Spartan.Users;
+using CH.Spartan.Users.Dto;
 
 namespace CH.Spartan.Web.Controllers
 {
@@ -34,16 +37,19 @@ namespace CH.Spartan.Web.Controllers
         private readonly ITenantAppService _tenantAppService;
         private readonly IDeviceTypeAppService _deviceTypeAppService;
         private readonly INodeAppService _nodeAppService;
+        private readonly IUserAppService _userAppService;
         public SystemManageController(
             ITenantAppService tenantAppService, 
             IDeviceTypeAppService deviceTypeAppService, 
             INodeAppService nodeAppService, 
-            IAuditLogAppService auditLogAppService)
+            IAuditLogAppService auditLogAppService, 
+            IUserAppService userAppService)
         {
             _tenantAppService = tenantAppService;
             _deviceTypeAppService = deviceTypeAppService;
             _nodeAppService = nodeAppService;
             _auditLogAppService = auditLogAppService;
+            _userAppService = userAppService;
         }
 
         #region 租户
@@ -248,6 +254,38 @@ namespace CH.Spartan.Web.Controllers
         }
         #endregion
 
+
+        #endregion
+
+        #region 个人
+        [AbpMvcAuthorize(SpartanPermissionNames.SystemManages_UserInfo)]
+        public async Task<ActionResult> UserInfo()
+        {
+            var result = await _userAppService.GetUpdateUserInfoAsync(new IdInput<long>(AbpSession.GetUserId()));
+            return View(result);
+        }
+
+        [HttpPost]
+        [AbpMvcAuthorize(SpartanPermissionNames.SystemManages_UserInfo)]
+        public async Task<JsonResult> UpdateUserInfo(UpdateUserInfoInput input)
+        {
+            var result = await _userAppService.UpdateUserInfoAsync(input);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [AbpMvcAuthorize(SpartanPermissionNames.SystemManages_ChangePassword)]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AbpMvcAuthorize(SpartanPermissionNames.SystemManages_ChangePassword)]
+        public async Task<JsonResult> ChangePassword(ChangePasswordInput input)
+        {
+            await _userAppService.ChangePasswordAsync(input);
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
 
         #endregion
     }

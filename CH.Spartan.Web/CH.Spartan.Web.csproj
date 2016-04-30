@@ -1210,12 +1210,14 @@
     <Content Include="Views\Shared\_HistoryDataDeviceBoxByAgent.cshtml" />
     <Content Include="Views\Shared\_HistoryDataTimelineBox.cshtml" />
     <Content Include="Views\AgentManage\HistoryData.cshtml" />
+    <Content Include="Views\SystemManage\ChangePassword.cshtml" />
     <None Include="Views\SystemManage\CreateTenant.cshtml" />
     <Content Include="Views\SystemManage\UpdateTenant.cshtml" />
     <Content Include="Views\SystemManage\DeviceType.cshtml" />
     <Content Include="Views\SystemManage\UpdateDeviceType.cshtml" />
     <Content Include="Views\SystemManage\Node.cshtml" />
     <Content Include="Views\SystemManage\UpdateNode.cshtml" />
+    <Content Include="Views\SystemManage\UserInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

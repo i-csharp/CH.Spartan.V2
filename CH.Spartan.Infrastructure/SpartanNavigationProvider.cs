@@ -80,6 +80,8 @@ namespace CH.Spartan.Infrastructure
                         requiresAuthentication: true,
                         requiredPermissionName: SpartanPermissionNames.SystemManages
                         )
+                        .AddItem(new MenuItemDefinition("UserInfo", L("个人资料"), "fa fa-briefcase", "/SystemManage/UserInfo", true, SpartanPermissionNames.SystemManages_UserInfo))
+                        .AddItem(new MenuItemDefinition("ChangePassword", L("修改密码"), "fa fa-key", "/SystemManage/ChangePassword", true, SpartanPermissionNames.SystemManages_ChangePassword))
                         .AddItem(new MenuItemDefinition("Tenant", L("租户管理"), "fa fa-user-secret", "/SystemManage/Tenant", true, SpartanPermissionNames.SystemManages_Tenant))
                         .AddItem(new MenuItemDefinition("DeviceType", L("设备类型"), "fa fa-square-o", "/SystemManage/DeviceType", true, SpartanPermissionNames.SystemManages_Tenant))
                         .AddItem(new MenuItemDefinition("Node", L("数据节点"), "fa fa-database", "/SystemManage/Node", true, SpartanPermissionNames.SystemManages_Node))

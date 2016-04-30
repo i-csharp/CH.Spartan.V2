@@ -224,7 +224,7 @@ namespace CH.Spartan.Web.Controllers
 
         #endregion
 
-        #region 用户
+        #region 客户
 
         #region 首页
         [AbpMvcAuthorize(SpartanPermissionNames.AgentManages_User)]

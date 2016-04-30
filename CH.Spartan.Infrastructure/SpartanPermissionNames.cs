@@ -63,6 +63,10 @@
 
         //系统
         public const string SystemManages = "SystemManages";
+
+        public const string SystemManages_UserInfo = "SystemManages.UserInfo";
+        public const string SystemManages_ChangePassword = "SystemManages.ChangePassword";
+
         public const string SystemManages_Tenant = "SystemManages.Tenant";
         public const string SystemManages_Tenant_Create = "SystemManages.Tenant.Create";
         public const string SystemManages_Tenant_Update = "SystemManages.Tenant.Update";

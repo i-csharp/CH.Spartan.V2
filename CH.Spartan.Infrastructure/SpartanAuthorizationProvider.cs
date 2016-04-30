@@ -68,26 +68,29 @@ namespace CH.Spartan.Infrastructure
             platformManageDealRecord.CreateChildPermission(SpartanPermissionNames.PlatformManages_DealRecord_Delete, L("删除"), multiTenancySides: MultiTenancySides.Host);
 
             //系统--------------------------------------------------------------------
-            var systemManage = context.GetPermissionOrNull(SpartanPermissionNames.SystemManages) ??
+            var systemManages = context.GetPermissionOrNull(SpartanPermissionNames.SystemManages) ??
                                context.CreatePermission(SpartanPermissionNames.SystemManages, L("系统管理"), multiTenancySides: MultiTenancySides.Host);
 
-            var systemManageTenant = systemManage.CreateChildPermission(SpartanPermissionNames.SystemManages_Tenant, L("租户管理"), multiTenancySides: MultiTenancySides.Host);
+            systemManages.CreateChildPermission(SpartanPermissionNames.SystemManages_UserInfo, L("个人资料"), multiTenancySides: MultiTenancySides.Host);
+            systemManages.CreateChildPermission(SpartanPermissionNames.SystemManages_ChangePassword, L("修改密码"), multiTenancySides: MultiTenancySides.Host);
+
+            var systemManageTenant = systemManages.CreateChildPermission(SpartanPermissionNames.SystemManages_Tenant, L("租户管理"), multiTenancySides: MultiTenancySides.Host);
             systemManageTenant.CreateChildPermission(SpartanPermissionNames.SystemManages_Tenant_Create, L("添加"), multiTenancySides: MultiTenancySides.Host);
             systemManageTenant.CreateChildPermission(SpartanPermissionNames.SystemManages_Tenant_Update, L("更新"), multiTenancySides: MultiTenancySides.Host);
             systemManageTenant.CreateChildPermission(SpartanPermissionNames.SystemManages_Tenant_Delete, L("删除"), multiTenancySides: MultiTenancySides.Host);
             systemManageTenant.CreateChildPermission(SpartanPermissionNames.SystemManages_Tenant_Deposit, L("充值"), multiTenancySides: MultiTenancySides.Host);
 
-            var systemManageDeviceType = systemManage.CreateChildPermission(SpartanPermissionNames.SystemManages_DeviceType, L("设备类型"), multiTenancySides: MultiTenancySides.Host);
+            var systemManageDeviceType = systemManages.CreateChildPermission(SpartanPermissionNames.SystemManages_DeviceType, L("设备类型"), multiTenancySides: MultiTenancySides.Host);
             systemManageDeviceType.CreateChildPermission(SpartanPermissionNames.SystemManages_DeviceType_Update, L("更新"), multiTenancySides: MultiTenancySides.Host);
 
-            var systemManageNodes = systemManage.CreateChildPermission(SpartanPermissionNames.SystemManages_Node, multiTenancySides: MultiTenancySides.Host);
+            var systemManageNodes = systemManages.CreateChildPermission(SpartanPermissionNames.SystemManages_Node, multiTenancySides: MultiTenancySides.Host);
             systemManageNodes.CreateChildPermission(SpartanPermissionNames.SystemManages_Node_Create, L("添加"), multiTenancySides: MultiTenancySides.Host);
             systemManageNodes.CreateChildPermission(SpartanPermissionNames.SystemManages_Node_Update, L("修改"), multiTenancySides: MultiTenancySides.Host);
 
-            var systemManageAuditLog = systemManage.CreateChildPermission(SpartanPermissionNames.SystemManages_AuditLog, L("审计日志"), multiTenancySides: MultiTenancySides.Host);
+            var systemManageAuditLog = systemManages.CreateChildPermission(SpartanPermissionNames.SystemManages_AuditLog, L("审计日志"), multiTenancySides: MultiTenancySides.Host);
             systemManageAuditLog.CreateChildPermission(SpartanPermissionNames.SystemManages_AuditLog_Delete, L("删除"), multiTenancySides: MultiTenancySides.Host);
 
-            var systemManageJob = systemManage.CreateChildPermission(SpartanPermissionNames.SystemManages_Job, L("调度任务"), multiTenancySides: MultiTenancySides.Host);
+            var systemManageJob = systemManages.CreateChildPermission(SpartanPermissionNames.SystemManages_Job, L("调度任务"), multiTenancySides: MultiTenancySides.Host);
         }
 
         private static ILocalizableString L(string name)
