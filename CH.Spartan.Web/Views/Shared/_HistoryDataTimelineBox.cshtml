@@ -93,7 +93,7 @@
                     self.setDeviceMarkerPosition(obj.from);
                 }
             });
-
+            self.timeline.ins = self.timeline.data("ionRangeSlider");
             //设置车辆位置
             self.setDeviceMarkerPosition = function (index) {
                 if (!abp.global.historyDataDeviceBox.data || abp.global.historyDataDeviceBox.data.items.length < 1 || index > abp.global.historyDataDeviceBox.data.items.length) {
@@ -159,9 +159,8 @@
 
             //加载时间轴
             self.loadTimeline = function () {
-                var timeline = self.timeline.data("ionRangeSlider");
-                timeline.reset();
-                timeline.update({
+                self.timeline.ins.reset();
+                self.timeline.ins.update({
                     max: abp.global.historyDataDeviceBox.data.items.length - 1,
                     from: 0
                 });
@@ -218,6 +217,7 @@
                             abp.global.historyDataDeviceBox.data.items.length > 0 &&
                             self.playIndex() < abp.global.historyDataDeviceBox.data.items.length) {
                             self.setDeviceMarkerPosition(self.playIndex());
+                            self.timeline.ins.update({ from: self.playIndex() });
                         }
                     }
                 }, self.playSpeed());

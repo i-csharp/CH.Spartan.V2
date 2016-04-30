@@ -143,7 +143,6 @@
 
             //显示检索
             self.showPlaceSearchBox = function () {
-                debugger;
                 if (abp.global.mapPlaceSearchBox) {
                     var cls = { left: (abp.global.win.w / 2 - 150) + "px" };
                     abp.global.mapPlaceSearchBox.show(cls);
@@ -158,7 +157,6 @@
 
 
             self.load = function () {
-                debugger;
                 abp.global.map.current.plugin(["AMap.RangingTool"], function () {
                     var startMarker = {
                         icon: new AMap.Icon({

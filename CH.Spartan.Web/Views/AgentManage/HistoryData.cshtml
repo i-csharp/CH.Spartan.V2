@@ -1,0 +1,27 @@
+﻿@using System.Web.Services.Protocols
+@{
+    ViewBag.BodyClass = "gray-bg";
+}
+
+@section styles
+{
+    @Styles.Render("~/styles/plugins/select")
+    @Styles.Render("~/styles/plugins/ionslider")
+
+}
+@section scripts
+{
+    @Scripts.Render("~/scripts/plugins/drag")
+    @Scripts.Render("~/scripts/plugins/select")
+    @Scripts.Render("~/scripts/plugins/date")
+    @Scripts.Render("~/scripts/plugins/ionslider")
+    @Scripts.Render("~/scripts/plugins/highstock")
+}
+
+<div class="wrapper wrapper-content @(SpartanConsts.DefaultAnimate) p0">
+    @Html.Partial("_Map")
+    @Html.Partial("_MapToolbar", "z-index: 998; top: 5px; right: 310px;display:none")
+    @Html.Partial("_MapPlaceSearchBox", "z-index: 997; top: 5px; right: 610px;display:none")
+    @Html.Partial("_HistoryDataDeviceBoxByAgent", "z-index: 999; top: 5px; right: 5px")
+    @Html.Partial("_HistoryDataTimelineBox", "z-index: 999; bottom: 0px;rigth:0px;display:none")
+</div>

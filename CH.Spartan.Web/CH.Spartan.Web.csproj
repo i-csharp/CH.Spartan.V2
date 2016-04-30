@@ -1209,6 +1209,7 @@
     <Content Include="Views\Shared\_HistoryDataDeviceBoxByCustomer.cshtml" />
     <Content Include="Views\Shared\_HistoryDataDeviceBoxByAgent.cshtml" />
     <Content Include="Views\Shared\_HistoryDataTimelineBox.cshtml" />
+    <Content Include="Views\AgentManage\HistoryData.cshtml" />
     <None Include="Views\SystemManage\CreateTenant.cshtml" />
     <Content Include="Views\SystemManage\UpdateTenant.cshtml" />
     <Content Include="Views\SystemManage\DeviceType.cshtml" />

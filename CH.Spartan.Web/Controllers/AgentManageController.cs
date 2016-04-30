@@ -13,6 +13,8 @@ using CH.Spartan.Devices;
 using CH.Spartan.Devices.Dto;
 using CH.Spartan.DeviceStocks;
 using CH.Spartan.DeviceStocks.Dto;
+using CH.Spartan.HistoryDatas;
+using CH.Spartan.HistoryDatas.Dto;
 using CH.Spartan.Infrastructure;
 using CH.Spartan.Users;
 using CH.Spartan.Users.Dto;
@@ -29,12 +31,14 @@ namespace CH.Spartan.Web.Controllers
         private readonly IUserAppService _userAppService;
         private readonly IDealRecordAppService _dealRecordAppService;
         private readonly IDeviceStockAppService _deviceStockAppService;
-        public AgentManageController(IDeviceAppService deviceAppService, IUserAppService userAppService, IDealRecordAppService dealRecordAppService, IDeviceStockAppService deviceStockAppService)
+        private readonly IHistoryDataAppService _historyDataAppService;
+        public AgentManageController(IDeviceAppService deviceAppService, IUserAppService userAppService, IDealRecordAppService dealRecordAppService, IDeviceStockAppService deviceStockAppService, IHistoryDataAppService historyDataAppService)
         {
             _deviceAppService = deviceAppService;
             _userAppService = userAppService;
             _dealRecordAppService = dealRecordAppService;
             _deviceStockAppService = deviceStockAppService;
+            _historyDataAppService = historyDataAppService;
         }
 
         #region 设备
@@ -120,6 +124,23 @@ namespace CH.Spartan.Web.Controllers
         public async Task<JsonResult> GetMonitorData(GetMonitorDataByAgentForWebInput input)
         {
             var result = await _deviceAppService.GetMonitorDataByAgentForWeb(input);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region 历史
+
+        [AbpMvcAuthorize(SpartanPermissionNames.AgentManages_HistoryData)]
+        public ActionResult HistoryData()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AbpMvcAuthorize(SpartanPermissionNames.AgentManages_HistoryData)]
+        public async Task<JsonResult> GetHistoryData(GetHistoryDataForWebInput input)
+        {
+            var result = await _historyDataAppService.GetHistoryDataForWebAsync(input);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         #endregion
