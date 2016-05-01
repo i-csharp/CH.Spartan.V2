@@ -143,7 +143,11 @@
     <Compile Include="Domain\ManagerBase.cs" />
     <Compile Include="HistoryDatas\HistoryDataHelper.cs" />
     <Compile Include="HistoryDatas\HistoryDataManager.cs" />
-    <Compile Include="Jobs\ActiveMqReceiveWorker.cs" />
+    <Compile Include="Instructions\InstructionMessage.cs" />
+    <Compile Include="Jobs\ActiveMqReceiveMessageWorker.cs" />
+    <Compile Include="Jobs\ActiveMqReceiveInstructionWorker.cs" />
+    <Compile Include="Jobs\ActiveMqSendMessageWorker.cs" />
+    <Compile Include="Jobs\ActiveMqSendInstructionWorker.cs" />
     <Compile Include="Jobs\SendAppJob.cs" />
     <Compile Include="Jobs\SendEmailJob.cs" />
     <Compile Include="Maps\MapLocations\AddressComponent.cs" />
@@ -159,7 +163,7 @@
     <Compile Include="Maps\MapManager.cs" />
     <Compile Include="Maps\MapPoint.cs" />
     <Compile Include="Messages\MessageManager.cs" />
-    <Compile Include="Messages\GetwayNotificationData.cs" />
+    <Compile Include="Messages\GetwayMessage.cs" />
     <Compile Include="Nodes\NodeManager.cs" />
     <Compile Include="DealRecords\DealRecord.cs" />
     <Compile Include="Devices\Device.cs" />

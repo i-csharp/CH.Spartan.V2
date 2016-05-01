@@ -8,7 +8,7 @@ using CH.Spartan.Infrastructure;
 
 namespace CH.Spartan.Messages
 {
-    public class GetwayNotificationData : NotificationData
+    public class GetwayMessage : NotificationData
     {
         public long UserId { get; set; }
 

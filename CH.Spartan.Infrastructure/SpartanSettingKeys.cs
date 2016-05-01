@@ -136,6 +136,16 @@ namespace CH.Spartan.Infrastructure
         /// 消息队列地址
         /// </summary>
         public const string General_ActiveMq_Message_Uri = "General.ActiveMq.Message.Uri";
+        
+        /// <summary>
+        /// 指令队列名字
+        /// </summary>
+        public const string General_ActiveMq_Instruction_Name = "General.ActiveMq.Instruction.Name";
+
+        /// <summary>
+        /// 指令队列地址
+        /// </summary>
+        public const string General_ActiveMq_Instruction_Uri = "General.ActiveMq.Instruction.Uri";
         #endregion
 
         #region 租户
