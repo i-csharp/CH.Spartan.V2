@@ -33,6 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Apache.NMS, Version=1.7.1.3894, Culture=neutral, PublicKeyToken=82756feee3957618, processorArchitecture=MSIL">
+      <HintPath>..\packages\Apache.NMS.1.7.1\lib\net40\Apache.NMS.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Apache.NMS.ActiveMQ, Version=1.7.1.3924, Culture=neutral, PublicKeyToken=82756feee3957618, processorArchitecture=MSIL">
+      <HintPath>..\packages\Apache.NMS.ActiveMQ.1.7.1\lib\net40\Apache.NMS.ActiveMQ.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
@@ -135,7 +143,9 @@
     <Compile Include="Domain\ManagerBase.cs" />
     <Compile Include="HistoryDatas\HistoryDataHelper.cs" />
     <Compile Include="HistoryDatas\HistoryDataManager.cs" />
-    <Compile Include="Jobs\JobManager.cs" />
+    <Compile Include="Jobs\ActiveMqReceiveWorker.cs" />
+    <Compile Include="Jobs\SendAppJob.cs" />
+    <Compile Include="Jobs\SendEmailJob.cs" />
     <Compile Include="Maps\MapLocations\AddressComponent.cs" />
     <Compile Include="Maps\MapLocations\Building.cs" />
     <Compile Include="Maps\MapLocations\BusinessArea.cs" />
@@ -148,6 +158,8 @@
     <Compile Include="Maps\MapLocations\StreetNumber.cs" />
     <Compile Include="Maps\MapManager.cs" />
     <Compile Include="Maps\MapPoint.cs" />
+    <Compile Include="Messages\MessageManager.cs" />
+    <Compile Include="Messages\GetwayNotificationData.cs" />
     <Compile Include="Nodes\NodeManager.cs" />
     <Compile Include="DealRecords\DealRecord.cs" />
     <Compile Include="Devices\Device.cs" />
@@ -194,6 +206,7 @@
       <Name>CH.Spartan.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

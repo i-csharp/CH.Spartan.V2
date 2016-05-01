@@ -12,7 +12,8 @@ namespace CH.Spartan.Infrastructure
         public const string DefaultAnimate = "animated fadeInRight";
         public const int DefaultNodeMaxUsageCount = 1000;
         public const int DefaultOfflineMinutes = -5;
-        public static int DefaultLimitSpeed = 80;
+        public const int DefaultLimitSpeed = 80;
+        public const string YouHaveAMessage = "YouHaveAMessage";
     }
     #endregion
 

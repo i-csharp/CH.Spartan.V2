@@ -127,7 +127,15 @@ namespace CH.Spartan.Infrastructure
         /// </summary>
         public const string General_WeiXin_AppSecret = "General.WeiXin.AppSecret";
 
+        /// <summary>
+        /// 消息队列名字
+        /// </summary>
+        public const string General_ActiveMq_Message_Name = "General.ActiveMq.Message.Name";
 
+        /// <summary>
+        /// 消息队列地址
+        /// </summary>
+        public const string General_ActiveMq_Message_Uri = "General.ActiveMq.Message.Uri";
         #endregion
 
         #region 租户
