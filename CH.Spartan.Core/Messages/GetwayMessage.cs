@@ -13,6 +13,8 @@ namespace CH.Spartan.Messages
     {
         public long UserId { get; set; }
 
+        public int DeviceId { get; set; }
+
         /// <summary>
         /// 标题
         /// </summary>

@@ -13,7 +13,7 @@ namespace CH.Spartan.Infrastructure
         public const int DefaultNodeMaxUsageCount = 1000;
         public const int DefaultOfflineMinutes = -5;
         public const int DefaultLimitSpeed = 80;
-        public const string YouHaveAMessage = "YouHaveAMessage";
+        public const string YouHaveAAlarmMessage = "YouHaveAAlarmMessage";
     }
     #endregion
 

@@ -131,13 +131,17 @@ namespace Abp.Notifications
         }
 
         [UnitOfWork]
-        public virtual Task<List<UserNotificationInfoWithNotificationInfo>> GetUserNotificationsWithNotificationsAsync(long userId, UserNotificationState? state = null, int skipCount = 0, int maxResultCount = int.MaxValue)
+        public virtual Task<List<UserNotificationInfoWithNotificationInfo>> GetUserNotificationsWithNotificationsAsync(long userId, UserNotificationState? state = null, int skipCount = 0, int maxResultCount = int.MaxValue,string entityId=null)
         {
             var query = from userNotificationInfo in _userNotificationRepository.GetAll()
-                        join notificationInfo in _notificationRepository.GetAll() on userNotificationInfo.NotificationId equals notificationInfo.Id
-                        where userNotificationInfo.UserId == userId && (state == null || userNotificationInfo.State == state.Value)
-                        orderby notificationInfo.CreationTime descending
-                        select new { userNotificationInfo, notificationInfo };
+                join notificationInfo in _notificationRepository.GetAll() on userNotificationInfo.NotificationId equals
+                    notificationInfo.Id
+                where
+                    userNotificationInfo.UserId == userId &&
+                    (state == null || userNotificationInfo.State == state.Value) &&
+                    (entityId == null || notificationInfo.EntityId == entityId)
+                orderby notificationInfo.CreationTime descending
+                select new {userNotificationInfo, notificationInfo};
 
             query = query.PageBy(skipCount, maxResultCount);
 

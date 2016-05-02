@@ -81,7 +81,7 @@ namespace Abp.Notifications
         /// <param name="skipCount">Skip count.</param>
         /// <param name="maxResultCount">Maximum result count.</param>
         /// <param name="state">State</param>
-        Task<List<UserNotificationInfoWithNotificationInfo>> GetUserNotificationsWithNotificationsAsync(long userId, UserNotificationState? state = null, int skipCount = 0, int maxResultCount = int.MaxValue);
+        Task<List<UserNotificationInfoWithNotificationInfo>> GetUserNotificationsWithNotificationsAsync(long userId, UserNotificationState? state = null, int skipCount = 0, int maxResultCount = int.MaxValue,string entityId = null);
 
         /// <summary>
         /// Gets user notification count.

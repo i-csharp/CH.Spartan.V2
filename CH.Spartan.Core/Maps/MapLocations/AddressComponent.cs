@@ -20,7 +20,7 @@ namespace CH.Spartan.Maps
         public string Province { get; set; }
 
         [JsonProperty("city")]
-        public object[] City { get; set; }
+        public string City { get; set; }
 
         [JsonProperty("citycode")]
         public string Citycode { get; set; }

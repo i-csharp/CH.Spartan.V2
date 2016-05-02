@@ -195,7 +195,7 @@ namespace CH.Spartan.Maps
             try
             {
                 var url = $"http://restapi.amap.com/v3/geocode/regeo?key={_aMapAk_Api}&location={mapPoint.Lng},{mapPoint.Lat}&homeorcorp=1&radius=1000&extensions=all&batch=false&roadlevel=1";
-                var json = HttpLibSyncRequest.Get(url).RegexReplace(@"\[\]","''");
+                var json = HttpLibSyncRequest.Get(url).RegexReplace(@"\[+\]+", "''");
                 location = json.ToObject<MapLocation>();
             }
             catch(Exception ex)

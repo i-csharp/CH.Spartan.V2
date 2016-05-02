@@ -43,10 +43,11 @@ namespace CH.Spartan.Jobs
             else
             {
 #if DEBUG
-                Send(new GetwayMessage()
+              Send(new GetwayMessage()
                 {
                     Title = "震动报警",
                     UserId = 4,
+                    DeviceId = 2171,
                     AlarmType = EnumAlarmType.Shake,
                     Content = "震动报警",
                     Latitude = 45.77378,

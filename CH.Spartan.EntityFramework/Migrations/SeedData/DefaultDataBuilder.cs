@@ -20,13 +20,14 @@ namespace CH.Spartan.Migrations.SeedData
             _context = context;
         }
 
-        public void Build()
-        {
-            //添加设备类型
-            CreateDeviceType();
-            //添加节点
-            CreateNode();
-        }
+       public void Build()
+       {
+
+           //添加节点
+           CreateNode();
+           //添加设备类型
+           CreateDeviceType();
+       }
 
        private void CreateNode()
        {

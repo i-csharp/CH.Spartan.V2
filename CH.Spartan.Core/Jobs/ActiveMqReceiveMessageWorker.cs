@@ -80,7 +80,7 @@ namespace CH.Spartan.Jobs
                 var data = msg.Body as GetwayMessage;
                 if (data != null)
                 {
-                   _messageManager.SendMessageAsync(data);
+                    _messageManager.SendMessageAsync(data);
                 }
             }
             catch (Exception ex)
