@@ -118,7 +118,7 @@ namespace Abp.Domain.Uow
             if (!UnitOfWorkDictionary.TryGetValue(outerUnitOfWorkKey, out unitOfWork))
             {
                 //No outer UOW
-                logger.Warn("Outer UOW key could not found in UnitOfWorkDictionary!");
+                //logger.Warn("Outer UOW key could not found in UnitOfWorkDictionary!");
                 CallContext.FreeNamedDataSlot(ContextKey);
                 return;
             }

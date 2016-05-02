@@ -34,7 +34,6 @@ namespace CH.Spartan.Infrastructure
 
             agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_Monitor, L("定位监控"), multiTenancySides: MultiTenancySides.Tenant);
             agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_HistoryData, L("历史轨迹"), multiTenancySides: MultiTenancySides.Tenant);
-            agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_Notification, L("报警信息"), multiTenancySides: MultiTenancySides.Tenant);
 
 
             var agentManageUser = agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_User, L("客户管理"), multiTenancySides: MultiTenancySides.Tenant);

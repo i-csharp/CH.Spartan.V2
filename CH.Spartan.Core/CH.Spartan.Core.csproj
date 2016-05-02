@@ -146,8 +146,8 @@
     <Compile Include="Instructions\InstructionMessage.cs" />
     <Compile Include="Jobs\ActiveMqReceiveMessageWorker.cs" />
     <Compile Include="Jobs\ActiveMqReceiveInstructionWorker.cs" />
-    <Compile Include="Jobs\ActiveMqSendMessageWorker.cs" />
     <Compile Include="Jobs\ActiveMqSendInstructionWorker.cs" />
+    <Compile Include="Jobs\ActiveMqSendMessageWorker.cs" />
     <Compile Include="Jobs\SendAppJob.cs" />
     <Compile Include="Jobs\SendEmailJob.cs" />
     <Compile Include="Maps\MapLocations\AddressComponent.cs" />

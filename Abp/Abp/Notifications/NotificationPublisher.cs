@@ -59,7 +59,7 @@ namespace Abp.Notifications
             NotificationSeverity severity = NotificationSeverity.Info,
             long[] userIds = null,
             long[] excludedUserIds = null,
-            int?[] tenantIds = null)
+            int?[] tenantIds = null,long? creatorUserId = null)
         {
             if (notificationName.IsNullOrEmpty())
             {
@@ -87,7 +87,8 @@ namespace Abp.Notifications
                 ExcludedUserIds = excludedUserIds.IsNullOrEmpty() ? null : excludedUserIds.JoinAsString(","),
                 TenantIds = tenantIds.IsNullOrEmpty() ? null : tenantIds.JoinAsString(","),
                 Data = data == null ? null : data.ToJsonString(),
-                DataTypeName = data == null ? null : data.GetType().AssemblyQualifiedName
+                DataTypeName = data == null ? null : data.GetType().AssemblyQualifiedName,
+                CreatorUserId = creatorUserId
             };
 
             await _store.InsertNotificationAsync(notificationInfo);

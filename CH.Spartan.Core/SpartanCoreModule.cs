@@ -30,6 +30,7 @@ namespace CH.Spartan
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
             RecurringJob.AddOrUpdate<ActiveMqSendInstructionWorker>(p => p.DoWork("default"), Cron.Minutely);
             RecurringJob.AddOrUpdate<ActiveMqReceiveMessageWorker>(p=>p.DoWork("default"),Cron.Minutely);
+            RecurringJob.AddOrUpdate<ActiveMqSendMessageWorker>(p => p.DoWork("default"), Cron.Minutely);
         }
     }
 }

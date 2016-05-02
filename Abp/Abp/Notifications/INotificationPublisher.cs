@@ -33,6 +33,7 @@ namespace Abp.Notifications
         /// <see cref="NotificationPublisher.AllTenants"/> can be passed to indicate all tenants.
         /// If this is null, then it's automatically set to the current tenant on <see cref="IAbpSession.TenantId"/>.
         /// </param>
+        /// <param name="creatorUserId"></param>
         Task PublishAsync(
             string notificationName,
             NotificationData data = null,
@@ -40,6 +41,7 @@ namespace Abp.Notifications
             NotificationSeverity severity = NotificationSeverity.Info,
             long[] userIds = null,
             long[] excludedUserIds = null,
-            int?[] tenantIds = null);
+            int?[] tenantIds = null, 
+            long? creatorUserId = null);
     }
 }

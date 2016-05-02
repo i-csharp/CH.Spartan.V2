@@ -29,7 +29,6 @@
         public const string AgentManages = "AgentManages";
         public const string AgentManages_Monitor = "AgentManages.Monitor";
         public const string AgentManages_HistoryData = "AgentManages.HistoryData";
-        public const string AgentManages_Notification = "AgentManages.Notification";
 
         public const string AgentManages_User = "AgentManages.User";
         public const string AgentManages_User_Create = "AgentManages.User.Create";

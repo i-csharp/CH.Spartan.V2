@@ -14,8 +14,6 @@ namespace CH.Spartan.Jobs
     [Serializable]
     public class SendAppJobArgs
     {
-        public long SenderUserId { get; set; }
-
         public int? TargetTenantId { get; set; }
 
         public long TargetUserId { get; set; }
@@ -37,7 +35,7 @@ namespace CH.Spartan.Jobs
         [UnitOfWork]
         public override void Execute(SendAppJobArgs args)
         {
-            using (CurrentUnitOfWork.SetFilterParameter(AbpDataFilters.MayHaveTenant, AbpDataFilters.Parameters.TenantId, args.TargetTenantId))
+            using (CurrentUnitOfWork.DisableFilter(AbpDataFilters.MayHaveTenant))
             {
                 var user = _userRepository.FirstOrDefault(args.TargetUserId);
                 if (user == null)

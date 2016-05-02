@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CH.Spartan.Instructions
 {
-   public class InstructionMessage
+    [Serializable]
+    public class InstructionMessage
     {
 
     }
