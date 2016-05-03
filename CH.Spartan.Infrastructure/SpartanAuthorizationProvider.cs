@@ -13,7 +13,7 @@ namespace CH.Spartan.Infrastructure
                             context.CreatePermission(SpartanPermissionNames.CustomerManages, L("客户管理"), multiTenancySides: MultiTenancySides.Tenant);
             customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_Monitor, L("定位监控"), multiTenancySides: MultiTenancySides.Tenant);
             customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_HistoryData, L("历史轨迹"), multiTenancySides: MultiTenancySides.Tenant);
-            customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_Notification, L("报警信息"), multiTenancySides: MultiTenancySides.Tenant);
+            customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_Message, L("报警信息"), multiTenancySides: MultiTenancySides.Tenant);
 
             var customerManageDevice = customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_Device, L("车辆管理"), multiTenancySides: MultiTenancySides.Tenant);
             customerManageDevice.CreateChildPermission(SpartanPermissionNames.CustomerManages_Device_Create, L("添加"), multiTenancySides: MultiTenancySides.Tenant);

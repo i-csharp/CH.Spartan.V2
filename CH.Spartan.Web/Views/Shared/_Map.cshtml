@@ -1,15 +1,13 @@
 ﻿@using Abp.Configuration
-<div class="map-container w h" id="map-container">
-
-
+@model int?
+<div class="map-container w ah" id="map-container" data-rh="@(Model??0)">
 </div>
 <script src="http://webapi.amap.com/maps?v=1.3&key=@SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_Map_AMapAk)" type="text/javascript"></script>
 <script type="text/javascript">
     (function () {
         abp.global.map = {};
-        $(function() {
+        $(function () {
             abp.global.map.container = $("#map-container");
-            abp.global.map.container.height(abp.global.win.h);
             abp.global.map.current = new AMap.Map("map-container", {
                 resizeEnable: true,
                 rotateEnable: true,
@@ -27,7 +25,6 @@
                 };
 
                 $.post("/Map/GetLocation", data, function (data) {
-                    debugger;
                     if (callback) {
                         callback(target, data.result.regeocode.formatted_address, data.result);
                     }

@@ -236,5 +236,13 @@ namespace CH.Spartan.Web.Controllers
         }
 
         #endregion
+
+        #region 消息
+        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Message)]
+        public async Task<ActionResult> Message()
+        {
+            return View();
+        }
+        #endregion
     }
 }

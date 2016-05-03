@@ -8,7 +8,7 @@
     }
 }
 
-<div id="area-box" class="ibox float-e-margins w300" style="position: absolute; @cls">
+<div id="area-box" class="ibox float-e-margins w300 mb0" style="position: absolute; @cls">
     <div class="ibox-title drag">
         <h5>@L("全部区域")</h5>
         <div class="ibox-tools">
@@ -41,7 +41,7 @@
                 <button type="button" class="btn btn-sm btn-primary" data-bind="click:enableEditingArea"> <i class="fa fa-arrows"></i> @L("调整区域")</button>
             </span>
         </div>
-        <ul class="sortable-list connectList agile-list h500 ova pt0" data-bind="foreach: areas">
+        <ul class="sortable-list connectList agile-list pt0 mt5 ah ova" data-rh="-270" data-bind="foreach: areas">
             <li data-bind="css:cls">
                 <span data-bind="text:name,click:$parent.showArea"></span>
                 <div class="agile-detail">

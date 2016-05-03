@@ -10,7 +10,7 @@
         public const string CustomerManages = "CustomerManages";
         public const string CustomerManages_Monitor = "CustomerManages.Monitor";
         public const string CustomerManages_HistoryData = "CustomerManages.HistoryData";
-        public const string CustomerManages_Notification = "CustomerManages.Notification";
+        public const string CustomerManages_Message = "CustomerManages.Message";
       
         public const string CustomerManages_Device = "CustomerManages.Device";
         public const string CustomerManages_Device_Create = "CustomerManages.Device.Create";

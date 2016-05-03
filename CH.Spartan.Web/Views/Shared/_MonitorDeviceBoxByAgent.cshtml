@@ -67,7 +67,7 @@
             opacity: 0.7;
         }
 </style>
-<div id="monitor-device-box" class="ibox float-e-margins w300" style="position: absolute; @cls">
+<div id="monitor-device-box" class="ibox float-e-margins w300 mb0" style="position: absolute; @cls">
     <div class="ibox-title">
         <h5>@L("全部车辆")</h5>
         <div class="ibox-tools">
@@ -99,7 +99,7 @@
         <div class="input-group col-xs-12">
             <input type="text" class="form-control search-keyword" placeholder="@L("搜索车辆"))" data-bind="event:{keyup:localSearch}">
         </div>
-        <ul class="sortable-list connectList agile-list h500 ova pt0 mt5" data-bind="foreach: data.items">
+        <ul class="sortable-list connectList agile-list pt0 mt5 ah ova" data-rh="-270" data-bind="foreach: data.items">
             <li data-bind="css:panelClsText,visible:isShow">
                 <span data-bind="text:bName,click:$root.showDevice"></span>
                 <div class="agile-detail">
