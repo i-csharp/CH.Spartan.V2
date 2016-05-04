@@ -199,7 +199,7 @@
                 if (self.current.address() == "" || !self.current.isStatic()) {
                     abp.global.map.getLocation(self.current, self.current.gLatitude(), self.current.gLongitude(), self.coordinates, function(target, address, all) {
                         self.current.address(address);
-                        if (all.regeocode.pois.length > 0) {
+                        if (all.regeocode.pois&&all.regeocode.pois.length > 0) {
                             var arounds = [];
                             $.each(all.regeocode.pois, function(index, item) {
                                 if (index < 3) {

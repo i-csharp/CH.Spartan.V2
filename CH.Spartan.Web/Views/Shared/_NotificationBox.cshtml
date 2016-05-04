@@ -7,7 +7,7 @@
         cls = "z-index: 999; top: 5px; right: 5px;";
     }
 }
-<div id="message-box" class="ibox float-e-margins w500 mb0" style="position: absolute; @cls">
+<div id="notification-box" class="ibox float-e-margins w400 mb0" style="position: absolute; @cls">
     <div class="ibox-title">
         <h5>@L("全部消息")</h5>
         <div class="ibox-tools">
@@ -28,7 +28,8 @@
         </div>
     </div>
     <div class="ibox-content timeline p5">
-        <div class="dark-timeline ah ova" data-rh="-70">
+        @Html.AutoCompleteDeviceByCustomer("DeviceId",L("请选择车辆"),cls:"w")
+        <div class="dark-timeline ah ova mt5" data-rh="-250">
             <div class="vertical-timeline-block">
                 <div class="vertical-timeline-icon navy-bg">
                     <i class="fa fa-briefcase"></i>
@@ -108,22 +109,22 @@
             return;
         }
 
-        function messageVM() {
+        function notificationVM() {
             var self = this;
             //显示
             self.show = function (cls) {
                 if (cls) {
-                    $("#message-box").css(cls).fadeIn();
+                    $("#notification-box").css(cls).fadeIn();
                 } else {
-                    $("#message-box").fadeIn();
+                    $("#notification-box").fadeIn();
                 }
             }
             //隐藏
             self.hide = function (cls) {
                 if (cls) {
-                    $("#message-box").css(cls).fadeOut();
+                    $("#notification-box").css(cls).fadeOut();
                 } else {
-                    $("#message-box").fadeOut();
+                    $("#notification-box").fadeOut();
                 }
             }
 
@@ -148,8 +149,8 @@
         }
 
         $(function () {
-            abp.global.messageBox = new messageVM();
-            ko.applyBindings(abp.global.messageBox, $("#message-box")[0]);
+            abp.global.notificationBox = new notificationVM();
+            ko.applyBindings(abp.global.notificationBox, $("#notification-box")[0]);
         });
     })(jQuery);
 

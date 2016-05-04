@@ -6,13 +6,19 @@ using System.Threading.Tasks;
 using Abp.Notifications;
 using CH.Spartan.Infrastructure;
 
-namespace CH.Spartan.Messages
+namespace CH.Spartan.Notifications
 {
     [Serializable]
-    public class GetwayMessage : NotificationData
+    public class AlarmNotificationData : NotificationData
     {
+        /// <summary>
+        /// 所属用户Id
+        /// </summary>
         public long UserId { get; set; }
 
+        /// <summary>
+        /// 所属设备Id
+        /// </summary>
         public int DeviceId { get; set; }
 
         /// <summary>
@@ -49,5 +55,10 @@ namespace CH.Spartan.Messages
         /// 报警地址
         /// </summary>
         public string Address { get; set; }
+
+        /// <summary>
+        /// 报警时间
+        /// </summary>
+        public DateTime ReportTime { get; set; }
     }
 }

@@ -11,7 +11,7 @@ using Apache.NMS.ActiveMQ;
 using Apache.NMS.ActiveMQ.Commands;
 using Castle.Core.Logging;
 using CH.Spartan.Infrastructure;
-using CH.Spartan.Messages;
+using CH.Spartan.Notifications;
 
 namespace CH.Spartan.Jobs
 {
@@ -43,16 +43,69 @@ namespace CH.Spartan.Jobs
             else
             {
 #if DEBUG
-              Send(new GetwayMessage()
+                Send(new AlarmNotificationData()
                 {
                     Title = "震动报警",
-                    UserId = 4,
+                    UserId = 3,
                     DeviceId = 2171,
                     AlarmType = EnumAlarmType.Shake,
                     Content = "震动报警",
-                    Latitude = 45.77378,
-                    Longitude = 126.746296666667,
-                    Severity = NotificationSeverity.Warn
+                    Latitude = 23.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000)/10000.0,
+                    Longitude = 113.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000)/10000.0,
+                    Severity = NotificationSeverity.Warn,
+                    ReportTime = DateTime.Now.AddSeconds(-new Random(Guid.NewGuid().GetHashCode()).Next(100, 200))
+                });
+
+                Send(new AlarmNotificationData()
+                {
+                    Title = "离开设防",
+                    UserId = 3,
+                    DeviceId = 2171,
+                    AlarmType = EnumAlarmType.OutFortify,
+                    Content = "离开设防报警",
+                    Latitude = 23.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000) / 10000.0,
+                    Longitude = 113.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000) / 10000.0,
+                    Severity = NotificationSeverity.Error,
+                    ReportTime = DateTime.Now.AddSeconds(-new Random(Guid.NewGuid().GetHashCode()).Next(100, 200))
+                });
+
+                Send(new AlarmNotificationData()
+                {
+                    Title = "进入区域",
+                    UserId = 3,
+                    DeviceId = 2171,
+                    AlarmType = EnumAlarmType.InArea,
+                    Content = "进入区域 购物公园",
+                    Latitude = 23.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000) / 10000.0,
+                    Longitude = 113.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000) / 10000.0,
+                    Severity = NotificationSeverity.Info,
+                    ReportTime = DateTime.Now.AddSeconds(-new Random(Guid.NewGuid().GetHashCode()).Next(100, 200))
+                });
+
+                Send(new AlarmNotificationData()
+                {
+                    Title = "超速报警",
+                    UserId = 3,
+                    DeviceId = 2171,
+                    AlarmType = EnumAlarmType.OverSpeed,
+                    Content = "当前速度 85km/h 限速 80km/h",
+                    Latitude = 23.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000) / 10000.0,
+                    Longitude = 113.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000) / 10000.0,
+                    Severity = NotificationSeverity.Fatal,
+                    ReportTime = DateTime.Now.AddSeconds(-new Random(Guid.NewGuid().GetHashCode()).Next(100, 200))
+                });
+
+                Send(new AlarmNotificationData()
+                {
+                    Title = "低电报警",
+                    UserId = 3,
+                    DeviceId = 2171,
+                    AlarmType = EnumAlarmType.LowBattery,
+                    Content = "当前电量 10%",
+                    Latitude = 23.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000) / 10000.0,
+                    Longitude = 113.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000) / 10000.0,
+                    Severity = NotificationSeverity.Warn,
+                    ReportTime = DateTime.Now.AddSeconds(-new Random(Guid.NewGuid().GetHashCode()).Next(100, 200))
                 });
 #endif
             }
@@ -86,7 +139,7 @@ namespace CH.Spartan.Jobs
             }
         }
 
-        public bool Send(GetwayMessage message)
+        public bool Send(AlarmNotificationData message)
         {
             try
             {

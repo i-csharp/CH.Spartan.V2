@@ -19,9 +19,9 @@ using CH.Spartan.Jobs;
 using CH.Spartan.Maps;
 using CH.Spartan.Users;
 
-namespace CH.Spartan.Messages
+namespace CH.Spartan.Notifications
 {
-    public class MessageManager : ISingletonDependency
+    public class AlarmNotificationManager : ISingletonDependency
     {
         private readonly ISettingManager _settingManager;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
@@ -30,7 +30,7 @@ namespace CH.Spartan.Messages
         private readonly INotificationPublisher _notificationPublisher;
         private readonly UserManager _userManager;
 
-        public MessageManager(
+        public AlarmNotificationManager(
             ISettingManager settingManager,
             IUnitOfWorkManager unitOfWorkManager,
             MapManager mapManager,
@@ -47,7 +47,7 @@ namespace CH.Spartan.Messages
         }
 
         [UnitOfWork]
-        public virtual async Task SendMessageAsync(GetwayMessage message)
+        public virtual async Task SendAsync(AlarmNotificationData message)
         {
 
             User targetUser;
@@ -56,7 +56,7 @@ namespace CH.Spartan.Messages
                 targetUser = await _userManager.FindByIdAsync(message.UserId);
                 if (targetUser == null)
                 {
-                    throw new UserFriendlyException("There is no such a user: " + message.UserId);
+                    throw new UserFriendlyException("不存在用户: " + message.UserId);
                 }
             }
 
@@ -74,8 +74,7 @@ namespace CH.Spartan.Messages
                     message,
                     new EntityIdentifier(typeof (Device), message.DeviceId),
                     message.Severity,
-                    new[] {targetUser.Id},
-                    creatorUserId: 1 //超级管理员
+                    new[] {targetUser.Id}
                     );
 
             //发送邮件

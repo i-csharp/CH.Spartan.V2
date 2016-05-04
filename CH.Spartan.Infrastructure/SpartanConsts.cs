@@ -57,7 +57,7 @@ namespace CH.Spartan.Infrastructure
         [EnumDisplayName("进入区域")]
         InArea = 16,
         [EnumDisplayName("离开设防")]
-        Fortify = 32,
+        OutFortify = 32,
         [EnumDisplayName("脱落报警")]
         DropOff = 64,
         [EnumDisplayName("震动报警")]

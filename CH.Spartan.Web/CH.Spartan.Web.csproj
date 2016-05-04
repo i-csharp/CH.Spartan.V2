@@ -1211,8 +1211,8 @@
     <Content Include="Views\Shared\_HistoryDataTimelineBox.cshtml" />
     <Content Include="Views\AgentManage\HistoryData.cshtml" />
     <Content Include="Views\SystemManage\ChangePassword.cshtml" />
-    <Content Include="Views\CustomerManage\Message.cshtml" />
-    <Content Include="Views\Shared\_MessageBox.cshtml" />
+    <Content Include="Views\CustomerManage\Notification.cshtml" />
+    <Content Include="Views\Shared\_NotificationBox.cshtml" />
     <None Include="Views\SystemManage\CreateTenant.cshtml" />
     <Content Include="Views\SystemManage\UpdateTenant.cshtml" />
     <Content Include="Views\SystemManage\DeviceType.cshtml" />

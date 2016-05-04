@@ -163,8 +163,8 @@
     <Compile Include="Maps\MapLocations\StreetNumber.cs" />
     <Compile Include="Maps\MapManager.cs" />
     <Compile Include="Maps\MapPoint.cs" />
-    <Compile Include="Messages\MessageManager.cs" />
-    <Compile Include="Messages\GetwayMessage.cs" />
+    <Compile Include="Notifications\AlarmNotificationManager.cs" />
+    <Compile Include="Notifications\AlarmNotificationData.cs" />
     <Compile Include="Nodes\NodeManager.cs" />
     <Compile Include="DealRecords\DealRecord.cs" />
     <Compile Include="Devices\Device.cs" />

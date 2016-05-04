@@ -11,7 +11,7 @@ using Apache.NMS.ActiveMQ.Commands;
 using Castle.Core.Logging;
 using CH.Spartan.Infrastructure;
 using CH.Spartan.Instructions;
-using CH.Spartan.Messages;
+using CH.Spartan.Notifications;
 
 namespace CH.Spartan.Jobs
 {

@@ -10,7 +10,7 @@ using Apache.NMS.ActiveMQ;
 using Apache.NMS.ActiveMQ.Commands;
 using Castle.Core.Logging;
 using CH.Spartan.Infrastructure;
-using CH.Spartan.Messages;
+using CH.Spartan.Notifications;
 
 namespace CH.Spartan.Jobs
 {
@@ -18,7 +18,7 @@ namespace CH.Spartan.Jobs
     {
         private readonly ILogger _logger;
         private readonly ISettingManager _settingManager;
-        private readonly MessageManager _messageManager;
+        private readonly AlarmNotificationManager _alarmNotificationManager;
         private IConnectionFactory _factory;
         private IConnection _connection;
         private ISession _session;
@@ -28,11 +28,11 @@ namespace CH.Spartan.Jobs
         private bool _isConnected;
         private string _clientId = "";
 
-        public ActiveMqReceiveMessageWorker(ILogger logger, ISettingManager settingManager, MessageManager messageManager)
+        public ActiveMqReceiveMessageWorker(ILogger logger, ISettingManager settingManager, AlarmNotificationManager messageManager, AlarmNotificationManager alarmNotificationManager)
         {
             _logger = logger;
             _settingManager = settingManager;
-            _messageManager = messageManager;
+            _alarmNotificationManager = alarmNotificationManager;
         }
 
         public void DoWork(string clientId)
@@ -77,10 +77,10 @@ namespace CH.Spartan.Jobs
             try
             {
                 var msg = (IObjectMessage)message;
-                var data = msg.Body as GetwayMessage;
+                var data = msg.Body as AlarmNotificationData;
                 if (data != null)
                 {
-                    _messageManager.SendMessageAsync(data);
+                    _alarmNotificationManager.SendAsync(data);
                 }
             }
             catch (Exception ex)
@@ -88,6 +88,8 @@ namespace CH.Spartan.Jobs
                 _logger.Error(ex.ToString());
             }
         }
+
+
 
     }
 }

@@ -11,7 +11,7 @@ using Apache.NMS.ActiveMQ;
 using Apache.NMS.ActiveMQ.Commands;
 using Castle.Core.Logging;
 using CH.Spartan.Infrastructure;
-using CH.Spartan.Messages;
+using CH.Spartan.Notifications;
 
 namespace CH.Spartan.Jobs
 {
@@ -19,7 +19,6 @@ namespace CH.Spartan.Jobs
     {
         private readonly ILogger _logger;
         private readonly ISettingManager _settingManager;
-        private readonly MessageManager _messageManager;
         private IConnectionFactory _factory;
         private IConnection _connection;
         private ISession _session;
@@ -29,11 +28,10 @@ namespace CH.Spartan.Jobs
         private bool _isConnected;
         private string _clientId = "";
 
-        public ActiveMqReceiveInstructionWorker(ILogger logger, ISettingManager settingManager, MessageManager messageManager)
+        public ActiveMqReceiveInstructionWorker(ILogger logger, ISettingManager settingManager)
         {
             _logger = logger;
             _settingManager = settingManager;
-            _messageManager = messageManager;
         }
 
         public void DoWork(string clientId)

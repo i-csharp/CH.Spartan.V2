@@ -141,6 +141,9 @@
     <Compile Include="HistoryDatas\Dto\GetHistoryDataDto.cs" />
     <Compile Include="HistoryDatas\HistoryDataAppService.cs" />
     <Compile Include="HistoryDatas\IHistoryDataAppService.cs" />
+    <Compile Include="Notifications\Dto\GetNotificationListDto.cs" />
+    <Compile Include="Notifications\INotificationAppService.cs" />
+    <Compile Include="Notifications\NotificationAppService.cs" />
     <Compile Include="MultiTenancy\Dto\GetTenantDto.cs" />
     <Compile Include="MultiTenancy\Dto\CreateTenantDto.cs" />
     <Compile Include="MultiTenancy\Dto\GetTenantListDto.cs" />
