@@ -26,6 +26,12 @@ namespace CH.Spartan.Users.Dto
         public string EmailAddress { get; set; }
 
         /// <summary>
+        /// 联系方式
+        /// </summary>
+        [Required]
+        public string Contact { get; set; }
+
+        /// <summary>
         /// 是否激活
         /// </summary>
         public bool IsActive { get; set; }

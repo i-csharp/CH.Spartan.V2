@@ -65,7 +65,7 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">@L("邮件"):</label>
                         <div class="col-sm-8">
-                            <input class="form-control  required isEmail" type="text" id="EmailAddress" name="EmailAddress" value="@Model.User.EmailAddress" />
+                            <input class="form-control  required isEmail" type="text" id="EmailAddress" name="EmailAddress" value="@Model.User.EmailAddress"/>
                             <span class="help-block m-b-none">@L("请务必填写真实的邮件地址 用于忘记密码时的验证")</span>
                         </div>
                     </div>
@@ -73,6 +73,15 @@
                         <label class="col-sm-4 control-label">@L("允许登录"):</label>
                         <div class="col-sm-8">
                             @Html.GetSelectByEnable("IsActive", "", Model.User.IsActive)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">@L("联系方式"):</label>
+                        <div class="col-sm-8">
+                            <input class="form-control  required" type="text" id="Contact" name="Contact" value="@Model.User.Contact" />
+                            <span class="help-block m-b-none">@L("请务必填写真实的联系方式")</span>
                         </div>
                     </div>
                 </div>

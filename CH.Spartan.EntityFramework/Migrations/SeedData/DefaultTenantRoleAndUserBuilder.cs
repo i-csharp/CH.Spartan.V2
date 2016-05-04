@@ -94,6 +94,7 @@ namespace CH.Spartan.Migrations.SeedData
                         EmailAddress = "359875450@qq.com",
                         IsEmailConfirmed = true,
                         IsStatic = true,
+                        Avatar = "/Content/img/avatar.jpg",
                         Password = new Md532PasswordHasher().HashPassword(SpartanConsts.DefaultPassword)
                     });
 
@@ -223,6 +224,7 @@ namespace CH.Spartan.Migrations.SeedData
                         EmailAddress = emailAddress,
                         IsEmailConfirmed = true,
                         IsStatic = true,
+                        Avatar = "/Content/img/avatar.jpg",
                         Password = new Md532PasswordHasher().HashPassword(SpartanConsts.DefaultPassword)
                     });
 
@@ -250,6 +252,7 @@ namespace CH.Spartan.Migrations.SeedData
                         Surname = customerName,
                         EmailAddress = customerName+"@gmail.com",
                         IsEmailConfirmed = true,
+                        Avatar = "/Content/img/avatar.jpg",
                         Password = new Md532PasswordHasher().HashPassword(SpartanConsts.DefaultPassword)
                     });
 

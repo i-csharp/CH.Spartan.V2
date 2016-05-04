@@ -42,6 +42,7 @@ namespace CH.Spartan.Web.Controllers
                 CurrentLanguage = _localizationManager.CurrentLanguage,
                 Languages = _localizationManager.GetAllLanguages(),
                 ShowUpdateDeviceUrl = AbpSession.IsTenantAdmin()? "/AgentManage/UpdateDevice" : "/CustomerManage/UpdateDevice",
+                IsTenantAdmin = AbpSession.IsTenantAdmin(),
                 LastDevices =
                     await _deviceAppService.GetLastDeviceListAsync(new GetLastDeviceListInput
                     {

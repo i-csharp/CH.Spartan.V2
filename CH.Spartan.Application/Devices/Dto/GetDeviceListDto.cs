@@ -103,6 +103,16 @@ namespace CH.Spartan.Devices.Dto
         /// </summary>
         public string ExpirePercentClsText { get; set; }
 
+        /// <summary>
+        /// 联系方式
+        /// </summary>
+        public string Contact { get; set; }
+
+        /// <summary>
+        /// 所属客户
+        /// </summary>
+        public string UserName { get; set; }
+
     }
 
     [AutoMapFrom(typeof(Device))]
@@ -122,6 +132,16 @@ namespace CH.Spartan.Devices.Dto
         /// 过期时间
         /// </summary>
         public DateTime? BExpireTime { get; set; }
+
+        /// <summary>
+        /// 联系方式
+        /// </summary>
+        public string Contact { get; set; }
+
+        /// <summary>
+        /// 所属客户
+        /// </summary>
+        public string UserName { get; set; }
 
     }
 

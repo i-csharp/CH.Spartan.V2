@@ -24,6 +24,11 @@ namespace CH.Spartan.Users
         /// </summary>
         public bool IsStatic { get; set; }
 
+        /// <summary>
+        /// 联系方式
+        /// </summary>
+        public string Contact { get; set; }
+
         #endregion
 
         #region 绑定

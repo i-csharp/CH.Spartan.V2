@@ -120,6 +120,8 @@ namespace CH.Spartan.Devices
         public async Task<ListResultOutput<GetNearExpireDeviceListDto>> GetNearExpireDeviceListAsync(GetNearExpireDeviceListInput input)
         {
             var list = await _deviceRepository.GetAll()
+                .Include(p => p.Tenant)
+                .Include(p => p.User)
                 .WhereIf(input.UserId.HasValue, p => p.UserId == input.UserId.Value)
                 .OrderBy(p => p.BExpireTime)
                 .Take(input)
@@ -131,6 +133,8 @@ namespace CH.Spartan.Devices
         public async Task<ListResultOutput<GetLastDeviceListDto>> GetLastDeviceListAsync(GetLastDeviceListInput input)
         {
             var list = await _deviceRepository.GetAll()
+                .Include(p => p.Tenant)
+                .Include(p => p.User)
                 .WhereIf(input.UserId.HasValue, p => p.UserId == input.UserId.Value)
                 .WhereIf(input.StartTime.HasValue, p => p.CreationTime > input.StartTime.Value)
                 .WhereIf(input.EndTime.HasValue, p => p.CreationTime < input.EndTime.Value)

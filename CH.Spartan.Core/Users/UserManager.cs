@@ -13,6 +13,7 @@ using Abp.IdentityFramework;
 using Abp.Localization;
 using Abp.Organizations;
 using Abp.Runtime.Caching;
+using Abp.Runtime.Session;
 using Abp.Zero;
 using Abp.Zero.Configuration;
 using CH.Spartan.Authorization.Roles;
@@ -70,6 +71,11 @@ namespace CH.Spartan.Users
         {
             var user = await Store.FindByNameAsync(userName);
             return user?.Tenant != null ? user.Tenant.TenancyName : "";
+        }
+
+        public async Task<bool> CheckIsTenantAdminAsync(long userId)
+        {
+            return await IsInRoleAsync(userId, StaticRoleNames.Tenants.Admin);
         }
 
         public async Task DeleteByIdsAsync(IEnumerable<long> ids)

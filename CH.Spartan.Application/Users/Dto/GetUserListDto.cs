@@ -36,12 +36,18 @@ namespace CH.Spartan.Users.Dto
         /// <summary>
         /// 所属租户
         /// </summary>
-        public string TenantText { get; set; }
+        public string TenancyName { get; set; }
 
         /// <summary>
         /// 静态用户
         /// </summary>
         public bool IsStatic { get; set; }
+
+
+        /// <summary>
+        /// 联系方式
+        /// </summary>
+        public string Contact { get; set; }
 
     }
 

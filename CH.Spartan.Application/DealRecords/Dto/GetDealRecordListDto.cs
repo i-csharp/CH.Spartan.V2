@@ -41,7 +41,7 @@ namespace CH.Spartan.DealRecords.Dto
         /// <summary>
         /// 所属租户
         /// </summary>
-        public string TenantText { get; set; }
+        public string TenancyName { get; set; }
 
         /// <summary>
         /// 交易类型

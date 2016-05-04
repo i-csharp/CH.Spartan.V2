@@ -190,7 +190,7 @@
                             <li class="divider"></li>
                             <li>
                                 <div class="text-center link-block">
-                                    <a class="J_menuItem" href="mailbox.html">
+                                    <a class="J_menuItem" href="/CustomerManage/Notification">
                                         <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
                                     </a>
                                 </div>
@@ -341,8 +341,7 @@
                 </div>
                 <div id="tab-2" class="tab-pane">
                     <div class="sidebar-title">
-                        <h3> <i class="fa fa-comments-o"></i> 新增车辆</h3>
-                        <small><i class="fa fa-tim"></i> 最近一个月新增车辆 @Model.LastDevices.Items.Count 辆</small>
+                        <small><i class="fa fa-tim"></i>最近一个月新增 @Model.LastDevices.Items.Count 辆车</small>
                     </div>
                     <ul class="sidebar-list">
                         @foreach (var device in Model.LastDevices.Items)
@@ -361,8 +360,7 @@
                 </div>
                 <div id="tab-3" class="tab-pane">
                     <div class="sidebar-title">
-                        <h3> <i class="fa fa-cube"></i> 过期车辆</h3>
-                        <small><i class="fa fa-tim"></i> 即将或者已过期车辆</small>
+                        <small><i class="fa fa-tim"></i>即将或者已过期的车辆</small>
                     </div>
                     <ul class="sidebar-list">
                         @foreach (var device in Model.NearExpireDevices.Items)
@@ -371,6 +369,11 @@
                                 <a href="#">
                                     <span class="label label-primary pull-right" onclick="showUpdateDevice(@device.Id);">修改</span>
                                     <h4>@device.BName</h4>
+                                     @if (Model.IsTenantAdmin)
+                                     {
+                                         <div class="small text-muted m-t-xs">所属客户：@device.UserName</div>
+                                        <div class="small text-muted m-t-xs">联系方式：@device.Contact</div>
+                                     }
                                     <div class="small text-muted m-t-xs">过期时间：@device.BExpireTime</div>
                                     <div class="progress progress-mini">
                                         <div style="width: @(device.ExpirePercent)%;" class="progress-bar progress-bar-@device.ExpirePercentClsText"></div>

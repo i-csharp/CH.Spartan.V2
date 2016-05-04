@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp;
 using Abp.Dependency;
+using Abp.Extensions;
 using Abp.Runtime.Session;
 using CH.Spartan.Authorization.Roles;
+using CH.Spartan.Users;
 using Microsoft.AspNet.Identity;
 
 namespace CH.Spartan.Sessions
@@ -25,7 +27,7 @@ namespace CH.Spartan.Sessions
                 throw new AbpException("Session.UserId is null! Probably, user is not logged in.");
             }
 
-            return IocManager.Instance.Resolve<RoleManager>().RoleExists(StaticRoleNames.Tenants.Admin);
+            return IocManager.Instance.Resolve<UserManager>().CheckIsTenantAdminAsync(session.GetUserId()).Result;
         }
 
         /// <summary>

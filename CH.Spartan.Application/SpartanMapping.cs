@@ -36,7 +36,7 @@ namespace CH.Spartan
 
            Mapper.CreateMap<User, GetUserListDto>()
                .ForMember(d => d.IsActiveText, opt => opt.MapFrom(o => o.IsActive ? L("是") : L("否")))
-               .ForMember(d => d.TenantText, opt => opt.MapFrom(o => o.Tenant != null ? o.Tenant.Name : "-"));
+               .ForMember(d => d.TenancyName, opt => opt.MapFrom(o => o.Tenant != null ? o.Tenant.Name : "-"));
 
            Mapper.CreateMap<Device, UpdateDeviceByAgentDto>()
                .ForMember(d => d.AreaSettings, opt => opt.MapFrom(o => DeviceHelper.GetOutAreaSettings(o).MapTo<List<AreaSettingDto>>()));
@@ -46,7 +46,7 @@ namespace CH.Spartan
 
            Mapper.CreateMap<DealRecord, GetDealRecordListDto>()
                .ForMember(d => d.IsSucceedText, opt => opt.MapFrom(o => o.IsSucceed ? L("是") : L("否")))
-               .ForMember(d => d.TenantText, opt => opt.MapFrom(o => o.Tenant != null ? o.Tenant.Name : "-"))
+               .ForMember(d => d.TenancyName, opt => opt.MapFrom(o => o.Tenant != null ? o.Tenant.Name : "-"))
                .ForMember(d => d.TypeText, opt => opt.MapFrom(o => L(o.Type.GetDisplayName())));
 
 
@@ -108,13 +108,19 @@ namespace CH.Spartan
 
 
            Mapper.CreateMap<Device, GetNearExpireDeviceListDto>()
+               .ForMember(d => d.Contact, opt => opt.MapFrom(o => o.User != null ? o.User.Contact : ""))
+               .ForMember(d => d.UserName, opt => opt.MapFrom(o => o.User != null ? o.User.Name : ""))
                .ForMember(p => p.ExpireText, opt => opt.MapFrom(o => DeviceHelper.GetExpireText(o)))
                .ForMember(p => p.ExpirePercent, opt => opt.MapFrom(o => DeviceHelper.GetExpirePercent(o)))
                .ForMember(p => p.ExpirePercentClsText, opt => opt.MapFrom(o => DeviceHelper.GetExpirePercentClsText(o)));
 
+            Mapper.CreateMap<Device, GetLastDeviceListDto>()
+              .ForMember(d => d.Contact, opt => opt.MapFrom(o => o.User != null ? o.User.Contact : ""))
+              .ForMember(d => d.UserName, opt => opt.MapFrom(o => o.User != null ? o.User.Name : ""));
+
 
             //历史数据
-           Mapper.CreateMap<HistoryData, GetHistoryDataForWebDto>()
+            Mapper.CreateMap<HistoryData, GetHistoryDataForWebDto>()
                .ForMember(p => p.IconUrl, opt => opt.MapFrom(o => HistoryDataHelper.WebIconUrl(o)));
 
        }

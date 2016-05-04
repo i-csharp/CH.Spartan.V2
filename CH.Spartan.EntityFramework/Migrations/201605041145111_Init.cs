@@ -77,6 +77,7 @@ namespace CH.Spartan.Migrations
                         Id = c.Long(nullable: false, identity: true),
                         Avatar = c.String(unicode: false),
                         IsStatic = c.Boolean(nullable: false),
+                        Contact = c.String(unicode: false),
                         QQOpenId = c.String(maxLength: 200, storeType: "nvarchar"),
                         QQAccessToken = c.String(maxLength: 200, storeType: "nvarchar"),
                         QQExpiresIn = c.Int(),

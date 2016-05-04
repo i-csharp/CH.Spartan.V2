@@ -39,7 +39,7 @@
         function create() {
             abp.dialog.open("/AgentManage/CreateUser", "@L("添加客户")", {
                 //area: ["775px", "750px"],
-                area: ["475px", "550px"],
+                area: ["475px", "600px"],
                 //area: ["775px", "750px"],
                 //area: ["995px", "750px"],
                 //area: ["1250px", "750px"],
@@ -55,7 +55,7 @@
         function update(id) {
             abp.dialog.open("/AgentManage/UpdateUser?id=" + id, "@L("修改客户")", {
                 //area: ["775px", "750px"],
-                area: ["475px", "550px"],
+                area: ["475px", "600px"],
                 //area: ["775px", "750px"],
                 //area: ["995px", "750px"],
                 //area: ["1250px", "750px"],
@@ -168,6 +168,7 @@
                                 <th data-field="op" data-formatter="formatterOp" data-width="120">@L("操作")</th>
                                 <th data-field="userName" data-sortable="true">@L("客户名")</th>
                                 <th data-field="name" data-sortable="true">@L("名称")</th>
+                                <th data-field="contact" data-sortable="true">@L("联系方式")</th>
                                 <th data-field="emailAddress" data-sortable="true">@L("邮件")</th>
                                 <th data-field="isActiveText" data-sortable="true" data-sort-name="isActive">@L("允许登录")</th>
                                 <th data-field="lastLoginTime" data-sortable="true">@L("最后登录时间")</th>

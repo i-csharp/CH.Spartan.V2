@@ -29,6 +29,12 @@ namespace CH.Spartan.Users.Dto
         /// </summary>
         [Required]
         public string EmailAddress { get; set; }
+
+        /// <summary>
+        /// 联系方式
+        /// </summary>
+        [Required]
+        public string Contact { get; set; }
     }
 
     public class CreateUserInput : IInputDto

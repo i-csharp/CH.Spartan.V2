@@ -46,5 +46,10 @@ namespace CH.Spartan.Web.Models
         /// 打开修改设备地址
         /// </summary>
         public string ShowUpdateDeviceUrl { get; set; }
+
+        /// <summary>
+        /// 是否租户管理员
+        /// </summary>
+        public bool IsTenantAdmin { get; set; }
     }
 }
