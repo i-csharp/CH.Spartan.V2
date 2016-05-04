@@ -141,6 +141,7 @@
     <Compile Include="HistoryDatas\Dto\GetHistoryDataDto.cs" />
     <Compile Include="HistoryDatas\HistoryDataAppService.cs" />
     <Compile Include="HistoryDatas\IHistoryDataAppService.cs" />
+    <Compile Include="Notifications\Dto\GetNotificationDto.cs" />
     <Compile Include="Notifications\Dto\GetNotificationListDto.cs" />
     <Compile Include="Notifications\INotificationAppService.cs" />
     <Compile Include="Notifications\NotificationAppService.cs" />

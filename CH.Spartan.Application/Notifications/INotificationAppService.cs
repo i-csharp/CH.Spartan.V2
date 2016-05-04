@@ -18,5 +18,12 @@ namespace CH.Spartan.Notifications
         /// <param name="input"></param>
         /// <returns></returns>
         Task<PagedResultOutput<GetNotificationListDto>> GetNotificationListPagedAsync(GetNotificationListPagedInput input);
+
+        /// <summary>
+        /// 获取 通知 数量
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<int> GetNotificationCountAsync(GetNotificationCountInput input);
     }
 }

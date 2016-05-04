@@ -32,7 +32,14 @@
             }
             $(function() {
                 abp.event.on('abp.notifications.received', function(userNotification) {
-                    console.log(userNotification);
+                    var count = $("#sp-notification-count").html();
+                    if (!count) {
+                        count = 0;
+                    } else {
+                        count = parseInt(count);
+                    }
+                    count++;
+                    $("#sp-notification-count").html(count);
                 });
             });
         })(jQuery);
@@ -90,7 +97,7 @@
                     <li>
                         @if (menuItem.Items.IsNullOrEmpty())
                         {
-                            <a href="@menuItem.Url">
+                            <a href="@menuItem.Url" title="@menuItem.DisplayName">
                                 @if (!string.IsNullOrWhiteSpace(menuItem.Icon))
                                 {
                                     <i class="@menuItem.Icon"></i>
@@ -100,7 +107,7 @@
                         }
                         else
                         {
-                            <a href="#">
+                            <a href="#" title="@menuItem.DisplayName">
                                 @if (!string.IsNullOrWhiteSpace(menuItem.Icon))
                                 {
                                     <i class="@menuItem.Icon"></i>
@@ -112,7 +119,7 @@
                                 @foreach (var subMenuItem in menuItem.Items)
                                 {
                                     <li>
-                                        <a class="J_menuItem" href="@subMenuItem.Url">
+                                        <a class="J_menuItem" href="@subMenuItem.Url" title="@subMenuItem.DisplayName">
                                             @if (!string.IsNullOrWhiteSpace(subMenuItem.Icon))
                                             {
                                                 <i class="@subMenuItem.Icon"></i>
@@ -156,46 +163,9 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
+                        <a class="dropdown-toggle count-info J_menuItem" data-toggle="dropdown" href="/CustomerManage/Notification" title="报警信息">
+                            <i class="fa fa-envelope"></i> <span class="label label-warning" id="sp-notification-count">@(Model.UnreadNotificationCount==0?"": Model.UnreadNotificationCount.ToString())</span>
                         </a>
-                        <ul class="dropdown-menu dropdown-messages">
-                            <li class="m-t-xs">
-                                <div class="dropdown-messages-box">
-                                    <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="/Content/img/a7.jpg">
-                                    </a>
-                                    <div class="media-body">
-                                        <small class="pull-right">46小时前</small>
-                                        <strong>小四</strong> 这个在日本投降书上签字的军官，建国后一定是个不小的干部吧？
-                                        <br>
-                                        <small class="text-muted">3天前 2014.11.8</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="dropdown-messages-box">
-                                    <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="/Content/img/a4.jpg">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right text-navy">25小时前</small>
-                                        <strong>国民岳父</strong> 如何看待“男子不满自己爱犬被称为狗，刺伤路人”？——这人比犬还凶
-                                        <br>
-                                        <small class="text-muted">昨天</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="text-center link-block">
-                                    <a class="J_menuItem" href="/CustomerManage/Notification">
-                                        <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
                     </li>
                     <li class="dropdown hidden-xs">
                         <a class="right-sidebar-toggle" aria-expanded="false">

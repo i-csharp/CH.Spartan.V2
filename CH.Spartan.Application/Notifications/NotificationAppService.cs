@@ -29,5 +29,10 @@ namespace CH.Spartan.Notifications
 
             return new PagedResultOutput<GetNotificationListDto>(0, result.MapTo<List<GetNotificationListDto>>());
         }
+
+        public async Task<int> GetNotificationCountAsync(GetNotificationCountInput input)
+        {
+            return await _userNotificationManager.GetUserNotificationCountAsync(input.UserId, input.State);
+        }
     }
 }

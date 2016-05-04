@@ -4,12 +4,15 @@ using System.Web.Mvc;
 using Abp.Application.Navigation;
 using Abp.Configuration.Startup;
 using Abp.Localization;
+using Abp.Notifications;
 using Abp.Runtime.Session;
 using Abp.Threading;
 using Abp.Timing;
 using Abp.Web.Mvc.Authorization;
 using CH.Spartan.Devices;
 using CH.Spartan.Devices.Dto;
+using CH.Spartan.Notifications;
+using CH.Spartan.Notifications.Dto;
 using CH.Spartan.Sessions;
 using CH.Spartan.Web.Models;
 
@@ -23,16 +26,17 @@ namespace CH.Spartan.Web.Controllers
         private readonly ILocalizationManager _localizationManager;
         private readonly ISessionAppService _sessionAppService;
         private readonly IDeviceAppService _deviceAppService;
-
+        private readonly INotificationAppService _notificationAppService;
         public HomeController(
             IUserNavigationManager userNavigationManager,
             ILocalizationManager localizationManager,
-            ISessionAppService sessionAppService, IDeviceAppService deviceAppService)
+            ISessionAppService sessionAppService, IDeviceAppService deviceAppService, INotificationAppService notificationAppService)
         {
             _userNavigationManager = userNavigationManager;
             _localizationManager = localizationManager;
             _sessionAppService = sessionAppService;
             _deviceAppService = deviceAppService;
+            _notificationAppService = notificationAppService;
         }
         public async Task<ActionResult> Index()
         {
@@ -43,6 +47,11 @@ namespace CH.Spartan.Web.Controllers
                 Languages = _localizationManager.GetAllLanguages(),
                 ShowUpdateDeviceUrl = AbpSession.IsTenantAdmin()? "/AgentManage/UpdateDevice" : "/CustomerManage/UpdateDevice",
                 IsTenantAdmin = AbpSession.IsTenantAdmin(),
+                UnreadNotificationCount = await _notificationAppService.GetNotificationCountAsync(new GetNotificationCountInput
+                {
+                    UserId = AbpSession.GetUserId(),
+                    State = UserNotificationState.Unread
+                }),
                 LastDevices =
                     await _deviceAppService.GetLastDeviceListAsync(new GetLastDeviceListInput
                     {

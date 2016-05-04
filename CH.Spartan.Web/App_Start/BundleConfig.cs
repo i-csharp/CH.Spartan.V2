@@ -186,7 +186,23 @@ namespace CH.Spartan.Web
                    .Include(
                       "~/Content/js/plugins/ionslider/js/ion.rangeSlider.js"
                   )
-               ); 
+               );
+
+
+            bundles.Add(
+            new StyleBundle("~/styles/plugins/icheck")
+                 .Include("~/Content/js/plugins/icheck/skins/all.css", new CssRewriteUrlTransform())
+            );
+
+            bundles.Add(
+               new ScriptBundle("~/scripts/plugins/icheck")
+                   .Include(
+                       "~/Content/js/plugins/icheck/icheck.js"
+                   ).Include(
+                       "~/Content/js/plugins/icheck/icheck.default.js"
+                   )
+               );
+
             #endregion
 
 

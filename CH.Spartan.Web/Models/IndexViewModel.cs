@@ -51,5 +51,11 @@ namespace CH.Spartan.Web.Models
         /// 是否租户管理员
         /// </summary>
         public bool IsTenantAdmin { get; set; }
+
+        /// <summary>
+        /// 未读通知数量
+        /// </summary>
+
+        public int UnreadNotificationCount { get; set; }
     }
 }

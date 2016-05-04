@@ -5,18 +5,19 @@
 @section styles
 {
     @Styles.Render("~/styles/plugins/select")
-
+    @Styles.Render("~/styles/plugins/icheck")
 }
 @section scripts
 {
     @Scripts.Render("~/scripts/plugins/drag")
-    @Scripts.Render("~/scripts/plugins/select")
+    @Scripts.Render("~/scripts/plugins/select") 
+    @Scripts.Render("~/scripts/plugins/icheck")
 }
 
 <div class="wrapper wrapper-content @(SpartanConsts.DefaultAnimate) p0">
     @Html.Partial("_Map")
     @Html.Partial("_MapToolbar", "z-index: 998; top: 5px; right: 410px;display:none")
     @Html.Partial("_MapPlaceSearchBox", "z-index: 997; top: 5px; right: 610px;display:none")
-    @Html.Partial("_AreaBox", "z-index: 996; top: 125px; right: 210px;display:none")
+    @Html.Partial("_AreaBox", "z-index: 996; top: 125px; right: 410px;display:none")
     @Html.Partial("_NotificationBox", "z-index: 999; top: 5px; right: 5px")
 </div>
