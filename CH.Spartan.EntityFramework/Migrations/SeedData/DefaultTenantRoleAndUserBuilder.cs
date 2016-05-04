@@ -30,7 +30,7 @@ namespace CH.Spartan.Migrations.SeedData
         private void CreateUserAndRoles()
         {
             CreateHost();
-            CreateTenant("羽衡科技", "yugps", "yugps@qq.com", "18566267191", 100000);
+            CreateTenant("羽衡科技", "yugps", "yugps@qq.com", "18566267191", 100000, User.DemoUserName);
             CreateTenant("哈尔滨卓拓科技", "hebztkj", "hebztkj@qq.com", "18533696989", 2000);
             UpdateTenantUserRolePermission();
             UpdateTenantAdminRolePermission();
@@ -104,7 +104,7 @@ namespace CH.Spartan.Migrations.SeedData
             }
         }
 
-        private void CreateTenant(string name, string tenancyName, string emailAddress, string phone, decimal balance)
+        private void CreateTenant(string name, string tenancyName, string emailAddress, string phone, decimal balance,string customerName="")
         {
             //添加一个租户
             var tenant = _context.Tenants.FirstOrDefault(t => t.TenancyName == tenancyName);
@@ -210,10 +210,10 @@ namespace CH.Spartan.Migrations.SeedData
             _context.SaveChanges();
 
             //添加一个租户管理员
-            var adminUserFoTenant = _context.Users.FirstOrDefault(u => u.TenantId == tenant.Id && u.UserName == tenancyName);
-            if (adminUserFoTenant == null)
+            var adminUserForTenant = _context.Users.FirstOrDefault(u => u.TenantId == tenant.Id && u.UserName == tenancyName);
+            if (adminUserForTenant == null)
             {
-                adminUserFoTenant = _context.Users.Add(
+                adminUserForTenant = _context.Users.Add(
                     new User
                     {
                         TenantId = tenant.Id,
@@ -227,8 +227,35 @@ namespace CH.Spartan.Migrations.SeedData
                     });
 
                 _context.SaveChanges();
-                //给租主 赋予租户管理员角色
-                _context.UserRoles.Add(new UserRole(adminUserFoTenant.Id, adminRoleForTenant.Id));
+                //给租户 赋予租户管理员角色
+                _context.UserRoles.Add(new UserRole(adminUserForTenant.Id, adminRoleForTenant.Id));
+                _context.SaveChanges();
+            }
+
+            //添加一个客户给租户
+            if (!customerName.HasValue())
+            {
+                return;
+            }
+
+            var userForTenant = _context.Users.FirstOrDefault(u => u.TenantId == tenant.Id && u.UserName == customerName);
+            if (userForTenant == null)
+            {
+                userForTenant = _context.Users.Add(
+                    new User
+                    {
+                        TenantId = tenant.Id,
+                        UserName = customerName,
+                        Name = customerName,
+                        Surname = customerName,
+                        EmailAddress = customerName+"@gmail.com",
+                        IsEmailConfirmed = true,
+                        Password = new Md532PasswordHasher().HashPassword(SpartanConsts.DefaultPassword)
+                    });
+
+                _context.SaveChanges();
+                //给租户客户 赋予租户客户角色
+                _context.UserRoles.Add(new UserRole(userForTenant.Id, userRoleForTenant.Id));
                 _context.SaveChanges();
             }
         }

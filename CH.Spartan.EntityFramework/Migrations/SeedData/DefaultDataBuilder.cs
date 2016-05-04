@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CH.Spartan.Devices;
+using CH.Spartan.DeviceStocks;
 using CH.Spartan.DeviceTypes;
 using CH.Spartan.EntityFramework;
 using CH.Spartan.Infrastructure;
 using CH.Spartan.Nodes;
+using CH.Spartan.Users;
 
 namespace CH.Spartan.Migrations.SeedData
 {
@@ -27,6 +30,64 @@ namespace CH.Spartan.Migrations.SeedData
            CreateNode();
            //添加设备类型
            CreateDeviceType();
+
+            //添加设备
+           CreateDevice("粤B56325", "3562698756337", "18566369898", "隐藏安装", DeviceType.D10, User.DemoUserName);
+           CreateDevice("粤B36598", "3563659856988", "18566365555", "隐藏安装", DeviceType.Gt02, User.DemoUserName);
+           CreateDevice("粤B36598", "3563695986989", "18566369777", "安装车头", DeviceType.Gt06, User.DemoUserName);
+           CreateDevice("桂A33333", "8563698789365", "13896569856", "隐藏安装", DeviceType.D10, User.DemoUserName);
+           CreateDevice("桂A56778", "8569832366698", "13569878598", "安装车尾", DeviceType.Gt02, User.DemoUserName);
+           CreateDevice("桂A07569", "8536987856399", "13698789669", "隐藏安装", DeviceType.Gt06, User.DemoUserName);
+        }
+
+
+       private void CreateDevice(string name, string no, string simNo, string description, string deviceTypeName,
+           string userName)
+       {
+
+           var device = _context.Devices.FirstOrDefault(p => p.BNo == no);
+           if (device == null)
+           {
+                var deviceType = _context.DeviceTypes.FirstOrDefault(p => p.Name == deviceTypeName);
+                if (deviceType == null) return;
+
+                var user = _context.Users.FirstOrDefault(p => p.UserName == userName);
+                if (user?.TenantId == null) return;
+
+                device = new Device
+                {
+                    BName = name,
+                    BNo = no,
+                    BSimNo = simNo,
+                    BDscription = description,
+                    BDeviceTypeId = deviceType.Id,
+                    BIconType = "PlaneCar",
+                    BNodeId = 1,
+                    SLimitSpeed = SpartanConsts.DefaultLimitSpeed
+                };
+                device.BCode = DeviceTypeHelper.CreateCode(device, deviceType);
+                device.UserId = user.Id;
+                device.TenantId = user.TenantId.Value;
+                device.CreatorUserId = user.Id;
+                device.GLatitude = 23.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000) / 10000.0;
+                device.GLongitude = 113.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000) / 10000.0;
+                device.GReportTime = DateTime.Now.AddSeconds(20);
+                device.GReceiveTime = DateTime.Now;
+                device.BExpireTime = DateTime.Now.AddYears(5);
+                device.GIsLocated = true;
+                device.GDirection = new Random(Guid.NewGuid().GetHashCode()).Next(0, 350);
+                _context.Devices.Add(device);
+                var deviceStocks = _context.DeviceStocks.FirstOrDefault(p => p.No == no && p.TenantId == user.TenantId.Value);
+                if (deviceStocks == null)
+                {
+                    _context.DeviceStocks.Add(new DeviceStock()
+                    {
+                        No = no,
+                        TenantId = user.TenantId.Value
+                    });
+                }
+                _context.SaveChanges();
+            }
        }
 
        private void CreateNode()
@@ -42,12 +103,13 @@ namespace CH.Spartan.Migrations.SeedData
                        Name = nodeName,
                        HistoryTableName = "historydatas_" + i,
                        HistoryConnectionStringRead = "Server=localhost;Database=spartan_historydata;Uid=root;Pwd=123456",
-                       HistoryConnectionStringWrite = "Server=localhost;Database=spartan_historydata;Uid=root;Pwd=123456"
+                       HistoryConnectionStringWrite =
+                           "Server=localhost;Database=spartan_historydata;Uid=root;Pwd=123456"
                    };
                    _context.Nodes.Add(node);
                }
            }
-
+           _context.SaveChanges();
        }
 
        private void CreateDeviceType()
@@ -172,6 +234,7 @@ namespace CH.Spartan.Migrations.SeedData
                };
                _context.DeviceTypes.Add(t2);
            }
+           _context.SaveChanges();
        }
     }
 }

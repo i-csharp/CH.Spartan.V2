@@ -410,7 +410,5 @@ namespace CH.Spartan.Devices
         #region App
 
         #endregion
-
-
     }
 }

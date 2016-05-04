@@ -39,18 +39,21 @@ namespace CH.Spartan.Nodes
             }
         }
 
-        public async Task<int> GetNodeIdAsync(Device  device)
+        public async Task<int> GetNodeIdAsync(Device device)
         {
             var node =
-                _nodeRepository.GetAll().Where(p => p.UsageCount < SpartanConsts.DefaultNodeMaxUsageCount).OrderByDescending(p=>p.UsageCount).FirstOrDefault();
+                _nodeRepository.GetAll()
+                    .Where(p => p.UsageCount < SpartanConsts.DefaultNodeMaxUsageCount)
+                    .OrderBy(p => p.UsageCount)
+                    .FirstOrDefault();
 
             if (node == null)
             {
                 throw new UserFriendlyException(L("已经没有足够的数据节点请联系管理员"));
             }
-           
+
             node.UsageCount++;
-            return node.Id;
+            return await Task.FromResult(node.Id);
         }
     }
 }

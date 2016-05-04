@@ -140,6 +140,7 @@
     <Compile Include="DeviceStocks\DeviceStockManager.cs" />
     <Compile Include="Devices\DeviceHelper.cs" />
     <Compile Include="Devices\DeviceManager.cs" />
+    <Compile Include="DeviceTypes\DeviceTypeHelper.cs" />
     <Compile Include="Domain\ManagerBase.cs" />
     <Compile Include="HistoryDatas\HistoryDataHelper.cs" />
     <Compile Include="HistoryDatas\HistoryDataManager.cs" />

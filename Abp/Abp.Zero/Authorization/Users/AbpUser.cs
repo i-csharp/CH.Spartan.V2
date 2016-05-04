@@ -24,6 +24,11 @@ namespace Abp.Authorization.Users
         public const string AdminUserName = "admin";
 
         /// <summary>
+        /// UserName of the Demo.
+        /// </summary>
+        public const string DemoUserName = "demo";
+
+        /// <summary>
         /// Maximum length of the <see cref="Name"/> property.
         /// </summary>
         public const int MaxNameLength = 32;

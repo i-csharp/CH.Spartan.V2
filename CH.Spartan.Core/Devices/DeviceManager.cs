@@ -20,18 +20,16 @@ namespace CH.Spartan.Devices
     public class DeviceManager : ManagerBase
     {
         private readonly IRepository<Device> _deviceRepository;
-        private readonly IRepository<Tenant> _tenantRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         public DeviceManager(
             IRepository<Device> deviceRepository, 
             ISettingManager settingManager, 
             ICacheManager cacheManager, 
             IIocResolver iocResolver, 
-            IUnitOfWorkManager unitOfWorkManager, IRepository<Tenant> tenantRepository) 
+            IUnitOfWorkManager unitOfWorkManager) 
 			: base(settingManager, cacheManager, iocResolver, unitOfWorkManager)
         {
             _deviceRepository = deviceRepository;
-            _tenantRepository = tenantRepository;
             _unitOfWorkManager = unitOfWorkManager;
         }
 

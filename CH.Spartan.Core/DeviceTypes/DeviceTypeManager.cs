@@ -20,12 +20,12 @@ namespace CH.Spartan.DeviceTypes
         private readonly IRepository<DeviceType> _deviceTypeRepository;
 
         public DeviceTypeManager(
-            IRepository<DeviceType> deviceTypeRepository, 
-            ISettingManager settingManager, 
-            ICacheManager cacheManager, 
-            IIocResolver iocResolver, 
-            IUnitOfWorkManager unitOfWorkManager) 
-			: base(settingManager, cacheManager, iocResolver, unitOfWorkManager)
+            IRepository<DeviceType> deviceTypeRepository,
+            ISettingManager settingManager,
+            ICacheManager cacheManager,
+            IIocResolver iocResolver,
+            IUnitOfWorkManager unitOfWorkManager)
+            : base(settingManager, cacheManager, iocResolver, unitOfWorkManager)
         {
             _deviceTypeRepository = deviceTypeRepository;
         }
@@ -38,22 +38,13 @@ namespace CH.Spartan.DeviceTypes
             }
         }
 
-        public async Task<string> CreateCodeAsync(Device device,DeviceType deviceType)
+        public async Task<string> CreateCodeAsync(Device device, DeviceType deviceType)
         {
             if (deviceType == null)
             {
                 throw new UserFriendlyException($"{L("不存在设备类型")}{device.BDeviceTypeId}");
             }
-
-            switch (deviceType.CodeCreateRule)
-            {
-                case EnumCodeCreateRule.No:
-                    return device.BNo; 
-                case EnumCodeCreateRule.PrefixZeroAndNo:
-                    return $"0{device.BNo}";
-                default:
-                    return device.BNo;
-            }
+            return await Task.FromResult(DeviceTypeHelper.CreateCode(device, deviceType));
         }
     }
 }
