@@ -11,6 +11,21 @@ namespace CH.Spartan.Infrastructure
         #region 通用
 
         /// <summary>
+        /// Host 首页
+        /// </summary>
+        public const string General_Host_Index = "General.Host.Index";
+
+        /// <summary>
+        /// Tenant 首页
+        /// </summary>
+        public const string General_Tenant_Index = "General.Tenant.Index";
+
+        /// <summary>
+        /// User 首页
+        /// </summary>
+        public const string General_User_Index = "General.User.Index";
+
+        /// <summary>
         /// 是否开启发送邮件
         /// </summary>
         public const string General_Mail_IsEnable= "General.Mail.IsEnable";
@@ -153,9 +168,11 @@ namespace CH.Spartan.Infrastructure
         /// 租户客户自行安装设备 默认过期 年
         /// </summary>
         public const string Tenant_Customer_InstallDevice_ExpireYear = "Tenant.Customer.InstallDevice.ExpireYear";
+
         #endregion
 
         #region 用户
+      
 
         /// <summary>
         /// 报警是否开启

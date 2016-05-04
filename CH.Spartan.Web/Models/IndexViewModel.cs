@@ -57,5 +57,10 @@ namespace CH.Spartan.Web.Models
         /// </summary>
 
         public int UnreadNotificationCount { get; set; }
+
+        /// <summary>
+        /// 首页Url
+        /// </summary>
+        public string IndexUrl { get; set; }
     }
 }

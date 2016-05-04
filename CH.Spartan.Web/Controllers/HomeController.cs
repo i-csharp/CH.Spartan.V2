@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Abp.Application.Navigation;
+using Abp.Configuration;
 using Abp.Configuration.Startup;
 using Abp.Localization;
 using Abp.Notifications;
@@ -11,6 +12,7 @@ using Abp.Timing;
 using Abp.Web.Mvc.Authorization;
 using CH.Spartan.Devices;
 using CH.Spartan.Devices.Dto;
+using CH.Spartan.Infrastructure;
 using CH.Spartan.Notifications;
 using CH.Spartan.Notifications.Dto;
 using CH.Spartan.Sessions;
@@ -45,13 +47,20 @@ namespace CH.Spartan.Web.Controllers
                 MainMenu = AsyncHelper.RunSync(() => _userNavigationManager.GetMenuAsync("MainMenu", AbpSession.UserId)),
                 CurrentLanguage = _localizationManager.CurrentLanguage,
                 Languages = _localizationManager.GetAllLanguages(),
-                ShowUpdateDeviceUrl = AbpSession.IsTenantAdmin()? "/AgentManage/UpdateDevice" : "/CustomerManage/UpdateDevice",
+                ShowUpdateDeviceUrl =
+                    AbpSession.IsTenantAdmin() ? "/AgentManage/UpdateDevice" : "/CustomerManage/UpdateDevice",
+                IndexUrl = AbpSession.TenantId.HasValue
+                    ? AbpSession.IsTenantAdmin()
+                        ? SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_Tenant_Index)
+                        : SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_User_Index)
+                    : SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_Host_Index),
                 IsTenantAdmin = AbpSession.IsTenantAdmin(),
-                UnreadNotificationCount = await _notificationAppService.GetNotificationCountAsync(new GetNotificationCountInput
-                {
-                    UserId = AbpSession.GetUserId(),
-                    State = UserNotificationState.Unread
-                }),
+                UnreadNotificationCount =
+                    await _notificationAppService.GetNotificationCountAsync(new GetNotificationCountInput
+                    {
+                        UserId = AbpSession.GetUserId(),
+                        State = UserNotificationState.Unread
+                    }),
                 LastDevices =
                     await _deviceAppService.GetLastDeviceListAsync(new GetLastDeviceListInput
                     {
@@ -72,11 +81,6 @@ namespace CH.Spartan.Web.Controllers
                 model.LoginInformations = AsyncHelper.RunSync(() => _sessionAppService.GetCurrentLoginInformations());
             }
             return View(model);
-        }
-
-        public ActionResult Dashboard()
-        {
-            return View();
         }
 
     }

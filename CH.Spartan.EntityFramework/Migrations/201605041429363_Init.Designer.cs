@@ -13,7 +13,7 @@ namespace CH.Spartan.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201605041145111_Init"; }
+            get { return "201605041429363_Init"; }
         }
         
         string IMigrationMetadata.Source

@@ -14,6 +14,9 @@ using CH.Spartan.Devices.Dto;
 using CH.Spartan.HistoryDatas;
 using CH.Spartan.HistoryDatas.Dto;
 using CH.Spartan.Infrastructure;
+using CH.Spartan.Nodes.Dto;
+using CH.Spartan.Notifications;
+using CH.Spartan.Notifications.Dto;
 using CH.Spartan.Users;
 using CH.Spartan.Users.Dto;
 
@@ -29,16 +32,19 @@ namespace CH.Spartan.Web.Controllers
         private readonly IDeviceAppService _deviceAppService;
         private readonly IUserAppService _userAppService;
         private readonly IHistoryDataAppService _historyDataAppService;
+        private readonly INotificationAppService _notificationAppService;
         public CustomerManageController(
             IAreaAppService areaAppService,
             IDeviceAppService deviceAppService,
             IUserAppService userAppService,
-            IHistoryDataAppService historyDataAppService)
+            IHistoryDataAppService historyDataAppService, 
+            INotificationAppService notificationAppService)
         {
             _areaAppService = areaAppService;
             _deviceAppService = deviceAppService;
             _userAppService = userAppService;
             _historyDataAppService = historyDataAppService;
+            _notificationAppService = notificationAppService;
         }
 
         #region 区域
@@ -242,6 +248,15 @@ namespace CH.Spartan.Web.Controllers
         public async Task<ActionResult> Notification()
         {
             return View();
+        }
+
+        [HttpPost]
+        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Notification)]
+        public async Task<JsonResult> GetNotificationListPaged(GetNotificationListPagedInput input)
+        {
+            input.UserId = AbpSession.GetUserId();
+            var result = await _notificationAppService.GetNotificationListPagedAsync(input);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

@@ -47,6 +47,28 @@ namespace CH.Spartan.Notifications.Dto
                 }
             }
         }
+
+        public string IconText
+        {
+            get
+            {
+                switch (Severity)
+                {
+                    case NotificationSeverity.Info:
+                        return "fa fa-info";
+                    case NotificationSeverity.Success:
+                        return "fa fa-check";
+                    case NotificationSeverity.Warn:
+                        return "fa fa-bell-o";
+                    case NotificationSeverity.Error:
+                        return "fa fa-close";
+                    case NotificationSeverity.Fatal:
+                        return "fa fa-bolt";
+                    default:
+                        return "fa fa-info";
+                }
+            }
+        }
     }
 
 

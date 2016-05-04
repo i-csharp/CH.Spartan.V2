@@ -1116,7 +1116,6 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Abp\Framework\scripts\libs\abp.spartan.js" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\SystemManage\Tenant.cshtml" />

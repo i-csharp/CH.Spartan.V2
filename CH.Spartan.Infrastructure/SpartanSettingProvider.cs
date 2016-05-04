@@ -18,6 +18,9 @@ namespace CH.Spartan.Infrastructure
             {
 
                 //通用
+                new SettingDefinition(SpartanSettingKeys.General_Host_Index,GetDefaultSetting(SpartanSettingKeys.General_Host_Index,"/SystemManage/Tenant"),L("租主首页")),
+                new SettingDefinition(SpartanSettingKeys.General_Tenant_Index,GetDefaultSetting(SpartanSettingKeys.General_Tenant_Index,"/AgentManage/Monitor"),L("租户管理员首页")),
+                new SettingDefinition(SpartanSettingKeys.General_User_Index,GetDefaultSetting(SpartanSettingKeys.General_User_Index,"/CustomerManage/Monitor"),L("租户客户首页")),
                 new SettingDefinition(SpartanSettingKeys.General_Mail_IsEnable,GetDefaultSetting(SpartanSettingKeys.General_Mail_IsEnable,"true"),L("是否开启发送邮件")),
                 new SettingDefinition(SpartanSettingKeys.General_Mail_Password,GetDefaultSetting(SpartanSettingKeys.General_Mail_Password,"Yuheng2015"),L("发送人邮箱密码")),
                 new SettingDefinition(SpartanSettingKeys.General_Mail_Port,GetDefaultSetting(SpartanSettingKeys.General_Mail_Port,"25"),L("发送服务器端口号")),
