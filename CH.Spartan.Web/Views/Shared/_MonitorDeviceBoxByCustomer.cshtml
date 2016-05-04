@@ -102,7 +102,7 @@
             <input type="text" class="form-control search-keyword" placeholder="@L("搜索车辆"))" data-bind="event:{keyup:localSearch}">
         </div>
         <ul class="sortable-list connectList agile-list pt0 mt5 ah ova" data-rh="-270" data-bind="foreach: data.items">
-            <li data-bind="css:panelClsText,visible:isShow">
+            <li data-bind="css:panelClsText()+'-element',visible:isShow">
                 <span data-bind="text:bName,click:$root.showDevice"></span>
                 <div class="agile-detail">
                     <a href="#" class="pull-right btn btn-xs btn-primary" data-bind="click:$root.showUpdateDevice">@L("修改")</a>

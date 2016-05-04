@@ -37,7 +37,23 @@ namespace CH.Spartan.Devices
         /// <param name="input"></param>
         /// <returns></returns>
         Task<ListResultOutput<ComboboxItemDto>> GetDeviceListAutoCompleteAsync(GetDeviceListInput input);
+
+        /// <summary>
+        /// 获取近期 或者 已过期 的设备
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<ListResultOutput<GetNearExpireDeviceListDto>> GetNearExpireDeviceListAsync(GetNearExpireDeviceListInput input);
+
+        /// <summary>
+        /// 获取最新添加的设备
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<ListResultOutput<GetLastDeviceListDto>> GetLastDeviceListAsync(GetLastDeviceListInput input);
+
         #endregion
+
 
         #region 代理
         /// <summary>

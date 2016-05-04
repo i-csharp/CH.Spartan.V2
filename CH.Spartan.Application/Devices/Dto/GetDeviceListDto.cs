@@ -74,6 +74,57 @@ namespace CH.Spartan.Devices.Dto
         
     }
 
+
+    [AutoMapFrom(typeof(Device))]
+    public class GetNearExpireDeviceListDto : AuditedEntityDto
+    {
+        /// <summary>
+        /// 设备名字
+        /// </summary>
+        public string BName { get; set; }
+
+        /// <summary>
+        /// 过期时间
+        /// </summary>
+        public DateTime? BExpireTime { get; set; }
+
+        /// <summary>
+        /// 过期时间
+        /// </summary>
+        public string ExpireText { get; set; }
+
+        /// <summary>
+        /// 过期百分比
+        /// </summary>
+        public double ExpirePercent { get; set; }
+
+        /// <summary>
+        /// 过期百分比 样式
+        /// </summary>
+        public string ExpirePercentClsText { get; set; }
+
+    }
+
+    [AutoMapFrom(typeof(Device))]
+    public class GetLastDeviceListDto : AuditedEntityDto
+    {
+        /// <summary>
+        /// 设备名字
+        /// </summary>
+        public string BName { get; set; }
+
+        /// <summary>
+        /// 设备描述
+        /// </summary>
+        public string BDscription { get; set; }
+
+        /// <summary>
+        /// 过期时间
+        /// </summary>
+        public DateTime? BExpireTime { get; set; }
+
+    }
+
     public class GetDeviceListInput : QueryListResultRequestInput
     {
         /// <summary>
@@ -95,6 +146,22 @@ namespace CH.Spartan.Devices.Dto
         /// </summary>
         public bool? IsLocated { get; set; }
 
+        /// <summary>
+        /// 用户Id
+        /// </summary>
+        public long? UserId { get; set; }
+    }
+
+    public class GetNearExpireDeviceListInput : QueryListResultRequestInput
+    {
+        /// <summary>
+        /// 用户Id
+        /// </summary>
+        public long? UserId { get; set; }
+    }
+
+    public class GetLastDeviceListInput : QueryListResultRequestInput
+    {
         /// <summary>
         /// 用户Id
         /// </summary>

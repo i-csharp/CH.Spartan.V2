@@ -172,6 +172,7 @@
     <Compile Include="HistoryDatas\HistoryData.cs" />
     <Compile Include="Nodes\Node.cs" />
     <Compile Include="Reports\MileageReportDay.cs" />
+    <Compile Include="Sessions\AbpSessionExtensions.cs" />
     <Compile Include="SpartanCoreModule.cs" />
     <Compile Include="Authorization\PermissionChecker.cs" />
     <Compile Include="Authorization\Roles\AppRoleConfig.cs" />

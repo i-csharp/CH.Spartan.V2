@@ -116,6 +116,31 @@ namespace CH.Spartan.Devices
                     list.Select(p => new ComboboxItemDto {Value = p.Id.ToString(), DisplayText = $"[{p.BNo}]{p.BName}"})
                         .ToList());
         }
+
+        public async Task<ListResultOutput<GetNearExpireDeviceListDto>> GetNearExpireDeviceListAsync(GetNearExpireDeviceListInput input)
+        {
+            var list = await _deviceRepository.GetAll()
+                .WhereIf(input.UserId.HasValue, p => p.UserId == input.UserId.Value)
+                .OrderBy(p => p.BExpireTime)
+                .Take(input)
+                .ToListAsync();
+
+            return new ListResultOutput<GetNearExpireDeviceListDto>(list.MapTo<List<GetNearExpireDeviceListDto>>());
+        }
+
+        public async Task<ListResultOutput<GetLastDeviceListDto>> GetLastDeviceListAsync(GetLastDeviceListInput input)
+        {
+            var list = await _deviceRepository.GetAll()
+                .WhereIf(input.UserId.HasValue, p => p.UserId == input.UserId.Value)
+                .WhereIf(input.StartTime.HasValue, p => p.CreationTime > input.StartTime.Value)
+                .WhereIf(input.EndTime.HasValue, p => p.CreationTime < input.EndTime.Value)
+                .OrderByDescending(p => p.CreationTime)
+                .Take(input)
+                .ToListAsync();
+
+            return new ListResultOutput<GetLastDeviceListDto>(list.MapTo<List<GetLastDeviceListDto>>());
+        }
+
         #endregion
 
         #region 代理

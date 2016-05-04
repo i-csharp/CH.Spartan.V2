@@ -26,23 +26,24 @@ namespace CH.Spartan.Notifications.Dto
         
         public UserNotificationState State { get; set; }
 
-        public string Cls {
+        public string ClsText {
             get
             {
+                //*-bg
                 switch (Severity)
                 {
                     case NotificationSeverity.Info:
-                        return "blue-bg";
+                        return "blue";
                     case NotificationSeverity.Success:
-                        return "navy-bg";
+                        return "navy";
                     case NotificationSeverity.Warn:
-                        return "yellow-bg";
+                        return "yellow";
                     case NotificationSeverity.Error:
-                        return "red-bg";
+                        return "red";
                     case NotificationSeverity.Fatal:
-                        return "red-bg";
+                        return "red";
                     default:
-                        return "blue-bg";
+                        return "blue";
                 }
             }
         }

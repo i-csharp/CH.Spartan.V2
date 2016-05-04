@@ -1,6 +1,8 @@
-﻿using Abp.IdentityFramework;
+﻿using Abp.Dependency;
+using Abp.IdentityFramework;
 using Abp.UI;
 using Abp.Web.Mvc.Controllers;
+using CH.Spartan.Authorization.Roles;
 using CH.Spartan.Infrastructure;
 using Microsoft.AspNet.Identity;
 

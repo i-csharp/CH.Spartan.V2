@@ -261,6 +261,8 @@ namespace CH.Spartan.Devices
             return text.IsNullOrEmpty() ? "-" : text;
         }
 
+       
+
         /// <summary>
         /// 获取离线时间
         /// </summary>
@@ -277,21 +279,22 @@ namespace CH.Spartan.Devices
 
 
         /// <summary>
-        /// 获取离线时间
+        /// 获取在线样式
         /// </summary>
         /// <param name="device"></param>
         /// <returns></returns>
         public static string GetClsText(Device device)
         {
-            var cls = "success-element";
+            //*-element
+            var cls = "success";
             if (!IsOnline(device))
             {
-                cls= "danger-element";
+                cls= "danger";
             }
 
             if (IsExpire(device))
             {
-                cls= "warning-element";
+                cls= "warning";
             }
 
             return cls;
@@ -343,72 +346,43 @@ namespace CH.Spartan.Devices
         private static string L(string name)
         {
             return LocalizationHelper.GetString(SpartanConsts.LocalizationSourceName, name);
-        } 
-        #endregion
-       
-        #region Web
-        public static string WebWinGpsStatusText(Device device)
-        {
-            return GetGpsStatusText(device);
-        }
-        public static string WebWinDeviceStatusText(Device device)
-        {
-            return GetDeviceStatusText(device);
         }
 
-        public static string WebWinAlarmStatusText(Device device)
-        {
-            return GetAlarmStatusText(device);
-        }
-
-        public static string WebWinReceiveTimeText(Device device)
-        {
-            return GetReceiveTimeText(device);
-        }
-
-        public static string WebWinReportTimeText(Device device)
-        {
-            return GetReportTimeText(device);
-        }
-
-        public static string WebWinSpeedText(Device device)
-        {
-            return GetSpeedText(device);
-        }
-
-        public static string WebWinOfflineText(Device device)
-        {
-            return GetOfflineText(device);
-        }
-
-        public static string WebPanelGpsStatusText(Device device)
-        {
-            return GetGpsStatusText(device);
-        }
-
-        public static string WebPanelSpeedText(Device device)
-        {
-            return GetSpeedText(device);
-        }
-
-        public static string WebPanelExpireText(Device device)
-        {
-            return GetExpireText(device);
-        }
-        public static string WebPanelClsText(Device device)
-        {
-            return GetClsText(device);
-        }
-
-        public static string WebIconUrl(Device device)
-        {
-            return GetIconUrl(device);
-        }
-        
         #endregion
 
-        #region App
+        public static string GetExpirePercentClsText(Device o)
+        {
+            //progress-bar-*
+            var p = GetExpirePercent(o);
+            if (p > 90)
+            {
+                return "danger";
+            }
+            else if (p > 60)
+            {
+                return "warning";
+            }
+            else
+            {
+                return "info";
+            }
+        }
 
-        #endregion
+        public static double GetExpirePercent(Device o)
+        {
+            if (o.BExpireTime.HasValue)
+            {
+                if (o.BExpireTime < DateTime.Now)
+                {
+                    return 100;
+                }
+                var total = o.BExpireTime.Value - o.CreationTime;
+                var use = DateTime.Now - o.CreationTime;
+                return Math.Round(use.TotalSeconds/total.TotalSeconds, 2)*100;
+            }
+
+            return 0;
+        }
+
     }
 }
