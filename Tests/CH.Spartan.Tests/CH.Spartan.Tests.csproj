@@ -141,6 +141,7 @@
     <Compile Include="Devices\DeviceAppService_Test.cs" />
     <Compile Include="HistoryDatas\HistoryDataService_Test.cs" />
     <Compile Include="Maps\MapManager_Test.cs" />
+    <Compile Include="Notifications\NotificationAppService_Test.cs" />
     <Compile Include="Notifications\UserNotificationManager_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpartanTestBase.cs" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Abp.AutoMapper;
 using Abp.Localization;
+using Abp.Notifications;
 using AutoMapper;
 using CH.Spartan.Areas.Dto;
 using CH.Spartan.DealRecords;
@@ -14,6 +15,7 @@ using CH.Spartan.HistoryDatas.Dto;
 using CH.Spartan.Infrastructure;
 using CH.Spartan.MultiTenancy;
 using CH.Spartan.MultiTenancy.Dto;
+using CH.Spartan.Notifications.Dto;
 using CH.Spartan.Users;
 using CH.Spartan.Users.Dto;
 
@@ -46,6 +48,15 @@ namespace CH.Spartan
                .ForMember(d => d.IsSucceedText, opt => opt.MapFrom(o => o.IsSucceed ? L("是") : L("否")))
                .ForMember(d => d.TenantText, opt => opt.MapFrom(o => o.Tenant != null ? o.Tenant.Name : "-"))
                .ForMember(d => d.TypeText, opt => opt.MapFrom(o => L(o.Type.GetDisplayName())));
+
+
+           Mapper.CreateMap<UserNotification, GetNotificationListDto>()
+               .ForMember(d => d.State, opt => opt.MapFrom(o => o.State))
+               .ForMember(d => d.EntityId, opt => opt.MapFrom(o => o.Notification.EntityId))
+               .ForMember(d => d.Data, opt => opt.MapFrom(o => o.Notification.Data))
+               .ForMember(d => d.Severity, opt => opt.MapFrom(o => o.Notification.Severity))
+               .ForMember(d => d.NotificationName, opt => opt.MapFrom(o => o.Notification.NotificationName))
+               .ForMember(d => d.CreationTime, opt => opt.MapFrom(o => o.Notification.CreationTime));
        }
 
        private static void MapDevice()

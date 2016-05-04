@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using Abp.Notifications;
-using CH.Spartan.Messages.Dto;
+using CH.Spartan.Notifications.Dto;
 
 namespace CH.Spartan.Notifications
 {
@@ -20,14 +20,14 @@ namespace CH.Spartan.Notifications
             _userNotificationManager = userNotificationManager;
         }
 
-        public async Task<PagedResultOutput<UserNotification>> GetNotificationListPagedAsync(GetNotificationListPagedInput input)
+        public async Task<PagedResultOutput<GetNotificationListDto>> GetNotificationListPagedAsync(GetNotificationListPagedInput input)
         {
             var result =
                 await
                     _userNotificationManager.GetUserNotificationsAsync(input.UserId, input.State, input.SkipCount,
                         input.MaxResultCount, input.DeviceId?.ToString());
 
-            return new PagedResultOutput<UserNotification>(0, result);
+            return new PagedResultOutput<GetNotificationListDto>(0, result.MapTo<List<GetNotificationListDto>>());
         }
     }
 }

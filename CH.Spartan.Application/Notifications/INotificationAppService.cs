@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Services;
 using Abp.Notifications;
-using CH.Spartan.Messages.Dto;
+using CH.Spartan.Notifications.Dto;
 
 namespace CH.Spartan.Notifications
 {
@@ -17,6 +17,6 @@ namespace CH.Spartan.Notifications
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultOutput<UserNotification>> GetNotificationListPagedAsync(GetNotificationListPagedInput input);
+        Task<PagedResultOutput<GetNotificationListDto>> GetNotificationListPagedAsync(GetNotificationListPagedInput input);
     }
 }

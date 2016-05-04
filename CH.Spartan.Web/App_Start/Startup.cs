@@ -20,8 +20,6 @@ using Hangfire.Dashboard;
 
 namespace CH.Spartan.Web
 {
-    
-
     public class Startup
     {
         public void Configuration(IAppBuilder app)
