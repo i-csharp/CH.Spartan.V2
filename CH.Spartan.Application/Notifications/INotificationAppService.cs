@@ -25,5 +25,12 @@ namespace CH.Spartan.Notifications
         /// <param name="input"></param>
         /// <returns></returns>
         Task<int> GetNotificationCountAsync(GetNotificationCountInput input);
+
+        /// <summary>
+        /// 设置 通知 已读
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task SetAllNotificationReaded(SetAllNotificationReadedInput input);
     }
 }

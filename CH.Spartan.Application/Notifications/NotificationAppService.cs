@@ -34,5 +34,11 @@ namespace CH.Spartan.Notifications
         {
             return await _userNotificationManager.GetUserNotificationCountAsync(input.UserId, input.State);
         }
+
+        public async Task SetAllNotificationReaded(SetAllNotificationReadedInput input)
+        {
+            await
+                _userNotificationManager.UpdateAllUserNotificationStatesAsync(input.UserId, UserNotificationState.Read);
+        }
     }
 }

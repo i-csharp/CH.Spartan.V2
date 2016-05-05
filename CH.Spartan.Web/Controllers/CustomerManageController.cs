@@ -258,6 +258,15 @@ namespace CH.Spartan.Web.Controllers
             var result = await _notificationAppService.GetNotificationListPagedAsync(input);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Notification)]
+        public async Task<JsonResult> SetAllNotificationReaded(SetAllNotificationReadedInput input)
+        {
+            input.UserId = AbpSession.GetUserId();
+            await _notificationAppService.SetAllNotificationReaded(input);
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 }

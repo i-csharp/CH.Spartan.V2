@@ -165,7 +165,7 @@
                     var lastItem = self.data.items[self.data.items.length - 1];
                     var lpt = new AMap.LngLat(lastItem.longitude, lastItem.latitude);
 
-                    self.endMarkerMarker = new AMap.Marker({
+                    self.endMarker = new AMap.Marker({
                         title: "@L("结束时间"):" + lastItem.reportTime + " - @L("总里程"):" + self.data.totalMileage + " km",
                         map: abp.global.map.current,
                         position: lpt,
@@ -173,7 +173,7 @@
                         offset: new AMap.Pixel(-10, -32)
                     });
 
-                    AMap.event.addListener(self.endMarkerMarker, "click", function (e) {
+                    AMap.event.addListener(self.endMarker, "click", function (e) {
                         self.openInfoWindow(e.target.getTitle(), e.lnglat);
                     });
 

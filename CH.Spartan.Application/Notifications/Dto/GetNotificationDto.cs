@@ -20,4 +20,10 @@ namespace CH.Spartan.Notifications.Dto
         public long UserId { get; set; }
         public UserNotificationState? State { get; set; }
     }
+
+    public class SetAllNotificationReadedInput : IInputDto
+    {
+        [Range(1, long.MaxValue)]
+        public long UserId { get; set; }
+    }
 }

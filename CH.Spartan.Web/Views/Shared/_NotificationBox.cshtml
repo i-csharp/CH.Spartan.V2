@@ -32,31 +32,33 @@
     </div>
     <div class="ibox-content timeline p5">
         <div class="input-group col-xs-12 mt5">
-            <button class="btn btn-sm btn-primary mr5" type="button">@L("设置全部已读")</button>
-            <button class="btn btn-sm btn-primary mr5" type="button">@L("设置选中为已读")</button>
-            <button class="btn btn-sm btn-danger" type="button">@L("删除选中")</button>
+            <button class="btn btn-sm btn-primary mr5" type="button" data-bind="click:setAllNotificationReaded">@L("全部已读")</button>
+            <button class="btn btn-sm btn-primary mr5" type="button" data-bind="click:load">@L("刷新")</button>
         </div>
-        @Html.AutoCompleteDeviceByCustomer("DeviceId",L("请选择车辆"),cls:"w")
-        <div class="dark-timeline ah ova mt5" data-rh="-250" data-bind="foreach: notifications">
+        @Html.AutoCompleteDeviceByCustomer("DeviceId", L("请选择车辆"), cls: "w")
+        <div class="dark-timeline ah ova mt5" data-rh="-250" id="time-line-container">
+            <!-- ko foreach: notifications -->
             <div class="vertical-timeline-block">
                 <div class="vertical-timeline-icon navy-bg">
-                    <i class="fa fa-briefcase"></i>
+                    <i data-bind="css:iconText"></i>
                 </div>
                 <div class="vertical-timeline-content">
-                    <div class="checkbox i-checks pull-right"><label><input type="checkbox" data-bind="checked: ischeck"></label></div><h2 data-bind="text:data.title"></h2>
+                    <h2 data-bind="text:data.title"></h2>
                     <p data-bind="text:data.content">
-                        
+
                     </p>
                     <p data-bind="text:data.address">
-                        
+
                     </p>
-                    <a href="#" class="btn btn-sm btn-primary"> <i class="fa fa-map-marker"></i></a>
+                    <a href="#" class="btn btn-sm btn-primary" data-bind="click:$root.showPosition"><i class="fa fa-map-marker"></i></a>
                     <span class="vertical-date">
-                        <br>
+                        <!-- ko text: stateText --><!-- /ko --><br>
                         <small data-bind="text:creationTime"></small>
                     </span>
                 </div>
             </div>
+            <!-- /ko -->
+            <div class="text-center"><a data-bind="click:loadMore,text:loadMoreText"></a></div>
         </div>
     </div>
 </div>
@@ -75,7 +77,16 @@
             //分页大小
             self.pageSize = 10;
 
+            //数据
             self.notifications = ko.mapping.fromJS(@Html.Raw((new List<GetNotificationListDto>()).ToJsonString(true)));
+
+            //加载中
+            self.loadMoreText = ko.observable("加载中...");
+
+            //信息窗口
+            self.infoWindow = new AMap.InfoWindow({
+                content: ""
+            });
 
             //显示
             self.show = function (cls) {
@@ -108,8 +119,46 @@
                 }
             }
 
+            //显示位置
+            self.showPosition = function(item) {
+                if (!item.marker) {
+                    var lpt = new AMap.LngLat(item.data.longitude(), item.data.latitude());
+                    item.marker = new AMap.Marker({
+                        title: item.data.title(),
+                        map: abp.global.map.current,
+                        position: lpt,
+                        icon: "/Content/img/marker/mark.png",
+                        offset: new AMap.Pixel(-10, -32)
+                    });
+                    item.marker.setMap(abp.global.map.current);
+                    AMap.event.addListener(item.marker, "click", function (e) {
+                        self.openInfoWindow(e.target.getTitle(), e.target.getPosition());
+                    });
+                }
+                self.openInfoWindow(item.marker.getTitle(), item.marker.getPosition());
+            }
+
+            //打开窗口
+            self.openInfoWindow = function (content, point) {
+                self.infoWindow.setContent(content);
+                self.infoWindow.setPosition(point);
+                self.infoWindow.open(abp.global.map.current);
+                abp.global.map.current.setCenter(point);
+                abp.global.map.current.setZoom(abp.global.map.zoom);
+            };
+
+            //设置已读
+            self.setAllNotificationReaded = function () {
+                abp.ajax(
+                {
+                    url: "/CustomerManage/SetAllNotificationReaded"
+                }).done(function (result) {
+                    self.load();
+                });
+            };
+
             //获取数据
-            self.getNotification = function() {
+            self.getNotification = function () {
                 var data =
                 {
                     deviceId: $("#notification-box #DeviceId").val(),
@@ -120,22 +169,38 @@
                 {
                     url: "/CustomerManage/GetNotificationListPaged",
                     data: JSON.stringify(data)
-                }).done(function(result) {
+                }).done(function (result) {
+                    if (result.items.length > 0) {
+                        self.loadMoreText("加载更多");
+                    } else {
+                        self.loadMoreText("没有了");
+                    }
                     $.each(result.items, function (index, item) {
                         var data = ko.mapping.fromJS(item);
                         data.ischeck = ko.observable(false);
                         self.notifications.push(data);
                     });
                 });
-            }
-            self.loadMore = function() {
+            };
+
+            //加载更多
+            self.loadMore = function () {
                 self.pageIndex++;
                 self.load();
             }
-            self.load = function() {
+
+            //加载
+            self.load = function () {
+                self.loadMoreText("加载中...");
+                self.pageIndex = 1;
+                $.each(self.notifications(), function(index, item) {
+                    self.notifications.mappedRemove(item);
+                });
                 self.getNotification();
             }
             self.load();
+
+
         }
 
         $(function () {

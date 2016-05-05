@@ -51,7 +51,7 @@ namespace CH.Spartan
 
 
            Mapper.CreateMap<UserNotification, GetNotificationListDto>()
-               .ForMember(d => d.State, opt => opt.MapFrom(o => o.State))
+               .ForMember(d => d.StateText, opt => opt.MapFrom(o => o.State == UserNotificationState.Read ? L("已读") : L("未读")))
                .ForMember(d => d.EntityId, opt => opt.MapFrom(o => o.Notification.EntityId))
                .ForMember(d => d.Data, opt => opt.MapFrom(o => o.Notification.Data))
                .ForMember(d => d.Severity, opt => opt.MapFrom(o => o.Notification.Severity))

@@ -23,8 +23,8 @@ namespace CH.Spartan.Notifications.Dto
         public NotificationSeverity Severity { get; set; }
 
         public DateTime CreationTime { get; set; }
-        
-        public UserNotificationState State { get; set; }
+
+        public string StateText { get; set; }
 
         public string ClsText {
             get
