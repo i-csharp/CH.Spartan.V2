@@ -14,6 +14,7 @@ namespace CH.Spartan.Infrastructure
             customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_Monitor, L("定位监控"), multiTenancySides: MultiTenancySides.Tenant);
             customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_HistoryData, L("历史轨迹"), multiTenancySides: MultiTenancySides.Tenant);
             customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_Notification, L("报警信息"), multiTenancySides: MultiTenancySides.Tenant);
+            customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_Setting, L("我的设置"), multiTenancySides: MultiTenancySides.Tenant);
 
             var customerManageDevice = customerManages.CreateChildPermission(SpartanPermissionNames.CustomerManages_Device, L("车辆管理"), multiTenancySides: MultiTenancySides.Tenant);
             customerManageDevice.CreateChildPermission(SpartanPermissionNames.CustomerManages_Device_Create, L("添加"), multiTenancySides: MultiTenancySides.Tenant);
@@ -34,6 +35,7 @@ namespace CH.Spartan.Infrastructure
 
             agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_Monitor, L("定位监控"), multiTenancySides: MultiTenancySides.Tenant);
             agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_HistoryData, L("历史轨迹"), multiTenancySides: MultiTenancySides.Tenant);
+            agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_Setting, L("代理设置"), multiTenancySides: MultiTenancySides.Tenant);
 
 
             var agentManageUser = agentManages.CreateChildPermission(SpartanPermissionNames.AgentManages_User, L("客户管理"), multiTenancySides: MultiTenancySides.Tenant);
@@ -72,6 +74,7 @@ namespace CH.Spartan.Infrastructure
 
             systemManages.CreateChildPermission(SpartanPermissionNames.SystemManages_UserInfo, L("个人资料"), multiTenancySides: MultiTenancySides.Host);
             systemManages.CreateChildPermission(SpartanPermissionNames.SystemManages_ChangePassword, L("修改密码"), multiTenancySides: MultiTenancySides.Host);
+            systemManages.CreateChildPermission(SpartanPermissionNames.SystemManages_Setting, L("系统设置"), multiTenancySides: MultiTenancySides.Host);
 
             var systemManageTenant = systemManages.CreateChildPermission(SpartanPermissionNames.SystemManages_Tenant, L("租户管理"), multiTenancySides: MultiTenancySides.Host);
             systemManageTenant.CreateChildPermission(SpartanPermissionNames.SystemManages_Tenant_Create, L("添加"), multiTenancySides: MultiTenancySides.Host);

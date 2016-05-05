@@ -11,7 +11,8 @@
         public const string CustomerManages_Monitor = "CustomerManages.Monitor";
         public const string CustomerManages_HistoryData = "CustomerManages.HistoryData";
         public const string CustomerManages_Notification = "CustomerManages.Notification";
-      
+        public const string CustomerManages_Setting = "CustomerManages.Setting";
+
         public const string CustomerManages_Device = "CustomerManages.Device";
         public const string CustomerManages_Device_Create = "CustomerManages.Device.Create";
         public const string CustomerManages_Device_Update = "CustomerManages.Device.Update";
@@ -29,6 +30,7 @@
         public const string AgentManages = "AgentManages";
         public const string AgentManages_Monitor = "AgentManages.Monitor";
         public const string AgentManages_HistoryData = "AgentManages.HistoryData";
+        public const string AgentManages_Setting = "AgentManages.Setting";
 
         public const string AgentManages_User = "AgentManages.User";
         public const string AgentManages_User_Create = "AgentManages.User.Create";
@@ -62,6 +64,7 @@
 
         //系统
         public const string SystemManages = "SystemManages";
+        public const string SystemManages_Setting = "SystemManages.Setting";
 
         public const string SystemManages_UserInfo = "SystemManages.UserInfo";
         public const string SystemManages_ChangePassword = "SystemManages.ChangePassword";

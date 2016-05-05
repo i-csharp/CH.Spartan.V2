@@ -132,7 +132,7 @@ namespace CH.Spartan.Settings
         public async Task UpdateUserSettingAsync(UpdateUserSettingInput input)
         {
             await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(),SpartanSettingKeys.User_IsEnableAlarm, input.UserSetting.User_IsEnableAlarm);
-            await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(), SpartanSettingKeys.User_AlarmSound, input.UserSetting.User_AlarmSound);
+            await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(),SpartanSettingKeys.User_AlarmSound, input.UserSetting.User_AlarmSound);
             await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(),SpartanSettingKeys.User_IsSendEmail, input.UserSetting.User_IsSendEmail);
             await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(),SpartanSettingKeys.User_IsSendApp, input.UserSetting.User_IsSendApp);
             await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(),SpartanSettingKeys.User_ReceiveAlarmType, input.UserSetting.User_ReceiveAlarmType);

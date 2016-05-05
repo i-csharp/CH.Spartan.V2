@@ -33,6 +33,7 @@ namespace CH.Spartan.Infrastructure
                         .AddItem(new MenuItemDefinition("ChangePassword", L("修改密码"), "fa fa-key", "/CustomerManage/ChangePassword", true, SpartanPermissionNames.CustomerManages_ChangePassword))
                         .AddItem(new MenuItemDefinition("Device", L("车辆管理"), "fa fa-truck", "/CustomerManage/Device", true, SpartanPermissionNames.CustomerManages_Device))
                         .AddItem(new MenuItemDefinition("Area", L("区域管理"), "fa fa-flag-o", "/CustomerManage/Area", true, SpartanPermissionNames.CustomerManages_Area))
+                        .AddItem(new MenuItemDefinition("Setting", L("我的设置"), "fa fa-tasks", "/CustomerManage/Setting", true, SpartanPermissionNames.CustomerManages_Setting))
                 )
                 .AddItem(
                     new MenuItemDefinition(
@@ -59,6 +60,7 @@ namespace CH.Spartan.Infrastructure
                         .AddItem(new MenuItemDefinition("Device", L("车辆管理"), "fa fa-truck", "/AgentManage/Device", true, SpartanPermissionNames.AgentManages_Device))
                         .AddItem(new MenuItemDefinition("DeviceStock", L("库存管理"), "fa fa-hourglass-half", "/AgentManage/DeviceStock", true, SpartanPermissionNames.AgentManages_DeviceStock))
                         .AddItem(new MenuItemDefinition("DealRecord", L("交易记录"), "fa fa-credit-card", "/AgentManage/DealRecord", true, SpartanPermissionNames.AgentManages_DealRecord))
+                        .AddItem(new MenuItemDefinition("Setting", L("代理设置"), "fa fa-tasks", "/AgentManage/Setting", true, SpartanPermissionNames.AgentManages_Setting))
                 )
                 .AddItem(
                     new MenuItemDefinition(
@@ -84,6 +86,7 @@ namespace CH.Spartan.Infrastructure
                         .AddItem(new MenuItemDefinition("Tenant", L("租户管理"), "fa fa-user-secret", "/SystemManage/Tenant", true, SpartanPermissionNames.SystemManages_Tenant))
                         .AddItem(new MenuItemDefinition("DeviceType", L("设备类型"), "fa fa-square-o", "/SystemManage/DeviceType", true, SpartanPermissionNames.SystemManages_Tenant))
                         .AddItem(new MenuItemDefinition("Node", L("数据节点"), "fa fa-database", "/SystemManage/Node", true, SpartanPermissionNames.SystemManages_Node))
+                        .AddItem(new MenuItemDefinition("Setting", L("系统设置"), "fa fa-tasks", "/SystemManage/Setting", true, SpartanPermissionNames.SystemManages_Setting))
                         .AddItem(new MenuItemDefinition("AuditLog", L("审计日志"), "fa fa-calendar-o", "/SystemManage/AuditLog", true, SpartanPermissionNames.SystemManages_AuditLog))
                 );
         }

@@ -17,6 +17,7 @@
     <text name="车辆管理" value="车辆管理" />
     <text name="交易记录" value="交易记录" />
     <text name="库存管理" value="库存管理" />
+    <text name="代理设置" value="代理设置" />
     
     <text name="系统管理" value="系统管理" />
     <text name="租户管理" value="租户管理" />
