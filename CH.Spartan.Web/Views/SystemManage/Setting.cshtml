@@ -57,7 +57,7 @@
     </script>
 }
 <div class="ibox float-e-margins @SpartanConsts.DefaultAnimate edit-col-1">
-    <form class="form-horizontal" id="form">
+    <form class="form" id="form">
         <div class="tabs-container">
             <ul class="nav nav-tabs">
                 <li class="active">
@@ -67,62 +67,24 @@
                     <a data-toggle="tab" href="#tab-setting">设备设置</a>
                 </li>
             </ul>
-            <div class="tab-content w500">
+            <div class="tab-content col-md-4 col-sm-6 col-xs-8">
                 <div id="tab-base" class="tab-pane active">
                     <div class="panel-body">
                         <div class="form-group">
-                            <label class="col-xs-4 control-label">@L("超速限制"):</label>
-                            <div class="col-xs-8">
-                                <input class="form-control required isInteger" type="text" id="SLimitSpeed" name="SLimitSpeed" value="@Model.GeneralSetting.General_ActiveMq_Instruction_Name"/>
-                                <span class="help-block m-b-none">@L("触发超速报警的最大速度 km/h")</span>
-                            </div>
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                            <p class="help-block m-b-none">Example block-level help text here.</p>
                         </div>
                         <div class="form-group">
-                            <label class="col-xs-4 control-label">@L("超速限制"):</label>
-                            <div class="col-xs-8">
-                                <input class="form-control required isInteger" type="text" id="SLimitSpeed" name="SLimitSpeed" value="@Model.GeneralSetting.General_ActiveMq_Instruction_Name"/>
-                                <span class="help-block m-b-none">@L("触发超速报警的最大速度 km/h")</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-xs-4 control-label">@L("超速限制"):</label>
-                            <div class="col-xs-8">
-                                <input class="form-control required isInteger" type="text" id="SLimitSpeed" name="SLimitSpeed" value="@Model.GeneralSetting.General_ActiveMq_Instruction_Name"/>
-                                <span class="help-block m-b-none">@L("触发超速报警的最大速度 km/h")</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-xs-4 control-label">@L("超速限制"):</label>
-                            <div class="col-xs-8">
-                                <input class="form-control required isInteger" type="text" id="SLimitSpeed" name="SLimitSpeed" value="@Model.GeneralSetting.General_ActiveMq_Instruction_Name"/>
-                                <span class="help-block m-b-none">@L("触发超速报警的最大速度 km/h")</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-xs-4 control-label">@L("超速限制"):</label>
-                            <div class="col-xs-8">
-                                <input class="form-control required isInteger" type="text" id="SLimitSpeed" name="SLimitSpeed" value="@Model.GeneralSetting.General_ActiveMq_Instruction_Name"/>
-                                <span class="help-block m-b-none">@L("触发超速报警的最大速度 km/h")</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-xs-4 control-label">@L("超速限制"):</label>
-                            <div class="col-xs-8">
-                                <input class="form-control required isInteger" type="text" id="SLimitSpeed" name="SLimitSpeed" value="@Model.GeneralSetting.General_ActiveMq_Instruction_Name" />
-                                <span class="help-block m-b-none">@L("触发超速报警的最大速度 km/h")</span>
-                            </div>
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                            <p class="help-block m-b-none">Example block-level help text here.</p>
                         </div>
                     </div>
                 </div>
                 <div id="tab-setting" class="tab-pane">
                     <div class="panel-body">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">@L("超速限制"):</label>
-                            <div class="col-sm-8 ">
-                                <input class="form-control required isInteger w180" type="text" id="SLimitSpeed" name="SLimitSpeed" value="@Model.GeneralSetting.General_ActiveMq_Instruction_Uri" />
-                                <span class="help-block m-b-none">@L("触发超速报警的最大速度 km/h")</span>
-                            </div>
-                        </div>
+                  
                     </div>
                 </div>
             </div>
