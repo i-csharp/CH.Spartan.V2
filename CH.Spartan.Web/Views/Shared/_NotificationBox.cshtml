@@ -38,17 +38,16 @@
         @Html.AutoCompleteDeviceByCustomer("DeviceId", L("请选择车辆"), cls: "w")
         <div class="dark-timeline ah ova mt5" data-rh="-250" id="time-line-container">
             <!-- ko foreach: notifications -->
-            <div class="vertical-timeline-block">
-                <div class="vertical-timeline-icon navy-bg">
+            <div class="vertical-timeline-block mt0 mt5 mb5">
+                <div class="vertical-timeline-icon" data-bind="css:clsText()+'-bg'">
                     <i data-bind="css:iconText"></i>
                 </div>
                 <div class="vertical-timeline-content">
-                    <h2 data-bind="text:data.title"></h2>
-                    <p data-bind="text:data.content">
+                    <h2 data-bind="text:data.title" class="m0"></h2>
+                    <p data-bind="text:data.content" class="m0">
 
                     </p>
-                    <p data-bind="text:data.address">
-
+                    <p data-bind="text:data.address" class="m0">
                     </p>
                     <a href="#" class="btn btn-sm btn-primary" data-bind="click:$root.showPosition"><i class="fa fa-map-marker"></i></a>
                     <span class="vertical-date">
@@ -78,7 +77,7 @@
             self.pageSize = 10;
 
             //数据
-            self.notifications = ko.mapping.fromJS(@Html.Raw((new List<GetNotificationListDto>()).ToJsonString(true)));
+            self.notifications = ko.observableArray();
 
             //加载中
             self.loadMoreText = ko.observable("加载中...");
@@ -124,7 +123,7 @@
                 if (!item.marker) {
                     var lpt = new AMap.LngLat(item.data.longitude(), item.data.latitude());
                     item.marker = new AMap.Marker({
-                        title: item.data.title(),
+                        title: item.data.title() + "-" + item.data.content(),
                         map: abp.global.map.current,
                         position: lpt,
                         icon: "/Content/img/marker/mark.png",
@@ -153,6 +152,7 @@
                 {
                     url: "/CustomerManage/SetAllNotificationReaded"
                 }).done(function (result) {
+                    parent.clearNotificationCount();
                     self.load();
                 });
             };
@@ -176,26 +176,23 @@
                         self.loadMoreText("没有了");
                     }
                     $.each(result.items, function (index, item) {
-                        var data = ko.mapping.fromJS(item);
-                        data.ischeck = ko.observable(false);
-                        self.notifications.push(data);
+                        self.notifications.push(ko.mapping.fromJS(item));
                     });
                 });
             };
 
             //加载更多
             self.loadMore = function () {
+                self.loadMoreText("加载中...");
                 self.pageIndex++;
-                self.load();
+                self.getNotification();
             }
 
             //加载
             self.load = function () {
+                self.notifications.removeAll();
                 self.loadMoreText("加载中...");
-                self.pageIndex = 1;
-                $.each(self.notifications(), function(index, item) {
-                    self.notifications.mappedRemove(item);
-                });
+                self.pageIndex = 0;
                 self.getNotification();
             }
             self.load();
@@ -206,6 +203,10 @@
         $(function () {
             abp.global.notificationBox = new notificationVM();
             ko.applyBindings(abp.global.notificationBox, $("#notification-box")[0]);
+
+            $("#notification-box #DeviceId").on("change", function (e) {
+                abp.global.notificationBox.load();
+            });
         });
     })(jQuery);
 

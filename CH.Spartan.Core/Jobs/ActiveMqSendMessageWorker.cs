@@ -45,9 +45,9 @@ namespace CH.Spartan.Jobs
 #if DEBUG
                 Send(new AlarmNotificationData()
                 {
-                    Title = "震动报警",
+                    Title = "粤B56325",
                     UserId = 3,
-                    DeviceId = 2171,
+                    DeviceId = 1,
                     AlarmType = EnumAlarmType.Shake,
                     Content = "震动报警",
                     Latitude = 23.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000)/10000.0,
@@ -58,9 +58,9 @@ namespace CH.Spartan.Jobs
 
                 Send(new AlarmNotificationData()
                 {
-                    Title = "离开设防",
+                    Title = "粤B36598",
                     UserId = 3,
-                    DeviceId = 2171,
+                    DeviceId = 2,
                     AlarmType = EnumAlarmType.OutFortify,
                     Content = "离开设防报警",
                     Latitude = 23.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000) / 10000.0,
@@ -71,9 +71,9 @@ namespace CH.Spartan.Jobs
 
                 Send(new AlarmNotificationData()
                 {
-                    Title = "进入区域",
+                    Title = "粤B36598",
                     UserId = 3,
-                    DeviceId = 2171,
+                    DeviceId = 3,
                     AlarmType = EnumAlarmType.InArea,
                     Content = "进入区域 购物公园",
                     Latitude = 23.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000) / 10000.0,
@@ -84,11 +84,11 @@ namespace CH.Spartan.Jobs
 
                 Send(new AlarmNotificationData()
                 {
-                    Title = "超速报警",
+                    Title = "桂A33333",
                     UserId = 3,
-                    DeviceId = 2171,
+                    DeviceId = 4,
                     AlarmType = EnumAlarmType.OverSpeed,
-                    Content = "当前速度 85km/h 限速 80km/h",
+                    Content = "超速报警 当前速度 85km/h 限速 80km/h",
                     Latitude = 23.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000) / 10000.0,
                     Longitude = 113.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000) / 10000.0,
                     Severity = NotificationSeverity.Fatal,
@@ -97,11 +97,11 @@ namespace CH.Spartan.Jobs
 
                 Send(new AlarmNotificationData()
                 {
-                    Title = "低电报警",
+                    Title = "桂A56778",
                     UserId = 3,
-                    DeviceId = 2171,
+                    DeviceId = 5,
                     AlarmType = EnumAlarmType.LowBattery,
-                    Content = "当前电量 10%",
+                    Content = "低电报警 当前电量 10%",
                     Latitude = 23.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000) / 10000.0,
                     Longitude = 113.00 + new Random(Guid.NewGuid().GetHashCode()).Next(10000, 90000) / 10000.0,
                     Severity = NotificationSeverity.Warn,

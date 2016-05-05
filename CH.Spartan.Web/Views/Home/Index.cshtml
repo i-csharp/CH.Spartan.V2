@@ -15,6 +15,10 @@
             $("#lbl-user-name").html(user.name);
         }
 
+        function clearNotificationCount() {
+            $("#sp-notification-count").html("");
+        }
+
         function showUpdateDevice(id) {
             abp.dialog.open("@(Model.ShowUpdateDeviceUrl)?id=" + id, "@L("修改车辆")", {
                 area: ["575px", "750px"],
