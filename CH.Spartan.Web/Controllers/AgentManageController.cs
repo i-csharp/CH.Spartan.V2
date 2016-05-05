@@ -16,6 +16,8 @@ using CH.Spartan.DeviceStocks.Dto;
 using CH.Spartan.HistoryDatas;
 using CH.Spartan.HistoryDatas.Dto;
 using CH.Spartan.Infrastructure;
+using CH.Spartan.Settings;
+using CH.Spartan.Settings.Dto;
 using CH.Spartan.Users;
 using CH.Spartan.Users.Dto;
 
@@ -32,13 +34,15 @@ namespace CH.Spartan.Web.Controllers
         private readonly IDealRecordAppService _dealRecordAppService;
         private readonly IDeviceStockAppService _deviceStockAppService;
         private readonly IHistoryDataAppService _historyDataAppService;
-        public AgentManageController(IDeviceAppService deviceAppService, IUserAppService userAppService, IDealRecordAppService dealRecordAppService, IDeviceStockAppService deviceStockAppService, IHistoryDataAppService historyDataAppService)
+        private readonly ISettingAppService _settingAppService;
+        public AgentManageController(IDeviceAppService deviceAppService, IUserAppService userAppService, IDealRecordAppService dealRecordAppService, IDeviceStockAppService deviceStockAppService, IHistoryDataAppService historyDataAppService, ISettingAppService settingAppService)
         {
             _deviceAppService = deviceAppService;
             _userAppService = userAppService;
             _dealRecordAppService = dealRecordAppService;
             _deviceStockAppService = deviceStockAppService;
             _historyDataAppService = historyDataAppService;
+            _settingAppService = settingAppService;
         }
 
         #region 设备
@@ -334,6 +338,23 @@ namespace CH.Spartan.Web.Controllers
         #endregion
 
 
+        #endregion
+
+        #region 设置
+
+        [AbpMvcAuthorize(SpartanPermissionNames.AgentManages_Setting)]
+        public async Task<ActionResult> Setting()
+        {
+            var result = await _settingAppService.GetUpdateTenantSettingAsync();
+            return View(result);
+        }
+
+        [AbpMvcAuthorize(SpartanPermissionNames.AgentManages_Setting)]
+        public async Task<ActionResult> UpdateSetting(UpdateTenantSettingInput input)
+        {
+            await _settingAppService.UpdateTenantSettingAsync(input);
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 }

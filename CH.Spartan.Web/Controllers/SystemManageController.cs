@@ -21,6 +21,8 @@ using CH.Spartan.Tenants;
 using CH.Spartan.Tenants.Dto;
 using CH.Spartan.Nodes;
 using CH.Spartan.Nodes.Dto;
+using CH.Spartan.Settings;
+using CH.Spartan.Settings.Dto;
 using CH.Spartan.Users;
 using CH.Spartan.Users.Dto;
 
@@ -38,18 +40,21 @@ namespace CH.Spartan.Web.Controllers
         private readonly IDeviceTypeAppService _deviceTypeAppService;
         private readonly INodeAppService _nodeAppService;
         private readonly IUserAppService _userAppService;
+        private readonly ISettingAppService _settingAppService;
         public SystemManageController(
             ITenantAppService tenantAppService, 
             IDeviceTypeAppService deviceTypeAppService, 
             INodeAppService nodeAppService, 
             IAuditLogAppService auditLogAppService, 
-            IUserAppService userAppService)
+            IUserAppService userAppService,
+            ISettingAppService settingAppService)
         {
             _tenantAppService = tenantAppService;
             _deviceTypeAppService = deviceTypeAppService;
             _nodeAppService = nodeAppService;
             _auditLogAppService = auditLogAppService;
             _userAppService = userAppService;
+            _settingAppService = settingAppService;
         }
 
         #region 租户
@@ -287,6 +292,23 @@ namespace CH.Spartan.Web.Controllers
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
+
+        #region 设置
+
+        [AbpMvcAuthorize(SpartanPermissionNames.SystemManages_Setting)]
+        public async Task<ActionResult> Setting()
+        {
+            var result = await _settingAppService.GetUpdateGeneralSettingAsync();
+            return View(result);
+        }
+
+        [AbpMvcAuthorize(SpartanPermissionNames.SystemManages_Setting)]
+        public async Task<ActionResult> UpdateSetting(UpdateGeneralSettingInput input)
+        {
+            await _settingAppService.UpdateGeneralSettingAsync(input);
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 }

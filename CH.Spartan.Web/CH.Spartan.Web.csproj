@@ -1219,6 +1219,7 @@
     <Content Include="Views\SystemManage\Node.cshtml" />
     <Content Include="Views\SystemManage\UpdateNode.cshtml" />
     <Content Include="Views\SystemManage\UserInfo.cshtml" />
+    <Content Include="Views\SystemManage\Setting.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

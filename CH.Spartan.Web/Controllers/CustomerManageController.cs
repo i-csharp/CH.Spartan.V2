@@ -17,6 +17,8 @@ using CH.Spartan.Infrastructure;
 using CH.Spartan.Nodes.Dto;
 using CH.Spartan.Notifications;
 using CH.Spartan.Notifications.Dto;
+using CH.Spartan.Settings;
+using CH.Spartan.Settings.Dto;
 using CH.Spartan.Users;
 using CH.Spartan.Users.Dto;
 
@@ -33,18 +35,21 @@ namespace CH.Spartan.Web.Controllers
         private readonly IUserAppService _userAppService;
         private readonly IHistoryDataAppService _historyDataAppService;
         private readonly INotificationAppService _notificationAppService;
+        private readonly ISettingAppService _settingAppService;
         public CustomerManageController(
             IAreaAppService areaAppService,
             IDeviceAppService deviceAppService,
             IUserAppService userAppService,
             IHistoryDataAppService historyDataAppService, 
-            INotificationAppService notificationAppService)
+            INotificationAppService notificationAppService, 
+            ISettingAppService settingAppService)
         {
             _areaAppService = areaAppService;
             _deviceAppService = deviceAppService;
             _userAppService = userAppService;
             _historyDataAppService = historyDataAppService;
             _notificationAppService = notificationAppService;
+            _settingAppService = settingAppService;
         }
 
         #region 区域
@@ -265,6 +270,23 @@ namespace CH.Spartan.Web.Controllers
         {
             input.UserId = AbpSession.GetUserId();
             await _notificationAppService.SetAllNotificationReaded(input);
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region 设置
+
+        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Setting)]
+        public async Task<ActionResult> Setting()
+        {
+            var result = await _settingAppService.GetUpdateUserSettingAsync();
+            return View(result);
+        }
+
+        [AbpMvcAuthorize(SpartanPermissionNames.CustomerManages_Setting)]
+        public async Task<ActionResult> UpdateSetting(UpdateUserSettingInput input)
+        {
+            await _settingAppService.UpdateUserSettingAsync(input);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
         #endregion
