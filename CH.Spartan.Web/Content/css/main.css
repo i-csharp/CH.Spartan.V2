@@ -9,9 +9,11 @@
 .wrapper-content.list .ibox-content.list-content { padding-top: 0px; }
 .wrapper-content.list .ibox-content.list-content .btn-op{ cursor: pointer;padding: 0px;margin: 0px; margin-right: 10px;font-size: 10px;}
 /*edit*/
-.ibox.edit{margin-bottom: 0px;}
-.ibox.edit .form-group{ height: 65px;margin-bottom: 0px;}
-.ibox.edit-col-1 .form-group.has-error .select2-selection--single{ border-color: #ed5565 !important;}
-.ibox.edit-col-1 .form-group.has-success .select2-selection--single{ border-color: #1ab394 !important;}
-.ibox.edit-col-1{margin-bottom: 0px;}
-.ibox.edit-col-1 .form-group{ height: 85px;margin-bottom: 0px;}
+.wrapper-content.edit{margin-bottom: 0px;}
+.wrapper-content.edit .form-group{ margin-bottom: 0px;}
+.wrapper-content.edit .form-group .help-block{ margin-bottom: 5px;}
+.wrapper-content.edit-col-1 .form-group.has-error .select2-selection--single{ border-color: #ed5565 !important;}
+.wrapper-content.edit-col-1 .form-group.has-success .select2-selection--single{ border-color: #1ab394 !important;}
+.wrapper-content.edit-col-1{margin-bottom: 0px;}
+.wrapper-content.edit-col-1 .form-group{ margin-bottom: 0px;}
+.wrapper-content.edit-col-1 .form-group .help-block{ margin-bottom: 5px;}

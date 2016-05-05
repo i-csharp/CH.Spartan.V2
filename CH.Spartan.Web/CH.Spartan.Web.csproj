@@ -1228,7 +1228,6 @@
     </None>
     <Content Include="Views\CustomerManage\Area.cshtml" />
     <Content Include="Views\CustomerManage\UpdateArea.cshtml" />
-    <Content Include="Views\CustomerManage\CreateArea.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Abp\Abp.AutoMapper\Abp.AutoMapper.csproj">
