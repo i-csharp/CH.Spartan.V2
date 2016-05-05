@@ -91,6 +91,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Linq.Dynamic, Version=1.0.5840.25917, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Linq.Dynamic.1.0.6\lib\net40\System.Linq.Dynamic.dll</HintPath>
@@ -157,6 +158,11 @@
     <Compile Include="Roles\Dto\CreateRoleDto.cs" />
     <Compile Include="Roles\Dto\GetRoleListDto.cs" />
     <Compile Include="Roles\Dto\UpdateRoleDto.cs" />
+    <Compile Include="Settings\Dto\GeneralSettingDto.cs" />
+    <Compile Include="Settings\Dto\TenantSettingDto.cs" />
+    <Compile Include="Settings\Dto\UserSettingDto.cs" />
+    <Compile Include="Settings\ISettingAppService.cs" />
+    <Compile Include="Settings\SettingAppService.cs" />
     <Compile Include="SpartanApplicationModule.cs" />
     <Compile Include="SpartanAppServiceBase.cs" />
     <Compile Include="MultiTenancy\ITenantAppService.cs" />

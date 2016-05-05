@@ -179,8 +179,8 @@
     <Compile Include="Authorization\Roles\StaticRoleNames.cs" />
     <Compile Include="Editions\EditionManager.cs" />
     <Compile Include="Features\FeatureValueStore.cs" />
-    <Compile Include="MultiTenancy\Tenant.cs" />
-    <Compile Include="MultiTenancy\TenantManager.cs" />
+    <Compile Include="Tenants\Tenant.cs" />
+    <Compile Include="Tenants\TenantManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Authorization\Roles\Role.cs" />
     <Compile Include="Authorization\Roles\RoleManager.cs" />

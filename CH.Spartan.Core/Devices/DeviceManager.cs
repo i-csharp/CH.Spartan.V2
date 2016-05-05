@@ -11,7 +11,7 @@ using Abp.IdentityFramework;
 using Abp.Runtime.Caching;
 using CH.Spartan.DeviceTypes;
 using CH.Spartan.Domain;
-using CH.Spartan.MultiTenancy;
+using CH.Spartan.Tenants;
 using CH.Spartan.Nodes;
 using Microsoft.AspNet.Identity;
 

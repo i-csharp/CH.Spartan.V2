@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Abp.Authorization;
 using Abp.Authorization.Users;
 using Abp.Extensions;
-using CH.Spartan.MultiTenancy;
+using CH.Spartan.Tenants;
 using Microsoft.AspNet.Identity;
 
 namespace CH.Spartan.Users

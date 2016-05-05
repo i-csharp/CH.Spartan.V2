@@ -13,7 +13,7 @@ using Abp.Extensions;
 using Abp.Timing;
 using CH.Spartan.DeviceTypes;
 using CH.Spartan.Infrastructure;
-using CH.Spartan.MultiTenancy;
+using CH.Spartan.Tenants;
 using CH.Spartan.Users;
 using CH.Spartan.Devices;
 namespace CH.Spartan.Web.Models

@@ -1,6 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
-using CH.Spartan.MultiTenancy;
+using CH.Spartan.Tenants;
 
 namespace CH.Spartan.Sessions.Dto
 {

@@ -9,7 +9,7 @@ using CH.Spartan.Editions;
 using CH.Spartan.Users;
 using Microsoft.AspNet.Identity;
 
-namespace CH.Spartan.MultiTenancy
+namespace CH.Spartan.Tenants
 {
     
     public class TenantManager : AbpTenantManager<Tenant, Role, User>

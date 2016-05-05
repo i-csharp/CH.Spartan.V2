@@ -7,7 +7,7 @@ using Abp.Web.Models;
 using Abp.WebApi.Controllers;
 using CH.Spartan.Api.Models;
 using CH.Spartan.Authorization.Roles;
-using CH.Spartan.MultiTenancy;
+using CH.Spartan.Tenants;
 using CH.Spartan.Users;
 using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Security;

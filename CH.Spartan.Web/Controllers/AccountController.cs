@@ -16,7 +16,7 @@ using Abp.Threading;
 using Abp.UI;
 using Abp.Web.Mvc.Models;
 using CH.Spartan.Authorization.Roles;
-using CH.Spartan.MultiTenancy;
+using CH.Spartan.Tenants;
 using CH.Spartan.Users;
 using CH.Spartan.Web.Models.Account;
 using Microsoft.AspNet.Identity;

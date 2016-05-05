@@ -14,7 +14,7 @@ using CH.Spartan.Devices;
 using CH.Spartan.Domain;
 using CH.Spartan.Infrastructure;
 using CH.Spartan.Maps;
-using CH.Spartan.MultiTenancy;
+using CH.Spartan.Tenants;
 using CH.Spartan.Nodes;
 using MySql.Data.MySqlClient;
 using Dapper;

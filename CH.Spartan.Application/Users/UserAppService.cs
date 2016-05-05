@@ -11,7 +11,7 @@ using Abp.Linq.Extensions;
 using CH.Spartan.Users.Dto;
 using Abp.Extensions;
 using Abp.Runtime.Session;
-using CH.Spartan.MultiTenancy;
+using CH.Spartan.Tenants;
 using CH.Spartan.Infrastructure;
 
 namespace CH.Spartan.Users

@@ -10,7 +10,7 @@ using Abp.Runtime.Session;
 using Abp.TestBase;
 using CH.Spartan.EntityFramework;
 using CH.Spartan.Migrations.SeedData;
-using CH.Spartan.MultiTenancy;
+using CH.Spartan.Tenants;
 using CH.Spartan.Users;
 using Castle.MicroKernel.Registration;
 using EntityFramework.DynamicFilters;

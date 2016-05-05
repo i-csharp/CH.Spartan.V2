@@ -2,7 +2,7 @@
 using Abp.MultiTenancy;
 using CH.Spartan.Users;
 
-namespace CH.Spartan.MultiTenancy
+namespace CH.Spartan.Tenants
 {
     public class Tenant : AbpTenant<Tenant, User>
     {

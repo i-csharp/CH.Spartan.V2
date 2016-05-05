@@ -1,7 +1,7 @@
 using Abp.Authorization.Roles;
 using Abp.Authorization.Users;
 using Abp.Domain.Repositories;
-using CH.Spartan.MultiTenancy;
+using CH.Spartan.Tenants;
 using CH.Spartan.Users;
 
 namespace CH.Spartan.Authorization.Roles

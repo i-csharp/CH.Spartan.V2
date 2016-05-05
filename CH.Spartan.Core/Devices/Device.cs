@@ -11,7 +11,7 @@ using Abp.Domain.Entities.Auditing;
 using CH.Spartan.Areas;
 using CH.Spartan.DeviceTypes;
 using CH.Spartan.Infrastructure;
-using CH.Spartan.MultiTenancy;
+using CH.Spartan.Tenants;
 using CH.Spartan.Nodes;
 using CH.Spartan.Users;
 using Abp.Extensions;

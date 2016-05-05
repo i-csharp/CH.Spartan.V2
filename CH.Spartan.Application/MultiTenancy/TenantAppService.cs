@@ -8,13 +8,13 @@ using Abp.Domain.Uow;
 using Abp.Linq.Extensions;
 using CH.Spartan.Authorization.Roles;
 using CH.Spartan.Editions;
-using CH.Spartan.MultiTenancy.Dto;
+using CH.Spartan.Tenants.Dto;
 using CH.Spartan.Users;
 using Abp.Extensions;
 using System.Data.Entity;
 using CH.Spartan.Infrastructure;
 
-namespace CH.Spartan.MultiTenancy
+namespace CH.Spartan.Tenants
 {
     public class TenantAppService : SpartanAppServiceBase, ITenantAppService
     {

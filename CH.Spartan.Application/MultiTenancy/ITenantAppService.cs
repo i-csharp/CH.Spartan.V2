@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
-using CH.Spartan.MultiTenancy.Dto;
+using CH.Spartan.Tenants.Dto;
 
-namespace CH.Spartan.MultiTenancy
+namespace CH.Spartan.Tenants
 {
     public interface ITenantAppService : IApplicationService
     {

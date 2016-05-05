@@ -18,7 +18,7 @@ using Abp.Zero;
 using Abp.Zero.Configuration;
 using CH.Spartan.Authorization.Roles;
 using CH.Spartan.Infrastructure;
-using CH.Spartan.MultiTenancy;
+using CH.Spartan.Tenants;
 using Microsoft.AspNet.Identity;
 
 namespace CH.Spartan.Users

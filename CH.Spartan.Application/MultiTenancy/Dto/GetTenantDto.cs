@@ -1,7 +1,7 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 
-namespace CH.Spartan.MultiTenancy.Dto
+namespace CH.Spartan.Tenants.Dto
 {
     [AutoMap(typeof (Tenant))]
     public class GetTenantDto : EntityDto, IOutputDto

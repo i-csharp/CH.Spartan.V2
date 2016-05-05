@@ -18,7 +18,7 @@ using CH.Spartan.DeviceStocks;
 using CH.Spartan.DeviceTypes;
 using CH.Spartan.Infrastructure;
 using CH.Spartan.Maps;
-using CH.Spartan.MultiTenancy;
+using CH.Spartan.Tenants;
 using CH.Spartan.Nodes;
 
 namespace CH.Spartan.Devices

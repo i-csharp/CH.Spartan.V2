@@ -5,7 +5,7 @@ using Abp.Zero.EntityFramework;
 using CH.Spartan.Authorization.Roles;
 using CH.Spartan.Devices;
 using CH.Spartan.DeviceTypes;
-using CH.Spartan.MultiTenancy;
+using CH.Spartan.Tenants;
 using CH.Spartan.Users;
 using MySql.Data.Entity;
 using CH.Spartan.Areas;

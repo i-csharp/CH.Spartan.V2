@@ -2,7 +2,7 @@ using Abp.Authorization.Users;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using CH.Spartan.Authorization.Roles;
-using CH.Spartan.MultiTenancy;
+using CH.Spartan.Tenants;
 
 namespace CH.Spartan.Users
 {

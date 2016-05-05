@@ -2,7 +2,7 @@
 using Abp.AutoMapper;
 using CH.Spartan.Infrastructure;
 
-namespace CH.Spartan.MultiTenancy.Dto
+namespace CH.Spartan.Tenants.Dto
 {
     [AutoMapFrom(typeof(Tenant))]
     public class GetTenantListDto : AuditedEntityDto

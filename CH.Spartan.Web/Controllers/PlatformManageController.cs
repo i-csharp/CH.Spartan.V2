@@ -11,7 +11,7 @@ using CH.Spartan.DealRecords.Dto;
 using CH.Spartan.Devices;
 using CH.Spartan.Devices.Dto;
 using CH.Spartan.Infrastructure;
-using CH.Spartan.MultiTenancy;
+using CH.Spartan.Tenants;
 using CH.Spartan.Users;
 using CH.Spartan.Users.Dto;
 

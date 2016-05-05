@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CH.Spartan.DeviceTypes;
 using CH.Spartan.Infrastructure;
-using CH.Spartan.MultiTenancy;
+using CH.Spartan.Tenants;
 using CH.Spartan.Users;
 
 namespace CH.Spartan.DeviceStocks
