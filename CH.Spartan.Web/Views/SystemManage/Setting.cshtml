@@ -3,26 +3,6 @@
 @section styles
 {
     @Styles.Render("~/styles/plugins/edit")
-    <style type="text/css">
-        .tabs-container ul > li > a {
-            border-radius: 0px;
-        }
-
-        .tabs-container .panel-body {
-            border: 0;
-            height: 599px;
-            overflow: auto;
-        }
-
-        .checkbox.i-checks label:first-child {
-            padding-left: 0px;
-        }
-
-        .checkbox.i-checks label:last-child {
-            padding-left: 15px;
-        }
-    </style>
-
 }
 @section scripts
 {
@@ -56,37 +36,199 @@
         })(jQuery);
     </script>
 }
-<div class="ibox float-e-margins @SpartanConsts.DefaultAnimate edit-col-1">
+<div class="wrapper wrapper-content @SpartanConsts.DefaultAnimate edit-col-1">
     <form class="form" id="form">
-        <div class="tabs-container">
-            <ul class="nav nav-tabs">
-                <li class="active">
-                    <a data-toggle="tab" href="#tab-base">基本资料</a>
-                </li>
-                <li class="">
-                    <a data-toggle="tab" href="#tab-setting">设备设置</a>
-                </li>
-            </ul>
-            <div class="tab-content col-md-4 col-sm-6 col-xs-8">
-                <div id="tab-base" class="tab-pane active">
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                            <p class="help-block m-b-none">Example block-level help text here.</p>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tabs-container">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#tab-base">常规设置</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#tab-email">邮件设置</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#tab-map">地图设置</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#tab-push">推送设置</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#tab-connect">互联设置</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#tab-wechat">微信设置</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#tab-mq">队列设置</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content col-md-4 col-sm-6 col-xs-8">
+                        <div id="tab-base" class="tab-pane active">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="control-label" for="General_Host_Index">@L("租主默认首页"):</label>
+                                    <input class="form-control required" type="text" id="General_Host_Index" name="General_Host_Index" value="@Model.GeneralSetting.General_Host_Index" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_Tenant_Index">@L("租户默认首页"):</label>
+                                    <input class="form-control required" type="text" id="General_Tenant_Index" name="General_Tenant_Index" value="@Model.GeneralSetting.General_Tenant_Index" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_User_Index">@L("客户默认首页"):</label>
+                                    <input class="form-control required" type="text" id="General_User_Index" name="General_User_Index" value="@Model.GeneralSetting.General_User_Index" />
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                            <p class="help-block m-b-none">Example block-level help text here.</p>
+                        <div id="tab-email" class="tab-pane">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="control-label" for="General_Mail_IsEnable">@L("发送邮件"):</label>
+                                    @Html.GetSelectByEnable("General_Mail_IsEnable", value: Model.GeneralSetting.General_Mail_IsEnable)
+                                    <span class="help-block">@L("是否开启")</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_Mail_Send_Email">@L("发送人"):</label>
+                                    <input class="form-control required" type="text" id="General_Mail_Send_Email" name="General_Mail_Send_Email" value="@Model.GeneralSetting.General_Mail_Send_Email" />
+                                    <span class="help-block">@L("发送人邮箱")</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_Mail_UserName">@L("账户"):</label>
+                                    <input class="form-control required" type="text" id="General_Mail_UserName" name="General_Mail_UserName" value="@Model.GeneralSetting.General_Mail_UserName" />
+                                    <span class="help-block">@L("发送人账户")</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_Mail_Password">@L("密码"):</label>
+                                    <input class="form-control required" type="text" id="General_Mail_Password" name="General_Mail_Password" value="@Model.GeneralSetting.General_Mail_Password" />
+                                    <span class="help-block">@L("发送人邮箱密码")</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_Mail_Smtp">@L("服务器"):</label>
+                                    <input class="form-control required" type="text" id="General_Mail_Smtp" name="General_Mail_Smtp" value="@Model.GeneralSetting.General_Mail_Smtp" />
+                                    <span class="help-block">@L("发送邮件服务器(Smtp)")</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_Mail_Port">@L("端口"):</label>
+                                    <input class="form-control required" type="text" id="General_Mail_Port" name="General_Mail_Port" value="@Model.GeneralSetting.General_Mail_Port" />
+                                    <span class="help-block">@L("发送服务器端口号")</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-map" class="tab-pane">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="control-label" for="General_Map_AMapAk">@L("高德地图密钥"):</label>
+                                    <input class="form-control required" type="text" id="General_Map_AMapAk" name="General_Map_AMapAk" value="@Model.GeneralSetting.General_Map_AMapAk" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_Map_AMapAk_Api">@L("高德地图API密钥"):</label>
+                                    <input class="form-control required" type="text" id="General_Map_AMapAk_Api" name="General_Map_AMapAk_Api" value="@Model.GeneralSetting.General_Map_AMapAk_Api" />
+                                    <span class="help-block">@L("用于解析地理位置")</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_Map_BaiduAk">@L("百度地图密钥"):</label>
+                                    <input class="form-control required" type="text" id="General_Map_BaiduAk" name="General_Map_BaiduAk" value="@Model.GeneralSetting.General_Map_BaiduAk" />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-push" class="tab-pane">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="control-label" for="General_Push_IsEnable">@L("推送信息"):</label>
+                                    @Html.GetSelectByEnable("General_Push_IsEnable", value: Model.GeneralSetting.General_Push_IsEnable)
+                                    <span class="help-block">@L("是否开启")</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_Push_AppKey">@L("AppKey"):</label>
+                                    <input class="form-control required" type="text" id="General_Push_AppKey" name="General_Push_AppKey" value="@Model.GeneralSetting.General_Push_AppKey" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_Push_Master_Secret">@L("MasterSecret"):</label>
+                                    <input class="form-control required" type="text" id="General_Push_Master_Secret" name="General_Push_Master_Secret" value="@Model.GeneralSetting.General_Push_Master_Secret" />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-connect" class="tab-pane">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="control-label" for="General_QQ_AppId">@L("QQ登录接入Id"):</label>
+                                    <input class="form-control required" type="text" id="General_QQ_AppId" name="General_QQ_AppId" value="@Model.GeneralSetting.General_QQ_AppId" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_QQ_AppSecrett">@L("QQ登录接入密钥"):</label>
+                                    <input class="form-control required" type="text" id="General_QQ_AppSecrett" name="General_QQ_AppSecrett" value="@Model.GeneralSetting.General_QQ_AppSecrett" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_WeiXin_AppId">@L("微信登录接入Id"):</label>
+                                    <input class="form-control required" type="text" id="General_WeiXin_AppId" name="General_WeiXin_AppId" value="@Model.GeneralSetting.General_WeiXin_AppId" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_WeiXin_AppSecret">@L("微信登录接入密钥"):</label>
+                                    <input class="form-control required" type="text" id="General_WeiXin_AppSecret" name="General_WeiXin_AppSecret" value="@Model.GeneralSetting.General_WeiXin_AppSecret" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label" for="General_WeiBo_AppId">@L("微博登录接入Id"):</label>
+                                    <input class="form-control required" type="text" id="General_WeiBo_AppId" name="General_WeiBo_AppId" value="@Model.GeneralSetting.General_WeiBo_AppId" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_WeiBo_AppSecret">@L("微博登录接入密钥"):</label>
+                                    <input class="form-control required" type="text" id="General_WeiBo_AppSecret" name="General_WeiBo_AppSecret" value="@Model.GeneralSetting.General_WeiBo_AppSecret" />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-wechat" class="tab-pane">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="control-label" for="General_WeChat_ApiUrl">@L("微信接口地址"):</label>
+                                    <input class="form-control required" type="text" id="General_WeChat_ApiUrl" name="General_WeChat_ApiUrl" value="@Model.GeneralSetting.General_WeChat_ApiUrl" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_WeChat_AppId">@L("微信应用接入Id"):</label>
+                                    <input class="form-control required" type="text" id="General_WeChat_AppId" name="General_WeChat_AppId" value="@Model.GeneralSetting.General_WeChat_AppId" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_WeChat_AppSecret">@L("微信应用接入密钥"):</label>
+                                    <input class="form-control required" type="text" id="General_WeChat_AppSecret" name="General_WeChat_AppSecret" value="@Model.GeneralSetting.General_WeChat_AppSecret" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_WeChat_Id">@L("微信应用账号"):</label>
+                                    <input class="form-control required" type="text" id="General_WeChat_Id" name="General_WeChat_Id" value="@Model.GeneralSetting.General_WeChat_Id" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_WeChat_Token">@L("微信应用加密令牌"):</label>
+                                    <input class="form-control required" type="text" id="General_WeChat_Token" name="General_WeChat_Token" value="@Model.GeneralSetting.General_WeChat_Token" />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-mq" class="tab-pane">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="control-label" for="General_ActiveMq_Message_Name">@L("消息队列名字"):</label>
+                                    <input class="form-control required" type="text" id="General_ActiveMq_Message_Name" name="General_ActiveMq_Message_Name" value="@Model.GeneralSetting.General_ActiveMq_Message_Name" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_ActiveMq_Message_Uri">@L("消息队列地址"):</label>
+                                    <input class="form-control required" type="text" id="General_ActiveMq_Message_Uri" name="General_ActiveMq_Message_Uri" value="@Model.GeneralSetting.General_ActiveMq_Message_Uri" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_ActiveMq_Instruction_Name">@L("指令队列名字"):</label>
+                                    <input class="form-control required" type="text" id="General_ActiveMq_Instruction_Name" name="General_ActiveMq_Instruction_Name" value="@Model.GeneralSetting.General_ActiveMq_Instruction_Name" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="General_ActiveMq_Instruction_Uri">@L("指令队列地址"):</label>
+                                    <input class="form-control required" type="text" id="General_ActiveMq_Instruction_Uri" name="General_ActiveMq_Instruction_Uri" value="@Model.GeneralSetting.General_ActiveMq_Instruction_Uri" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div id="tab-setting" class="tab-pane">
-                    <div class="panel-body">
-                  
-                    </div>
-                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-primary ml5" id="btn-save">@L("保存")</button>
             </div>
         </div>
     </form>

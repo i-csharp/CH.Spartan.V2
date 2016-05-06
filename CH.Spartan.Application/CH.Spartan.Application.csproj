@@ -146,10 +146,10 @@
     <Compile Include="Notifications\Dto\GetNotificationListDto.cs" />
     <Compile Include="Notifications\INotificationAppService.cs" />
     <Compile Include="Notifications\NotificationAppService.cs" />
-    <Compile Include="MultiTenancy\Dto\GetTenantDto.cs" />
-    <Compile Include="MultiTenancy\Dto\CreateTenantDto.cs" />
-    <Compile Include="MultiTenancy\Dto\GetTenantListDto.cs" />
-    <Compile Include="MultiTenancy\Dto\UpdateTenantDto.cs" />
+    <Compile Include="Tenants\Dto\GetTenantDto.cs" />
+    <Compile Include="Tenants\Dto\CreateTenantDto.cs" />
+    <Compile Include="Tenants\Dto\GetTenantListDto.cs" />
+    <Compile Include="Tenants\Dto\UpdateTenantDto.cs" />
     <Compile Include="Nodes\Dto\CreateNodeDto.cs" />
     <Compile Include="Nodes\Dto\GetNodeListDto.cs" />
     <Compile Include="Nodes\Dto\UpdateNodeDto.cs" />
@@ -165,8 +165,8 @@
     <Compile Include="Settings\SettingAppService.cs" />
     <Compile Include="SpartanApplicationModule.cs" />
     <Compile Include="SpartanAppServiceBase.cs" />
-    <Compile Include="MultiTenancy\ITenantAppService.cs" />
-    <Compile Include="MultiTenancy\TenantAppService.cs" />
+    <Compile Include="Tenants\ITenantAppService.cs" />
+    <Compile Include="Tenants\TenantAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Roles\IRoleAppService.cs" />
     <Compile Include="Roles\Dto\UpdateRolePermissionsInput.cs" />

@@ -22,7 +22,7 @@ namespace CH.Spartan.Settings
                     General_Host_Index = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_Host_Index),
                     General_Tenant_Index = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_Tenant_Index),
                     General_User_Index = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_User_Index),
-                    General_Mail_IsEnable = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_Mail_IsEnable),
+                    General_Mail_IsEnable = SettingManager.GetSettingValueForApplication<bool>(SpartanSettingKeys.General_Mail_IsEnable),
                     General_Mail_Password = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_Mail_Password),
                     General_Mail_Port = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_Mail_Port),
                     General_Mail_Send_Email = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_Mail_Send_Email),
@@ -32,7 +32,7 @@ namespace CH.Spartan.Settings
                     General_Map_AMapAk_Api = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_Map_AMapAk_Api),
                     General_Map_BaiduAk = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_Map_BaiduAk),
                     General_Push_AppKey = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_Push_AppKey),
-                    General_Push_IsEnable = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_Push_IsEnable),
+                    General_Push_IsEnable = SettingManager.GetSettingValueForApplication<bool>(SpartanSettingKeys.General_Push_IsEnable),
                     General_Push_Master_Secret = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_Push_Master_Secret),
                     General_QQ_AppId = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_QQ_AppId),
                     General_QQ_AppSecrett = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_QQ_AppSecrett),
@@ -60,7 +60,7 @@ namespace CH.Spartan.Settings
             await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_Host_Index, input.GeneralSetting.General_Host_Index);
             await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_Tenant_Index, input.GeneralSetting.General_Tenant_Index);
             await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_User_Index, input.GeneralSetting.General_User_Index);
-            await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_Mail_IsEnable, input.GeneralSetting.General_Mail_IsEnable);
+            await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_Mail_IsEnable, input.GeneralSetting.General_Mail_IsEnable.ToString());
             await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_Mail_Password, input.GeneralSetting.General_Mail_Password);
             await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_Mail_Port, input.GeneralSetting.General_Mail_Port);
             await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_Mail_Send_Email, input.GeneralSetting.General_Mail_Send_Email);
@@ -69,7 +69,7 @@ namespace CH.Spartan.Settings
             await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_Map_AMapAk, input.GeneralSetting.General_Map_AMapAk);
             await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_Map_AMapAk_Api, input.GeneralSetting.General_Map_AMapAk_Api);
             await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_Map_BaiduAk, input.GeneralSetting.General_Map_BaiduAk);
-            await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_Push_IsEnable, input.GeneralSetting.General_Push_IsEnable);
+            await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_Push_IsEnable, input.GeneralSetting.General_Push_IsEnable.ToString());
             await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_Push_Master_Secret, input.GeneralSetting.General_Push_Master_Secret);
             await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_QQ_AppId, input.GeneralSetting.General_QQ_AppId);
             await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_QQ_AppSecrett, input.GeneralSetting.General_QQ_AppSecrett);
@@ -114,11 +114,9 @@ namespace CH.Spartan.Settings
             {
                 UserSetting = new UserSettingDto
                 {
-                    User_IsEnableAlarm = SettingManager.GetSettingValueForUser(SpartanSettingKeys.User_IsEnableAlarm, AbpSession.GetTenantId(),AbpSession.GetUserId()),
-                    User_AlarmSound = SettingManager.GetSettingValueForUser(SpartanSettingKeys.User_AlarmSound, AbpSession.GetTenantId(),AbpSession.GetUserId()),
-                    User_IsSendEmail = SettingManager.GetSettingValueForUser(SpartanSettingKeys.User_IsSendEmail, AbpSession.GetTenantId(),AbpSession.GetUserId()),
-                    User_IsSendApp = SettingManager.GetSettingValueForUser(SpartanSettingKeys.User_IsSendApp, AbpSession.GetTenantId(),AbpSession.GetUserId()),
-                    User_ReceiveAlarmType = SettingManager.GetSettingValueForUser(SpartanSettingKeys.User_ReceiveAlarmType, AbpSession.GetTenantId(),AbpSession.GetUserId()),
+                    User_IsEnableAlarm = SettingManager.GetSettingValueForUser<bool>(SpartanSettingKeys.User_IsEnableAlarm, AbpSession.GetTenantId(),AbpSession.GetUserId()),
+                    User_IsSendEmail = SettingManager.GetSettingValueForUser<bool>(SpartanSettingKeys.User_IsSendEmail, AbpSession.GetTenantId(),AbpSession.GetUserId()),
+                    User_IsSendApp = SettingManager.GetSettingValueForUser<bool>(SpartanSettingKeys.User_IsSendApp, AbpSession.GetTenantId(),AbpSession.GetUserId()),
                     User_ReceiveEmails = SettingManager.GetSettingValueForUser(SpartanSettingKeys.User_ReceiveEmails, AbpSession.GetTenantId(),AbpSession.GetUserId()),
                     User_ReceiveStartTime = SettingManager.GetSettingValueForUser(SpartanSettingKeys.User_ReceiveStartTime, AbpSession.GetTenantId(),AbpSession.GetUserId()),
                     User_ReceiveEndTime = SettingManager.GetSettingValueForUser(SpartanSettingKeys.User_ReceiveEndTime, AbpSession.GetTenantId(),AbpSession.GetUserId()),
@@ -131,11 +129,9 @@ namespace CH.Spartan.Settings
 
         public async Task UpdateUserSettingAsync(UpdateUserSettingInput input)
         {
-            await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(),SpartanSettingKeys.User_IsEnableAlarm, input.UserSetting.User_IsEnableAlarm);
-            await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(),SpartanSettingKeys.User_AlarmSound, input.UserSetting.User_AlarmSound);
-            await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(),SpartanSettingKeys.User_IsSendEmail, input.UserSetting.User_IsSendEmail);
-            await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(),SpartanSettingKeys.User_IsSendApp, input.UserSetting.User_IsSendApp);
-            await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(),SpartanSettingKeys.User_ReceiveAlarmType, input.UserSetting.User_ReceiveAlarmType);
+            await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(),SpartanSettingKeys.User_IsEnableAlarm, input.UserSetting.User_IsEnableAlarm.ToString());
+            await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(),SpartanSettingKeys.User_IsSendEmail, input.UserSetting.User_IsSendEmail.ToString());
+            await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(),SpartanSettingKeys.User_IsSendApp, input.UserSetting.User_IsSendApp.ToString());
             await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(),SpartanSettingKeys.User_ReceiveEmails, input.UserSetting.User_ReceiveEmails);
             await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(),SpartanSettingKeys.User_ReceiveStartTime, input.UserSetting.User_ReceiveStartTime);
             await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(),SpartanSettingKeys.User_ReceiveEndTime, input.UserSetting.User_ReceiveEndTime);

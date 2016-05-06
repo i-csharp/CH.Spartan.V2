@@ -63,53 +63,51 @@
 <div class="wrapper wrapper-content @(SpartanConsts.DefaultAnimate) list">
     <div class="row">
         <div class="col-sm-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-content list-toolbar">
-                    <form role="form" class="form-inline" id="form">
-                        <div class="form-group">
-                            <select class="form-control w180" name="SearchTime">
-                                <option value="CreationTime">@L("交易时间")</option>
-                            </select>
-                        </div>
-                        @Html.DateTimeRange()
-                        <div class="form-group" data-toggle="tooltip" data-placement="bottom" title="@L("交易类型")">
-                            @Html.GetSelectByEnum(typeof(EnumDealRecordType),"Type", L("不限(交易类型)"))
-                        </div>
-                        <div class="form-group">
-                            @Html.SearchText(L("请输入交易流水号/交易名称"), L("查询"))
-                        </div>
-                    </form>
-                </div>
-                <div class="ibox-content list-content">
-                    <div class="btn-group hidden-xs" id="tableToolbar" role="group">
-                        @if (IsGranted(SpartanPermissionNames.AgentManages_DealRecord_Delete))
-                        {
-                            <button type="button" class="btn btn-outline btn-default" id="btn-del"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                        }
+            <div class="list-toolbar">
+                <form role="form" class="form-inline" id="form">
+                    <div class="form-group">
+                        <select class="form-control w180" name="SearchTime">
+                            <option value="CreationTime">@L("交易时间")</option>
+                        </select>
                     </div>
-                    <table id="table"
-                           data-toggle="table"
-                           data-url="/AgentManage/GetDealRecordListPaged"
-                           data-toolbar="#tableToolbar"
-                           data-height="550"
-                           data-query-params="queryParams"
-                           data-show-export="true">
-                        <thead>
-                            <tr>
-                                <th data-field="state" data-checkbox="true"></th>
-                                <th data-field="id" data-sortable="true" data-width="50">@L("编号")</th>
-                                <th data-field="op" data-formatter="formatterOp" data-width="60">@L("操作")</th>
-                                <th data-field="no">@L("交易流水号")</th>
-                                <th data-field="typeText" data-sortable="true" data-sort-name="type">@L("交易类型")</th>
-                                <th data-field="name">@L("交易名称")</th>
-                                <th data-field="remark">@L("交易备注")</th>
-                                <th data-field="amount" data-sortable="true">@L("交易金额")</th>
-                                <th data-field="isSucceedText" data-sortable="true" data-sort-name="isSucceed">@L("交易成功")</th>
-                                <th data-field="creationTime">@L("交易时间")</th>
-                            </tr>
-                        </thead>
-                    </table>
+                    @Html.DateTimeRange()
+                    <div class="form-group" data-toggle="tooltip" data-placement="bottom" title="@L("交易类型")">
+                        @Html.GetSelectByEnum(typeof(EnumDealRecordType),"Type", L("不限(交易类型)"))
+                    </div>
+                    <div class="form-group">
+                        @Html.SearchText(L("请输入交易流水号/交易名称"), L("查询"))
+                    </div>
+                </form>
+            </div>
+            <div class="list-content">
+                <div class="btn-group hidden-xs" id="tableToolbar" role="group">
+                    @if (IsGranted(SpartanPermissionNames.AgentManages_DealRecord_Delete))
+                        {
+                        <button type="button" class="btn btn-outline btn-default" id="btn-del"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                        }
                 </div>
+                <table id="table"
+                       data-toggle="table"
+                       data-url="/AgentManage/GetDealRecordListPaged"
+                       data-toolbar="#tableToolbar"
+                       data-height="550"
+                       data-query-params="queryParams"
+                       data-show-export="true">
+                    <thead>
+                        <tr>
+                            <th data-field="state" data-checkbox="true"></th>
+                            <th data-field="id" data-sortable="true" data-width="50">@L("编号")</th>
+                            <th data-field="op" data-formatter="formatterOp" data-width="60">@L("操作")</th>
+                            <th data-field="no">@L("交易流水号")</th>
+                            <th data-field="typeText" data-sortable="true" data-sort-name="type">@L("交易类型")</th>
+                            <th data-field="name">@L("交易名称")</th>
+                            <th data-field="remark">@L("交易备注")</th>
+                            <th data-field="amount" data-sortable="true">@L("交易金额")</th>
+                            <th data-field="isSucceedText" data-sortable="true" data-sort-name="isSucceed">@L("交易成功")</th>
+                            <th data-field="creationTime">@L("交易时间")</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>

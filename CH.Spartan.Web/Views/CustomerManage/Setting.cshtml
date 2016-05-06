@@ -1,0 +1,104 @@
+﻿@model CH.Spartan.Settings.Dto.GetUpdateUserSettingOutput
+@using Abp.Timing
+@section styles
+{
+    @Styles.Render("~/styles/plugins/edit")
+}
+@section scripts
+{
+    @Scripts.Render("~/scripts/plugins/edit")
+    <script type="text/javascript">
+        (function ($) {
+            if (!$) {
+                return;
+            }
+            var from = $("#form");
+            $(function () {
+                from.validate({
+                    submitHandler: function (form) {
+                        var data =
+                        {
+                            userSetting: abp.utils.getFormData(form)
+                        };
+                        abp.ajax({
+                            url: "/CustomerManage/UpdateSetting",
+                            data: JSON.stringify(data)
+                        }).done(function (result) {
+                            abp.message.success("@L("保存成功")");
+                        });
+                    }
+                });
+
+                $("#btn-save").click(function () {
+                    from.submit();
+                });
+            });
+        })(jQuery);
+    </script>
+}
+<div class="wrapper wrapper-content @SpartanConsts.DefaultAnimate edit-col-1">
+    <form class="form" id="form">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tabs-container">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#tab-base">常规设置</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#tab-email">邮件</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content col-md-4 col-sm-6 col-xs-8">
+                        <div id="tab-base" class="tab-pane active">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="control-label" for="User_IsEnableAlarm">@L("开启报警"):</label>
+                                    @Html.GetSelectByEnable("User_IsEnableAlarm", value: Model.UserSetting.User_IsEnableAlarm)
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="User_IsSendApp">@L("推送到手机"):</label>
+                                    @Html.GetSelectByEnable("User_IsSendApp", value: Model.UserSetting.User_IsSendApp)
+                                    <span class="help-block">@L("当有报警信息的时候是否要推送到手机。注意：App需要保证在手机后台运行")</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="User_ReceiveStartTime">@L("接收开始时间"):</label>
+                                    <input class="form-control required" type="text" id="User_ReceiveStartTime" name="User_ReceiveStartTime" value="@Model.UserSetting.User_ReceiveStartTime" onfocus="WdatePicker({ dateFmt: 'HH:mm:ss', minDate: '00:00:00', maxDate: '23:59:59' })"/>
+                                    <span class="help-block">@L("报警信息允许接收开始时间")</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="User_ReceiveEndTime">@L("接收结束时间"):</label>
+                                    <input class="form-control required" type="text" id="User_ReceiveEndTime" name="User_ReceiveEndTime" value="@Model.UserSetting.User_ReceiveEndTime" onfocus="WdatePicker({ dateFmt: 'HH:mm:ss', minDate: '00:00:00', maxDate: '23:59:59' })"/>
+                                    <span class="help-block">@L("报警信息允许接收结束时间")</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="User_FortifyRadius">@L("报警设防半径"):</label>
+                                    <input class="form-control required range[300,1000]" type="text" id="User_FortifyRadius" name="User_FortifyRadius" value="@Model.UserSetting.User_FortifyRadius"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-email" class="tab-pane">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="control-label" for="User_IsSendEmail">@L("发送邮件"):</label>
+                                    @Html.GetSelectByEnable("User_IsSendEmail", value: Model.UserSetting.User_IsSendEmail)
+                                    <span class="help-block">@L("当有报警信息的时候是否要发送到邮箱")</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="User_ReceiveEmails">@L("接收邮件列表"):</label>
+                                    <input class="form-control required" type="text" id="User_ReceiveEmails" name="User_ReceiveEmails" value="@Model.UserSetting.User_ReceiveEmails" />
+                                    <span class="help-block">@L("报警信息接收邮件列表")</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-primary ml5" id="btn-save">@L("保存")</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -13,27 +13,17 @@ namespace CH.Spartan.Settings.Dto
         /// <summary>
         /// 报警是否开启
         /// </summary>
-        public string User_IsEnableAlarm { get; set; }
-
-        /// <summary>
-        /// 报警信息报警声音
-        /// </summary>
-        public string User_AlarmSound { get; set; }
+        public bool User_IsEnableAlarm { get; set; }
 
         /// <summary>
         /// 报警信息是否发送邮件
         /// </summary>
-        public string User_IsSendEmail { get; set; }
+        public bool User_IsSendEmail { get; set; }
 
         /// <summary>
         /// 报警信息是否发送APP
         /// </summary>
-        public string User_IsSendApp { get; set; }
-
-        /// <summary>
-        /// 接收报警类型
-        /// </summary>
-        public string User_ReceiveAlarmType { get; set; }
+        public bool User_IsSendApp { get; set; }
 
         /// <summary>
         /// 报警信息接收邮件列表

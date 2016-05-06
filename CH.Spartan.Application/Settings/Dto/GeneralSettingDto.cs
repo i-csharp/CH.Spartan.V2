@@ -28,7 +28,7 @@ namespace CH.Spartan.Settings.Dto
         /// <summary>
         /// 是否开启发送邮件
         /// </summary>
-        public string General_Mail_IsEnable { get; set; }
+        public bool General_Mail_IsEnable { get; set; }
 
         /// <summary>
         /// 发送人邮箱密码
@@ -78,7 +78,7 @@ namespace CH.Spartan.Settings.Dto
         /// <summary>
         /// 允许推送
         /// </summary>
-        public string General_Push_IsEnable { get; set; }
+        public bool General_Push_IsEnable { get; set; }
 
         /// <summary>
         /// 推送MasterSecret

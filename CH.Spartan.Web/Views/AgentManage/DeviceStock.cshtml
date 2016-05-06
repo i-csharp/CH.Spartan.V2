@@ -33,7 +33,7 @@
                 //area: ["995px", "750px"],
                 //area: ["1250px", "750px"],
                 btn: ["@L("确定")", '@L("取消")'],
-                yes: function(index, layero) {
+                yes: function (index, layero) {
                     var iframeWin = layero.find("iframe")[0].contentWindow;
                     iframeWin.submitForm(callback);
                 }
@@ -49,7 +49,7 @@
                 //area: ["995px", "750px"],
                 //area: ["1250px", "750px"],
                 btn: ["@L("保存")", '@L("取消")'],
-                yes: function(index, layero) {
+                yes: function (index, layero) {
                     var iframeWin = layero.find("iframe")[0].contentWindow;
                     iframeWin.submitForm(callback);
                 }
@@ -62,12 +62,12 @@
             if (typeof ids == "string") {
                 ids = [{ id: ids }];
             }
-            abp.message.confirm("@L("确定删除")?", function(yes) {
+            abp.message.confirm("@L("确定删除")?", function (yes) {
                 if (!yes) return;
                 abp.ajax({
                     url: "/AgentManage/DeleteDeviceStock",
                     data: JSON.stringify(ids)
-                }).done(function(result) {
+                }).done(function (result) {
                     abp.notify.success("@L("删除成功")");
                     $("#table").bootstrapTable("refresh");
                 });
@@ -79,26 +79,26 @@
             return $.extend({}, params, abp.utils.getFormData("#form"));
         }
 
-        (function($) {
+        (function ($) {
             if (!$) {
                 return;
             }
 
             //搜索
-            $("#btn-search").click(function() {
+            $("#btn-search").click(function () {
                 $("#table").bootstrapTable("refresh");
             });
 
             //添加
-            $("#btn-add").click(function() {
+            $("#btn-add").click(function () {
                 create();
             });
 
             //删除
-            $("#btn-del").click(function() {
+            $("#btn-del").click(function () {
                 var rows = $("#table").bootstrapTable("getSelections");
                 var ids = [];
-                $.each(rows, function(index, item) {
+                $.each(rows, function (index, item) {
                     ids.push({ id: item.id });
                 });
                 if (ids.length == 0) {
@@ -115,44 +115,42 @@
 <div class="wrapper wrapper-content @(SpartanConsts.DefaultAnimate) list">
     <div class="row">
         <div class="col-sm-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-content list-toolbar">
-                    <form role="form" class="form-inline" id="form">
-                        <div class="form-group">
-                            @Html.SearchText(L("请输入设备号"), L("查询"))
-                        </div>
-                    </form>
-                </div>
-                <div class="ibox-content list-content">
-                    <div class="btn-group hidden-xs" id="tableToolbar" role="group">
-                        @if (IsGranted(SpartanPermissionNames.AgentManages_DeviceStock_Create))
-                        {
-                            <button type="button" class="btn btn-outline btn-default" id="btn-add"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                        }
-                        @if (IsGranted(SpartanPermissionNames.AgentManages_DeviceStock_Delete))
-                        {
-                            <button type="button" class="btn btn-outline btn-default" id="btn-del"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                        }
+            <div class="list-toolbar">
+                <form role="form" class="form-inline" id="form">
+                    <div class="form-group">
+                        @Html.SearchText(L("请输入设备号"), L("查询"))
                     </div>
-                    <table id="table"
-                           data-toggle="table"
-                           data-url="/AgentManage/GetDeviceStockListPaged"
-                           data-toolbar="#tableToolbar"
-                           data-height="550"
-                           data-query-params="queryParams"
-                           data-show-export="true">
-                        <thead>
-                            <tr>
-                                <th data-field="state" data-checkbox="true"></th>
-                                <th data-field="id" data-sortable="true" data-width="50">@L("编号")</th>
-                                <th data-field="op" data-formatter="formatterOp" data-width="120">@L("操作")</th>
-                                <th data-field="no" data-sortable="true">@L("设备号")</th>
-                                <th data-field="lastModificationTime" data-sortable="true">@L("最后编辑时间")</th>
-                                <th data-field="creationTime" data-sortable="true">@L("创建时间")</th>
-                            </tr>
-                        </thead>
-                    </table>
+                </form>
+            </div>
+            <div class="list-content">
+                <div class="btn-group hidden-xs" id="tableToolbar" role="group">
+                    @if (IsGranted(SpartanPermissionNames.AgentManages_DeviceStock_Create))
+                        {
+                        <button type="button" class="btn btn-outline btn-default" id="btn-add"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        }
+                    @if (IsGranted(SpartanPermissionNames.AgentManages_DeviceStock_Delete))
+                        {
+                        <button type="button" class="btn btn-outline btn-default" id="btn-del"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                        }
                 </div>
+                <table id="table"
+                       data-toggle="table"
+                       data-url="/AgentManage/GetDeviceStockListPaged"
+                       data-toolbar="#tableToolbar"
+                       data-height="550"
+                       data-query-params="queryParams"
+                       data-show-export="true">
+                    <thead>
+                        <tr>
+                            <th data-field="state" data-checkbox="true"></th>
+                            <th data-field="id" data-sortable="true" data-width="50">@L("编号")</th>
+                            <th data-field="op" data-formatter="formatterOp" data-width="120">@L("操作")</th>
+                            <th data-field="no" data-sortable="true">@L("设备号")</th>
+                            <th data-field="lastModificationTime" data-sortable="true">@L("最后编辑时间")</th>
+                            <th data-field="creationTime" data-sortable="true">@L("创建时间")</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>

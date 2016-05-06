@@ -104,44 +104,42 @@
 <div class="wrapper wrapper-content @(SpartanConsts.DefaultAnimate) list">
     <div class="row">
         <div class="col-sm-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-content list-toolbar">
-                    <form role="form" class="form-inline" id="form">
-                        <div class="form-group">
-                            @Html.SearchText(L("请输入租户名/名称"), L("查询"))
-                        </div>
-                    </form>
-                </div>
-                <div class="ibox-content list-content">
-                    <div class="btn-group hidden-xs" id="tableToolbar" role="group">
-                        @if (IsGranted(SpartanPermissionNames.SystemManages_Tenant_Create))
-                        {
-                            <button type="button" class="btn btn-outline btn-default" id="btn-add"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                        }
-                        @if (IsGranted(SpartanPermissionNames.SystemManages_Tenant_Delete))
-                        {
-                            <button type="button" class="btn btn-outline btn-default" id="btn-del"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                        }
+            <div class="list-toolbar">
+                <form role="form" class="form-inline" id="form">
+                    <div class="form-group">
+                        @Html.SearchText(L("请输入租户名/名称"), L("查询"))
                     </div>
-                    <table id="table"
-                           data-toggle="table"
-                           data-url="/SystemManage/GetTenantListPaged"
-                           data-toolbar="#tableToolbar"
-                           data-height="550"
-                           data-query-params="queryParams"
-                           data-show-export="true">
-                        <thead>
-                            <tr>
-                                <th data-field="state" data-checkbox="true"></th>
-                                <th data-field="id" data-sortable="true" data-width="50">@L("编号")</th>
-                                <th data-field="op" data-formatter="formatterOp" data-width="120">@L("操作")</th>
-                                <th data-field="tenancyName" data-sortable="true">@L("租户名")</th>
-                                <th data-field="name" data-sortable="true">@L("公司名")</th>
-                                <th data-field="isActiveText" data-sortable="true">@L("允许登录")</th>
-                            </tr>
-                        </thead>
-                    </table>
+                </form>
+            </div>
+            <div class="list-content">
+                <div class="btn-group hidden-xs" id="tableToolbar" role="group">
+                    @if (IsGranted(SpartanPermissionNames.SystemManages_Tenant_Create))
+                    {
+                        <button type="button" class="btn btn-outline btn-default" id="btn-add"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                    }
+                    @if (IsGranted(SpartanPermissionNames.SystemManages_Tenant_Delete))
+                    {
+                        <button type="button" class="btn btn-outline btn-default" id="btn-del"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                    }
                 </div>
+                <table id="table"
+                       data-toggle="table"
+                       data-url="/SystemManage/GetTenantListPaged"
+                       data-toolbar="#tableToolbar"
+                       data-height="550"
+                       data-query-params="queryParams"
+                       data-show-export="true">
+                    <thead>
+                        <tr>
+                            <th data-field="state" data-checkbox="true"></th>
+                            <th data-field="id" data-sortable="true" data-width="50">@L("编号")</th>
+                            <th data-field="op" data-formatter="formatterOp" data-width="120">@L("操作")</th>
+                            <th data-field="tenancyName" data-sortable="true">@L("租户名")</th>
+                            <th data-field="name" data-sortable="true">@L("公司名")</th>
+                            <th data-field="isActiveText" data-sortable="true">@L("允许登录")</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>

@@ -10,6 +10,9 @@ namespace CH.Spartan.Settings.Dto
 {
     public class TenantSettingDto : IValidate
     {
+        /// <summary>
+        /// 设备安装默认过期时间
+        /// </summary>
         public string Tenant_Customer_InstallDevice_ExpireYear { get; set; }
     }
 
