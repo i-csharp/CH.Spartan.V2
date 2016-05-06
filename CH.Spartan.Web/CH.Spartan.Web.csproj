@@ -1212,6 +1212,7 @@
     <Content Include="Views\SystemManage\ChangePassword.cshtml" />
     <Content Include="Views\CustomerManage\Notification.cshtml" />
     <Content Include="Views\Shared\_NotificationBox.cshtml" />
+    <Content Include="Views\Shared\_UserInfoBox.cshtml" />
     <None Include="Views\SystemManage\CreateTenant.cshtml" />
     <Content Include="Views\SystemManage\UpdateTenant.cshtml" />
     <Content Include="Views\SystemManage\DeviceType.cshtml" />
