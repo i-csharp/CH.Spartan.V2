@@ -145,22 +145,22 @@ namespace CH.Spartan.Settings.Dto
         /// <summary>
         /// 消息队列名字
         /// </summary>
-        public string General_ActiveMq_Message_Name { get; set; }
+        public string General_ActiveMq_Notification_Name { get; set; }
 
         /// <summary>
         /// 消息队列地址
         /// </summary>
-        public string General_ActiveMq_Message_Uri { get; set; }
+        public string General_ActiveMq_Notification_Uri { get; set; }
 
         /// <summary>
-        /// 指令队列名字
+        /// 事件队列名字
         /// </summary>
-        public string General_ActiveMq_Instruction_Name { get; set; }
+        public string General_ActiveMq_Event_Name { get; set; }
 
         /// <summary>
-        /// 指令队列地址
+        /// 事件队列地址
         /// </summary>
-        public string General_ActiveMq_Instruction_Uri { get; set; }
+        public string General_ActiveMq_Event_Uri { get; set; }
     }
 
     public class UpdateGeneralSettingInput : IInputDto

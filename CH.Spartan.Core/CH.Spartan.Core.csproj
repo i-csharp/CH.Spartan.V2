@@ -145,10 +145,12 @@
     <Compile Include="HistoryDatas\HistoryDataHelper.cs" />
     <Compile Include="HistoryDatas\HistoryDataManager.cs" />
     <Compile Include="Instructions\InstructionMessage.cs" />
-    <Compile Include="Jobs\ActiveMqReceiveMessageWorker.cs" />
-    <Compile Include="Jobs\ActiveMqReceiveInstructionWorker.cs" />
-    <Compile Include="Jobs\ActiveMqSendInstructionWorker.cs" />
-    <Compile Include="Jobs\ActiveMqSendMessageWorker.cs" />
+    <Compile Include="Jobs\ActiveMqReceiveWorker.cs" />
+    <Compile Include="Jobs\ActiveMqReceiveNotificationWorker.cs" />
+    <Compile Include="Jobs\ActiveMqReceiveEventWorker.cs" />
+    <Compile Include="Jobs\ActiveMqSendWorker.cs" />
+    <Compile Include="Jobs\ActiveMqSendEventWorker.cs" />
+    <Compile Include="Jobs\ActiveMqSendNotificationWorker.cs" />
     <Compile Include="Jobs\SendAppJob.cs" />
     <Compile Include="Jobs\SendEmailJob.cs" />
     <Compile Include="Maps\MapLocations\AddressComponent.cs" />

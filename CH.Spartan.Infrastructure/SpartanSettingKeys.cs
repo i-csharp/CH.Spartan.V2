@@ -141,26 +141,27 @@ namespace CH.Spartan.Infrastructure
         /// 微信登录接入密钥
         /// </summary>
         public const string General_WeiXin_AppSecret = "General.WeiXin.AppSecret";
+        
+        /// <summary>
+        /// 事件队列名字
+        /// </summary>
+        public const string General_ActiveMq_Event_Name = "General.ActiveMq.Event.Name";
+
+        /// <summary>
+        /// 事件队列地址
+        /// </summary>
+        public const string General_ActiveMq_Event_Uri = "General.ActiveMq.Event.Uri";
+
 
         /// <summary>
         /// 消息队列名字
         /// </summary>
-        public const string General_ActiveMq_Message_Name = "General.ActiveMq.Message.Name";
+        public const string General_ActiveMq_Notification_Name = "General.ActiveMq.Message.Name";
 
         /// <summary>
         /// 消息队列地址
         /// </summary>
-        public const string General_ActiveMq_Message_Uri = "General.ActiveMq.Message.Uri";
-        
-        /// <summary>
-        /// 指令队列名字
-        /// </summary>
-        public const string General_ActiveMq_Instruction_Name = "General.ActiveMq.Instruction.Name";
-
-        /// <summary>
-        /// 指令队列地址
-        /// </summary>
-        public const string General_ActiveMq_Instruction_Uri = "General.ActiveMq.Instruction.Uri";
+        public const string General_ActiveMq_Notification_Uri = "General.ActiveMq.Message.Uri";
         #endregion
 
         #region 租户

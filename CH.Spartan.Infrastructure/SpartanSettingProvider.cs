@@ -44,10 +44,10 @@ namespace CH.Spartan.Infrastructure
                 new SettingDefinition(SpartanSettingKeys.General_WeiBo_AppSecret,GetDefaultSetting(SpartanSettingKeys.General_WeiBo_AppSecret,"f2206c86a2949eeb9df79222da1394a3"),L("微博登录接入密钥")),
                 new SettingDefinition(SpartanSettingKeys.General_WeiXin_AppId,GetDefaultSetting(SpartanSettingKeys.General_WeiXin_AppId,"wxdcda5516be05d99f"),L("微信登录接入Id")),
                 new SettingDefinition(SpartanSettingKeys.General_WeiXin_AppSecret,GetDefaultSetting(SpartanSettingKeys.General_WeiXin_AppSecret,"8c3e08ff4069fa8392811c83548fe7c1"),L("微信登录接入密钥")),
-                new SettingDefinition(SpartanSettingKeys.General_ActiveMq_Message_Name,GetDefaultSetting(SpartanSettingKeys.General_ActiveMq_Message_Name,"Message"),L("消息队列名字")),
-                new SettingDefinition(SpartanSettingKeys.General_ActiveMq_Message_Uri,GetDefaultSetting(SpartanSettingKeys.General_ActiveMq_Message_Uri,"tcp://localhost:61616"),L("消息队列地址")),
-                new SettingDefinition(SpartanSettingKeys.General_ActiveMq_Instruction_Name,GetDefaultSetting(SpartanSettingKeys.General_ActiveMq_Instruction_Name,"Instruction"),L("指令队列名字")),
-                new SettingDefinition(SpartanSettingKeys.General_ActiveMq_Instruction_Uri,GetDefaultSetting(SpartanSettingKeys.General_ActiveMq_Instruction_Uri,"tcp://localhost:61616"),L("指令队列地址")),
+                new SettingDefinition(SpartanSettingKeys.General_ActiveMq_Notification_Name,GetDefaultSetting(SpartanSettingKeys.General_ActiveMq_Notification_Name,"Message"),L("消息队列名字")),
+                new SettingDefinition(SpartanSettingKeys.General_ActiveMq_Notification_Uri,GetDefaultSetting(SpartanSettingKeys.General_ActiveMq_Notification_Uri,"tcp://localhost:61616"),L("消息队列地址")),
+                new SettingDefinition(SpartanSettingKeys.General_ActiveMq_Event_Name,GetDefaultSetting(SpartanSettingKeys.General_ActiveMq_Event_Name,"Event"),L("事件队列名字")),
+                new SettingDefinition(SpartanSettingKeys.General_ActiveMq_Event_Uri,GetDefaultSetting(SpartanSettingKeys.General_ActiveMq_Event_Uri,"tcp://localhost:61616"),L("事件队列地址")),
                 //租户
                 new SettingDefinition(SpartanSettingKeys.Tenant_Customer_InstallDevice_ExpireYear,GetDefaultSetting(SpartanSettingKeys.Tenant_Customer_InstallDevice_ExpireYear,"1"),L("客户安装设备过期"),scopes:SettingScopes.Tenant),
                
