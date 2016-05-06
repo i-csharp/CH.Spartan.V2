@@ -80,7 +80,7 @@ namespace CH.Spartan.Devices
                 .Include(p => p.DeviceType)
                 .WhereIf(!input.SearchText.IsNullOrEmpty(),
                     p => p.BName.Contains(input.SearchText) ||
-                         p.BDscription.Contains(input.SearchText) ||
+                         p.BDescription.Contains(input.SearchText) ||
                          p.BSimNo.Contains(input.SearchText) ||
                          p.BNo.Contains(input.SearchText))
                 .WhereIf(input.UserId.HasValue, p => p.UserId == input.UserId.Value)

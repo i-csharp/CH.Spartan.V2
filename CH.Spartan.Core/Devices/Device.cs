@@ -46,7 +46,7 @@ namespace CH.Spartan.Devices
         /// 设备描述
         /// </summary>
         [MaxLength(50)]
-        public string BDscription { get; set; }
+        public string BDescription { get; set; }
 
         /// <summary>
         /// 设备图标类型

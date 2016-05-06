@@ -8,6 +8,7 @@
     @Scripts.Render("~/scripts/plugins/edit")
     <script type="text/javascript">
         var from = $("#form");
+        var callback = null;
         (function ($) {
             if (!$) {
                 return;
@@ -43,38 +44,26 @@
     </script>
 }
 
-<div class="ibox float-e-margins @(SpartanConsts.DefaultAnimate) edit-col-1">
-    <form class="form-horizontal" id="form">
-        <div class="ibox-content">
-            <div class="row">
-                <input name="Id" class="form-control" type="hidden" value="@Model.Tenant.Id">
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">@L("公司名")：</label>
-                        <div class="col-sm-8">
-                            <input name="Name" class="form-control required stringCheck" type="text" value="@Model.Tenant.Name">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">@L("租户名")：</label>
-                        <div class="col-sm-8">
-                            <input name="TenancyName" class="form-control" type="text" readonly value="@Model.Tenant.TenancyName">
-                        </div>
-                    </div>
+<div class="wrapper wrapper-content @(SpartanConsts.DefaultAnimate) edit-col-1">
+    <form class="form" id="form">
+        <input name="Id" class="form-control" type="hidden" value="@Model.Tenant.Id">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="control-label" for="Name">@L("公司名")：</label>
+                    <input name="Name" id="Name" class="form-control required stringCheck" type="text" value="@Model.Tenant.Name">
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">@L("电话")：</label>
-                        <div class="col-sm-8">
-                            <input name="Phone" class="form-control required isTel" type="text" value="@Model.Tenant.Phone">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">@L("允许登录")：</label>
-                        <div class="col-sm-8">
-                            @Html.GetSelectByEnable("IsActive","", Model.Tenant.IsActive,"")
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label class="control-label" for="TenancyName">@L("租户名")：</label>
+                    <input name="TenancyName" id="TenancyName" class="form-control" type="text" readonly value="@Model.Tenant.TenancyName">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="Phone">@L("电话")：</label>
+                    <input name="Phone" id="Phone" class="form-control required isTel" type="text" value="@Model.Tenant.Phone">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="IsActive">@L("允许登录")：</label>
+                    @Html.GetSelectByEnable("IsActive", "", Model.Tenant.IsActive, "")
                 </div>
             </div>
         </div>

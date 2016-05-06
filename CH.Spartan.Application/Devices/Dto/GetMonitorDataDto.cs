@@ -24,7 +24,7 @@ namespace CH.Spartan.Devices.Dto
         /// <summary>
         /// 设备描述
         /// </summary>
-        public string BDscription { get; set; }
+        public string BDescription { get; set; }
 
         /// <summary>
         /// 纬度

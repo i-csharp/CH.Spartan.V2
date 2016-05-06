@@ -1227,7 +1227,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="Views\CustomerManage\Area.cshtml" />
-    <Content Include="Views\CustomerManage\UpdateArea.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Abp\Abp.AutoMapper\Abp.AutoMapper.csproj">

@@ -294,7 +294,7 @@ namespace CH.Spartan.Migrations
                         BName = c.String(nullable: false, maxLength: 100, storeType: "nvarchar"),
                         BNo = c.String(nullable: false, maxLength: 50, storeType: "nvarchar"),
                         BSimNo = c.String(nullable: false, maxLength: 50, storeType: "nvarchar"),
-                        BDscription = c.String(maxLength: 50, storeType: "nvarchar"),
+                        BDescription = c.String(maxLength: 50, storeType: "nvarchar"),
                         BIconType = c.String(nullable: false, maxLength: 50, storeType: "nvarchar"),
                         BDeviceTypeId = c.Int(nullable: false),
                         BCode = c.String(nullable: false, maxLength: 50, storeType: "nvarchar"),

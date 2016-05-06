@@ -59,7 +59,7 @@ namespace CH.Spartan.Migrations.SeedData
                     BName = name,
                     BNo = no,
                     BSimNo = simNo,
-                    BDscription = description,
+                    BDescription = description,
                     BDeviceTypeId = deviceType.Id,
                     BIconType = "PlaneCar",
                     BNodeId = 1,

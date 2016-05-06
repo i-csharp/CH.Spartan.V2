@@ -82,10 +82,10 @@
 }
 
 <div class="wrapper wrapper-content @SpartanConsts.DefaultAnimate edit-col-1 pb0">
-    <div class="row">
-        <div class="col-sm-12">
-            <form id="form">
-                <input name="Id" class="form-control" type="hidden" value="@Model.Device.Id">
+    <form id="form">
+        <input name="Id" class="form-control" type="hidden" value="@Model.Device.Id">
+        <div class="row">
+            <div class="col-sm-12">
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
                         <li class="active">
@@ -105,27 +105,27 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="BNo">@L("设备号"):</label>
-                                    <input class="form-control required isDigits" type="text" id="BNo" name="BNo" value="@Model.Device.BNo" />
+                                    <input class="form-control required isDigits" type="text" id="BNo" name="BNo" value="@Model.Device.BNo"/>
                                     <span class="help-block">@L("设备的唯一编码 一般是IMEI号或者序列号")</span>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="BSimNo">@L("设备卡号"):</label>
-                                    <input class="form-control required isDigits" type="text" id="BSimNo" name="BSimNo" value="@Model.Device.BSimNo" />
+                                    <input class="form-control required isDigits" type="text" id="BSimNo" name="BSimNo" value="@Model.Device.BSimNo"/>
                                     <span class="help-block">@L("设备所使用的SIM卡卡号")</span>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="BName">@L("设备名字"):</label>
-                                    <input class="form-control required" type="text" id="BName" name="BName" value="@Model.Device.BName" />
+                                    <input class="form-control required" type="text" id="BName" name="BName" value="@Model.Device.BName"/>
                                     <span class="help-block">@L("例如：粤B95270")</span>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label" for="BDscription">@L("设备描述"):</label>
-                                    <input class="form-control required" type="text" id="BDscription" name="BDscription" value="@Model.Device.BDscription" />
+                                    <label class="control-label" for="BDescription">@L("设备描述"):</label>
+                                    <input class="form-control required" type="text" id="BDescription" name="BDescription" value="@Model.Device.BDescription"/>
                                     <span class="help-block">@L("例如：隐藏安装/安装在车头")</span>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="BExpireTime">@L("过期时间"):</label>
-                                    <input class="form-control required" type="text" id="BExpireTime" name="BExpireTime" disabled="disabled" value="@Model.BExpireTime" />
+                                    <input class="form-control required" type="text" id="BExpireTime" name="BExpireTime" disabled="disabled" value="@Model.BExpireTime"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
@@ -134,12 +134,12 @@
                             <div class="panel-body pt5 pb5">
                                 <div class="form-group">
                                     <label class="control-label" for="SLimitSpeed">@L("超速限制"):</label>
-                                    <input class="form-control required isInteger w180" type="text" id="SLimitSpeed" name="SLimitSpeed" value="@Model.Device.SLimitSpeed" />
+                                    <input class="form-control required isInteger w180" type="text" id="SLimitSpeed" name="SLimitSpeed" value="@Model.Device.SLimitSpeed"/>
                                     <span class="help-block">@L("触发超速报警的最大速度 km/h")</span>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">@L("进出区域"):</label>
-                                    <input class="form-control" type="hidden" id="SInOutArea" name="SInOutArea" value="@Model.Device.SInOutArea" />
+                                    <input class="form-control" type="hidden" id="SInOutArea" name="SInOutArea" value="@Model.Device.SInOutArea"/>
                                     <span class="help-block">@L("设置进入和离开哪个区域的时候触发报警")</span>
                                     @if (Model.AllAreas.Count == 0)
                                     {
@@ -164,7 +164,8 @@
                         </div>
                     </div>
                 </div>
-            </form>
+
+            </div>
         </div>
-    </div>
+    </form>
 </div>

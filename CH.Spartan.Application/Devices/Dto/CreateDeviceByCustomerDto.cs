@@ -19,7 +19,7 @@ namespace CH.Spartan.Devices.Dto
         /// 设备描述
         /// </summary>
         [MaxLength(100)]
-        public string BDscription { get; set; }
+        public string BDescription { get; set; }
 
         /// <summary>
         /// 设备类型Id

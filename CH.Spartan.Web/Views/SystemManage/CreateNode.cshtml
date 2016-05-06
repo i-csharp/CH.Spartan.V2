@@ -24,7 +24,7 @@
                             url: "/SystemManage/CreateNode",
                             data: JSON.stringify(data)
                         }).done(function (result) {
-                             if (callback) {
+                            if (callback) {
                                 callback(result, "@L("添加成功")");
                             }
                             abp.dialog.close();
@@ -43,23 +43,17 @@
     </script>
 }
 
-<div class="ibox float-e-margins @(SpartanConsts.DefaultAnimate) edit-col-1">
-    <form class="form-horizontal" id="form">
-        <div class="ibox-content">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">@L("节点名字"):</label>
-                        <div class="col-sm-8 ">
-                            <input class="form-control required stringCheck" type="text" id="Name" name="Name" value="@Model.Node.Name" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">@L("历史数据表"):</label>
-                        <div class="col-sm-8">
-                            <input class="form-control required isEnglishAndNumber" type="text" id="HistoryTableName" name="HistoryTableName" value="@Model.Node.HistoryTableName" />
-                        </div>
-                    </div>
+<div class="wrapper wrapper-content @(SpartanConsts.DefaultAnimate) edit-col-1">
+    <form class="form" id="form">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="control-label" for="Name">@L("节点名字"):</label>
+                    <input class="form-control required stringCheck" type="text" id="Name" name="Name" value="@Model.Node.Name" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="HistoryTableName">@L("历史数据表"):</label>
+                    <input class="form-control required isEnglishAndNumber" type="text" id="HistoryTableName" name="HistoryTableName" value="@Model.Node.HistoryTableName" />
                 </div>
             </div>
         </div>

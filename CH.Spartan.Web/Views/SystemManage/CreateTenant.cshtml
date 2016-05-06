@@ -25,7 +25,7 @@
                             url: "/SystemManage/CreateTenant",
                             data: JSON.stringify(data)
                         }).done(function (result) {
-                             if (callback) {
+                            if (callback) {
                                 callback(result, "@L("添加成功")");
                             }
                             abp.dialog.close();
@@ -44,37 +44,25 @@
     </script>
 }
 
-<div class="ibox float-e-margins @(SpartanConsts.DefaultAnimate) edit-col-1">
-    <form class="form-horizontal" id="form">
-        <div class="ibox-content">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">@L("公司名")：</label>
-                        <div class="col-sm-8">
-                            <input name="Name" class="form-control required stringCheck" type="text" value="@Model.Tenant.Name">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">@L("租户名")：</label>
-                        <div class="col-sm-8">
-                            <input name="TenancyName" class="form-control required stringCheck" type="text" value="@Model.Tenant.TenancyName">
-                        </div>
-                    </div>
+<div class="wrapper wrapper-content @(SpartanConsts.DefaultAnimate) edit-col-1">
+    <form class="form" id="form">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="control-label" for="Name">@L("公司名")：</label>
+                    <input name="Name" id="Name" class="form-control required stringCheck" type="text" value="@Model.Tenant.Name">
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">@L("电话")：</label>
-                        <div class="col-sm-8">
-                            <input name="Phone" class="form-control required isTel" type="text" value="@Model.Tenant.Phone">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">@L("邮件")：</label>
-                        <div class="col-sm-8">
-                            <input name="EmailAddress" class="form-control required isEmail" type="text" value="@Model.Tenant.EmailAddress">
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label class="control-label" for="TenancyName">@L("租户名")：</label>
+                    <input name="TenancyName" id="TenancyName" class="form-control required stringCheck" type="text" value="@Model.Tenant.TenancyName">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="Phone">@L("电话")：</label>
+                    <input name="Phone" id="Phone" class="form-control required isTel" type="text" value="@Model.Tenant.Phone">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="EmailAddress">@L("邮件")：</label>
+                    <input name="EmailAddress" id="EmailAddress" class="form-control required isEmail" type="text" value="@Model.Tenant.EmailAddress">
                 </div>
             </div>
         </div>
