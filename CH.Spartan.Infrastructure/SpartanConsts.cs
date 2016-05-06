@@ -72,5 +72,23 @@ namespace CH.Spartan.Infrastructure
         Startup = 2048
     }
 
+    public enum EnumGetwayEventDataType
+    {
+        [EnumDisplayName("报警通知")]
+        AlarmNotificationData = 0
+    }
+
+    public enum EnumWebEventDataType
+    {
+        [EnumDisplayName("设备指令")]
+        InstructionData = 0,
+        [EnumDisplayName("设备已更新")]
+        DeviceUpdated=1,
+        [EnumDisplayName("设备已删除")]
+        DeviceDeleted = 1,
+        [EnumDisplayName("用户配置已更新")]
+        UserSettingUpdated = 2
+    }
+
     #endregion
 }

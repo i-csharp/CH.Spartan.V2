@@ -49,6 +49,10 @@ namespace CH.Spartan.Notifications
         [UnitOfWork]
         public virtual async Task SendAsync(AlarmNotificationData message)
         {
+            if (message == null)
+            {
+                return;
+            }
 
             User targetUser;
             using (_unitOfWorkManager.Current.DisableFilter(AbpDataFilters.MayHaveTenant))

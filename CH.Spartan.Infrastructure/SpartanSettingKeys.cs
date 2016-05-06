@@ -143,25 +143,25 @@ namespace CH.Spartan.Infrastructure
         public const string General_WeiXin_AppSecret = "General.WeiXin.AppSecret";
         
         /// <summary>
-        /// 事件队列名字
+        /// Web事件队列名字
         /// </summary>
-        public const string General_ActiveMq_Event_Name = "General.ActiveMq.Event.Name";
+        public const string General_ActiveMq_Web_Event_Name = "General.ActiveMq.Web.Event.Name";
 
         /// <summary>
-        /// 事件队列地址
+        /// Web事件队列地址
         /// </summary>
-        public const string General_ActiveMq_Event_Uri = "General.ActiveMq.Event.Uri";
+        public const string General_ActiveMq_Web_Event_Uri = "General.ActiveMq.Web.Event.Uri";
 
 
         /// <summary>
-        /// 消息队列名字
+        /// 网关事件队列名字
         /// </summary>
-        public const string General_ActiveMq_Notification_Name = "General.ActiveMq.Message.Name";
+        public const string General_ActiveMq_Gateway_Event_Name = "General.ActiveMq.Gateway.Event.Name";
 
         /// <summary>
-        /// 消息队列地址
+        /// 网关事件队列地址
         /// </summary>
-        public const string General_ActiveMq_Notification_Uri = "General.ActiveMq.Message.Uri";
+        public const string General_ActiveMq_Gateway_Event_Uri = "General.ActiveMq.Gateway.Event.Uri";
         #endregion
 
         #region 租户

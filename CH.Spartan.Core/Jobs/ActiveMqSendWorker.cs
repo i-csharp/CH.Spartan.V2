@@ -43,7 +43,7 @@ namespace CH.Spartan.Jobs
                 _connection = _factory.CreateConnection();
                 _connection.ExceptionListener += (p) =>
                 {
-                    Logger.Error($"与事件队列服务器断开连接![{Name}-{Uri}]");
+                    Logger.Error($"与Web事件队列服务器断开连接![{Name}-{Uri}]");
                     IsConnected = false;
                 };
                 _connection.ClientId = $"{ClientId}ActiveMqSend{Name}Worker";
@@ -60,14 +60,17 @@ namespace CH.Spartan.Jobs
             }
         }
 
-        public bool Send(object message)
+        public Task<bool> SendAsync(object message)
         {
             try
             {
                 if (IsConnected)
                 {
-                    _producer.Send(new ActiveMQObjectMessage() {Body = message }, MsgDeliveryMode.NonPersistent, MsgPriority.Normal, TimeSpan.MinValue);
-                    return true;
+                    Task.Run(()=>
+                    {
+                        _producer.Send(new ActiveMQObjectMessage() { Body = message }, MsgDeliveryMode.NonPersistent, MsgPriority.Normal, TimeSpan.MinValue);
+                    });
+                    return Task.FromResult(true);
                 }
             }
             catch (Exception ex)
@@ -75,7 +78,7 @@ namespace CH.Spartan.Jobs
                 Logger.Error(ex.ToString());
                 IsConnected = false;
             }
-            return false;
+            return Task.FromResult(false);
         }
 
     }

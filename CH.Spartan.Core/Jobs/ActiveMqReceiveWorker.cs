@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.Configuration;
 using Abp.Dependency;
+using Abp.Events.Bus;
 using Abp.Json;
 using Apache.NMS;
 using Apache.NMS.ActiveMQ;
@@ -19,7 +20,7 @@ namespace CH.Spartan.Jobs
     {
         protected readonly ILogger Logger;
         protected readonly ISettingManager SettingManager;
-
+        protected readonly IEventBus EventBus;
         private IConnectionFactory _factory;
         private IConnection _connection;
         private ISession _session;
@@ -30,10 +31,11 @@ namespace CH.Spartan.Jobs
         protected string Uri { get; set; }
         protected bool IsConnected { get; set; }
 
-        protected ActiveMqReceiveWorker(ILogger logger, ISettingManager settingManager)
+        protected ActiveMqReceiveWorker(ILogger logger, ISettingManager settingManager, IEventBus eventBus)
         {
             Logger = logger;
             SettingManager = settingManager;
+            EventBus = eventBus;
         }
 
         protected virtual void TryConnect()

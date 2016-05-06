@@ -143,24 +143,24 @@ namespace CH.Spartan.Settings.Dto
         public string General_WeiXin_AppSecret { get; set; }
 
         /// <summary>
-        /// 消息队列名字
+        /// 网关事件队列名字
         /// </summary>
-        public string General_ActiveMq_Notification_Name { get; set; }
+        public string General_ActiveMq_Gateway_Event_Name { get; set; }
 
         /// <summary>
-        /// 消息队列地址
+        /// 网关事件队列地址
         /// </summary>
-        public string General_ActiveMq_Notification_Uri { get; set; }
+        public string General_ActiveMq_Gateway_Event_Uri { get; set; }
 
         /// <summary>
-        /// 事件队列名字
+        /// Web事件队列名字
         /// </summary>
-        public string General_ActiveMq_Event_Name { get; set; }
+        public string General_ActiveMq_Web_Event_Name { get; set; }
 
         /// <summary>
-        /// 事件队列地址
+        /// Web事件队列地址
         /// </summary>
-        public string General_ActiveMq_Event_Uri { get; set; }
+        public string General_ActiveMq_Web_Event_Uri { get; set; }
     }
 
     public class UpdateGeneralSettingInput : IInputDto

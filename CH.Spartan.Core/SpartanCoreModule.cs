@@ -28,10 +28,13 @@ namespace CH.Spartan
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
-            RecurringJob.AddOrUpdate<ActiveMqSendEventWorker>(p => p.DoWork("Default"), Cron.Minutely);
-            RecurringJob.AddOrUpdate<ActiveMqReceiveNotificationWorker>(p => p.DoWork("Default"), Cron.Minutely);
+            RecurringJob.AddOrUpdate<ActiveMqSendWebEventWorker>(p => p.DoWork("Default"), Cron.Minutely);
+            RecurringJob.AddOrUpdate<ActiveMqReceiveGetwayEventWorker>(p => p.DoWork("Default"), Cron.Minutely);
+
             //for test
-            //RecurringJob.AddOrUpdate<ActiveMqSendNotificationWorker>(p => p.DoWork("Default"), Cron.Minutely);
+            RecurringJob.AddOrUpdate<ActiveMqReceiveWebEventWorker>(p => p.DoWork("Default"), Cron.Minutely);
+            RecurringJob.AddOrUpdate<ActiveMqSendGetwayEventWorker>(p => p.DoWork("Default"), Cron.Minutely);
+           
         }
     }
 }

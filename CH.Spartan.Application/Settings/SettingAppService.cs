@@ -45,10 +45,10 @@ namespace CH.Spartan.Settings
                     General_WeiBo_AppSecret = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_WeiBo_AppSecret),
                     General_WeiXin_AppId = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_WeiXin_AppId),
                     General_WeiXin_AppSecret = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_WeiXin_AppSecret),
-                    General_ActiveMq_Notification_Name = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_ActiveMq_Notification_Name),
-                    General_ActiveMq_Notification_Uri = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_ActiveMq_Notification_Uri),
-                    General_ActiveMq_Event_Name = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_ActiveMq_Event_Name),
-                    General_ActiveMq_Event_Uri = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_ActiveMq_Event_Uri)
+                    General_ActiveMq_Gateway_Event_Name = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_ActiveMq_Gateway_Event_Name),
+                    General_ActiveMq_Gateway_Event_Uri = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_ActiveMq_Gateway_Event_Uri),
+                    General_ActiveMq_Web_Event_Name = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_ActiveMq_Web_Event_Name),
+                    General_ActiveMq_Web_Event_Uri = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_ActiveMq_Web_Event_Uri)
                 }
             };
 
@@ -82,10 +82,10 @@ namespace CH.Spartan.Settings
             await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_WeiBo_AppSecret, input.GeneralSetting.General_WeiBo_AppSecret);
             await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_WeiXin_AppId, input.GeneralSetting.General_WeiXin_AppId);
             await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_WeiXin_AppSecret, input.GeneralSetting.General_WeiXin_AppSecret);
-            await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_ActiveMq_Notification_Name, input.GeneralSetting.General_ActiveMq_Notification_Name);
-            await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_ActiveMq_Notification_Uri, input.GeneralSetting.General_ActiveMq_Notification_Uri);
-            await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_ActiveMq_Event_Name, input.GeneralSetting.General_ActiveMq_Event_Name);
-            await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_ActiveMq_Event_Uri, input.GeneralSetting.General_ActiveMq_Event_Uri);
+            await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_ActiveMq_Gateway_Event_Name, input.GeneralSetting.General_ActiveMq_Gateway_Event_Name);
+            await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_ActiveMq_Gateway_Event_Uri, input.GeneralSetting.General_ActiveMq_Gateway_Event_Uri);
+            await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_ActiveMq_Web_Event_Name, input.GeneralSetting.General_ActiveMq_Web_Event_Name);
+            await SettingManager.ChangeSettingForApplicationAsync(SpartanSettingKeys.General_ActiveMq_Web_Event_Uri, input.GeneralSetting.General_ActiveMq_Web_Event_Uri);
 
 
         }
