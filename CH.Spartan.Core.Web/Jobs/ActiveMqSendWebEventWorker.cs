@@ -5,23 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.Configuration;
 using Abp.Dependency;
-using Abp.Events.Bus;
-using Abp.Json;
-using Abp.Notifications;
 using Apache.NMS;
 using Apache.NMS.ActiveMQ;
 using Apache.NMS.ActiveMQ.Commands;
 using Castle.Core.Logging;
+using CH.Spartan.Devices;
 using CH.Spartan.Events;
 using CH.Spartan.Infrastructure;
+using CH.Spartan.Instructions;
+using CH.Spartan.Jobs;
 using CH.Spartan.Notifications;
 
-namespace CH.Spartan.Jobs
+namespace CH.Spartan.Core.Web.Jobs
 {
-
-    public class ActiveMqReceiveWebEventWorker : ActiveMqReceiveWorker
+    public class ActiveMqSendWebEventWorker : ActiveMqSendWorker
     {
-        public ActiveMqReceiveWebEventWorker(ILogger logger, ISettingManager settingManager, IEventBus eventBus) : base(logger, settingManager, eventBus)
+
+        public ActiveMqSendWebEventWorker(ILogger logger, ISettingManager settingManager)
+            : base(logger, settingManager)
         {
 
         }
@@ -35,16 +36,6 @@ namespace CH.Spartan.Jobs
                 Uri = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_ActiveMq_Web_Event_Uri);
                 TryConnect();
             }
-        }
-
-        protected override void Received(IObjectMessage message)
-        {
-            var data = message as WebEventData;
-            if (data == null)
-            {
-                return;
-            }
-            EventBus.TriggerAsync(data);
         }
     }
 }

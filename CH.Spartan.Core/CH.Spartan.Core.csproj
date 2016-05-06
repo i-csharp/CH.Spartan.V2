@@ -49,6 +49,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.LoggingFacility.3.3.0\lib\net45\Castle.Facilities.Logging.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Services.Logging.Log4netIntegration, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core-log4net.3.3.0\lib\net45\Castle.Services.Logging.Log4netIntegration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
@@ -71,6 +75,10 @@
     </Reference>
     <Reference Include="Hangfire.SqlServer, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Hangfire.SqlServer.1.5.3\lib\net45\Hangfire.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -142,18 +150,13 @@
     <Compile Include="Devices\DeviceManager.cs" />
     <Compile Include="DeviceTypes\DeviceTypeHelper.cs" />
     <Compile Include="Domain\ManagerBase.cs" />
-    <Compile Include="Events\EventHandler.cs" />
     <Compile Include="Events\GetwayEventData.cs" />
     <Compile Include="Events\WebEventData.cs" />
     <Compile Include="HistoryDatas\HistoryDataHelper.cs" />
     <Compile Include="HistoryDatas\HistoryDataManager.cs" />
     <Compile Include="Instructions\InstructionMessage.cs" />
     <Compile Include="Jobs\ActiveMqReceiveWorker.cs" />
-    <Compile Include="Jobs\ActiveMqReceiveGetwayEventWorker.cs" />
-    <Compile Include="Jobs\ActiveMqReceiveWebEventWorker.cs" />
     <Compile Include="Jobs\ActiveMqSendWorker.cs" />
-    <Compile Include="Jobs\ActiveMqSendWebEventWorker.cs" />
-    <Compile Include="Jobs\ActiveMqSendGetwayEventWorker.cs" />
     <Compile Include="Jobs\SendAppJob.cs" />
     <Compile Include="Jobs\SendEmailJob.cs" />
     <Compile Include="Maps\MapLocations\AddressComponent.cs" />

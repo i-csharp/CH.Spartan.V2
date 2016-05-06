@@ -9,14 +9,12 @@ using CH.Spartan.Notifications;
 
 namespace CH.Spartan.Events
 {
-
-
     public class GetwayEventData : EventData
     {
         public EnumGetwayEventDataType DataType { get; set; }
 
-        public object EntityId { get; set; }
+        public string EntityId { get; set; }
 
-        public object Data { get; set; }
+        public string Data { get; set; }
     }
 }
