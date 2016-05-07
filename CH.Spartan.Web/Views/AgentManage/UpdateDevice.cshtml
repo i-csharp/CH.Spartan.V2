@@ -89,12 +89,12 @@
                         <div id="tab-base" class="tab-pane active">
                             <div class="panel-body pt5 pb5">
                                 <div class="form-group">
-                                    <label class="control-label" for="UserId">@L("所属客户"):</label>
-                                    @Html.AutoCompleteUser("UserId", L("请选择客户"), Model.Device.UserId, "required w180")
+                                    <label class="control-label block" for="UserId">@L("所属客户"):</label>
+                                    @Html.AutoCompleteUser("UserId", L("请选择客户"), Model.Device.UserId, "required w300")
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="BDeviceTypeId">@L("设备类型"):</label>
-                                    @Html.GetSelectByDeviceType("BDeviceTypeId", L("请选择设备类型"), Model.Device.BDeviceTypeId, "required w180")
+                                    @Html.GetSelectByDeviceType("BDeviceTypeId", L("请选择设备类型"), Model.Device.BDeviceTypeId, "required")
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="BNo">@L("设备号"):</label>

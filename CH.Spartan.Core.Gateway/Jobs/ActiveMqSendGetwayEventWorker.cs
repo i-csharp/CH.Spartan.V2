@@ -18,7 +18,7 @@ using CH.Spartan.Notifications;
 
 namespace CH.Spartan.Core.Gateway.Jobs
 {
-    public class ActiveMqSendGetwayEventWorker : ActiveMqSendWorker
+    public class ActiveMqSendGetwayEventWorker : ActiveMqSendWorker, ISingletonDependency
     {
       
         public ActiveMqSendGetwayEventWorker(ILogger logger, ISettingManager settingManager)
@@ -32,7 +32,8 @@ namespace CH.Spartan.Core.Gateway.Jobs
             if (!IsConnected)
             {
                 ClientId = clientId;
-                Name = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_ActiveMq_Gateway_Event_Name);
+                Name =
+                    SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_ActiveMq_Gateway_Event_Name);
                 Uri = SettingManager.GetSettingValueForApplication(SpartanSettingKeys.General_ActiveMq_Gateway_Event_Uri);
                 TryConnect();
             }

@@ -18,7 +18,7 @@ using CH.Spartan.Notifications;
 namespace CH.Spartan.Core.Web.Jobs
 {
 
-    public class ActiveMqReceiveGetwayEventWorker : ActiveMqReceiveWorker
+    public class ActiveMqReceiveGetwayEventWorker : ActiveMqReceiveWorker, ISingletonDependency
     {
 
         public ActiveMqReceiveGetwayEventWorker(ILogger logger, ISettingManager settingManager, IEventBus eventBus) : base(logger,settingManager, eventBus)

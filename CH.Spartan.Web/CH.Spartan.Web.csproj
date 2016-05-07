@@ -1215,6 +1215,7 @@
     <Content Include="Views\Shared\_UserInfoBox.cshtml" />
     <Content Include="Views\CustomerManage\Setting.cshtml" />
     <Content Include="Views\AgentManage\Setting.cshtml" />
+    <Content Include="Views\Home\Faq.cshtml" />
     <None Include="Views\SystemManage\CreateTenant.cshtml" />
     <Content Include="Views\SystemManage\UpdateTenant.cshtml" />
     <Content Include="Views\SystemManage\DeviceType.cshtml" />

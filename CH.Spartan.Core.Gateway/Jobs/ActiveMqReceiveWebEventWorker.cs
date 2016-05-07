@@ -20,7 +20,7 @@ using CH.Spartan.Notifications;
 namespace CH.Spartan.Core.Gateway.Jobs
 {
 
-    public class ActiveMqReceiveWebEventWorker : ActiveMqReceiveWorker
+    public class ActiveMqReceiveWebEventWorker : ActiveMqReceiveWorker, ISingletonDependency
     {
         public ActiveMqReceiveWebEventWorker(ILogger logger, ISettingManager settingManager, IEventBus eventBus) : base(logger, settingManager, eventBus)
         {

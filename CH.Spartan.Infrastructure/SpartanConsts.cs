@@ -90,5 +90,15 @@ namespace CH.Spartan.Infrastructure
         UserSettingUpdated = 2
     }
 
+    public enum EnumInstructionType
+    {
+        [EnumDisplayName("继电器1")]
+        Relay1 = 1,
+        [EnumDisplayName("继电器2")]
+        Relay2 = 2,
+        [EnumDisplayName("继电器3")]
+        Relay3 =3,
+    }
+
     #endregion
 }

@@ -124,9 +124,9 @@ namespace CH.Spartan.Devices.Dto
         public string BName { get; set; }
 
         /// <summary>
-        /// 设备描述
+        /// 设备号
         /// </summary>
-        public string BDescription { get; set; }
+        public string BNo { get; set; }
 
         /// <summary>
         /// 过期时间

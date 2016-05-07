@@ -83,5 +83,10 @@ namespace CH.Spartan.Web.Controllers
             return View(model);
         }
 
+        public ActionResult Faq()
+        {
+            return View();
+        }
+
     }
 }

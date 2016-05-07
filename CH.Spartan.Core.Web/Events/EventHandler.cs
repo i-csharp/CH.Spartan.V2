@@ -19,7 +19,9 @@ namespace CH.Spartan.Core.Web.Events
     public class EventHandler :
         ISingletonDependency,
         IEventHandler<EntityUpdatedEventData<Device>>,
-        IEventHandler<EntityDeletedEventData<Device>>
+        IEventHandler<EntityDeletedEventData<Device>>,
+        IEventHandler<UserSettingUpdatedEventData>,
+        IEventHandler<IssuedInstructionEventData>
     {
         private readonly ActiveMqSendWebEventWorker _activeMqSendWebEventWorker;
         private readonly AlarmNotificationManager _alarmNotificationManager;
@@ -32,12 +34,42 @@ namespace CH.Spartan.Core.Web.Events
 
         public void HandleEvent(EntityUpdatedEventData<Device> eventData)
         {
-
+            _activeMqSendWebEventWorker.SendAsync(new WebEventData
+            {
+                DataType = EnumWebEventDataType.DeviceUpdated,
+                Data = eventData.Entity.Id.ToString(),
+                EntityId = eventData.Entity.Id.ToString()
+            });
         }
 
         public void HandleEvent(EntityDeletedEventData<Device> eventData)
         {
+            _activeMqSendWebEventWorker.SendAsync(new WebEventData
+            {
+                DataType = EnumWebEventDataType.DeviceDeleted,
+                Data = eventData.Entity.Id.ToString(),
+                EntityId = eventData.Entity.Id.ToString()
+            });
+        }
 
+        public void HandleEvent(UserSettingUpdatedEventData eventData)
+        {
+            _activeMqSendWebEventWorker.SendAsync(new WebEventData
+            {
+                DataType = EnumWebEventDataType.UserSettingUpdated,
+                Data = eventData.ToJsonString(),
+                EntityId = eventData.UserId.ToString()
+            });
+        }
+
+        public void HandleEvent(IssuedInstructionEventData eventData)
+        {
+            _activeMqSendWebEventWorker.SendAsync(new WebEventData
+            {
+                DataType = EnumWebEventDataType.InstructionData,
+                Data = eventData.ToJsonString(),
+                EntityId = eventData.DeviceId.ToString()
+            });
         }
 
         public void HandleEvent(GetwayEventData eventData)
@@ -45,11 +77,14 @@ namespace CH.Spartan.Core.Web.Events
             switch (eventData.DataType)
             {
                 case EnumGetwayEventDataType.AlarmNotificationData:
-                    _alarmNotificationManager.SendAsync(eventData.Data.ToObject<AlarmNotificationData>());
+                    _alarmNotificationManager.Send(eventData.Data.ToObject<AlarmNotificationData>());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+
+      
     }
 }

@@ -18,6 +18,7 @@ using CH.Spartan.Infrastructure;
 using CH.Spartan.Jobs;
 using CH.Spartan.Maps;
 using CH.Spartan.Users;
+using Microsoft.AspNet.Identity;
 
 namespace CH.Spartan.Notifications
 {
@@ -47,7 +48,7 @@ namespace CH.Spartan.Notifications
         }
 
         [UnitOfWork]
-        public virtual async Task SendAsync(AlarmNotificationData message)
+        public virtual void Send(AlarmNotificationData message)
         {
             if (message == null)
             {
@@ -57,7 +58,7 @@ namespace CH.Spartan.Notifications
             User targetUser;
             using (_unitOfWorkManager.Current.DisableFilter(AbpDataFilters.MayHaveTenant))
             {
-                targetUser = await _userManager.FindByIdAsync(message.UserId);
+                targetUser = _userManager.FindById(message.UserId);
                 if (targetUser == null)
                 {
                     throw new UserFriendlyException("不存在用户: " + message.UserId);
@@ -72,24 +73,22 @@ namespace CH.Spartan.Notifications
                         .ToString();
             }
 
-            await
-                _notificationPublisher.PublishAsync(
-                    SpartanConsts.YouHaveAAlarmMessage,
-                    message,
-                    new EntityIdentifier(typeof (Device), message.DeviceId),
-                    message.Severity,
-                    new[] {targetUser.Id}
-                    );
+
+            _notificationPublisher.Publish(
+                SpartanConsts.YouHaveAAlarmMessage,
+                message,
+                new EntityIdentifier(typeof (Device), message.DeviceId),
+                message.Severity,
+                new[] {targetUser.Id}
+                );
 
             //发送邮件
-            var isSendEmail =
-                await
-                    _settingManager.GetSettingValueForUserAsync<bool>(SpartanSettingKeys.User_IsSendEmail,
-                        targetUser.TenantId, targetUser.Id);
+            var isSendEmail = _settingManager.GetSettingValueForUser<bool>(SpartanSettingKeys.User_IsSendEmail,
+                targetUser.TenantId, targetUser.Id);
 
             if (isSendEmail)
             {
-                await _backgroundJobManager.EnqueueAsync<SendEmailJob, SendEmailJobArgs>(
+                _backgroundJobManager.Enqueue<SendEmailJob, SendEmailJobArgs>(
                     new SendEmailJobArgs
                     {
                         Subject = message.Title,
@@ -100,14 +99,12 @@ namespace CH.Spartan.Notifications
             }
 
             //推送APP
-            var isSendApp =
-                await
-                    _settingManager.GetSettingValueForUserAsync<bool>(SpartanSettingKeys.User_IsSendApp,
-                        targetUser.TenantId, targetUser.Id);
+            var isSendApp = _settingManager.GetSettingValueForUser<bool>(SpartanSettingKeys.User_IsSendApp,
+                targetUser.TenantId, targetUser.Id);
 
             if (isSendApp)
             {
-                await _backgroundJobManager.EnqueueAsync<SendAppJob, SendAppJobArgs>(
+                _backgroundJobManager.Enqueue<SendAppJob, SendAppJobArgs>(
                     new SendAppJobArgs
                     {
                         Subject = message.Title,

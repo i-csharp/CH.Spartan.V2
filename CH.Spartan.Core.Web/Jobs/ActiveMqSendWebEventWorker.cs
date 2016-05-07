@@ -18,13 +18,13 @@ using CH.Spartan.Notifications;
 
 namespace CH.Spartan.Core.Web.Jobs
 {
-    public class ActiveMqSendWebEventWorker : ActiveMqSendWorker
+    public class ActiveMqSendWebEventWorker : ActiveMqSendWorker, ISingletonDependency
     {
 
         public ActiveMqSendWebEventWorker(ILogger logger, ISettingManager settingManager)
             : base(logger, settingManager)
         {
-
+           
         }
 
         public override void DoWork(string clientId)

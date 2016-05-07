@@ -151,6 +151,8 @@
     <Compile Include="DeviceTypes\DeviceTypeHelper.cs" />
     <Compile Include="Domain\ManagerBase.cs" />
     <Compile Include="Events\GetwayEventData.cs" />
+    <Compile Include="Events\IssuedInstructionEventData.cs" />
+    <Compile Include="Events\UserSettingUpdatedEventData.cs" />
     <Compile Include="Events\WebEventData.cs" />
     <Compile Include="HistoryDatas\HistoryDataHelper.cs" />
     <Compile Include="HistoryDatas\HistoryDataManager.cs" />

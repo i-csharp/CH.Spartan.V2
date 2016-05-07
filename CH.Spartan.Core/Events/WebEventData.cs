@@ -8,7 +8,8 @@ using CH.Spartan.Infrastructure;
 
 namespace CH.Spartan.Events
 {
-   public class WebEventData: EventData
+    [Serializable]
+    public class WebEventData: EventData
     {
         public EnumWebEventDataType DataType { get; set; }
 

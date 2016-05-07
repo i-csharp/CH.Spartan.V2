@@ -16,7 +16,7 @@ using CH.Spartan.Notifications;
 
 namespace CH.Spartan.Jobs
 {
-    public abstract class ActiveMqReceiveWorker : ISingletonDependency
+    public abstract class ActiveMqReceiveWorker
     {
         protected readonly ILogger Logger;
         protected readonly ISettingManager SettingManager;
@@ -42,12 +42,12 @@ namespace CH.Spartan.Jobs
         {
             try
             {
-                Logger.Info($"开始连接队列服务器![{Name}-{Uri}]");
+                Logger.Info($"开始连接队列服务器![Receive-{Name}-{Uri}]");
                 _factory = new ConnectionFactory(Uri);
                 _connection = _factory.CreateConnection();
                 _connection.ExceptionListener += (p) =>
                 {
-                    Logger.Error($"与队列服务器断开连接![{Name}-{Uri}]");
+                    Logger.Error($"与队列服务器断开连接![Receive-{Name}-{Uri}]");
                     IsConnected = false;
                 };
                 _connection.ClientId = $"{ClientId}ActiveMqReceive{Name}Worker";
@@ -56,11 +56,11 @@ namespace CH.Spartan.Jobs
                 _consumer = _session.CreateDurableConsumer(new ActiveMQTopic(Name), _connection.ClientId, null, false);
                 _consumer.Listener += OnReceived;
                 IsConnected = true;
-                Logger.Info($"连接队列服务器成功![{Name}-{Uri}]");
+                Logger.Info($"连接队列服务器成功![Receive-{Name}-{Uri}]");
             }
             catch (Exception ex)
             {
-                Logger.Error($"连接对列服务器失败![{Name}-{Uri}]", ex);
+                Logger.Error($"连接对列服务器失败![Receive-{Name}-{Uri}]", ex);
                 IsConnected = false;
             }
         }

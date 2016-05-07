@@ -81,10 +81,7 @@
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li>
-                                <a class="J_menuItem" href="contacts.html">@L("联系我们")</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="contacts.html">@L("使用帮助")</a>
+                                <a class="J_menuItem" title="@L("使用说明")" href="/Home/Faq">@L("使用说明")</a>
                             </li>
                             <li class="divider"></li>
                             <li>
@@ -324,7 +321,7 @@
                                 <a href="#">
                                     <span class="label label-primary pull-right" onclick="showUpdateDevice(@device.Id);">修改</span>
                                     <h4>@device.BName</h4>
-                                    @device.BDescription
+                                    <div class="small text-muted m-t-xs">设备号：@device.BNo</div>
                                     <div class="small text-muted m-t-xs">新增时间：@device.CreationTime</div>
                                     <div class="small text-muted m-t-xs">过期时间：@device.BExpireTime</div>
                                 </a>

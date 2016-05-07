@@ -9,6 +9,7 @@ using CH.Spartan.Notifications;
 
 namespace CH.Spartan.Events
 {
+    [Serializable]
     public class GetwayEventData : EventData
     {
         public EnumGetwayEventDataType DataType { get; set; }

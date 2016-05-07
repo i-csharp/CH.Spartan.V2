@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.Configuration;
 using Abp.Dependency;
+using Abp.Threading;
 using Apache.NMS;
 using Apache.NMS.ActiveMQ;
 using Apache.NMS.ActiveMQ.Commands;
@@ -14,7 +15,7 @@ using CH.Spartan.Instructions;
 
 namespace CH.Spartan.Jobs
 {
-    public abstract class ActiveMqSendWorker : ISingletonDependency
+    public abstract class ActiveMqSendWorker
     {
         protected readonly ILogger Logger;
         protected readonly ISettingManager SettingManager;
@@ -26,6 +27,7 @@ namespace CH.Spartan.Jobs
         protected string Uri;
         protected bool IsConnected;
         protected string ClientId = "";
+
         protected ActiveMqSendWorker(ILogger logger, ISettingManager settingManager)
         {
             Logger = logger;
@@ -38,12 +40,12 @@ namespace CH.Spartan.Jobs
         {
             try
             {
-                Logger.Info($"开始连接队列服务器![{Name}-{Uri}]");
+                Logger.Info($"开始连接队列服务器![Send-{Name}-{Uri}]");
                 _factory = new ConnectionFactory(Uri);
                 _connection = _factory.CreateConnection();
                 _connection.ExceptionListener += (p) =>
                 {
-                    Logger.Error($"与Web事件队列服务器断开连接![{Name}-{Uri}]");
+                    Logger.Error($"与队列服务器断开连接![Send-{Name}-{Uri}]");
                     IsConnected = false;
                 };
                 _connection.ClientId = $"{ClientId}ActiveMqSend{Name}Worker";
@@ -51,35 +53,37 @@ namespace CH.Spartan.Jobs
                 _session = _connection.CreateSession();
                 _producer = _session.CreateProducer(new ActiveMQTopic(Name));
                 IsConnected = true;
-                Logger.Info($"连接队列服务器成功![{Name}-{Uri}]");
+                Logger.Info($"连接队列服务器成功![Send-{Name}-{Uri}]");
             }
             catch (Exception ex)
             {
-                Logger.Error($"连接队列服务器失败![{Name}-{Uri}]", ex);
+                Logger.Error($"连接队列服务器失败![Send-{Name}-{Uri}]", ex);
                 IsConnected = false;
             }
         }
 
-        public Task<bool> SendAsync(object message)
+        public void SendAsync(object message)
         {
-            try
+            Task.Factory.StartNew(() =>
             {
-                if (IsConnected)
+                try
                 {
-                    Task.Run(()=>
+                    if (IsConnected)
                     {
-                        _producer.Send(new ActiveMQObjectMessage() { Body = message }, MsgDeliveryMode.NonPersistent, MsgPriority.Normal, TimeSpan.MinValue);
-                    });
-                    return Task.FromResult(true);
+                        _producer.Send(new ActiveMQObjectMessage() {Body = message}, MsgDeliveryMode.NonPersistent,
+                            MsgPriority.Normal, TimeSpan.MinValue);
+                    }
+                    else
+                    {
+                        Logger.Error($"队列服务器没有建立连接![Send-{Name}-{Uri}]");
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex.ToString());
-                IsConnected = false;
-            }
-            return Task.FromResult(false);
+                catch (Exception ex)
+                {
+                    Logger.Error(ex.ToString());
+                    IsConnected = false;
+                }
+            });
         }
-
     }
 }
