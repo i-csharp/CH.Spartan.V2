@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.Dependency;
 using Abp.Modules;
+using Abp.Threading.BackgroundWorkers;
 using Abp.Zero;
 using Abp.Zero.Configuration;
 using CH.Spartan.Authorization.Roles;
 using CH.Spartan.Core.Gateway.Jobs;
 using CH.Spartan.Jobs;
-using Hangfire;
 
 namespace CH.Spartan.Core.Gateway
 {
@@ -31,8 +31,9 @@ namespace CH.Spartan.Core.Gateway
 
         public override void PostInitialize()
         {
-            RecurringJob.AddOrUpdate<ActiveMqReceiveWebEventWorker>(p => p.DoWork("Default"), Cron.Minutely);
-            RecurringJob.AddOrUpdate<ActiveMqSendGetwayEventWorker>(p => p.DoWork("Default"), Cron.Minutely);
+            var workManager = IocManager.Resolve<IBackgroundWorkerManager>();
+            workManager.Add(IocManager.Resolve<ActiveMqReceiveWebEventWorker>());
+            workManager.Add(IocManager.Resolve<ActiveMqSendGetwayEventWorker>());
         }
     }
 }

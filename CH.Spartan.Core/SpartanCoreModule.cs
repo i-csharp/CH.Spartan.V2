@@ -10,9 +10,6 @@ using CH.Spartan.Authorization;
 using CH.Spartan.Authorization.Roles;
 using CH.Spartan.Infrastructure;
 using CH.Spartan.Jobs;
-using Hangfire;
-using Hangfire.Server;
-using NCrontab;
 
 namespace CH.Spartan
 {
@@ -21,8 +18,7 @@ namespace CH.Spartan
     {
         public override void PreInitialize()
         {
-            Configuration.MultiTenancy.IsEnabled = true;
-            AppRoleConfig.Configure(Configuration.Modules.Zero().RoleManagement);
+            
         }
 
         public override void Initialize()

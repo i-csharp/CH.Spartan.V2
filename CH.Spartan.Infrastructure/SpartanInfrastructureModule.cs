@@ -28,15 +28,20 @@ namespace CH.Spartan
                         )
                     )
                 );
-           
-            DisableFilterIfHostInterceptorRegister.Initialize(IocManager);
-            Configuration.Authorization.Providers.Add<SpartanAuthorizationProvider>();
+
             Configuration.Settings.Providers.Add<SpartanSettingProvider>();
+            Configuration.Navigation.Providers.Add<SpartanNavigationProvider>();
+            Configuration.Authorization.Providers.Add<SpartanAuthorizationProvider>();
         }
 
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
+        }
+
+        public override void PostInitialize()
+        {
+            DisableFilterIfHostInterceptorRegister.Initialize(IocManager);
         }
     }
 }

@@ -91,8 +91,6 @@ namespace CH.Spartan.Infrastructure
 
             var systemManageAuditLog = systemManages.CreateChildPermission(SpartanPermissionNames.SystemManages_AuditLog, L("审计日志"), multiTenancySides: MultiTenancySides.Host);
             systemManageAuditLog.CreateChildPermission(SpartanPermissionNames.SystemManages_AuditLog_Delete, L("删除"), multiTenancySides: MultiTenancySides.Host);
-
-            var systemManageJob = systemManages.CreateChildPermission(SpartanPermissionNames.SystemManages_Job, L("调度任务"), multiTenancySides: MultiTenancySides.Host);
         }
 
         private static ILocalizableString L(string name)

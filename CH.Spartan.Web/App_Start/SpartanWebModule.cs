@@ -2,15 +2,13 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Abp.Hangfire;
-using Abp.Hangfire.Configuration;
 using Abp.Zero.Configuration;
 using Abp.Modules;
 using Abp.Web.Mvc;
 using Abp.Web.SignalR;
 using CH.Spartan.Api;
+using CH.Spartan.Authorization.Roles;
 using CH.Spartan.Infrastructure;
-using Hangfire.MemoryStorage;
 
 namespace CH.Spartan.Web
 {
@@ -19,25 +17,14 @@ namespace CH.Spartan.Web
         typeof(SpartanApplicationModule),
         typeof(SpartanWebApiModule),
         typeof(AbpWebSignalRModule),
-        typeof(AbpHangfireModule),
         typeof(AbpWebMvcModule))]
     public class SpartanWebModule : AbpModule
     {
         public override void PreInitialize()
         {
-            //Enable database based localization
+            Configuration.MultiTenancy.IsEnabled = true;
             Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
-
-            //Configure navigation/menu
-            Configuration.Navigation.Providers.Add<SpartanNavigationProvider>();
-
-            //Configure Hangfire
-            Configuration.BackgroundJobs.UseHangfire(configuration =>
-            {
-                configuration.GlobalConfiguration.UseMemoryStorage();
-            });
-
-
+            AppRoleConfig.Configure(Configuration.Modules.Zero().RoleManagement);
         }
 
         public override void Initialize()

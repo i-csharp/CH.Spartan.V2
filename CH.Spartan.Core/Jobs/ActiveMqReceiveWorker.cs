@@ -7,6 +7,8 @@ using Abp.Configuration;
 using Abp.Dependency;
 using Abp.Events.Bus;
 using Abp.Json;
+using Abp.Threading.BackgroundWorkers;
+using Abp.Threading.Timers;
 using Apache.NMS;
 using Apache.NMS.ActiveMQ;
 using Apache.NMS.ActiveMQ.Commands;
@@ -16,10 +18,8 @@ using CH.Spartan.Notifications;
 
 namespace CH.Spartan.Jobs
 {
-    public abstract class ActiveMqReceiveWorker
+    public abstract class ActiveMqReceiveWorker: PeriodicBackgroundWorkerBase
     {
-        protected readonly ILogger Logger;
-        protected readonly ISettingManager SettingManager;
         protected readonly IEventBus EventBus;
         private IConnectionFactory _factory;
         private IConnection _connection;
@@ -31,10 +31,9 @@ namespace CH.Spartan.Jobs
         protected string Uri { get; set; }
         protected bool IsConnected { get; set; }
 
-        protected ActiveMqReceiveWorker(ILogger logger, ISettingManager settingManager, IEventBus eventBus)
+        protected ActiveMqReceiveWorker(AbpTimer timer,IEventBus eventBus):base(timer)
         {
-            Logger = logger;
-            SettingManager = settingManager;
+            Timer.Period = 15*1000;
             EventBus = eventBus;
         }
 
@@ -75,8 +74,6 @@ namespace CH.Spartan.Jobs
                 Logger.Error(ex.ToString());
             }
         }
-
-        public abstract void DoWork(string clientId);
 
         protected abstract void Received(IObjectMessage message);
     }

@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Modules;
+using Abp.Threading.BackgroundWorkers;
 using Abp.Zero;
 using CH.Spartan.Core.Web.Jobs;
-using Hangfire;
 
 namespace CH.Spartan.Core.Web
 {
@@ -26,8 +26,9 @@ namespace CH.Spartan.Core.Web
 
         public override void PostInitialize()
         {
-            RecurringJob.AddOrUpdate<ActiveMqSendWebEventWorker>(p => p.DoWork("Default"), Cron.Minutely);
-            RecurringJob.AddOrUpdate<ActiveMqReceiveGetwayEventWorker>(p => p.DoWork("Default"), Cron.Minutely);
+            var workManager = IocManager.Resolve<IBackgroundWorkerManager>();
+            workManager.Add(IocManager.Resolve<ActiveMqSendWebEventWorker>());
+            workManager.Add(IocManager.Resolve<ActiveMqReceiveGetwayEventWorker>());
         }
     }
 }

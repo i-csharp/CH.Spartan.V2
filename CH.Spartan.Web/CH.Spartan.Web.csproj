@@ -92,14 +92,6 @@
       <HintPath>..\packages\FluentAssertions.4.1.0\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Hangfire.Core, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hangfire.Core.1.5.3\lib\net45\Hangfire.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Hangfire.MemoryStorage, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hangfire.MemoryStorage.1.2.0.0\lib\net45\Hangfire.MemoryStorage.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
       <Private>True</Private>
@@ -1240,10 +1232,6 @@
     <ProjectReference Include="..\Abp\Abp.EntityFramework\Abp.EntityFramework.csproj">
       <Project>{948f0caf-3382-4e03-9a0f-0ddb206fe40d}</Project>
       <Name>Abp.EntityFramework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Abp\Abp.HangFire\Abp.HangFire.csproj">
-      <Project>{58a5158c-c78b-4451-bfd8-ffc31d48d713}</Project>
-      <Name>Abp.HangFire</Name>
     </ProjectReference>
     <ProjectReference Include="..\Abp\Abp.Owin\Abp.Owin.csproj">
       <Project>{5d471c86-838f-4bdc-af9f-c95e8fa4e977}</Project>

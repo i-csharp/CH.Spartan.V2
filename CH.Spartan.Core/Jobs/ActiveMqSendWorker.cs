@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Abp.Configuration;
 using Abp.Dependency;
 using Abp.Threading;
+using Abp.Threading.BackgroundWorkers;
+using Abp.Threading.Timers;
 using Apache.NMS;
 using Apache.NMS.ActiveMQ;
 using Apache.NMS.ActiveMQ.Commands;
@@ -15,10 +17,8 @@ using CH.Spartan.Instructions;
 
 namespace CH.Spartan.Jobs
 {
-    public abstract class ActiveMqSendWorker
+    public abstract class ActiveMqSendWorker: PeriodicBackgroundWorkerBase
     {
-        protected readonly ILogger Logger;
-        protected readonly ISettingManager SettingManager;
         private IConnectionFactory _factory;
         private IConnection _connection;
         private ISession _session;
@@ -28,13 +28,10 @@ namespace CH.Spartan.Jobs
         protected bool IsConnected;
         protected string ClientId = "";
 
-        protected ActiveMqSendWorker(ILogger logger, ISettingManager settingManager)
+        protected ActiveMqSendWorker(AbpTimer timer):base(timer)
         {
-            Logger = logger;
-            SettingManager = settingManager;
+            timer.Period = 15*1000;
         }
-
-        public abstract void DoWork(string clientId);
 
         protected virtual void TryConnect()
         {
